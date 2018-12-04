@@ -33,6 +33,8 @@ public class WebSecurityController {
     @Autowired
     private SecurityProperties securityProperties;
 
+
+
     @RequestMapping(value = "/authentication/require")
     @ResponseStatus(code= HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication( HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws IOException {

@@ -7,20 +7,30 @@ import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@CacheConfig
-@Cacheable(value="user")
+//@CacheConfig
+//@Cacheable(value="user")
 public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User update(User user) throws Exception {
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public User save(User user) throws Exception {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return super.save(user);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.hdl.gzccocpweb.security;
 
 import com.hdl.gzccocpcore.properties.SecurityProperties;
+import com.hdl.gzccocpcore.validate.code.ValidateCodeFilter;
+import com.hdl.gzccocpweb.Authentication.MyAuthenticationFailureHandler;
+import com.hdl.gzccocpweb.Authentication.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,15 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-//    @Autowired
-//    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    @Autowired
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    @Autowired
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 //
 //    @Autowired
 //    private DbUserDetailsService userDetailsService;
@@ -33,13 +37,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+
+        ValidateCodeFilter validateCodeFilter=new ValidateCodeFilter();
+        validateCodeFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
+        validateCodeFilter.setSecurityProperties(securityProperties);
+        validateCodeFilter.afterPropertiesSet();
+
+
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/authentication/require")
-                .loginProcessingUrl("/")
+                .loginProcessingUrl("/login")
+                .successHandler(myAuthenticationSuccessHandler)
+                .failureHandler(myAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require", "/", securityProperties.getWebProperties().getLoginPage()).permitAll()
+                .antMatchers("/authentication/require", "/login", "/code/image",securityProperties.getWebProperties().getLoginPage()).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

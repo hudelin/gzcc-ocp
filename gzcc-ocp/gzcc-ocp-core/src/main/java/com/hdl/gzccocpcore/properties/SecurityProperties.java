@@ -21,11 +21,21 @@ public class SecurityProperties {
 
     private WebProperties webProperties = new WebProperties();
 
+    private ValidateCodeProperties validateCodeProperties=new ValidateCodeProperties();
+
     public WebProperties getWebProperties() {
         return webProperties;
     }
 
     public void setWebProperties(WebProperties webProperties) {
         this.webProperties = webProperties;
+    }
+
+    public ValidateCodeProperties getValidateCodeProperties() {
+        return validateCodeProperties;
+    }
+
+    public void setValidateCodeProperties(ValidateCodeProperties validateCodeProperties) {
+        this.validateCodeProperties = validateCodeProperties;
     }
 }

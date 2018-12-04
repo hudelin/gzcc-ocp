@@ -23,4 +23,11 @@ public class UserController {
         return userList;
     }
 
+//    @ResponseBody
+//    @RequestMapping("/save")
+//    public User save(User user) throws Exception {
+//        user=userService.save(user);
+//        return user;
+//    }
+
 }

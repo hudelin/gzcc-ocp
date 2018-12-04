@@ -58,6 +58,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guava</artifactId>-->
+            <!--&lt;!&ndash;<version>25.1-jre</version>&ndash;&gt;-->
+        <!--</dependency>-->
+
 
 
     </dependencies>
