@@ -2,12 +2,12 @@ package com.hdl.gzccocpcore.properties;
 
 public class ImageCodeProperties {
 
-    private int width = 67;
-    private int height = 23;
+    private int width = 90;
+    private int height = 30;
     private int length = 4;
     private int expireIn = 60;
 
-    private String url="/user,/user/*";
+    private String url="/login,/note/add";
 
     public int getWidth() {
         return width;

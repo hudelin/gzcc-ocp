@@ -39,17 +39,16 @@ public class WebSecurityController {
     @ResponseStatus(code= HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication( HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws IOException {
 
-        SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
-
-        if (savedRequest != null) {
-            String targetUrl = savedRequest.getRedirectUrl();
-            logger.info("引发跳转的请求是:" + targetUrl);
-            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, securityProperties.getWebProperties().getLoginPage());
-            }
-        }
-
-        return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
-//        return null;
+//        SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
+//        if (savedRequest != null) {
+//            String targetUrl = savedRequest.getRedirectUrl();
+//            logger.info("引发跳转的请求是:" + targetUrl);
+//            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+//                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, securityProperties.getWebProperties().getLoginPage());
+//            }
+//        }
+        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, securityProperties.getWebProperties().getLoginPage());
+//        return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.hdl.gzccocpweb.Authentication;
+package com.hdl.gzccocpweb.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdl.gzccocpcore.properties.LoginResponseType;

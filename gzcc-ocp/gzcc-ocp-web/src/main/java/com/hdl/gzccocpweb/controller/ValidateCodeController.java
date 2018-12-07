@@ -4,6 +4,7 @@ import com.hdl.gzccocpcore.properties.SecurityProperties;
 import com.hdl.gzccocpcore.validate.code.ImageCode;
 import com.hdl.gzccocpcore.validate.code.ValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +27,19 @@ public class ValidateCodeController {
 
     @Autowired
     private ValidateCodeGenerator imageCodeGenerator;
+//    @Autowired
+//    private RedisTemplate redisCacheTemplate;
 
 
 
     @RequestMapping("/code/image")
     public void createCode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+
+
         ImageCode imageCode=imageCodeGenerator.generate(new ServletWebRequest(httpServletRequest));
+//        String imageCode1= (String) redisCacheTemplate.opsForValue().get("imageCode");
+//        redisCacheTemplate.opsForValue().set("imageCode",imageCode.getCode());
+        httpServletRequest.getSession().setAttribute("imageCode",imageCode.getCode());
         ImageIO.write(imageCode.getBufferedImage(),"JPEG",httpServletResponse.getOutputStream());
 //        ServletRequestUtils.getIntParameter(httpServletRequest,"width",securityProperties.getValidateCodeProperties().getImageCodeProperties().getWidth());
     }

@@ -2,8 +2,8 @@ package com.hdl.gzccocpweb.security;
 
 import com.hdl.gzccocpcore.properties.SecurityProperties;
 import com.hdl.gzccocpcore.validate.code.ValidateCodeFilter;
-import com.hdl.gzccocpweb.Authentication.MyAuthenticationFailureHandler;
-import com.hdl.gzccocpweb.Authentication.MyAuthenticationSuccessHandler;
+import com.hdl.gzccocpweb.authentication.MyAuthenticationFailureHandler;
+import com.hdl.gzccocpweb.authentication.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 
 @EnableWebSecurity
@@ -23,17 +27,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 //
-//    @Autowired
-//    private DbUserDetailsService userDetailsService;
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-//        return NoOpPasswordEncoder.getInstance();
     }
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+        JdbcTokenRepositoryImpl tokenRepository=new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+//        tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,9 +65,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(myAuthenticationSuccessHandler)
                 .failureHandler(myAuthenticationFailureHandler)
                 .and()
+                .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(securityProperties.getWebProperties().getRememberMeSeconds())
+                .userDetailsService(myUserDetailsService)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/authentication/require", "/login", "/code/image",securityProperties.getWebProperties().getLoginPage()).permitAll()
+                .antMatchers("/note/add").hasRole("USER")
                 .anyRequest()
+//                关闭登录验证
+//                .permitAll()
+//                开启登录验证
                 .authenticated()
                 .and()
                 .csrf().disable();
@@ -80,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().mvcMatchers("/res/**"); /*配置静态资源访问路径*/
+        web.ignoring().mvcMatchers("/res/**"); /*配置静态资源访问路径*/
         web.ignoring().antMatchers("/res/**");
     }
 

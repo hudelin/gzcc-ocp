@@ -2,6 +2,7 @@ package com.hdl.gzccocpcore.validate.code;
 
 import com.hdl.gzccocpcore.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -16,6 +17,10 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
      */
     @Autowired
     private SecurityProperties securityProperties;
+
+//    @Autowired
+//    private RedisTemplate redisCacheTemplate;
+
     @Override
     public ImageCode generate(ServletWebRequest servletWebRequest) {
         int width = ServletRequestUtils.getIntParameter(servletWebRequest.getRequest(), "width",
@@ -30,7 +35,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 
         g.setColor(getRandColor(200, 250));
         g.fillRect(0, 0, width, height);
-        g.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+        g.setFont(new Font("Times New Roman", Font.ITALIC, 30));
         g.setColor(getRandColor(160, 200));
         for (int i = 0; i < 155; i++) {
             int x = random.nextInt(width);
@@ -45,12 +50,14 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
             String rand = String.valueOf(random.nextInt(10));
             sRand += rand;
             g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
-            g.drawString(rand, 13 * i + 6, 16);
+            g.drawString(rand, 20 * i + 5, 25);
         }
 
         g.dispose();
-
-        return new ImageCode(image, sRand, securityProperties.getValidateCodeProperties().getImageCodeProperties().getExpireIn());
+        servletWebRequest.getRequest().getSession().setAttribute("code",sRand);
+        ImageCode imageCode = new ImageCode(image, sRand, securityProperties.getValidateCodeProperties().getImageCodeProperties().getExpireIn());
+//        redisCacheTemplate.opsForValue().set("imageCode", imageCode.getCode());
+        return imageCode;
     }
     /**
      * 生成随机背景条纹

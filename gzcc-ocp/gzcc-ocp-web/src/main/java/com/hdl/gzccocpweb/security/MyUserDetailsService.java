@@ -24,8 +24,12 @@ public class MyUserDetailsService implements UserDetailsService {
 //    private RedisTemplate redisCacheTemplate;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        User user = userService.findByUsername(name);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userService.findByUsername(username);
+        if(user==null){
+//            throw new AuthenticationException
+            throw new UsernameNotFoundException(username);
+        }
 //        redisCacheTemplate.opsForValue().set("qwe", user);
 //        User map2 = (User) redisCacheTemplate.opsForValue().get("qwe");
 //        System.out.println(map2.getUsername());

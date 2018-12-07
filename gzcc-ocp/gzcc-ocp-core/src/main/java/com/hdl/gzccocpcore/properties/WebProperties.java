@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 public class WebProperties {
 
     @Value("${gzcc.ocp.security.web.loginPage}")
-    private String loginPage="/html/user/login.html";
+    private String loginPage="/user/login";
 
     private LoginResponseType loginResponseType=LoginResponseType.JSON;
+
+    private int rememberMeSeconds=3600;
 
     public String getLoginPage() {
         return loginPage;
@@ -24,5 +26,13 @@ public class WebProperties {
 
     public void setLoginResponseType(LoginResponseType loginResponseType) {
         this.loginResponseType = loginResponseType;
+    }
+
+    public int getRememberMeSeconds() {
+        return rememberMeSeconds;
+    }
+
+    public void setRememberMeSeconds(int rememberMeSeconds) {
+        this.rememberMeSeconds = rememberMeSeconds;
     }
 }

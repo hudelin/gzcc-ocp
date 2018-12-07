@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-//@CacheConfig
-//@Cacheable(value="user")
+@CacheConfig
+@Cacheable(value="user")
 public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService {
 
     @Autowired

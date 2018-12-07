@@ -1,55 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
     <meta charset="utf-8">
     <title>登入</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-    <link rel="stylesheet" href="../../res/layui/css/layui.css">
-    <link rel="stylesheet" href="../../res/css/global.css">
+    <% include("/common/link.btl"){} %>
 </head>
 <body>
 
-<div class="fly-header layui-bg-black">
-    <div class="layui-container">
-        <a class="fly-logo" href="/">
-            <img src="../../res/images/logo.png" alt="layui">
-        </a>
-        <ul class="layui-nav fly-nav layui-hide-xs">
-            <li class="layui-nav-item layui-this">
-                <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="../case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-            </li>
-        </ul>
-
-        <ul class="layui-nav fly-nav-user">
-            <!-- 未登入的状态 -->
-            <li class="layui-nav-item">
-                <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="user/login.html">登入</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="user/reg.html">注册</a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入"
-                   class="iconfont icon-qq"></a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入"
-                   class="iconfont icon-weibo"></a>
-            </li>
-        </ul>
-    </div>
-</div>
+<% include("/common/header.btl"){} %>
 
 <div class="layui-container fly-marginTop">
     <div class="fly-panel fly-panel-user" pad20>
@@ -77,14 +39,14 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label for="L_vercode" class="layui-form-label">人类验证</label>
+                                <label for="L_vercode" class="layui-form-label">验证码</label>
                                 <div class="layui-input-inline">
                                     <input type="text" id="L_vercode" name="imageCode" required lay-verify="required"
-                                           placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
+                                           placeholder="请输入后面的验证码" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-form-mid">
                                     <!--<span style="color: #c00;">{{d.vercode}}</span>-->
-                                    <img src="/code/image" class="fly-imagecode"
+                                    <img src="/code/image" class="fly-imagecode" id="imgCode" onclick="changeImage()"
                                          style="position: relative;margin-top: -4px;cursor: pointer;">
                                 </div>
                             </div>
@@ -115,17 +77,9 @@
     </div>
 </div>
 
-<div class="fly-footer">
-    <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/"
-                                                                                target="_blank">layui.com 出品</a></p>
-    <p>
-        <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-        <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
-        <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
-    </p>
-</div>
+<% include("/common/footer.btl"){} %>
 
-<script src="../../res/layui/layui.js"></script>
+<script src="/res/layui/layui.js"></script>
 <script>
     layui.cache.page = 'user';
     layui.cache.user = {
@@ -137,19 +91,29 @@
     };
     layui.config({
         version: "3.0.0"
-        , base: '../../res/mods/'
+        , base: '/res/mods/'
     }).extend({
         fly: 'index',
         request: 'request'
     }).use('fly');
 </script>
+
 <script>
-    layui.use(['form','request'], function () {
-        var $=layui.$
+    function changeImage() {
+        var element = document.getElementById('imgCode');
+        element.src = "/code/image?t="+new Date().getTime();
+    }
+
+    var url = "${url}"
+    console.log(url)
+    layui.use(['form', 'request','laytpl'], function () {
+        var $ = layui.$
         var form = layui.form;
         var request = layui.request
+        var laytpl = layui.laytpl;
         // 各种基于事件的操作，下面会有进一步介绍
         form.on('submit(login)', function (data) {
+            var ok = true
             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
@@ -157,17 +121,26 @@
                 type: 'POST',
                 url: '/login',
                 data: data.field,
-            }).then(function(res) {
-                if(res.content=="坏的凭证"){
+            }).then(function (res) {
+                changeImage();
+                if (res.content == "坏的凭证") {
                     layer.msg('帐号或密码错误');
-                    return
+                    ok = false
                 }
-                window.location.href = "/html/index.html";
+                if(res.content == "验证码不匹配"){
+                    layer.msg('验证码不匹配');
+                    ok = false
+                }
+                if (ok) {
+
+
+
+                    window.location.href = url;
+                }
             })
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
     });
-
 </script>
 
 </body>
