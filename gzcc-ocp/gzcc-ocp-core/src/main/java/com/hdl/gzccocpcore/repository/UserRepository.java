@@ -13,11 +13,11 @@ public interface UserRepository extends BaseRepository<User, Long> {
 
     public List<User> findAll(Specification<User> spec);
 
-
-
 //    public List<User> findByUsernameIsNotNull();
 
-
-
     User findByUsername(String username);
+
+
+
+
 }

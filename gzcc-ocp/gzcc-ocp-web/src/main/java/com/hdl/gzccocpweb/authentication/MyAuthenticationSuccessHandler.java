@@ -46,8 +46,12 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 //        if (LoginResponseType.JSON.equals(securityProperties.getWebProperties().getLoginResponseType())){
 //            //将 authention 信息打包成json格式返回
             httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletRequest.getSession().setAttribute("user",userService.findByUsername(authentication.getName()));
-            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(authentication));
+        try {
+            httpServletRequest.getSession().setAttribute("user",userService.findByUsername(authentication.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(authentication));
 //        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(targetUrl));
 //        }else {
 //            //返回view

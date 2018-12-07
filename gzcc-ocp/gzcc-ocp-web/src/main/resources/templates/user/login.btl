@@ -81,14 +81,14 @@
 
 <script src="/res/layui/layui.js"></script>
 <script>
-    layui.cache.page = 'user';
-    layui.cache.user = {
-        username: '游客'
-        , uid: -1
-        , avatar: '../../res/images/avatar/00.jpg'
-        , experience: 83
-        , sex: '男'
-    };
+    // layui.cache.page = 'user';
+    // layui.cache.user = {
+    //     username: '游客'
+    //     , uid: -1
+    //     , avatar: '../../res/images/avatar/00.jpg'
+    //     , experience: 83
+    //     , sex: '男'
+    // };
     layui.config({
         version: "3.0.0"
         , base: '/res/mods/'
@@ -101,12 +101,11 @@
 <script>
     function changeImage() {
         var element = document.getElementById('imgCode');
-        element.src = "/code/image?t="+new Date().getTime();
+        element.src = "/code/image?t=" + new Date().getTime();
     }
-
     var url = "${url}"
     console.log(url)
-    layui.use(['form', 'request','laytpl'], function () {
+    layui.use(['form', 'request', 'laytpl'], function () {
         var $ = layui.$
         var form = layui.form;
         var request = layui.request
@@ -127,15 +126,25 @@
                     layer.msg('帐号或密码错误');
                     ok = false
                 }
-                if(res.content == "验证码不匹配"){
+                if (res.content == "验证码不匹配") {
                     layer.msg('验证码不匹配');
                     ok = false
                 }
                 if (ok) {
-
-
-
-                    window.location.href = url;
+                    layui.data('userData', {
+                        key: 'authentication'
+                        ,value: res
+                    });
+                    request.ajax({
+                        type: 'POST',
+                        url: '/user/getDetail',
+                    }).then(function (res) {
+                        layui.data('userData', {
+                            key: 'user'
+                            ,value: res
+                        });
+                        window.location.href = url;
+                    })
                 }
             })
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。

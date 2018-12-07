@@ -4,8 +4,9 @@ package com.hdl.gzccocpweb.controller;
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -27,8 +28,8 @@ public class UserController {
     private UserService userService;
     private RequestCache requestCache=new HttpSessionRequestCache();
 
-    @Autowired
-    private RedisTemplate redisCacheTemplate;
+//    @Autowired
+//    private RedisTemplate redisCacheTemplate;
 
     @RequestMapping(value = "/login")
     public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
@@ -46,6 +47,16 @@ public class UserController {
         return mv;
     }
 
+    @RequestMapping("/getDetail")
+    @ResponseBody
+    public User getDetail() throws Exception {
+//        String imageCode = (String) redisCacheTemplate.opsForValue().get("imageCode");
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        String username=securityContext.getAuthentication().getName();
+        User user=userService.findByUsername(username);
+        return user;
+    }
+
     @RequestMapping("/findAll")
     @ResponseBody
     public List<User> findAll() throws Exception {
@@ -54,11 +65,22 @@ public class UserController {
         return userList;
     }
 
-//    @ResponseBody
-//    @RequestMapping("/save")
-//    public User save(User user) throws Exception {
-//        user=userService.save(user);
-//        return user;
-//    }
+    @ResponseBody
+    @RequestMapping("/findByUsername")
+    public User findByUsername(String username) throws Exception {
+        User user=userService.findByUsername(username);
+        user.getId();
+        return user;
+    }
+
+    @ResponseBody
+    @RequestMapping("/save")
+    public User save() throws Exception {
+        User user= new User();
+        user.setPassword("123");
+        user.setUsername("hdl");
+        user=userService.save(user);
+        return user;
+    }
 
 }

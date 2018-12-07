@@ -6,7 +6,7 @@ import org.springframework.data.domain.Sort;
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseService<T,ID extends Serializable>{
+public interface BaseService<T ,ID extends Serializable>{
 //   BaseRepository<T, ID> getRepository();
 // void setRepository(BaseRepository<T,ID> baseRepository);
 

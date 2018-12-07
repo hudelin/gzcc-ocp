@@ -1,6 +1,5 @@
 package com.hdl.gzccocpcore.service.serviceImpl;
 
-
 import com.hdl.gzccocpcore.repository.BaseRepository;
 import com.hdl.gzccocpcore.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,10 @@ import java.util.List;
 
 
 @Transactional
-public abstract class BaseServiceImpl<T, ID extends Serializable> implements BaseService<T, ID> {
+public abstract class BaseServiceImpl<T , ID extends Serializable> implements BaseService<T, ID> {
 
 
-    BaseRepository<T, ID> baseRepository;
+    BaseRepository<T , ID> baseRepository;
 
     @Autowired
     public void setRepository(BaseRepository<T, ID> baseRepository) {

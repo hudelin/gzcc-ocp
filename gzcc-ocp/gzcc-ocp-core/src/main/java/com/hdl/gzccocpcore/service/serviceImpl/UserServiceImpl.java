@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@CacheConfig
-@Cacheable(value="user")
+//@CacheConfig
+//@Cacheable(value="user")
 public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService {
 
     @Autowired
@@ -28,14 +28,14 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
     }
 
     @Override
-    public User save(User user) throws Exception {
+    public User save(User user)  {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return super.save(user);
+        return userRepository.save(user);
     }
 
     @Override
 //    ("user.service.findByUsername")
-    public User findByUsername(String name) {
+    public User findByUsername(String name){
         return userRepository.findByUsername(name);
     }
 

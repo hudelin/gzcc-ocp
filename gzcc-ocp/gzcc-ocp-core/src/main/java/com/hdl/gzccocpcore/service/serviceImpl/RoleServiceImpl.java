@@ -18,7 +18,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role,Long> implements RoleS
         return roleRepository.save(role);
     }
 
-    @Override
     public Role findByName(String name) {
         return roleRepository.findByName(name);
     }

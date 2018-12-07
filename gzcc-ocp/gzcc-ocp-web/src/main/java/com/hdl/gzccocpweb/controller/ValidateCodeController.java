@@ -4,7 +4,6 @@ import com.hdl.gzccocpcore.properties.SecurityProperties;
 import com.hdl.gzccocpcore.validate.code.ImageCode;
 import com.hdl.gzccocpcore.validate.code.ValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,7 @@ import java.io.IOException;
 @RestController
 public class ValidateCodeController {
 
-    private static final String SEEION_KEY = "SEEION_KEY_IMAGE_CODE";
+    private static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
 
 //    private SessionStrategy sessionStrategy=new HttpSessionStrategy();
 
@@ -27,10 +26,6 @@ public class ValidateCodeController {
 
     @Autowired
     private ValidateCodeGenerator imageCodeGenerator;
-//    @Autowired
-//    private RedisTemplate redisCacheTemplate;
-
-
 
     @RequestMapping("/code/image")
     public void createCode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {

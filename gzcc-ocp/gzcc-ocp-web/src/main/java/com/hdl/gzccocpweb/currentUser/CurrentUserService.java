@@ -13,7 +13,7 @@ public class CurrentUserService {
     @Autowired
     private UserService userService;
 
-    public Long getUserId(){
+    public Long getUserId() throws Exception {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         String username=securityContext.getAuthentication().getName();
         User user=userService.findByUsername(username);

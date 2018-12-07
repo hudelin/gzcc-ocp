@@ -2,7 +2,6 @@ package com.hdl.gzccocpcore.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedBy;
@@ -17,12 +16,12 @@ import java.util.Date;
 
 @Entity
 @Data
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = false)
-public class Note  implements Serializable {
+public class Reply   implements Serializable {
 
-    private static final long serialVersionUID = 2005794687566181633L;
+    private static final long serialVersionUID = -3843608801898748229L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
     @Column(name = "id")
@@ -42,22 +41,11 @@ public class Note  implements Serializable {
     @LastModifiedBy
     protected Long lastModifiedBy;
 
-    private String title;
 
     @Column(columnDefinition="text")
     private String content;
 
-
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-//    @CreatedDate
-//    private Date createTime;
-
-
-
-
-
-
-
+    private Integer praise;
 
 
 }

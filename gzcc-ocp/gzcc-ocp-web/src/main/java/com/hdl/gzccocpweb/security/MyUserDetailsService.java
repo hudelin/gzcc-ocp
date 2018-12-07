@@ -26,15 +26,10 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByUsername(username);
+
         if(user==null){
-//            throw new AuthenticationException
             throw new UsernameNotFoundException(username);
         }
-//        redisCacheTemplate.opsForValue().set("qwe", user);
-//        User map2 = (User) redisCacheTemplate.opsForValue().get("qwe");
-//        System.out.println(map2.getUsername());
-//        List<Role> roleList=roleRepository.findByUserList(user);
-//        List<Role> roleList=user.getRoleList();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for(Role role:user.getRoleList()){

@@ -3,8 +3,8 @@ package com.hdl.gzccocpcore.validate.code;
 
 import com.hdl.gzccocpcore.properties.SecurityProperties;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;

@@ -37,7 +37,12 @@ public class CurrentUserAuditorBean implements AuditorAware<Long> {
         }
         String username=securityContext.getAuthentication().getName();
         if (username != null && username!="anonymousUser" ) {
-            User user= userService.findByUsername(username);
+            User user= null;
+            try {
+                user = userService.findByUsername(username);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             id= Optional.of(user.getId());
             return id;
         }
