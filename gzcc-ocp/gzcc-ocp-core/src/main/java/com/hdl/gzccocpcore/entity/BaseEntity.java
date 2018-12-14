@@ -33,7 +33,7 @@
 //
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 //    @LastModifiedDate
-//    protected Date lastModifiedDate;
+//    protected Date lastModifiedTime;
 //
 //    @LastModifiedBy
 //    protected Long lastModifiedBy;

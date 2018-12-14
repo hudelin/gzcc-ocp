@@ -95,7 +95,6 @@
                                 <input type="hidden" id="L_content" name="content" autocomplete="off" class="layui-input">
                                 <div id="content" class="text ">
                                     <!--可使用 min-height 实现编辑区域自动增加高度-->
-                                    <p>请输入内容</p>
                                 </div>
                             </div>
                             <!--<div class="layui-form-item">-->
@@ -194,10 +193,6 @@
                     ok = false
                 }
                 if (ok) {
-                    layui.data('userData', {
-                        key: 'note'
-                        ,value: res
-                    });
                     window.location.href = "/note/detail/"+res.id;
                 }
             })

@@ -108,19 +108,19 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
 
     @Override
     public Page<T> findPage(Integer page, Integer size) throws Exception {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page-1, size);
         return findPageByT( null,pageable);
     }
 
     @Override
     public Page<T> findPageByCondition(T t, Integer page, Integer size) throws Exception {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page-1, size);
         return findPageByT(t, pageable);
     }
 
     @Override
     public Page<T> findPageByConditionAndSort(T t, Integer page, Integer size, Sort sort) throws Exception {
-        Pageable pageable = PageRequest.of(page, size, sort);
+        Pageable pageable = PageRequest.of(page-1, size, sort);
         return findPageByT(t, pageable);
     }
 

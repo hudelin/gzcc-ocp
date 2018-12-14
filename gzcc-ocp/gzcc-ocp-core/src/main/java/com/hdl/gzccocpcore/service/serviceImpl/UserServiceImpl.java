@@ -10,6 +10,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 //@CacheConfig
 //@Cacheable(value="user")
@@ -35,8 +37,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
 
     @Override
 //    ("user.service.findByUsername")
-    public User findByUsername(String name){
-        return userRepository.findByUsername(name);
+    public User findByUsername(String username){
+        User user=userRepository.findByUsername(username);
+        return user;
     }
 
 

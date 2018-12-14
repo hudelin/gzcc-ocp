@@ -22,37 +22,25 @@ public class CurrentUserAuditorBean implements AuditorAware<Long> {
     public Optional<Long> getCurrentAuditor() {
 
         Authentication test = SecurityContextHolder.getContext().getAuthentication();
-//        String userRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();/*获取身份的字符串*/
         SecurityContext securityContext = SecurityContextHolder.getContext();
 
-        Optional<Long> id=Optional.of((long)123);
+        Optional<Long> id;
 
-//        SecurityContext ctx = SecurityContextHolder.getContext();
-
-//        if (ctx.getAuthentication() == null) {
-//            return null;
-//        }
         if (securityContext.getAuthentication().getPrincipal() == "anonymousUser") {
             return Optional.empty();
         }
         String username=securityContext.getAuthentication().getName();
         if (username != null && username!="anonymousUser" ) {
-            User user= null;
-            try {
-                user = userService.findByUsername(username);
-            } catch (Exception e) {
-                e.printStackTrace();
+            User user = userService.findByUsername(username);
+            Long userId=user.getId();
+
+            if(user!=null){
+                id= Optional.of(user.getId());
+                return id;
             }
-            id= Optional.of(user.getId());
-            return id;
+
         }
-//        Object principal = ctx.getAuthentication().getPrincipal();
-//        if (principal.getClass().isAssignableFrom(Long.class)) {
-//            return (Optional<Long>) principal;
-//        } else {
-//            return null;
-//        }
-//        return null;
+
 
         return Optional.empty();
     }

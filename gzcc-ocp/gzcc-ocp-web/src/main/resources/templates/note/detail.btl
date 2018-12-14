@@ -28,78 +28,7 @@
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8 content detail">
-            <div class="fly-panel detail-box">
-                <h1>Fly Template v3.0，基于 layui 的极简社区页面模版</h1>
-                <div class="fly-detail-info">
-                    <!-- <span class="layui-badge">审核中</span> -->
-                    <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
-
-                    <span class="layui-badge" style="background-color: #999;">未结</span>
-                    <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
-
-                    <span class="layui-badge layui-bg-black">置顶</span>
-                    <span class="layui-badge layui-bg-red">精帖</span>
-
-                    <div class="fly-admin-box" data-id="123">
-                        <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
-
-                        <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span>
-                        <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
-
-                        <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span>
-                        <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
-                    </div>
-                    <span class="fly-list-nums">
-            <a href="${servlet.request.requestURL}#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
-            <i class="iconfont" title="人气">&#xe60b;</i> 99999
-          </span>
-                </div>
-                <div class="detail-about">
-                    <a class="fly-avatar" href="../user/home.html">
-                        <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                             alt="贤心">
-                    </a>
-                    <div class="fly-detail-user">
-                        <a href="../user/home.html" class="fly-link">
-                            <cite>贤心</cite>
-                            <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
-                            <i class="layui-badge fly-badge-vip">VIP3</i>
-                        </a>
-                        <span>2017-11-30</span>
-                    </div>
-                    <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-                        <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>
-                        <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
-                    </div>
-                </div>
-                <div class="detail-body photos" id="note-content">
-                    <!--<p>-->
-                    <!--该模版由 layui官方社区（<a href="http://fly.layui.com/" target="_blank">fly.layui.com</a>）倾情提供，只为表明我们对-->
-                    <!--layui 执着的信念、以及对未来持续加强的承诺。该模版基于 layui 搭建而成，可作为极简通用型社区的页面支撑。-->
-                    <!--</p>-->
-                    <!--<p>更新日志：</p>-->
-                    <!--<pre>-->
-                    <!--# v3.0 2017-11-30-->
-                    <!--* 采用 layui 2.2.3 作为 UI 支撑-->
-                    <!--* 全面同步最新的 Fly 社区风格，各种细节得到大幅优化-->
-                    <!--* 更友好的响应式适配能力-->
-                    <!--</pre>-->
-
-                    <!--下载-->
-                    <!--<hr>-->
-                    <!--<p>-->
-                    <!--官网：<a href="http://www.layui.com/template/fly/" target="_blank">http://www.layui.com/template/fly/</a><br>-->
-                    <!--码云：<a href="https://gitee.com/sentsin/fly/"-->
-                    <!--target="_blank">https://gitee.com/sentsin/fly/</a><br>-->
-                    <!--GitHub：<a href="https://github.com/layui/fly" target="_blank">https://github.com/layui/fly</a>-->
-                    <!--</p>-->
-                    <!--封面-->
-                    <!--<hr>-->
-                    <!--<p>-->
-                    <!--<img src="../../res/images/fly.jpg" alt="Fly社区">-->
-                    <!--</p>-->
-                </div>
-            </div>
+            <div class="fly-panel detail-box" id="noteBox"></div>
 
             <div class="fly-panel detail-box" id="flyReply">
                 <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
@@ -107,92 +36,9 @@
                 </fieldset>
 
                 <ul class="jieda" id="jieda">
-                    <li data-id="111" class="jieda-daan">
-                        <a name="item-1111111111"></a>
-                        <div class="detail-about detail-about-reply">
-                            <a class="fly-avatar" href="">
-                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt=" ">
-                            </a>
-                            <div class="fly-detail-user">
-                                <a href="" class="fly-link">
-                                    <cite>贤心</cite>
-                                    <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                                    <i class="layui-badge fly-badge-vip">VIP3</i>
-                                </a>
 
-                                <span>(楼主)</span>
-                                <!--
-                                <span style="color:#5FB878">(管理员)</span>
-                                <span style="color:#FF9E3F">（社区之光）</span>
-                                <span style="color:#999">（该号已被封）</span>
-                                -->
-                            </div>
-
-                            <div class="detail-hits">
-                                <span>2017-11-30</span>
-                            </div>
-
-                            <i class="iconfont icon-caina" title="最佳答案"></i>
-                        </div>
-                        <div class="detail-body jieda-body photos">
-                            <p>香菇那个蓝瘦，这是一条被采纳的回帖</p>
-                        </div>
-                        <div class="jieda-reply">
-              <span class="jieda-zan zanok" type="zan">
-                <i class="iconfont icon-zan"></i>
-                <em>66</em>
-              </span>
-                            <span type="reply">
-                <i class="iconfont icon-svgmoban53"></i>
-                回复
-              </span>
-                            <div class="jieda-admin">
-                                <span type="edit">编辑</span>
-                                <span type="del">删除</span>
-                                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
-                            </div>
-                        </div>
-                    </li>
-
-                    <li data-id="111">
-                        <a name="item-1111111111"></a>
-                        <div class="detail-about detail-about-reply">
-                            <a class="fly-avatar" href="">
-                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                                     alt=" ">
-                            </a>
-                            <div class="fly-detail-user">
-                                <a href="" class="fly-link">
-                                    <cite>贤心</cite>
-                                </a>
-                            </div>
-                            <div class="detail-hits">
-                                <span>2017-11-30</span>
-                            </div>
-                        </div>
-                        <div class="detail-body jieda-body photos">
-                            <p>蓝瘦那个香菇，这是一条没被采纳的回帖</p>
-                        </div>
-                        <div class="jieda-reply">
-              <span class="jieda-zan" type="zan">
-                <i class="iconfont icon-zan"></i>
-                <em>0</em>
-              </span>
-                            <span type="reply">
-                <i class="iconfont icon-svgmoban53"></i>
-                回复
-              </span>
-                            <div class="jieda-admin">
-                                <span type="edit">编辑</span>
-                                <span type="del">删除</span>
-                                <span class="jieda-accept" type="accept">采纳</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- 无数据时 -->
-                    <!-- <li class="fly-none">消灭零回复</li> -->
                 </ul>
+                <div style="text-align: center" id="demo0"></div>
                 <div class="layui-form layui-form-pane">
                     <form action="/note/reply" method="post">
                         <div class="layui-form-item layui-form-text">
@@ -207,16 +53,16 @@
                             <input type="hidden" id="L_content" name="content" autocomplete="off" class="layui-input">
                             <div id="content" class="text ">
                                 <!--可使用 min-height 实现编辑区域自动增加高度-->
-                                <p>请输入内容</p>
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <input type="hidden" name="jid" value="123">
-                            <button class="layui-btn" lay-filter="/note/reply" lay-submit>提交回复</button>
+                            <input type="hidden" name="noteId" value="${noteId}">
+                            <button class="layui-btn" lay-filter="replyNote" lay-submit>确认</button>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
         <div class="layui-col-md4">
             <dl class="fly-panel fly-list-one">
@@ -289,11 +135,60 @@
 
 <% include("/common/footer.btl"){} %>
 
+<script id="noteTemplate" type="text/html">
 
-<script id="reply" type="text/html">
+    <h1>{{d.note.title}}</h1>
+    <div class="fly-detail-info">
+        <!-- <span class="layui-badge">审核中</span> -->
+        <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
 
-    {{#  layui.each(d.list, function(index, item){ }}
+        <span class="layui-badge" style="background-color: #999;">未结</span>
+        <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
+        <span class="layui-badge layui-bg-black">置顶</span>
+        <span class="layui-badge layui-bg-red">精帖</span>
+
+        <div class="fly-admin-box" data-id="123">
+            <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
+
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span>
+            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
+
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span>
+            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
+        </div>
+        <span class="fly-list-nums">
+            <a href="${servlet.request.requestURL}#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
+            <i class="iconfont" title="人气">&#xe60b;</i> 99999
+          </span>
+    </div>
+    <div class="detail-about">
+        <a class="fly-avatar" href="../user/home.html">
+            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                 alt="贤心">
+        </a>
+        <div class="fly-detail-user">
+            <a href="../user/home.html" class="fly-link">
+                <cite>{{d.note.user.nickname}}</cite>
+                <i class="iconfont icon-renzheng" title="认证信息："></i>
+                <i class="layui-badge fly-badge-vip">VIP3</i>
+            </a>
+            <span>{{d.note.timeAgo}}</span>
+        </div>
+        <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
+            <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>
+            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
+        </div>
+    </div>
+    <div class="detail-body photos" id="note-content">
+        {{ d.note.content }}
+    </div>
+
+</script>
+
+
+<script id="replyTemplate" type="text/html">
+    {{#  layui.each(d.content, function(index, item){ }}
     <li data-id="111" class="jieda-daan">
         <a name="item-1111111111"></a>
         <div class="detail-about detail-about-reply">
@@ -302,11 +197,13 @@
             </a>
             <div class="fly-detail-user">
                 <a href="" class="fly-link">
-                    <cite>贤心</cite>
-                    <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                    <i class="layui-badge fly-badge-vip">VIP3</i>
+                    <cite>{{item.user.nickname}}</cite>
+                    <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
+                    <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
                 </a>
+                {{# if(item.userId==d.noteUserId){ }}
                 <span>(楼主)</span>
+                {{# } }}
                 <!--
                 <span style="color:#5FB878">(管理员)</span>
                 <span style="color:#FF9E3F">（社区之光）</span>
@@ -314,12 +211,15 @@
                 -->
             </div>
             <div class="detail-hits">
-                <span>2017-11-30</span>
+                <span>{{item.timeAgo}}</span>
             </div>
+            {{# if(item.isAccept){ }}
             <i class="iconfont icon-caina" title="最佳答案"></i>
+            {{# } }}
         </div>
         <div class="detail-body jieda-body photos">
-            <p>香菇那个蓝瘦，这是一条被采纳的回帖</p>
+            <!--<p>香菇那个蓝瘦，这是一条被采纳的回帖</p>-->
+            {{ item.content }}
         </div>
         <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
@@ -331,14 +231,22 @@
                 回复
               </span>
             <div class="jieda-admin">
+                {{# if(item.user.id==d.userId){ }}
                 <span type="edit">编辑</span>
-                <span type="del">删除</span>
-                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
+                {{# } }}
+                {{# if(item.user.id==d.userId||d.userId==d.noteUserId){ }}
+                <span type="del" data-method="notice">删除</span>
+                {{# } }}
+                {{# if(d.userId==d.noteUserId&&!item.isAccept){ }}
+                <span class="jieda-accept" type="accept" onclick="acceptReply({{item.id}})">采纳</span>
+                {{# } }}
             </div>
         </div>
     </li>
-
     {{#  }); }}
+    {{#  if(d.content.length === 0){ }}
+    <li class="fly-none">消灭零回复</li>
+    {{#  } }}
 </script>
 
 <script src="/res/layui/layui.js"></script>
@@ -358,55 +266,167 @@
     }).extend({
         fly: 'index',
         request: 'request'
-    }).use(['fly', 'face'], function () {
+    }).use(['jquery', 'request', 'laytpl', 'form', 'laypage', 'util'], function () {
         var $ = layui.$
-            , fly = layui.fly;
-        //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
-        /*
-        $('.detail-body').each(function(){
-          var othis = $(this), html = othis.html();
-          othis.html(fly.content(html));
-        });
-        */
-    });
-</script>
-<script>
-    layui.use(['jquery', 'request', 'laytpl'], function () {
-        var $ = layui.$
+        var fly = layui.fly;
         var laytpl = layui.laytpl
-        var content=layui.data('userData').note.content;
-        $('#note-content').html(content)
+        var request = layui.request
+        var form = layui.form;
+        var laypage = layui.laypage;
+        var util = layui.util;
 
-        var data = { //数据
-            "title": "Layui常用模块"
-            , "list": [{"modname": "弹层", "alias": "layer", "site": "layer.layui.com"}, {"modname": "表单", "alias": "form"}]
+        var noteId = '${noteId}'
+        var note = {};
+        var replyPage = {};
+        //请求帖子内容
+        request.ajax({
+            type: 'POST',
+            url: '/note/get',
+            data: {noteId: noteId},
+        }).then(function (res) {
+            console.log("note",res)
+            note = res;
+            note.timeAgo = util.timeAgo(note.lastModifiedTime)
+            var data = {
+                note: note
+            }
+            var getTpl = noteTemplate.innerHTML
+                , view = document.getElementById('noteBox');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+            // $('#note-content').html(note.content)
+            requestFindPage(noteId).then(function (replyPage) {
+                loadPageBar(replyPage)
+            })
+        })
+
+        //请求回复分页
+        function requestFindPage(noteId, page, size) {
+            return request.ajax({
+                type: 'POST',
+                url: '/note/findPage',
+                data: {noteId: noteId, page: page || 1, size: size || 10,},
+            }).then(function (res) {
+                replyPage = res
+                loadReply(replyPage)
+                return replyPage
+            })
         }
-        var getTpl = reply.innerHTML
-            , view = document.getElementById('jieda');
-        laytpl(getTpl).render(data, function (html) {
-            view.innerHTML = html;
+
+        //加载回复分页
+        function loadReply(replyPage) {
+            var content = replyPage.content;
+            content.forEach(function (item) {
+                item.timeAgo = util.timeAgo(item.lastModifiedTime)
+            })
+            return new Promise(function (res, reject) {
+                if (content.length <= 0) {
+                    reject();
+                }
+                var data = {
+                    content: content,
+                    noteUserId: note.user.id,
+                    userId: layui.data('userData').user.id
+                }
+                var getTpl = replyTemplate.innerHTML
+                    , view = document.getElementById('jieda');
+                laytpl(getTpl).render(data, function (html) {
+                    view.innerHTML = html;
+                });
+                res(replyPage)
+            })
+        }
+
+        //加载分页工具
+        function loadPageBar(replyPage) {
+            laypage.render({
+                elem: 'demo0'
+                , count: replyPage.totalElements //数据总数
+                , limit: replyPage.size || 10
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj, first) {
+                    //obj包含了当前分页的所有参数，比如：
+                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    console.log(obj.limit); //得到每页显示的条数
+                    //首次不执行
+                    if (!first) {
+                        //do something
+                        requestFindPage(noteId, obj.curr, obj.limit)
+                    }
+                }
+            });
+        }
+
+        //创建回复文本编辑器
+        var E = window.wangEditor
+        var editor = new E('#toolbar', '#content')  // 两个参数也可以传入 elem 对象，class 选择器
+        editor.customConfig.zIndex = 1
+        editor.customConfig.onchange = function (html) {
+            // html 即变化之后的内容
+            document.getElementById('L_content').value = html
+            console.log(html)
+        }
+        // editor.customConfig.emotions = [
+        //     {
+        //         // tab 的标题
+        //         title: '默认',
+        //         // type -> 'emoji' / 'image'
+        //         type: 'image',
+        //         // content -> 数组
+        //         content: [
+        //             {
+        //                 alt: '[坏笑]',
+        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png'
+        //             },
+        //             {
+        //                 alt: '[爱你]',
+        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/f6/2018new_aini_org.png'
+        //             },
+        //             {
+        //                 alt: '[舔屏]',
+        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png'
+        //             }
+        //         ]
+        //     }
+        // ]
+        editor.create()
+        form.on('submit(replyNote)', function (data) {
+            var ok = true
+            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            data.field.userId = layui.data('userData').user.id
+            request.ajax({
+                type: 'POST',
+                url: '/note/saveReplay',
+                data: data.field,
+            }).then(function (res) {
+                // note.replyList.push(res)
+                editor.txt.clear()
+                // replyPage = res
+                requestFindPage(noteId).then(function (replyPage) {
+                    loadPageBar(replyPage)
+                })
+            })
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
-        // function myFunction(item) {
-        //     sum += item;
-        //     demo.innerHTML = sum;
-        // }
+
+        window.acceptReply=function(replyId) {
+            request.ajax({
+                type: 'POST',
+                url: '/note/acceptReplay',
+                data: {replyId: replyId, noteId: noteId},
+            }).then(function (res) {
+                requestFindPage(noteId).then(function (replyPage) {
+                    loadPageBar(replyPage)
+                })
+            })
+        }
+
 
 
     })
-
-
-</script>
-<script>
-    var E = window.wangEditor
-    var editor = new E('#toolbar', '#content')  // 两个参数也可以传入 elem 对象，class 选择器
-    editor.customConfig.zIndex = 1
-    editor.customConfig.onchange = function (html) {
-        // html 即变化之后的内容
-        document.getElementById('L_content').value = html
-        console.log(html)
-    }
-    editor.create()
-
 
 </script>
 

@@ -78,7 +78,7 @@ public class UserController {
     public User save() throws Exception {
         User user= new User();
         user.setPassword("123");
-        user.setUsername("hdl");
+        user.setUsername("admin");
         user=userService.save(user);
         return user;
     }
