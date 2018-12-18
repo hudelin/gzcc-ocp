@@ -205,7 +205,6 @@
             if(data.field.id!=""){
                 data.field.createTime= new Date(note.createTime)
             }
-
             // note.id=data.field
             request.ajax({
                 type: 'POST',

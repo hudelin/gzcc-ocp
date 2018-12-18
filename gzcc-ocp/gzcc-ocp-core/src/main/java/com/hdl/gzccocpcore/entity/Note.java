@@ -65,9 +65,14 @@ public class Note  implements Serializable {
     @Getter@Setter
     private String canReply="1";
 
+    @Getter@Setter
+    private String isTop="1";
+
 
     @Getter@Setter
     private String isDelete="0";
+
+
 
     @Getter@Setter
     private String noteType;

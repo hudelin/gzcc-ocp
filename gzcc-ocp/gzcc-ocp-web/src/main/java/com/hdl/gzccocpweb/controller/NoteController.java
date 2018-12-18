@@ -7,6 +7,7 @@ import com.hdl.gzccocpcore.service.ReplyService;
 import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,11 +47,23 @@ public class NoteController {
         return mv;
     }
 
+    @RequestMapping(value = "/index")
+    public ModelAndView index(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/note/index.btl");
+        return mv;
+    }
+
     @RequestMapping(value = "/save")
     @ResponseBody
     public Note save(Note note,Long userId) throws Exception {
-        note.setUser(userService.get(userId));
-        note = noteService.save(note);
+        if(note.getId()==null){
+            note.setUser(userService.get(userId));
+            note = noteService.save(note);
+        }else{
+            note.setUser(userService.get(userId));
+            note = noteService.update(note);
+        }
 
         return note;
     }
@@ -104,9 +117,9 @@ public class NoteController {
 
     @RequestMapping(value = "/findNotePage")
     @ResponseBody
-    public Page<Note> findNotePage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) throws Exception {
+    public Page<Note> findNotePage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,String orderType) throws Exception {
         Note note=new Note();
-        Page<Note> notePage = noteService.findPageByCondition(note,page, size);
+        Page<Note> notePage = noteService.findPageByConditionAndSort(note,page, size,new Sort(Sort.Direction.DESC, "isTop").and(new Sort(Sort.Direction.DESC,"lastModifiedTime")));
         return notePage;
     }
 
