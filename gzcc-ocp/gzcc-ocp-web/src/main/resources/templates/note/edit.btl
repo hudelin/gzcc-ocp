@@ -125,6 +125,7 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
+                                <input type="hidden" id="noteId" name="id" autocomplete="off" class="layui-input">
                                 <button class="layui-btn" lay-filter="saveNote" lay-submit>完成</button>
                             </div>
                         </form>
@@ -171,17 +172,41 @@
     }
     editor.create()
 
-    layui.use(['form', 'request', 'laytpl'], function () {
-        // var $ = layui.$
+    layui.use(['jquery','form', 'request', 'laytpl'], function () {
+        var $ = layui.$
         var form = layui.form;
         var request = layui.request
+
         // var laytpl = layui.laytpl;
+
+        var noteId="${noteId}"
+        var note;
+        if(noteId!=0){
+            request.ajax({
+                type: 'POST',
+                url: '/note/get',
+                data: {noteId: noteId},
+            }).then(function (res) {
+                note=res;
+                console.log("note",res)
+                editor.txt.html(res.content)
+                $("#noteId").val(res.id)
+                $("#L_title").val(res.title)
+            })
+        }
+
         // 各种基于事件的操作，下面会有进一步介绍
         form.on('submit(saveNote)', function (data) {
             var ok = true
             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            data.field.userId = layui.data('userData').user.id
+            if(data.field.id!=""){
+                data.field.createTime= new Date(note.createTime)
+            }
+
+            // note.id=data.field
             request.ajax({
                 type: 'POST',
                 url: '/note/save',
@@ -195,6 +220,9 @@
                 if (ok) {
                     window.location.href = "/note/detail/"+res.id;
                 }
+                // else{
+                //     layer.msg('请求');
+                // }
             })
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });

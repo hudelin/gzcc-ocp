@@ -25,7 +25,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Note  implements Serializable {
 
-    private static final long serialVersionUID = 2005794687566181633L;
+
+    private static final long serialVersionUID = -7106333655949626799L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
     @Column(name = "id")
@@ -44,9 +45,9 @@ public class Note  implements Serializable {
     @Getter@Setter
     protected Date lastModifiedTime;
 
-    @LastModifiedBy
-    @Getter@Setter
-    protected Long lastModifiedBy;
+//    @LastModifiedBy
+//    @Getter@Setter
+//    protected Long lastModifiedBy;
 
     @Getter@Setter
     private String title;
@@ -62,7 +63,11 @@ public class Note  implements Serializable {
     private List<Reply> replyList= new ArrayList<>();
 
     @Getter@Setter
-    private Boolean canReply=true;
+    private String canReply="1";
+
+
+    @Getter@Setter
+    private String isDelete="0";
 
     @Getter@Setter
     private String noteType;

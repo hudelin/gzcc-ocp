@@ -41,9 +41,9 @@ public class Reply  implements Serializable {
     @Getter@Setter
     protected Date lastModifiedTime;
 
-    @LastModifiedBy
-    @Getter@Setter
-    protected Long lastModifiedBy;
+//    @LastModifiedBy
+//    @Getter@Setter
+//    protected Long lastModifiedBy;
 
 
     @Column(columnDefinition="text")
@@ -54,7 +54,7 @@ public class Reply  implements Serializable {
     private Integer praise=0;
 
     @Getter@Setter
-    private Boolean isDelete=false;
+    private String isDelete="0";
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,7 +63,7 @@ public class Reply  implements Serializable {
     private Note note;
 
     @Getter@Setter
-    private Boolean isAccept=false;
+    private String isAccept="0";
 
     @ManyToOne
     @Getter@Setter

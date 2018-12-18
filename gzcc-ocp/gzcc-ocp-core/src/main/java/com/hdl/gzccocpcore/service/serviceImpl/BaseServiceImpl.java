@@ -135,9 +135,15 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
                         field.setAccessible(true);
                         try {
                             Object value = field.get(t);
-                            if (null != t && null != value) {
+                            if (null != t && null != value && !"serialVersionUID".equals(field.getName()) ) {
                                 // 这里也可以root.get("name").as(String.class)这种方式来强转泛型类型
+//                                if("java.lang.Boolean".equals(field.getType().getName())) {
+//                                    like=cb.isFalse(root.<Boolean>get(field.getName()));
+//                                }
                                 like = cb.like(root.<String>get(field.getName()), "%" + field.get(t) + "%");
+
+
+
                             }
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();

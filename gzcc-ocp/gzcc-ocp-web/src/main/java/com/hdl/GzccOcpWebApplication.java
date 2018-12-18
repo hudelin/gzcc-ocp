@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 //@EnableSwagger2
-//@EnableJpaAuditing
+@EnableJpaAuditing
 public class GzccOcpWebApplication {
 
     public static void main(String[] args) {

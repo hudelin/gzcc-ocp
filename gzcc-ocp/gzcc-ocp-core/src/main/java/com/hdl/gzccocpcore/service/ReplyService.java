@@ -9,5 +9,4 @@ public interface ReplyService extends BaseService<Reply,Long>  {
 
     public Reply acceptReply(Long replyId,Long noteId)throws Exception ;
 
-    public void deleteReply(Long replyId,Long userId)throws Exception ;
 }

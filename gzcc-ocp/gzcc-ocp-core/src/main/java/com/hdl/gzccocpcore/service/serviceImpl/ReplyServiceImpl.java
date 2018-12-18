@@ -26,6 +26,9 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Autowired
     private ReplyRepository replyRepository;
 
+    private static final String TRUE = "1";
+
+    private static final String FALSE = "0";
     @Override
     public Reply update(Reply reply) throws Exception {
         return null;
@@ -34,28 +37,29 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Override
     public Page<Reply> findPageByNoteId(Integer page, Integer size, Long noteId) throws Exception {
         Pageable pageable = PageRequest.of(page-1, size);
-        Page<Reply> replyPage=replyRepository.findByNoteIdOrderByIsAcceptDescCreateTimeDesc(pageable,noteId);
+        Page<Reply> replyPage=replyRepository.findByNoteIdAndIsDeleteOrderByIsAcceptDescCreateTimeDesc(pageable,noteId,FALSE);
         return replyPage;
     }
 
     @Override
     public Reply acceptReply(Long replyId, Long noteId) throws Exception {
 
-        if(replyRepository.findByNoteIdAndIsAccept(noteId,true)!=null){
-            Reply acceptReplyOld=replyRepository.findByNoteIdAndIsAccept(noteId,true);
-            acceptReplyOld.setIsAccept(false);
+        if(replyRepository.findByNoteIdAndIsAccept(noteId,TRUE)!=null){
+            Reply acceptReplyOld=replyRepository.findByNoteIdAndIsAccept(noteId,TRUE);
+            acceptReplyOld.setIsAccept(FALSE);
             replyRepository.save(acceptReplyOld);
         }
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsAccept(true);
+        acceptReplyNew.setIsAccept(TRUE);
         replyRepository.save(acceptReplyNew);
         return acceptReplyNew;
     }
 
     @Override
-    public void deleteReply(Long replyId, Long userId) throws Exception {
+    public void delete(Long replyId) throws Exception {
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsDelete(true);
+        acceptReplyNew.setIsDelete(TRUE);
         replyRepository.save(acceptReplyNew);
     }
+
 }

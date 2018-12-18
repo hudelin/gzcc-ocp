@@ -40,7 +40,7 @@
                 </ul>
                 <div style="text-align: center" id="demo0"></div>
                 <div class="layui-form layui-form-pane">
-                    <form action="/note/reply" method="post">
+                    <form action="/note/saveReply" method="post">
                         <div class="layui-form-item layui-form-text">
                             <a name="comment"></a>
                             <!--<div class="layui-input-block">-->
@@ -56,6 +56,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
+                            <input type="hidden" id="replyId" name="id" value="">
                             <input type="hidden" name="noteId" value="${noteId}">
                             <button class="layui-btn" lay-filter="replyNote" lay-submit>确认</button>
                         </div>
@@ -176,8 +177,8 @@
             <span>{{d.note.timeAgo}}</span>
         </div>
         <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-            <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>
-            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
+            <!--<span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>-->
+            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="/note/edit/${noteId}">编辑此贴</a></span>
         </div>
     </div>
     <div class="detail-body photos" id="note-content">
@@ -213,7 +214,7 @@
             <div class="detail-hits">
                 <span>{{item.timeAgo}}</span>
             </div>
-            {{# if(item.isAccept){ }}
+            {{# if(item.isAccept=="1"){ }}
             <i class="iconfont icon-caina" title="最佳答案"></i>
             {{# } }}
         </div>
@@ -232,12 +233,12 @@
               </span>
             <div class="jieda-admin">
                 {{# if(item.user.id==d.userId){ }}
-                <span type="edit">编辑</span>
+                <span type="edit"  onclick="editReply({{item.id}})">编辑</span>
                 {{# } }}
                 {{# if(item.user.id==d.userId||d.userId==d.noteUserId){ }}
-                <span type="del" data-method="notice">删除</span>
+                <span type="del" data-method="notice"  onclick="deleteReply({{item.id}})">删除</span>
                 {{# } }}
-                {{# if(d.userId==d.noteUserId&&!item.isAccept){ }}
+                {{# if(d.userId==d.noteUserId&&item.isAccept=="0"){ }}
                 <span class="jieda-accept" type="accept" onclick="acceptReply({{item.id}})">采纳</span>
                 {{# } }}
             </div>
@@ -266,7 +267,7 @@
     }).extend({
         fly: 'index',
         request: 'request'
-    }).use(['jquery', 'request', 'laytpl', 'form', 'laypage', 'util'], function () {
+    }).use(['jquery', 'request', 'laytpl', 'form', 'laypage', 'util','layer'], function () {
         var $ = layui.$
         var fly = layui.fly;
         var laytpl = layui.laytpl
@@ -274,6 +275,7 @@
         var form = layui.form;
         var laypage = layui.laypage;
         var util = layui.util;
+        var layer = layui.layer;
 
         var noteId = '${noteId}'
         var note = {};
@@ -305,7 +307,7 @@
         function requestFindPage(noteId, page, size) {
             return request.ajax({
                 type: 'POST',
-                url: '/note/findPage',
+                url: '/note/findReplyPage',
                 data: {noteId: noteId, page: page || 1, size: size || 10,},
             }).then(function (res) {
                 replyPage = res
@@ -397,6 +399,10 @@
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
             data.field.userId = layui.data('userData').user.id
+            if($("#replyId").val()!=""){
+                data.field.createTime= new Date(replyPage.content.find(e=>e.id==data.field.id).createTime)
+            }
+
             request.ajax({
                 type: 'POST',
                 url: '/note/saveReplay',
@@ -413,15 +419,39 @@
         });
 
         window.acceptReply=function(replyId) {
-            request.ajax({
-                type: 'POST',
-                url: '/note/acceptReplay',
-                data: {replyId: replyId, noteId: noteId},
-            }).then(function (res) {
-                requestFindPage(noteId).then(function (replyPage) {
-                    loadPageBar(replyPage)
+            layer.confirm('是否采纳该回答为最佳答案？', function(index){
+                request.ajax({
+                    type: 'POST',
+                    url: '/note/acceptReplay',
+                    data: {replyId: replyId, noteId: noteId},
+                }).then(function (res) {
+                    requestFindPage(noteId).then(function (replyPage) {
+                        loadPageBar(replyPage)
+                    })
                 })
-            })
+                layer.close(index);
+            });
+        }
+
+        window.deleteReply=function(replyId){
+            layer.confirm('确认删除该回答么？', function(index){
+                request.ajax({
+                    type: 'POST',
+                    url: '/note/deleteReplay',
+                    data: {replyId: replyId, noteId: noteId},
+                }).then(function (res) {
+                    requestFindPage(noteId).then(function (replyPage) {
+                        loadPageBar(replyPage)
+                    })
+                })
+                layer.close(index);
+            });
+        }
+        window.editReply=function(replyId){
+            // console.log(replyId)
+            // console.log( replyPage.content.find(e=>e.id==replyId).content)
+            $("#replyId").val(replyId)
+            editor.txt.html(replyPage.content.find(e=>e.id==replyId).content)
         }
 
 

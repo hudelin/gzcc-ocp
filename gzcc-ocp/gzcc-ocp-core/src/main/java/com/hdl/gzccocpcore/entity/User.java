@@ -37,18 +37,18 @@ public class User  implements Serializable{
     @Getter@Setter
     protected Date createTime;
 
-    @CreatedBy
-    @Getter@Setter
-    protected Long createBy;
+//    @CreatedBy
+//    @Getter@Setter
+//    protected Long createBy;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
     @Getter@Setter
     protected Date lastModifiedTime;
 
-    @LastModifiedBy
-    @Getter@Setter
-    protected Long lastModifiedBy;
+//    @LastModifiedBy
+//    @Getter@Setter
+//    protected Long lastModifiedBy;
 
     @Getter@Setter
     private String username;
