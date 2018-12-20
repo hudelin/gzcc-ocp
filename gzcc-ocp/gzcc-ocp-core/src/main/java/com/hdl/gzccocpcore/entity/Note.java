@@ -37,13 +37,13 @@ public class Note  implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
     @Getter@Setter
-    protected Date createTime;
+    private Date createTime;
 
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
     @Getter@Setter
-    protected Date lastModifiedTime;
+    private Date lastModifiedTime;
 
 //    @LastModifiedBy
 //    @Getter@Setter

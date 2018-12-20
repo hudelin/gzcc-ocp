@@ -5,18 +5,20 @@ import com.hdl.gzccocpcore.entity.Reply;
 import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ReplyService;
 import com.hdl.gzccocpcore.service.UserService;
+import com.hdl.gzccocpweb.support.UploadResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +123,23 @@ public class NoteController {
         Note note=new Note();
         Page<Note> notePage = noteService.findPageByConditionAndSort(note,page, size,new Sort(Sort.Direction.DESC, "isTop").and(new Sort(Sort.Direction.DESC,"lastModifiedTime")));
         return notePage;
+    }
+
+    @RequestMapping("/upload")
+    @ResponseBody
+    private UploadResponse upload(MultipartFile file){
+//        try {  /*获取文件的后缀，对文件进行重命名*/
+//            String prefix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+//            String fileName = user.getName() + "." + prefix;
+//            File f = new File(rootPath + fileName);
+//            file.transferTo(f);
+//            user.setPicture("/uploads/" + fileName);
+//            userRepository.save(user);
+//        } catch (FileNotFoundException e) {
+//        } catch (IOException e) {
+//        }
+        UploadResponse uploadResponse=new UploadResponse("https://res.layui.com/static/images/layui/logo.png");
+        return uploadResponse;
     }
 
 

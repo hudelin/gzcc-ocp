@@ -1,13 +1,12 @@
 package com.hdl.gzccocpcore.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,14 +19,14 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reply  implements Serializable {
-
-    private static final long serialVersionUID = -3843608801898748229L;
+public class Resource implements Serializable {
+    private static final long serialVersionUID = -8742672422313673849L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
     @Column(name = "id")
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -35,39 +34,28 @@ public class Reply  implements Serializable {
     @Getter@Setter
     private Date createTime;
 
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
     @Getter@Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
-
-
-    @Column(columnDefinition="text")
     @Getter@Setter
-    private String content;
+    private String filePath;
 
     @Getter@Setter
-    private Integer praise=0;
+    private String originalName;
+
+    @Getter@Setter
+    private String formatName;
+
+    @Getter@Setter
+    private String fileType;
+
+    @Getter@Setter
+    private String suffix;
 
     @Getter@Setter
     private String isDelete="0";
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @Getter@Setter
-    private Note note;
-
-    @Getter@Setter
-    private String isAccept="0";
-
-    @ManyToOne
-    @Getter@Setter
-    private User user;
 
 
 }
