@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <title>基于 layui 的极简社区页面模版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <% include("/common/link.btl"){} %>
+</head>
+<body>
+<blockquote class="layui-elem-quote">
+    注意：LayIM 是基于 layui 的一款独立的付费组件，它是网页即时通讯 UI 解决方案，您购买授权后得到的是一套前端源代码，而服务端程序需自写。</blockquote>
+
+<a class="layui-btn layui-btn-normal" href="http://layim.layui.com/" target="_blank">前去LayIM官网</a>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>面板外的操作示例</legend>
+</fieldset>
+
+<div class="site-demo-button">
+    <button class="layui-btn site-demo-layim" data-type="chat">自定义会话</button>
+    <button class="layui-btn site-demo-layim" data-type="message">接受好友的消息</button>
+    <button class="layui-btn site-demo-layim" data-type="messageAudio">接受音频消息</button>
+    <button class="layui-btn site-demo-layim" data-type="messageVideo">接受视频消息</button>
+    <button class="layui-btn site-demo-layim" data-type="messageTemp">接受临时会话消息</button>
+
+    <br>
+
+    <button class="layui-btn site-demo-layim" data-type="add">申请好友</button>
+    <button class="layui-btn site-demo-layim" data-type="addqun">申请加群</button>
+    <button class="layui-btn site-demo-layim" data-type="addFriend">同意好友</button>
+    <button class="layui-btn site-demo-layim" data-type="addGroup">增加群组到主面板</button>
+    <button class="layui-btn site-demo-layim" data-type="removeFriend">删除主面板好友</button>
+    <button class="layui-btn site-demo-layim" data-type="removeGroup">删除主面板群组</button>
+
+    <br>
+    <button class="layui-btn site-demo-layim" data-type="setGray">置灰离线好友</button>
+    <button class="layui-btn site-demo-layim" data-type="unGray">取消好友置灰</button>
+    <a href="http://layim.layui.com/kefu.html" class="layui-btn site-demo-layim" target="_blank">客服模式</a>
+    <button class="layui-btn site-demo-layim" data-type="mobile">移动端版本</button>
+</div>
+
+
+<script src="../../res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+    <!--&lt;!&ndash;layui.use('layim', function() {&ndash;&gt;-->
+        <!--&lt;!&ndash;var layim = layui.layim;&ndash;&gt;-->
+
+        <!--&lt;!&ndash;//演示自动回复&ndash;&gt;-->
+        <!--&lt;!&ndash;var autoReplay = [&ndash;&gt;-->
+            <!--&lt;!&ndash;'您好，我现在有事不在，一会再和您联系。',&ndash;&gt;-->
+            <!--&lt;!&ndash;'你没发错吧？face[微笑] ',&ndash;&gt;-->
+            <!--&lt;!&ndash;'洗澡中，请勿打扰，偷窥请购票，个体四十，团体八折，订票电话：一般人我不告诉他！face[哈哈] ',&ndash;&gt;-->
+            <!--&lt;!&ndash;'你好，我是主人的美女秘书，有什么事就跟我说吧，等他回来我会转告他的。face[心] face[心] face[心] ',&ndash;&gt;-->
+            <!--&lt;!&ndash;'face[威武] face[威武] face[威武] face[威武] ',&ndash;&gt;-->
+            <!--&lt;!&ndash;'<（@￣︶￣@）>',&ndash;&gt;-->
+            <!--&lt;!&ndash;'你要和我说话？你真的要和我说话？你确定自己想说吗？你一定非说不可吗？那你说吧，这是自动回复。',&ndash;&gt;-->
+            <!--&lt;!&ndash;'face[黑线]  你慢慢说，别急……',&ndash;&gt;-->
+            <!--&lt;!&ndash;'(*^__^*) face[嘻嘻] ，是贤心吗？'&ndash;&gt;-->
+        <!--&lt;!&ndash;];&ndash;&gt;-->
+
+        <!--&lt;!&ndash;//基础配置&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.config({&ndash;&gt;-->
+            <!--&lt;!&ndash;//初始化接口&ndash;&gt;-->
+            <!--&lt;!&ndash;init: {&ndash;&gt;-->
+                <!--&lt;!&ndash;url: '/chat/json',&ndash;&gt;-->
+                <!--&lt;!&ndash;data: {}&ndash;&gt;-->
+            <!--&lt;!&ndash;}&ndash;&gt;-->
+            <!--&lt;!&ndash;//查看群员接口&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;members: {&ndash;&gt;-->
+                <!--&lt;!&ndash;url: '/chat/getMembers',&ndash;&gt;-->
+                <!--&lt;!&ndash;data: {}&ndash;&gt;-->
+            <!--&lt;!&ndash;}&ndash;&gt;-->
+
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;uploadImage: {&ndash;&gt;-->
+                <!--&lt;!&ndash;url: '/note/upload' //（返回的数据格式见下文）&ndash;&gt;-->
+                <!--&lt;!&ndash;,&ndash;&gt;-->
+                <!--&lt;!&ndash;type: '' //默认post&ndash;&gt;-->
+            <!--&lt;!&ndash;},&ndash;&gt;-->
+            <!--&lt;!&ndash;uploadFile: {&ndash;&gt;-->
+                <!--&lt;!&ndash;url: '' //（返回的数据格式见下文）&ndash;&gt;-->
+                <!--&lt;!&ndash;,&ndash;&gt;-->
+                <!--&lt;!&ndash;type: '' //默认post&ndash;&gt;-->
+            <!--&lt;!&ndash;}&ndash;&gt;-->
+
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;isAudio: true //开启聊天工具栏音频&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;isVideo: true //开启聊天工具栏视频&ndash;&gt;-->
+
+            <!--&lt;!&ndash;//扩展工具栏&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;tool: [{&ndash;&gt;-->
+                <!--&lt;!&ndash;alias: 'code',&ndash;&gt;-->
+                <!--&lt;!&ndash;title: '代码',&ndash;&gt;-->
+                <!--&lt;!&ndash;icon: '&#xe64e;'&ndash;&gt;-->
+            <!--&lt;!&ndash;}]&ndash;&gt;-->
+
+            <!--&lt;!&ndash;//,brief: true //是否简约模式（若开启则不显示主面板）&ndash;&gt;-->
+
+            <!--&lt;!&ndash;//,title: 'WebIM' //自定义主面板最小化时的标题&ndash;&gt;-->
+            <!--&lt;!&ndash;//,right: '100px' //主面板相对浏览器右侧距离&ndash;&gt;-->
+            <!--&lt;!&ndash;//,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;initSkin: '3.jpg' //1-5 设置初始背景&ndash;&gt;-->
+            <!--&lt;!&ndash;//,skin: ['aaa.jpg'] //新增皮肤&ndash;&gt;-->
+            <!--&lt;!&ndash;//,isfriend: false //是否开启好友&ndash;&gt;-->
+            <!--&lt;!&ndash;//,isgroup: false //是否开启群组&ndash;&gt;-->
+            <!--&lt;!&ndash;,min: true //是否始终最小化主面板，默认false&ndash;&gt;-->
+            <!--&lt;!&ndash;//,notice: true //是否开启桌面消息提醒，默认false&ndash;&gt;-->
+            <!--&lt;!&ndash;//,voice: false //声音提醒，默认开启，声音文件为：default.mp3&ndash;&gt;-->
+
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;msgbox: '/layim/demo/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;find: '/layim/demo/find.html' //发现页面地址，若不开启，剔除该项即可&ndash;&gt;-->
+            <!--&lt;!&ndash;,&ndash;&gt;-->
+            <!--&lt;!&ndash;chatLog: '/layim/demo/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可&ndash;&gt;-->
+
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+        <!--&lt;!&ndash;//监听在线状态的切换事件&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('online', function(status) {&ndash;&gt;-->
+            <!--&lt;!&ndash;layer.msg(status);&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+
+        <!--&lt;!&ndash;//监听签名修改&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('sign', function(value) {&ndash;&gt;-->
+            <!--&lt;!&ndash;layer.msg(value);&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+        <!--&lt;!&ndash;//监听自定义工具栏点击，以添加代码为例&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('tool(code)', function(insert) {&ndash;&gt;-->
+            <!--&lt;!&ndash;layer.prompt({&ndash;&gt;-->
+                <!--&lt;!&ndash;title: '插入代码 - 工具栏扩展示例',&ndash;&gt;-->
+                <!--&lt;!&ndash;formType: 2,&ndash;&gt;-->
+                <!--&lt;!&ndash;shade: 0&ndash;&gt;-->
+            <!--&lt;!&ndash;}, function(text, index) {&ndash;&gt;-->
+                <!--&lt;!&ndash;layer.close(index);&ndash;&gt;-->
+                <!--&lt;!&ndash;insert('[pre class=layui-code]' + text + '[/pre]'); //将内容插入到编辑器&ndash;&gt;-->
+            <!--&lt;!&ndash;});&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+
+        <!--&lt;!&ndash;//监听layim建立就绪&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('ready', function(res) {&ndash;&gt;-->
+            <!--&lt;!&ndash;//console.log(res.mine);&ndash;&gt;-->
+            <!--&lt;!&ndash;layim.msgbox(5); //模拟消息盒子有新消息，实际使用时，一般是动态获得&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+        <!--&lt;!&ndash;//监听发送消息&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('sendMessage', function(data) {&ndash;&gt;-->
+            <!--&lt;!&ndash;var To = data.to;&ndash;&gt;-->
+            <!--&lt;!&ndash;//console.log(data);&ndash;&gt;-->
+
+            <!--&lt;!&ndash;if (To.type === 'friend') {&ndash;&gt;-->
+                <!--&lt;!&ndash;layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');&ndash;&gt;-->
+            <!--&lt;!&ndash;}&ndash;&gt;-->
+
+            <!--&lt;!&ndash;//演示自动回复&ndash;&gt;-->
+            <!--&lt;!&ndash;setTimeout(function() {&ndash;&gt;-->
+                <!--&lt;!&ndash;var obj = {};&ndash;&gt;-->
+                <!--&lt;!&ndash;if (To.type === 'group') {&ndash;&gt;-->
+                    <!--&lt;!&ndash;obj = {&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: '模拟群员' + (Math.random() * 100 | 0),&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: layui.cache.dir + 'images/face/' + (Math.random() * 72 | 0) + '.gif',&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: To.id,&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: To.type,&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: autoReplay[Math.random() * 9 | 0]&ndash;&gt;-->
+                    <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--&lt;!&ndash;} else {&ndash;&gt;-->
+                    <!--&lt;!&ndash;obj = {&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: To.name,&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: To.avatar,&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: To.id,&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: To.type,&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: autoReplay[Math.random() * 9 | 0]&ndash;&gt;-->
+                    <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.setChatStatus('<span style="color:#FF5722;">在线</span>');&ndash;&gt;-->
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--&lt;!&ndash;layim.getMessage(obj);&ndash;&gt;-->
+            <!--&lt;!&ndash;}, 1000);&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+        <!--&lt;!&ndash;//监听查看群员&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('members', function(data) {&ndash;&gt;-->
+            <!--&lt;!&ndash;//console.log(data);&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+
+        <!--&lt;!&ndash;//监听聊天窗口的切换&ndash;&gt;-->
+        <!--&lt;!&ndash;layim.on('chatChange', function(res) {&ndash;&gt;-->
+            <!--&lt;!&ndash;var type = res.data.type;&ndash;&gt;-->
+            <!--&lt;!&ndash;console.log(res.data.id)&ndash;&gt;-->
+            <!--&lt;!&ndash;if (type === 'friend') {&ndash;&gt;-->
+                <!--&lt;!&ndash;//模拟标注好友状态&ndash;&gt;-->
+                <!--&lt;!&ndash;//layim.setChatStatus('<span style="color:#FF5722;">在线</span>');&ndash;&gt;-->
+            <!--&lt;!&ndash;} else if (type === 'group') {&ndash;&gt;-->
+                <!--&lt;!&ndash;//模拟系统消息&ndash;&gt;-->
+                <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                    <!--&lt;!&ndash;system: true,&ndash;&gt;-->
+                    <!--&lt;!&ndash;id: res.data.id,&ndash;&gt;-->
+                    <!--&lt;!&ndash;type: "group",&ndash;&gt;-->
+                    <!--&lt;!&ndash;content: '模拟群员' + (Math.random() * 100 | 0) + '加入群聊'&ndash;&gt;-->
+                <!--&lt;!&ndash;});&ndash;&gt;-->
+            <!--&lt;!&ndash;}&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;//面板外的操作&ndash;&gt;-->
+        <!--&lt;!&ndash;var $ = layui.jquery,&ndash;&gt;-->
+            <!--&lt;!&ndash;active = {&ndash;&gt;-->
+                <!--&lt;!&ndash;chat: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//自定义会话&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.chat({&ndash;&gt;-->
+                        <!--&lt;!&ndash;name: '小闲',&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'friend',&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: '//tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg',&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: 1008612&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                    <!--&lt;!&ndash;layer.msg('也就是说，此人可以不在好友面板里');&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;message: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//制造好友消息&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: "贤心",&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: "//tp1.sinaimg.cn/1571889140/180/40030060651/1",&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: "100001",&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: "friend",&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: "嗨，你好！欢迎体验LayIM。演示标记：" + new Date().getTime(),&ndash;&gt;-->
+                        <!--&lt;!&ndash;timestamp: new Date().getTime()&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;messageAudio: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//接受音频消息&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: "林心如",&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: "//tp3.sinaimg.cn/1223762662/180/5741707953/0",&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: "76543",&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: "friend",&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: "audio[http://gddx.sc.chinaz.com/Files/DownLoad/sound1/201510/6473.mp3]",&ndash;&gt;-->
+                        <!--&lt;!&ndash;timestamp: new Date().getTime()&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;messageVideo: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//接受视频消息&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: "林心如",&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: "//tp3.sinaimg.cn/1223762662/180/5741707953/0",&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: "76543",&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: "friend",&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: "video[http://www.w3school.com.cn//i/movie.ogg]",&ndash;&gt;-->
+                        <!--&lt;!&ndash;timestamp: new Date().getTime()&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;messageTemp: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//接受临时会话消息&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: "小酱",&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: "//tva1.sinaimg.cn/crop.7.0.736.736.50/bd986d61jw8f5x8bqtp00j20ku0kgabx.jpg",&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: "198909151014",&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: "friend",&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: "临时：" + new Date().getTime()&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;add: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;//实际使用时数据由动态获得&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.add({&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'friend',&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: '麻花疼',&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: '//tva1.sinaimg.cn/crop.0.0.720.720.180/005JKVuPjw8ers4osyzhaj30k00k075e.jpg',&ndash;&gt;-->
+                        <!--&lt;!&ndash;submit: function(group, remark, index) {&ndash;&gt;-->
+                            <!--&lt;!&ndash;layer.msg('好友申请已发送，请等待对方确认', {&ndash;&gt;-->
+                                <!--&lt;!&ndash;icon: 1,&ndash;&gt;-->
+                                <!--&lt;!&ndash;shade: 0.5&ndash;&gt;-->
+                            <!--&lt;!&ndash;}, function() {&ndash;&gt;-->
+                                <!--&lt;!&ndash;layer.close(index);&ndash;&gt;-->
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;//通知对方&ndash;&gt;-->
+                            <!--&lt;!&ndash;/*&ndash;&gt;-->
+                            <!--&lt;!&ndash;$.post('/im-applyFriend/', {&ndash;&gt;-->
+                              <!--&lt;!&ndash;uid: info.uid&ndash;&gt;-->
+                              <!--&lt;!&ndash;,from_group: group&ndash;&gt;-->
+                              <!--&lt;!&ndash;,remark: remark&ndash;&gt;-->
+                            <!--&lt;!&ndash;}, function(res){&ndash;&gt;-->
+                              <!--&lt;!&ndash;if(res.status != 0){&ndash;&gt;-->
+                                <!--&lt;!&ndash;return layer.msg(res.msg);&ndash;&gt;-->
+                              <!--&lt;!&ndash;}&ndash;&gt;-->
+                              <!--&lt;!&ndash;layer.msg('好友申请已发送，请等待对方确认', {&ndash;&gt;-->
+                                <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                                <!--&lt;!&ndash;,shade: 0.5&ndash;&gt;-->
+                              <!--&lt;!&ndash;}, function(){&ndash;&gt;-->
+                                <!--&lt;!&ndash;layer.close(index);&ndash;&gt;-->
+                              <!--&lt;!&ndash;});&ndash;&gt;-->
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+                            <!--&lt;!&ndash;*/&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;addqun: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.add({&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'group',&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: 'LayIM会员群',&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: '//tva2.sinaimg.cn/crop.0.0.180.180.50/6ddfa27bjw1e8qgp5bmzyj2050050aa8.jpg',&ndash;&gt;-->
+                        <!--&lt;!&ndash;submit: function(group, remark, index) {&ndash;&gt;-->
+                            <!--&lt;!&ndash;layer.msg('申请已发送，请等待管理员确认', {&ndash;&gt;-->
+                                <!--&lt;!&ndash;icon: 1,&ndash;&gt;-->
+                                <!--&lt;!&ndash;shade: 0.5&ndash;&gt;-->
+                            <!--&lt;!&ndash;}, function() {&ndash;&gt;-->
+                                <!--&lt;!&ndash;layer.close(index);&ndash;&gt;-->
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;//通知对方&ndash;&gt;-->
+                            <!--&lt;!&ndash;/*&ndash;&gt;-->
+                            <!--&lt;!&ndash;$.post('/im-applyGroup/', {&ndash;&gt;-->
+                              <!--&lt;!&ndash;uid: info.uid&ndash;&gt;-->
+                              <!--&lt;!&ndash;,from_group: group&ndash;&gt;-->
+                              <!--&lt;!&ndash;,remark: remark&ndash;&gt;-->
+                            <!--&lt;!&ndash;}, function(res){&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+                            <!--&lt;!&ndash;*/&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;addFriend: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;var user = {&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'friend',&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: 1234560,&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: '李彦宏' //好友昵称，若申请加群，参数为：groupname&ndash;&gt;-->
+                        <!--&lt;!&ndash;,&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: '//tva4.sinaimg.cn/crop.0.0.996.996.180/8b2b4e23jw8f14vkwwrmjj20ro0rpjsq.jpg' //头像&ndash;&gt;-->
+                        <!--&lt;!&ndash;,&ndash;&gt;-->
+                        <!--&lt;!&ndash;sign: '全球最大的中文搜索引擎'&ndash;&gt;-->
+                    <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.setFriendGroup({&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: user.type,&ndash;&gt;-->
+                        <!--&lt;!&ndash;username: user.username,&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: user.avatar,&ndash;&gt;-->
+                        <!--&lt;!&ndash;group: layim.cache().friend //获取好友列表数据&ndash;&gt;-->
+                        <!--&lt;!&ndash;,&ndash;&gt;-->
+                        <!--&lt;!&ndash;submit: function(group, index) {&ndash;&gt;-->
+                            <!--&lt;!&ndash;//一般在此执行Ajax和WS，以通知对方已经同意申请&ndash;&gt;-->
+                            <!--&lt;!&ndash;//……&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;//同意后，将好友追加到主面板&ndash;&gt;-->
+                            <!--&lt;!&ndash;layim.addList({&ndash;&gt;-->
+                                <!--&lt;!&ndash;type: user.type,&ndash;&gt;-->
+                                <!--&lt;!&ndash;username: user.username,&ndash;&gt;-->
+                                <!--&lt;!&ndash;avatar: user.avatar,&ndash;&gt;-->
+                                <!--&lt;!&ndash;groupid: group //所在的分组id&ndash;&gt;-->
+                                <!--&lt;!&ndash;,&ndash;&gt;-->
+                                <!--&lt;!&ndash;id: user.id //好友ID&ndash;&gt;-->
+                                <!--&lt;!&ndash;,&ndash;&gt;-->
+                                <!--&lt;!&ndash;sign: user.sign //好友签名&ndash;&gt;-->
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;layer.close(index);&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;addGroup: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layer.msg('已成功把[Angular开发]添加到群组里', {&ndash;&gt;-->
+                        <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                    <!--&lt;!&ndash;//增加一个群组&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.addList({&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'group',&ndash;&gt;-->
+                        <!--&lt;!&ndash;avatar: "//tva3.sinaimg.cn/crop.64.106.361.361.50/7181dbb3jw8evfbtem8edj20ci0dpq3a.jpg",&ndash;&gt;-->
+                        <!--&lt;!&ndash;groupname: 'Angular开发',&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: "12333333",&ndash;&gt;-->
+                        <!--&lt;!&ndash;members: 0&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;removeFriend: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layer.msg('已成功删除[凤姐]', {&ndash;&gt;-->
+                        <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                    <!--&lt;!&ndash;//删除一个好友&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.removeList({&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: 121286,&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'friend'&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;},&ndash;&gt;-->
+                <!--&lt;!&ndash;removeGroup: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layer.msg('已成功删除[前端群]', {&ndash;&gt;-->
+                        <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                    <!--&lt;!&ndash;//删除一个群组&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.removeList({&ndash;&gt;-->
+                        <!--&lt;!&ndash;id: 101,&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 'group'&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--&lt;!&ndash;//置灰离线好友&ndash;&gt;-->
+                <!--&lt;!&ndash;,&ndash;&gt;-->
+                <!--&lt;!&ndash;setGray: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.setFriendStatus(168168, 'offline');&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;layer.msg('已成功将好友[马小云]置灰', {&ndash;&gt;-->
+                        <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--&lt;!&ndash;//取消好友置灰&ndash;&gt;-->
+                <!--&lt;!&ndash;,&ndash;&gt;-->
+                <!--&lt;!&ndash;unGray: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.setFriendStatus(168168, 'online');&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;layer.msg('成功取消好友[马小云]置灰状态', {&ndash;&gt;-->
+                        <!--&lt;!&ndash;icon: 1&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--&lt;!&ndash;//移动端版本&ndash;&gt;-->
+                <!--&lt;!&ndash;,&ndash;&gt;-->
+                <!--&lt;!&ndash;mobile: function() {&ndash;&gt;-->
+                    <!--&lt;!&ndash;var device = layui.device();&ndash;&gt;-->
+                    <!--&lt;!&ndash;var mobileHome = '/layim/demo/mobile.html';&ndash;&gt;-->
+                    <!--&lt;!&ndash;if (device.android || device.ios) {&ndash;&gt;-->
+                        <!--&lt;!&ndash;return location.href = mobileHome;&ndash;&gt;-->
+                    <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;var index = layer.open({&ndash;&gt;-->
+                        <!--&lt;!&ndash;type: 2,&ndash;&gt;-->
+                        <!--&lt;!&ndash;title: '移动版演示 （或手机扫右侧二维码预览）',&ndash;&gt;-->
+                        <!--&lt;!&ndash;content: mobileHome,&ndash;&gt;-->
+                        <!--&lt;!&ndash;area: ['375px', '667px'],&ndash;&gt;-->
+                        <!--&lt;!&ndash;shadeClose: true,&ndash;&gt;-->
+                        <!--&lt;!&ndash;shade: 0.8,&ndash;&gt;-->
+                        <!--&lt;!&ndash;end: function() {&ndash;&gt;-->
+                            <!--&lt;!&ndash;layer.close(index + 2);&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                    <!--&lt;!&ndash;layer.photos({&ndash;&gt;-->
+                        <!--&lt;!&ndash;photos: {&ndash;&gt;-->
+                            <!--&lt;!&ndash;"data": [{&ndash;&gt;-->
+                                <!--&lt;!&ndash;"src": "http://cdn.layui.com/upload/2016_12/168_1481056358469_50288.png",&ndash;&gt;-->
+                            <!--&lt;!&ndash;}]&ndash;&gt;-->
+                        <!--&lt;!&ndash;},&ndash;&gt;-->
+                        <!--&lt;!&ndash;anim: 0,&ndash;&gt;-->
+                        <!--&lt;!&ndash;shade: false,&ndash;&gt;-->
+                        <!--&lt;!&ndash;success: function(layero) {&ndash;&gt;-->
+                            <!--&lt;!&ndash;layero.css('margin-left', '350px');&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                    <!--&lt;!&ndash;});&ndash;&gt;-->
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+            <!--&lt;!&ndash;};&ndash;&gt;-->
+        <!--&lt;!&ndash;$('.site-demo-layim').on('click', function() {&ndash;&gt;-->
+            <!--&lt;!&ndash;var type = $(this).data('type');&ndash;&gt;-->
+            <!--&lt;!&ndash;active[type] ? active[type].call(this) : '';&ndash;&gt;-->
+        <!--&lt;!&ndash;});&ndash;&gt;-->
+    <!--&lt;!&ndash;});&ndash;&gt;-->
+<!--</script>-->
+</body>
+</html>
