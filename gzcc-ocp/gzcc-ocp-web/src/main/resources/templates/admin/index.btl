@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layout 后台大布局 - Layui</title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css">
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">layui 后台布局</div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
+				<ul class="layui-nav layui-layout-left">
+					<li class="layui-nav-item"><a href="#"><i class="kit-side-fold layui-icon layui-icon-home"></i></a></li>
+					<li class="layui-nav-item"><a href="">控制台</a></li>
+					<li class="layui-nav-item"><a href="">商品管理</a></li>
+					<li class="layui-nav-item"><a href="">用户</a></li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">其它系统</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">邮件管理</a></dd>
+							<dd><a href="">消息管理</a></dd>
+							<dd><a href="">授权管理</a></dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+							贤心
+						</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">基本资料</a></dd>
+							<dd><a href="">安全设置</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item"><a href="">退了</a></li>
+				</ul>
+			</div>
+			<!-- layui-hide 加到下面可以隐藏 -->
+
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- <div title="菜单缩放" class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div> -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页</span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>生源列表</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-clipboard fa-lg"></i> <span>学校信息</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-file-text fa-lg"></i> <span>工做计划</span></a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span>用户</span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;"><i class="fa fa-th-list fa-lg"></i> <span>学员列表</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-user-o fa-lg"></i> <span>考勤管理</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-send-o fa-lg"></i> <span>沟通计划</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-frown-o fa-lg"></i> <span>成绩管理</span></a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span>管理设置</span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;"><i class="fa fa-gear fa-lg"></i> <span>系统管理</span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;"><i class="fa fa-window-restore fa-lg"></i> <span>系统信息</span></a></dd>
+								<dd><a href="javascript:;"><i class="fa fa-database fa-lg"></i> <span>操作日志</span></a></dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<!-- <div style="padding: 15px;">内容主体区域</div> -->
+
+				<iframe src="admin.html" style="position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;"></iframe>
+
+			</div>
+
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				© layui.com - 底部固定区域
+			</div>
+		</div>
+		<script src="../../res/layui/layui.js"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['jquery', 'element'], function() {
+				var element = layui.element;
+				var $ = layui.$
+
+				var isShow = true; //定义一个标志位
+				$('.kit-side-fold').click(function() {
+					//选择出所有的span，并判断是不是hidden
+					$('.layui-nav-item span').each(function() {
+						if ($(this).is(':hidden')) {
+							$(this).show();
+						} else {
+							$(this).hide();
+						}
+					});
+					//判断isshow的状态
+					if (isShow) {
+						$('.layui-side.layui-bg-black').width(60); //设置宽度
+						$('.kit-side-fold i').css('margin-right', '70%'); //修改图标的位置
+						//将footer和body的宽度修改
+						$('.layui-body').css('left', 60 + 'px');
+						$('.layui-footer').css('left', 60 + 'px');
+						//将二级导航栏隐藏
+						$('dd span').each(function() {
+							$(this).hide();
+						});
+						//修改标志位
+						isShow = false;
+					} else {
+						$('.layui-side.layui-bg-black').width(200);
+						$('.kit-side-fold i').css('margin-right', '10%');
+						$('.layui-body').css('left', 200 + 'px');
+						$('.layui-footer').css('left', 200 + 'px');
+						$('dd span').each(function() {
+							$(this).show();
+						});
+						isShow = true;
+					}
+				});
+			});
+		</script>
+
+
+	</body>
+</html>
