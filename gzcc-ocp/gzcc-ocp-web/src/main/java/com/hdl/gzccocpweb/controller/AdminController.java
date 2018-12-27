@@ -17,4 +17,12 @@ public class AdminController {
         mv.setViewName("/admin/index.btl");
         return mv;
     }
+
+    @RequestMapping("/user")
+    public ModelAndView user(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/admin/user.btl");
+        return mv;
+    }
+
 }

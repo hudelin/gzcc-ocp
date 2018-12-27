@@ -7,8 +7,8 @@
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../res/layui/css/layui.css">
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
+<body class="layui-layout-body" >
+<div class="layui-layout layui-layout-admin" >
     <div class="layui-header">
         <div class="layui-logo">layui 后台布局</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
@@ -44,31 +44,52 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="sideBar">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>生源列表</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-clipboard fa-lg"></i> <span>学校信息</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-file-text fa-lg"></i> <span>工做计划</span></a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页一</span></a></dd>
+                        <!--<dd><a href="javascript:;"><i class="fa fa-clipboard fa-lg"></i> <span>学校信息</span></a></dd>-->
+                        <!--<dd><a href="javascript:;"><i class="fa fa-file-text fa-lg"></i> <span>工做计划</span></a></dd>-->
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-vcard fa-lg"></i> <span>用户</span></a>
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>论坛</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="fa fa-th-list fa-lg"></i> <span>学员列表</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-user-o fa-lg"></i> <span>考勤管理</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-send-o fa-lg"></i> <span>沟通计划</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-frown-o fa-lg"></i> <span>成绩管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-diamond fa-lg"></i> <span>管理设置</span></a>
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>教学</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
-                        <dd><a href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>资源</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a lay-href="" href="javascript:;"><i class="layui-icon layui-icon-username"></i> <span>用户</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a lay-href="/admin/user"  href="javascript:;"><i class="layui-icon layui-icon-group"></i> <span>网站用户</span></a></dd>
+                        <dd><a lay-href="/"  href="javascript:;"><i class="layui-icon layui-icon-group"></i><span>后台管理员</span></a></dd>
+                        <dd><a lay-href="/"  href="javascript:;"><i class="layui-icon layui-icon-friends"></i> <span>角色管理</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>管理设置</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
+                    </dl>
+                </li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="fa fa-gear fa-lg"></i> <span>系统管理</span></a>
                     <dl class="layui-nav-child">
@@ -85,24 +106,24 @@
         <!-- 内容主体区域 -->
         <!-- <div style="padding: 15px;">内容主体区域</div> -->
 
-        <div class="layui-tab layui-tab-card" lay-filter="demo" lay-allowclose="true">
-            <ul class="layui-tab-title">
-                <li class="layui-this" lay-id="11">网站设置</li>
-                <li lay-id="22">用户管理</li>
-                <li lay-id="33">权限分配</li>
-                <li lay-id="44">商品管理</li>
-                <li lay-id="55">订单管理</li>
+        <div class="layui-tab layui-tab-card" lay-filter="pages" lay-allowclose="true">
+            <ul class="layui-tab-title" style="background-color: #fff;">
+                <!--<li class="layui-this" lay-id="11">网站设置</li>-->
+                <!--<li lay-id="22">用户管理</li>-->
+                <!--<li lay-id="33">权限分配</li>-->
+                <!--<li lay-id="44">商品管理</li>-->
+                <!--<li lay-id="55">订单管理</li>-->
             </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show" style="height: calc(100vh - 190px);">
-                    <iframe src="/index" style="width: 100%;
-    height: 100%;
-    border: 0;"></iframe>
-                </div>
-                <div class="layui-tab-item" style="height: calc(100vh - 190px);">内容2</div>
-                <div class="layui-tab-item" style="height: calc(100vh - 190px);">内容3</div>
-                <div class="layui-tab-item" style="height: calc(100vh - 190px);">内容4</div>
-                <div class="layui-tab-item" style="height: calc(100vh - 190px);">内容5</div>
+            <div class="layui-tab-content" style="height: calc(100vh - 190px);">
+                <!--<div class="layui-tab-item layui-show" style="height: calc(100vh - 190px);">-->
+                    <!--<iframe src="/admin/user" style="width: 100%;-->
+    <!--height: calc(100vh - 190px);-->
+    <!--border: 0;"></iframe>-->
+                <!--</div>-->
+                <!--<div class="layui-tab-item" style="height: calc(100vh - 190px);">内容2</div>-->
+                <!--<div class="layui-tab-item" style="height: calc(100vh - 190px);">内容3</div>-->
+                <!--<div class="layui-tab-item" style="height: calc(100vh - 190px);">内容4</div>-->
+                <!--<div class="layui-tab-item" style="height: calc(100vh - 190px);">内容5</div>-->
             </div>
         </div>
     </div>
@@ -119,10 +140,13 @@
         var element = layui.element;
         var $ = layui.$
 
+
+        var pageList=[];
+
         var isShow = true; //定义一个标志位
         $('.kit-side-fold').click(function () {
             //选择出所有的span，并判断是不是hidden
-            $('.layui-nav-item span').each(function () {
+            $('.layui-side-scroll .layui-nav-item span').each(function () {
                 if ($(this).is(':hidden')) {
                     $(this).show();
                 } else {
@@ -139,9 +163,9 @@
                 $('.layui-body').css('left', 60 + 'px');
                 $('.layui-footer').css('left', 60 + 'px');
                 //将二级导航栏隐藏
-                $('dd span').each(function () {
-                    $(this).hide();
-                });
+                // $('dd span').each(function () {
+                //     $(this).hide();
+                // });
                 //修改标志位
                 isShow = false;
             } else {
@@ -151,12 +175,60 @@
                 $('.kit-side-fold').addClass("layui-icon-shrink-right");
                 $('.layui-body').css('left', 200 + 'px');
                 $('.layui-footer').css('left', 200 + 'px');
-                $('dd span').each(function () {
-                    $(this).show();
-                });
+                // $('dd span').each(function () {
+                //     $(this).show();
+                // });
                 isShow = true;
             }
         });
+
+
+
+        element.on('collapse(sideBar)', function(data){
+            console.log(data.show); //得到当前面板的展开状态，true或者false
+            console.log(data.title); //得到当前点击面板的标题区域DOM对象
+            console.log(data.content); //得到当前点击面板的内容区域DOM对象
+        });
+        element.on('tab(sideBar)', function(data){
+            console.log(data);
+        });
+        element.on('nav(sideBar)', function(elem){
+            console.log(elem); //得到当前点击的DOM对象
+            console.log(elem[0].attributes['lay-href'].value)
+            var url=elem[0].attributes['lay-href'].value
+            var title=elem[0].text
+            if(url!="" ){
+                if(!pageList.find(e=>e.url==url)){
+                    element.tabAdd('pages', {
+                        title: title
+                        ,content: '<iframe src="'+url+'" style="width: 100%;\n' +
+                            '    height: calc(100vh - 190px);\n' +
+                            '    border: 0;"></iframe>' //支持传入html
+                        ,id: title
+                    });
+                    var page={url:url,title:title,id:title}
+                    pageList.push(page)
+                    element.tabChange('pages', pageList.find(e=>e.url==url).id);
+                }else{
+                    element.tabChange('pages', pageList.find(e=>e.url==url).id);
+                }
+
+            }
+        });
+        element.on('tabDelete(pages)', function(data){
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+            pageList.splice(data.index,1)
+        });
+
+
+
+
+
+
+
+
     });
 </script>
 

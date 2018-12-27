@@ -48,6 +48,7 @@ public class Reply  implements Serializable {
 
     @Column(columnDefinition="text")
     @Getter@Setter
+
     private String content;
 
     @Getter@Setter

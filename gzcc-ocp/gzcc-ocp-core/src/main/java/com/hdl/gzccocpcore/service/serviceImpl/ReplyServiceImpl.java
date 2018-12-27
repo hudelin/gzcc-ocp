@@ -1,5 +1,6 @@
 package com.hdl.gzccocpcore.service.serviceImpl;
 
+import com.hdl.gzccocpcore.constant.BaseConstant;
 import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
 import com.hdl.gzccocpcore.repository.ReplyRepository;
@@ -26,9 +27,6 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Autowired
     private ReplyRepository replyRepository;
 
-    private static final String TRUE = "1";
-
-    private static final String FALSE = "0";
     @Override
     public Reply update(Reply reply) throws Exception {
         return null;
@@ -37,20 +35,20 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Override
     public Page<Reply> findPageByNoteId(Integer page, Integer size, Long noteId) throws Exception {
         Pageable pageable = PageRequest.of(page-1, size);
-        Page<Reply> replyPage=replyRepository.findByNoteIdAndIsDeleteOrderByIsAcceptDescCreateTimeDesc(pageable,noteId,FALSE);
+        Page<Reply> replyPage=replyRepository.findByNoteIdAndIsDeleteOrderByIsAcceptDescCreateTimeDesc(pageable,noteId,BaseConstant.FALSE);
         return replyPage;
     }
 
     @Override
     public Reply acceptReply(Long replyId, Long noteId) throws Exception {
 
-        if(replyRepository.findByNoteIdAndIsAccept(noteId,TRUE)!=null){
-            Reply acceptReplyOld=replyRepository.findByNoteIdAndIsAccept(noteId,TRUE);
-            acceptReplyOld.setIsAccept(FALSE);
+        if(replyRepository.findByNoteIdAndIsAccept(noteId, BaseConstant.TRUE)!=null){
+            Reply acceptReplyOld=replyRepository.findByNoteIdAndIsAccept(noteId,BaseConstant.TRUE);
+            acceptReplyOld.setIsAccept(BaseConstant.FALSE);
             replyRepository.save(acceptReplyOld);
         }
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsAccept(TRUE);
+        acceptReplyNew.setIsAccept(BaseConstant.TRUE);
         replyRepository.save(acceptReplyNew);
         return acceptReplyNew;
     }
@@ -58,7 +56,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Override
     public void delete(Long replyId) throws Exception {
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsDelete(TRUE);
+        acceptReplyNew.setIsDelete(BaseConstant.TRUE);
         replyRepository.save(acceptReplyNew);
     }
 
