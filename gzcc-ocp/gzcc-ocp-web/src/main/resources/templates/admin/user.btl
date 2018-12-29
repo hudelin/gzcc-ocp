@@ -12,7 +12,13 @@
 
     <table id="demo" lay-filter="test"></table>
 </div>
-
+<div class="layui-btn-container" id="a">
+    <button class="layui-btn layui-btn-sm" lay-event="addUser">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    <button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>
+</div>
 
 <script src="../../res/layui/layui.js"></script>
 
@@ -22,29 +28,46 @@
     <!--<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>-->
     {{d.gender=='0'?"男":"女"}}
 </script>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addUser">添加</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+        <button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>
+    </div>
+</script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
-    layui.use('table', function(){
+    layui.config({
+        version: "3.0.0"
+        , base: '../../res/mods/'
+    }).extend({
+        request: 'request'
+    }).use(['jquery', 'request', 'table'], function () {
+        var $ = layui.$
         var table = layui.table;
+        var request = layui.request
 
         //第一个实例
-        table.render({
+        var userTable = table.render({
             elem: '#demo'
             // ,height: 312
-            ,height: 'full-20'
+            , height: 'full-20'
 
-            ,url: '/user/findUserPage' //数据接口
-            ,cellMinWidth: 80
-            ,toolbar: true
-            ,page: true //开启分页
-            ,request: {
+            , url: '/user/findUserPage' //数据接口
+            , cellMinWidth: 80
+            // ,toolbar: true
+            , toolbar: '#toolbarDemo'
+            , page: true //开启分页
+            , request: {
                 pageName: 'page' //页码的参数名称，默认：page
-                ,limitName: 'size' //每页数据量的参数名，默认：limit
+                , limitName: 'size' //每页数据量的参数名，默认：limit
             }
-            ,parseData: function(res){ //res 即为原始返回的数据
+            , parseData: function (res) { //res 即为原始返回的数据
                 console.log(res)
                 return {
                     "code": "0", //解析接口状态
@@ -53,32 +76,137 @@
                     "data": res.content //解析数据列表
                 };
             }
-            ,cols: [[ //表头
-                {type:'checkbox'}
-                ,{field: 'id', title: 'ID',  sort: true}
-                ,{field: 'username', title: '用户名'}
-                ,{field: 'gender', title: '性别', sort: true, templet: '#genderTemplate'}
-                ,{field: 'email', title: '城市',edit: 'text'}
-                ,{field: 'sign', title: '签名'}
-                ,{field: 'experience', title: '积分', sort: true}
-                ,{field: 'score', title: '评分',  sort: true}
-                ,{field: 'classify', title: '职业'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+            , cols: [[ //表头
+                {type: 'checkbox'}
+                , {field: 'id', title: 'ID', sort: true}
+                , {field: 'username', title: '用户名'}
+                , {field: 'gender', title: '性别', sort: true, templet: '#genderTemplate'}
+                , {field: 'email', title: '城市', edit: 'text'}
+                , {field: 'sign', title: '签名'}
+                , {field: 'experience', title: '积分', sort: true}
+                , {field: 'score', title: '评分', sort: true}
+                , {field: 'classify', title: '职业'}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
-            ,
+            , done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+                console.log(userTable)
+                var data = userTable.config.data;
+            }
         });
 
+
         //监听单元格编辑
-        table.on('edit(test)', function(obj){
+        table.on('edit(test)', function (obj) {
             var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
-            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+            layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
         });
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'addUser':
+                    layer.open({
+                        type: 1,
+                        content: $('#a') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    });
+                    break;
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                case 'refresh':
+                    table.reload('demo', {
+                        url: '/user/findUserPage'
+                        , request: {
+                            pageName: 'page' //页码的参数名称，默认：page
+                            , limitName: 'size' //每页数据量的参数名，默认：limit
+                        }
+                        , where: {} //设定异步数据接口的额外参数
+                        //,height: 300
+                    });
+                    break;
+            }
+            ;
+        });
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.prompt({
+                    formType: 2
+                    , value: data.email
+                }, function (value, index) {
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+
+        var socket;
+        if(typeof(WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket");
+        }else{
+            console.log("您的浏览器支持WebSocket");
+            //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+            //等同于
+            socket = new WebSocket("ws://localhost:8060/webSocket/20");
+
+            //打开事件
+            socket.onopen = function() {
+                console.log("Socket 已打开");
+                socket.send("这是来自客户端的消息" + location.href + new Date());
+            };
+            //获得消息事件
+            socket.onmessage = function(msg) {
+                console.log(msg.data);
+                //发现消息进入    开始处理前端触发逻辑
+            };
+            //关闭事件
+            socket.onclose = function() {
+                console.log("Socket已关闭");
+            };
+            //发生了错误事件
+            socket.onerror = function() {
+                alert("Socket发生了错误");
+                //此时可以尝试刷新页面
+            }
+            //离开页面时，关闭socket
+            //jquery1.8中已经被废弃，3.0中已经移除
+            // $(window).unload(function(){
+            //     socket.close();
+            //});
+        }
+
 
     });
 </script>
 
 
 </body>
+
 </html>

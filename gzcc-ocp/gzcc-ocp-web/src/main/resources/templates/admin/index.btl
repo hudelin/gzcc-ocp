@@ -35,9 +35,10 @@
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
+                    <dd><a href="/logout">退出</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="/logout">退了</a></li>
+            <!--<li class="layui-nav-item"><a href="/logout">退了</a></li>-->
         </ul>
     </div>
     <!-- layui-hide 加到下面可以隐藏 -->
