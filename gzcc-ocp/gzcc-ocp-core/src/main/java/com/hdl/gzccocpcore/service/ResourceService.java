@@ -1,6 +1,9 @@
 package com.hdl.gzccocpcore.service;
 
 import com.hdl.gzccocpcore.entity.Resource;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ResourceService extends BaseService<Resource,Long>  {
+
+    public Resource uploadResource(MultipartFile multipartFile) throws Exception;
 }

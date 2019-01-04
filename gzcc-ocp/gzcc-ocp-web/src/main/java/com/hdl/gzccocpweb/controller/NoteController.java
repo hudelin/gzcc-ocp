@@ -122,24 +122,7 @@ public class NoteController {
         return notePage;
     }
 
-    @RequestMapping("/upload")
-    @ResponseBody
-    private ObjectRestResponse upload(MultipartFile file){
-//        try {  /*获取文件的后缀，对文件进行重命名*/
-//            String prefix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-//            String fileName = user.getName() + "." + prefix;
-//            File f = new File(rootPath + fileName);
-//            file.transferTo(f);
-//            user.setPicture("/uploads/" + fileName);
-//            userRepository.save(user);
-//        } catch (FileNotFoundException e) {
-//        } catch (IOException e) {
-//        }
-        Resource resource=new Resource();
-        resource.setSrc("https://res.layui.com/static/images/layui/logo.png");
-        ObjectRestResponse uploadResponse=new ObjectRestResponse(resource);
-        return uploadResponse;
-    }
+
 
 
 }
