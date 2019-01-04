@@ -14,6 +14,8 @@ public class BaseConstant {
     public static final String TRUE = "1";
     //假
     public static final String FALSE = "0";
+    //假
+    public static final Integer SYSTEM_ERROR = 000;
 
     static {
         logger.debug("加载本地数据....");

@@ -71,7 +71,7 @@
                 console.log(res)
                 return {
                     "code": "0", //解析接口状态
-                    "msg": res.message, //解析提示文本
+                    "msg": res.msg, //解析提示文本
                     "count": res.totalElements, //解析数据长度
                     "data": res.content //解析数据列表
                 };

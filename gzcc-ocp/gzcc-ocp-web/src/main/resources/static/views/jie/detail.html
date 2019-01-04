@@ -28,7 +28,7 @@ var rows = d.rows;
       <div class="fly-panel detail-box">
         <h1>{{=rows.title}}</h1>
         <div class="fly-detail-info">
-          {{# if(rows.status == -1){ }}
+          {{# if(rows.code == -1){ }}
             <span class="layui-badge">审核中</span>
           {{# } }}
           <span class="layui-badge layui-bg-green fly-detail-column">
@@ -41,7 +41,7 @@ var rows = d.rows;
           {{# } }}
 
           {{ rows.stick > 0 ? '<span class="layui-badge layui-bg-black">置顶</span>' :'' }}
-          {{ rows.status == 1 ? '<span class="layui-badge layui-bg-red">精帖</span>' : ''}}
+          {{ rows.code == 1 ? '<span class="layui-badge layui-bg-red">精帖</span>' : ''}}
           
           <div class="fly-admin-box" data-id="{{rows.id}}">
             {{# if(user.auth == 1){ }}
@@ -54,10 +54,10 @@ var rows = d.rows;
               {{# } else { }}
                 <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span> 
               {{# };
-              if(rows.status == 1){ }}
-                <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span>
+              if(rows.code == 1){ }}
+                <span class="layui-btn layui-btn-xs jie-admin" type="set" field="code" rank="0" style="background-color:#ccc;">取消加精</span>
               {{# } else { }}
-                <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span> 
+                <span class="layui-btn layui-btn-xs jie-admin" type="set" field="code" rank="1">加精</span>
               {{# }; 
             } }}
           </div>

@@ -40,7 +40,7 @@ public class Resource implements Serializable {
     private Date lastModifiedTime;
 
     @Getter@Setter
-    private String filePath;
+    private String src;
 
     @Getter@Setter
     private String originalName;

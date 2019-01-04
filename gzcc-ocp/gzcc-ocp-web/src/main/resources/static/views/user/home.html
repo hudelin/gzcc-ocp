@@ -77,7 +77,7 @@ var info = d.info || {}, jie = d.jie, da = d.da;
         <ul class="jie-row">
         {{# jie.forEach(function(item, index){ }}
           <li>
-            {{ item.status == 1 ? '<span class="fly-jing layui-hide-xs">精</span>' : ''}}
+            {{ item.code == 1 ? '<span class="fly-jing layui-hide-xs">精</span>' : ''}}
             <a href="/jie/{{item.id}}/" class="jie-title">{{= item.title}}</a>
             <i>{{lay.time(item.time, 1)}}</i>
             <em class="layui-hide-xs">{{item.hits}}阅/{{item.comment}}答</em>

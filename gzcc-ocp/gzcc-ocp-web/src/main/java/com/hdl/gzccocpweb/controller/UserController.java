@@ -3,6 +3,8 @@ package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.service.UserService;
+import com.hdl.gzccocpweb.support.ObjectRestResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -93,5 +96,15 @@ public class UserController {
         user=userService.save(user);
         return user;
     }
+    @ResponseBody
+    @RequestMapping("/send")
+    public ObjectRestResponse send(String message) throws Exception {
+        List<User> userList = userService.findAll();
+        List<User> test=new ArrayList<>();
+        ObjectRestResponse objectRestResponse = new ObjectRestResponse();
+        BeanUtils.copyProperties(userList,test);
+        objectRestResponse.data(userList);
+        return objectRestResponse;
 
+    }
 }

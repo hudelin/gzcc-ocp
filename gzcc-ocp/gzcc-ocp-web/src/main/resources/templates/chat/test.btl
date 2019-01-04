@@ -21,7 +21,7 @@
 
 <div class="site-demo-button">
     <button class="layui-btn site-demo-layim" data-type="chat">自定义会话</button>
-    <button class="layui-btn site-demo-layim" data-type="message">接受好友的消息</button>
+    <button class="layui-btn site-demo-layim" data-type="msg">接受好友的消息</button>
     <button class="layui-btn site-demo-layim" data-type="messageAudio">接受音频消息</button>
     <button class="layui-btn site-demo-layim" data-type="messageVideo">接受视频消息</button>
     <button class="layui-btn site-demo-layim" data-type="messageTemp">接受临时会话消息</button>
@@ -180,7 +180,7 @@
                     <!--&lt;!&ndash;}&ndash;&gt;-->
                     <!--&lt;!&ndash;layim.setChatStatus('<span style="color:#FF5722;">在线</span>');&ndash;&gt;-->
                 <!--&lt;!&ndash;}&ndash;&gt;-->
-                <!--&lt;!&ndash;layim.getMessage(obj);&ndash;&gt;-->
+                <!--&lt;!&ndash;layim.getMsg(obj);&ndash;&gt;-->
             <!--&lt;!&ndash;}, 1000);&ndash;&gt;-->
         <!--&lt;!&ndash;});&ndash;&gt;-->
         <!--&lt;!&ndash;//监听查看群员&ndash;&gt;-->
@@ -197,7 +197,7 @@
                 <!--&lt;!&ndash;//layim.setChatStatus('<span style="color:#FF5722;">在线</span>');&ndash;&gt;-->
             <!--&lt;!&ndash;} else if (type === 'group') {&ndash;&gt;-->
                 <!--&lt;!&ndash;//模拟系统消息&ndash;&gt;-->
-                <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                <!--&lt;!&ndash;layim.getMsg({&ndash;&gt;-->
                     <!--&lt;!&ndash;system: true,&ndash;&gt;-->
                     <!--&lt;!&ndash;id: res.data.id,&ndash;&gt;-->
                     <!--&lt;!&ndash;type: "group",&ndash;&gt;-->
@@ -220,9 +220,9 @@
                     <!--&lt;!&ndash;});&ndash;&gt;-->
                     <!--&lt;!&ndash;layer.msg('也就是说，此人可以不在好友面板里');&ndash;&gt;-->
                 <!--&lt;!&ndash;},&ndash;&gt;-->
-                <!--&lt;!&ndash;message: function() {&ndash;&gt;-->
+                <!--&lt;!&ndash;msg: function() {&ndash;&gt;-->
                     <!--&lt;!&ndash;//制造好友消息&ndash;&gt;-->
-                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMsg({&ndash;&gt;-->
                         <!--&lt;!&ndash;username: "贤心",&ndash;&gt;-->
                         <!--&lt;!&ndash;avatar: "//tp1.sinaimg.cn/1571889140/180/40030060651/1",&ndash;&gt;-->
                         <!--&lt;!&ndash;id: "100001",&ndash;&gt;-->
@@ -233,7 +233,7 @@
                 <!--&lt;!&ndash;},&ndash;&gt;-->
                 <!--&lt;!&ndash;messageAudio: function() {&ndash;&gt;-->
                     <!--&lt;!&ndash;//接受音频消息&ndash;&gt;-->
-                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMsg({&ndash;&gt;-->
                         <!--&lt;!&ndash;username: "林心如",&ndash;&gt;-->
                         <!--&lt;!&ndash;avatar: "//tp3.sinaimg.cn/1223762662/180/5741707953/0",&ndash;&gt;-->
                         <!--&lt;!&ndash;id: "76543",&ndash;&gt;-->
@@ -244,7 +244,7 @@
                 <!--&lt;!&ndash;},&ndash;&gt;-->
                 <!--&lt;!&ndash;messageVideo: function() {&ndash;&gt;-->
                     <!--&lt;!&ndash;//接受视频消息&ndash;&gt;-->
-                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMsg({&ndash;&gt;-->
                         <!--&lt;!&ndash;username: "林心如",&ndash;&gt;-->
                         <!--&lt;!&ndash;avatar: "//tp3.sinaimg.cn/1223762662/180/5741707953/0",&ndash;&gt;-->
                         <!--&lt;!&ndash;id: "76543",&ndash;&gt;-->
@@ -255,7 +255,7 @@
                 <!--&lt;!&ndash;},&ndash;&gt;-->
                 <!--&lt;!&ndash;messageTemp: function() {&ndash;&gt;-->
                     <!--&lt;!&ndash;//接受临时会话消息&ndash;&gt;-->
-                    <!--&lt;!&ndash;layim.getMessage({&ndash;&gt;-->
+                    <!--&lt;!&ndash;layim.getMsg({&ndash;&gt;-->
                         <!--&lt;!&ndash;username: "小酱",&ndash;&gt;-->
                         <!--&lt;!&ndash;avatar: "//tva1.sinaimg.cn/crop.7.0.736.736.50/bd986d61jw8f5x8bqtp00j20ku0kgabx.jpg",&ndash;&gt;-->
                         <!--&lt;!&ndash;id: "198909151014",&ndash;&gt;-->

@@ -2,10 +2,11 @@ package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
+import com.hdl.gzccocpcore.entity.Resource;
 import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ReplyService;
 import com.hdl.gzccocpcore.service.UserService;
-import com.hdl.gzccocpweb.support.UploadResponse;
+import com.hdl.gzccocpweb.support.ObjectRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -16,10 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -127,7 +124,7 @@ public class NoteController {
 
     @RequestMapping("/upload")
     @ResponseBody
-    private UploadResponse upload(MultipartFile file){
+    private ObjectRestResponse upload(MultipartFile file){
 //        try {  /*获取文件的后缀，对文件进行重命名*/
 //            String prefix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 //            String fileName = user.getName() + "." + prefix;
@@ -138,7 +135,9 @@ public class NoteController {
 //        } catch (FileNotFoundException e) {
 //        } catch (IOException e) {
 //        }
-        UploadResponse uploadResponse=new UploadResponse("https://res.layui.com/static/images/layui/logo.png");
+        Resource resource=new Resource();
+        resource.setSrc("https://res.layui.com/static/images/layui/logo.png");
+        ObjectRestResponse uploadResponse=new ObjectRestResponse(resource);
         return uploadResponse;
     }
 

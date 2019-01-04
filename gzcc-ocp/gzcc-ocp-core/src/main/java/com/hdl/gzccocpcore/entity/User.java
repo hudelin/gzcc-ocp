@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,21 +68,21 @@ public class User  implements Serializable{
     private String gender;
 
     @Getter@Setter
-    private String imagePath;
+    private String avatar;
 
     @ManyToMany(mappedBy = "userList" ,fetch=FetchType.EAGER )
     @Cascade(value ={ org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
     @Getter@Setter
-    private List<Role> roleList;
+    private List<Role> roleList=new ArrayList<>();
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter@Setter
-    private List<Reply> replyList;
+    private List<Reply> replyList=new ArrayList<>();
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter@Setter
-    private List<Note> noteList;
+    private List<Note> noteList=new ArrayList<>();
 
 }

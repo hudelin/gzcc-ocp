@@ -296,6 +296,7 @@
                 layer.closeAll('loading'); //关闭loading
             }
             ,done: function(res, index, upload){
+                // console.log(res)
                 if(res.code == 0){ //上传成功
                     var tr = demoListView.find('tr#upload-'+ index)
                         ,tds = tr.children();

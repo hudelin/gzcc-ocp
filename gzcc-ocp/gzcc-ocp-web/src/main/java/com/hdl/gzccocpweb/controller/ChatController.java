@@ -1,5 +1,9 @@
 package com.hdl.gzccocpweb.controller;
 
+import com.hdl.gzccocpcore.constant.BaseConstant;
+import com.hdl.gzccocpcore.entity.User;
+import com.hdl.gzccocpweb.support.BaseException;
+import com.hdl.gzccocpweb.support.ObjectRestResponse;
 import com.hdl.gzccocpweb.webSocket.WebSocketServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/chat")
@@ -207,11 +213,26 @@ public class ChatController {
     public void pushToWeb(@PathVariable String cid,String message) {
         try {
             WebSocketServer.sendInfo(message,cid);
+//            BeanUtils.copyProperties(user, note);
         } catch (IOException e) {
             e.printStackTrace();
-//            return ApiReturnUtil.error(cid+"#"+e.getMessage());
+//            return ApiReturnUtil.error(cid+"#"+e.getMsg());
         }
 //        return ApiReturnUtil.success(cid);
+    }
+
+    @ResponseBody
+    @RequestMapping("/send")
+    public ObjectRestResponse send( String message) throws Exception {
+        User user=new User();
+        ObjectRestResponse objectRestResponse = new ObjectRestResponse();
+        List<User> userList=new ArrayList<>();
+        userList.add(new User());
+        userList.add(new User());
+        objectRestResponse.data(userList);
+        throw new BaseException(BaseConstant.SYSTEM_ERROR, "该班级已经存在！");
+//        return objectRestResponse;
+
     }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,5 +59,5 @@ public class Role implements Serializable {
 
     @ManyToMany
     @JsonIgnore
-    private List<User> userList;
+    private List<User> userList=new ArrayList<>();
 }

@@ -96,8 +96,4 @@ public class Note  implements Serializable {
     @Getter@Setter
     private User user;
 
-
-
-
-
 }
