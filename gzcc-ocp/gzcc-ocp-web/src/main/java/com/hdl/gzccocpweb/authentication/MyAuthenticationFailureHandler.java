@@ -3,7 +3,7 @@ package com.hdl.gzccocpweb.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdl.gzccocpcore.properties.LoginResponseType;
 import com.hdl.gzccocpcore.properties.SecurityProperties;
-import com.hdl.gzccocpweb.support.SimpleResponse;
+import com.hdl.gzccocpweb.response.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,15 +3,21 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   ObjectRestResponse.java
 
-package com.hdl.gzccocpweb.support;
+package com.hdl.gzccocpweb.response;
 
 
 // Referenced classes of package net.shadowedu.metis.common.base.response:
 //			BaseResponse
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 public class ObjectRestResponse extends BaseResponse {
 
     private static final long serialVersionUID = 1L;
+
+    @Getter@Setter
     private Object data;
 
     public ObjectRestResponse() {
@@ -26,11 +32,4 @@ public class ObjectRestResponse extends BaseResponse {
         return this;
     }
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 }

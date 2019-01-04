@@ -3,8 +3,11 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space
 // Source File Name:   BaseException.java
 
-package com.hdl.gzccocpweb.support;
+package com.hdl.gzccocpweb.exception;
 
+import com.hdl.gzccocpweb.response.ObjectRestResponse;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,15 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class BaseException extends RuntimeException {
 	private static final long serialVersionUID = 5705170943155980911L;
+	@Getter
+	@Setter
 	private int status = 200;
-
-	public int getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
 
 	public BaseException() {
 	}

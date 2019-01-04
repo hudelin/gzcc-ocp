@@ -1,4 +1,4 @@
-package com.hdl.gzccocpweb.support;
+package com.hdl.gzccocpweb.response;
 
 
 public class SimpleResponse {

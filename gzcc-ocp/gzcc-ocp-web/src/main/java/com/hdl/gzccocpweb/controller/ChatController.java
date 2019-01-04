@@ -2,8 +2,8 @@ package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.constant.BaseConstant;
 import com.hdl.gzccocpcore.entity.User;
-import com.hdl.gzccocpweb.support.BaseException;
-import com.hdl.gzccocpweb.support.ObjectRestResponse;
+import com.hdl.gzccocpweb.exception.BaseException;
+import com.hdl.gzccocpweb.response.ObjectRestResponse;
 import com.hdl.gzccocpweb.webSocket.WebSocketServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -230,7 +230,7 @@ public class ChatController {
         userList.add(new User());
         userList.add(new User());
         objectRestResponse.data(userList);
-        throw new BaseException(BaseConstant.SYSTEM_ERROR, "该班级已经存在！");
+        throw new BaseException(BaseConstant.SYSTEM_ERROR, "系统错误！");
 //        return objectRestResponse;
 
     }
