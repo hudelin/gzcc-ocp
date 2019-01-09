@@ -1,7 +1,7 @@
 package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.entity.Resource;
-import com.hdl.gzccocpweb.response.ObjectRestResponse;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   ObjectRestResponse.java
 
-package com.hdl.gzccocpweb.response;
+package com.hdl.gzccocpcore.response;
 
 
 // Referenced classes of package net.shadowedu.metis.common.base.response:

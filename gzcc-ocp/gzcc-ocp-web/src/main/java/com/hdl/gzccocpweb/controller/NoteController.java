@@ -2,17 +2,14 @@ package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
-import com.hdl.gzccocpcore.entity.Resource;
 import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ReplyService;
 import com.hdl.gzccocpcore.service.UserService;
-import com.hdl.gzccocpweb.response.ObjectRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

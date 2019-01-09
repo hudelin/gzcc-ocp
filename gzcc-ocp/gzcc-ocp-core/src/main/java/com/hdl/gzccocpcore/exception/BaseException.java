@@ -3,9 +3,9 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space
 // Source File Name:   BaseException.java
 
-package com.hdl.gzccocpweb.exception;
+package com.hdl.gzccocpcore.exception;
 
-import com.hdl.gzccocpweb.response.ObjectRestResponse;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class BaseException extends RuntimeException {
 	private static final long serialVersionUID = 5705170943155980911L;
 	@Getter
 	@Setter
-	private int status = 200;
+	private String status = "200";
 
 	public BaseException() {
 	}
 
-	public BaseException(int status, String message) {
+	public BaseException(String status, String message) {
 		super(message);
 		this.status = status;
 	}
@@ -56,7 +56,7 @@ public class BaseException extends RuntimeException {
 				response.setCode(baseException.getStatus());
 				response.setMsg(baseException.getMessage());
 			} else {
-				response.setCode(500);
+				response.setCode("500");
 				response.setMsg(exception.getMessage());
 			}
 		} finally {

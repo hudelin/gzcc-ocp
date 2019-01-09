@@ -3,7 +3,7 @@ package com.hdl.gzccocpweb.controller;
 
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.service.UserService;
-import com.hdl.gzccocpweb.response.ObjectRestResponse;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.redis.core.RedisTemplate;

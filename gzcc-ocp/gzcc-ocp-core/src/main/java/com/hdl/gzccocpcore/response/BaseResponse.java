@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   BaseResponse.java
 
-package com.hdl.gzccocpweb.response;
+package com.hdl.gzccocpcore.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +14,11 @@ public class BaseResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Getter@Setter
-    private int code=0;
+    private String code="0";
     @Getter@Setter
     private String msg ="";
 
-    public BaseResponse(int code, String msg) {
+    public BaseResponse(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
