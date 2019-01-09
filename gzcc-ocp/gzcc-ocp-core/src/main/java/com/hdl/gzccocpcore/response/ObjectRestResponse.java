@@ -6,10 +6,6 @@
 package com.hdl.gzccocpcore.response;
 
 
-// Referenced classes of package net.shadowedu.metis.common.base.response:
-//			BaseResponse
-
-
 import lombok.Getter;
 import lombok.Setter;
 

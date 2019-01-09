@@ -49,13 +49,19 @@ public class Resource implements Serializable {
     private String formatName;
 
     @Getter@Setter
-    private String fileType;
-
-    @Getter@Setter
     private String suffix;
 
     @Getter@Setter
     private String isDelete="0";
+
+    @Getter@Setter
+    private Long userId;
+
+    @Getter@Setter
+    private String resourceType;
+
+
+
 
 
 }

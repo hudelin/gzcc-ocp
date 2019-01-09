@@ -91,7 +91,7 @@ public class NoteController {
     @ResponseBody
     public Reply acceptReplay(Long replyId, Long noteId) throws Exception {
 //        Reply reply=replyService.get(replyId);
-//        reply.setIsAccept(true);
+//        reply.setAccept(true);
 //        replyService.save(reply);
         return replyService.acceptReply(replyId, noteId);
 //        return reply;
@@ -115,7 +115,7 @@ public class NoteController {
     @ResponseBody
     public Page<Note> findNotePage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,String orderType) throws Exception {
         Note note=new Note();
-        Page<Note> notePage = noteService.findPageByConditionAndSort(note,page, size,new Sort(Sort.Direction.DESC, "isTop").and(new Sort(Sort.Direction.DESC,"lastModifiedTime")));
+        Page<Note> notePage = noteService.findPageByConditionAndSort(note,page, size,new Sort(Sort.Direction.DESC, "top").and(new Sort(Sort.Direction.DESC,"lastModifiedTime")));
         return notePage;
     }
 

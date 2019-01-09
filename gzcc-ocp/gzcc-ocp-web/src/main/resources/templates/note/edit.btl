@@ -250,7 +250,7 @@
         var demoListView = $('#fileList')
         var uploadListIns=upload.render({
             elem: '#chooseFileButton'
-            ,url: '/note/upload/'
+            ,url: '/resource/upload/'
             ,multiple: true
             ,accept: 'file'
             ,auto: false
@@ -281,7 +281,6 @@
                         tr.remove();
                         uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                     });
-
                     demoListView.append(tr);
                 });
             }
