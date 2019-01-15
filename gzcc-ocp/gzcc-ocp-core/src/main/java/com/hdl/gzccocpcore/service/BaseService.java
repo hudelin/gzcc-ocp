@@ -10,7 +10,6 @@ public interface BaseService<T ,ID extends Serializable>{
 //   BaseRepository<T, ID> getRepository();
 // void setRepository(BaseRepository<T,ID> baseRepository);
 
-
     T save(T t) throws Exception;
 
     T update(T t)throws Exception;

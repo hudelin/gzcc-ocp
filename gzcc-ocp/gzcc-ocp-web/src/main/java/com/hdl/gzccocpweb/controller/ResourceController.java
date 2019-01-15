@@ -26,8 +26,6 @@ public class ResourceController {
 
         Resource resource=resourceService.uploadResource(file,userId,type);
         resource.setSrc("https://res.layui.com/static/images/layui/logo.png");
-
-        ObjectRestResponse uploadResponse=new ObjectRestResponse(resource);
-        return uploadResponse;
+        return new ObjectRestResponse(resource);
     }
 }

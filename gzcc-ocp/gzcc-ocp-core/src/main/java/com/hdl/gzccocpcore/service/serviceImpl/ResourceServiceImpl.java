@@ -23,6 +23,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
 
     @Value("${gzcc.ocp.web.root-path}")
     private String rootPath;
+    @Value("${gzcc.ocp.web.path}")
+    private String path;
 
     @Autowired
     private ResourceRepository resourceRepository;
@@ -41,13 +43,14 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
         if (multipartFile == null || multipartFile.isEmpty()) {
             throw new BaseException(OcpErrorConstant.RESOURCE_IS_NULL, "资源为空！");
         }
+//        ArrayUtils.toString(arr, ",");
         //获取文件的后缀，对文件进行重命名
         String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
         String fileName = gen() + OcpConstant.RESOURCE_TYPE_NOTE + "." + suffix;
         File f = new File(rootPath + fileName);
         multipartFile.transferTo(f);
         Resource resource = new Resource();
-        resource.setSrc(fileName);
+        resource.setSrc(path+fileName);
         resource.setResourceType(type);
         resource.setUserId(userId);
         resource.setFormatName(fileName);

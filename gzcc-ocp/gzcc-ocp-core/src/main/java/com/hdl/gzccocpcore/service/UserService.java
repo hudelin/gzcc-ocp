@@ -15,4 +15,6 @@ public interface UserService extends BaseService<User,Long>  {
     */
     User findByUsername(String username);
 
+   User encryption(User user);
+
 }

@@ -85,4 +85,9 @@ public class User  implements Serializable{
     @Getter@Setter
     private List<Note> noteList=new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @JsonIgnore
+    @Getter@Setter
+    private List<Friend> friendList=new ArrayList<>();
+
 }

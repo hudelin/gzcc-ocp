@@ -50,7 +50,6 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function 
     };
 
     var fly = {
-
         //Ajax
         json: function (url, data, success, options) {
             var that = this, type = typeof data === 'function';
@@ -60,9 +59,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function 
                 success = data;
                 data = {};
             }
-
             options = options || {};
-
             return $.ajax({
                 type: options.type || 'post',
                 dataType: options.dataType || 'json',

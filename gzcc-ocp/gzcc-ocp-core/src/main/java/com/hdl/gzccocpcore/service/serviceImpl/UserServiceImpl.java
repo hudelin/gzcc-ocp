@@ -9,13 +9,14 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 
 @Service
 //@CacheConfig
 //@Cacheable(value="user")
-public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -25,19 +26,30 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
 
     @Override
     public User update(User user) throws Exception {
-        return userRepository.save(user);
+        User userOld = get(user.getId());
+//        if(!StringUtils.isEmpty(user.getNickname())){
+            userOld.setNickname(user.getNickname());
+//        }
+        userOld.setGender(user.getGender());
+        return userRepository.save(userOld);
     }
 
     @Override
-    public User save(User user)  {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User save(User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
 //    ("user.service.findByUsername")
-    public User findByUsername(String username){
-        User user=userRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+
+    @Override
+    public User encryption(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return user;
     }
 
@@ -92,7 +104,6 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
 //            }
 //        });
 //    }
-
 
 
 }

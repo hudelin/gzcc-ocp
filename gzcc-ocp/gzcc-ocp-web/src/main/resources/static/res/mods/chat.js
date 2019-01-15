@@ -1,31 +1,38 @@
-layui.use('layim', function() {
+// layui.config({
+//     version: "3.0.0"
+//     , base: '../../res/mods/'
+// }).extend({
+//     socket: 'socket'
+// })
+layui.use(['layim', 'jquery', 'layer'], function () {
     var layim = layui.layim;
-
+    var $ = layui.$;
+    var layer = layui.layer;
     var socket;
-    if(typeof(WebSocket) == "undefined") {
+    if (typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
-    }else{
+    } else {
         console.log("您的浏览器支持WebSocket");
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
         //等同于
-        socket = new WebSocket("ws://localhost:8060/webSocket/20");
+        socket = new WebSocket("ws://localhost:8060/webSocket/" + layui.data('userData').user.id);
 
         //打开事件
-        socket.onopen = function() {
+        socket.onopen = function () {
             console.log("Socket 已打开");
             socket.send("这是来自客户端的消息" + location.href + new Date());
         };
         //获得消息事件
-        socket.onmessage = function(msg) {
+        socket.onmessage = function (msg) {
             console.log(msg.data);
             //发现消息进入    开始处理前端触发逻辑
         };
         //关闭事件
-        socket.onclose = function() {
+        socket.onclose = function () {
             console.log("Socket已关闭");
         };
         //发生了错误事件
-        socket.onerror = function() {
+        socket.onerror = function () {
             // alert("Socket发生了错误");
             //此时可以尝试刷新页面
         }
@@ -52,9 +59,12 @@ layui.use('layim', function() {
     //基础配置
     layim.config({
         //初始化接口
+        title: layui.data('userData').user.username,
         init: {
             url: '/chat/json',
-            data: {}
+            data: {
+                userId: layui.data('userData').user.id
+            }
         }
         //查看群员接口
         ,
@@ -62,7 +72,6 @@ layui.use('layim', function() {
             url: '/chat/getMembers',
             data: {}
         }
-
         ,
         uploadImage: {
             url: '/note/upload' //（返回的数据格式见下文）
@@ -98,7 +107,7 @@ layui.use('layim', function() {
         //,skin: ['aaa.jpg'] //新增皮肤
         //,isfriend: false //是否开启好友
         //,isgroup: false //是否开启群组
-        ,min: true //是否始终最小化主面板，默认false
+        , min: true //是否始终最小化主面板，默认false
         //,notice: true //是否开启桌面消息提醒，默认false
         //,voice: false //声音提醒，默认开启，声音文件为：default.mp3
 
@@ -111,33 +120,33 @@ layui.use('layim', function() {
 
     });
     //监听在线状态的切换事件
-    layim.on('online', function(status) {
+    layim.on('online', function (status) {
         layer.msg(status);
     });
 
     //监听签名修改
-    layim.on('sign', function(value) {
+    layim.on('sign', function (value) {
         layer.msg(value);
     });
     //监听自定义工具栏点击，以添加代码为例
-    layim.on('tool(code)', function(insert) {
+    layim.on('tool(code)', function (insert) {
         layer.prompt({
             title: '插入代码 - 工具栏扩展示例',
             formType: 2,
             shade: 0
-        }, function(text, index) {
+        }, function (text, index) {
             layer.close(index);
             insert('[pre class=layui-code]' + text + '[/pre]'); //将内容插入到编辑器
         });
     });
 
     //监听layim建立就绪
-    layim.on('ready', function(res) {
+    layim.on('ready', function (res) {
         //console.log(res.mine);
         layim.msgbox(5); //模拟消息盒子有新消息，实际使用时，一般是动态获得
     });
     //监听发送消息
-    layim.on('sendMessage', function(data) {
+    layim.on('sendMessage', function (data) {
         var To = data.to;
         console.log(data);
 
@@ -146,7 +155,7 @@ layui.use('layim', function() {
         }
 
         //演示自动回复
-        setTimeout(function() {
+        setTimeout(function () {
             var obj = {};
             if (To.type === 'group') {
                 obj = {
@@ -170,12 +179,12 @@ layui.use('layim', function() {
         }, 1000);
     });
     //监听查看群员
-    layim.on('members', function(data) {
+    layim.on('members', function (data) {
         //console.log(data);
     });
 
     //监听聊天窗口的切换
-    layim.on('chatChange', function(res) {
+    layim.on('chatChange', function (res) {
         var type = res.data.type;
         console.log(res.data.id)
         if (type === 'friend') {
@@ -192,11 +201,50 @@ layui.use('layim', function() {
         }
     });
 
+    layim.on('ready', function (options) {
+
+        // console.log(options);
+        // console.log($('body').find('.layim-list-friend'),"zhao")
+        var index;
+        $('body').find('.layim-list-friend .layui-layim-list li').contextmenu(function (e) {
+            if (index != null) {
+                layer.close(index);
+            }
+            var othis = $(this);
+            var id = othis[0].id;
+            console.log(e)
+            console.log(e.currentTarget.classList[0])
+            var html = '<ul id="contextmenu_' + othis[0].id + '" data-id="' + othis[0].id + '" data-index="' + othis.data('index') + '">';
+            // html += '<li layim-event="menu_chat">' + '发送即时消息</li>';
+            // html += '<li layim-event="menu_profile">' + '查看资料</li>';
+            // html += '<li layim-event="menu_history">' + '消息记录</li>';
+            // html += '<li layim-event="menu_nomsg">' + '屏蔽消息</li>';
+            html += '<li layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '删除好友</li>';
+            html += '<li layim-event="menu_moveto" style="padding:5px 0px;width:110px;text-align:center;">' + '移动分组</li></ul>';
+            // layer.tips('默认就是向右的', '.layim-friend4');
+
+            index = layer.open({
+                shade: 0,
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                content: html, //这里content是一个普通的String
+                offset: [(document.body.offsetHeight-e.clientY)>58? e.clientY:e.clientY-58 , (document.body.offsetWidth-e.clientX)>110? e.clientX:e.clientX-110]
+            });
+        });
+        $('body').click(function (e) {
+            console.log(e)
+            if (index != null) {
+                layer.close(index);
+            }
+        })
+    });
+
 
     //面板外的操作
     var $ = layui.jquery,
         active = {
-            chat: function() {
+            chat: function () {
                 //自定义会话
                 layim.chat({
                     name: '小闲',
@@ -206,7 +254,7 @@ layui.use('layim', function() {
                 });
                 layer.msg('也就是说，此人可以不在好友面板里');
             },
-            message: function() {
+            message: function () {
                 //制造好友消息
                 layim.getMessage({
                     username: "贤心",
@@ -217,7 +265,7 @@ layui.use('layim', function() {
                     timestamp: new Date().getTime()
                 });
             },
-            messageAudio: function() {
+            messageAudio: function () {
                 //接受音频消息
                 layim.getMessage({
                     username: "林心如",
@@ -228,7 +276,7 @@ layui.use('layim', function() {
                     timestamp: new Date().getTime()
                 });
             },
-            messageVideo: function() {
+            messageVideo: function () {
                 //接受视频消息
                 layim.getMessage({
                     username: "林心如",
@@ -239,7 +287,7 @@ layui.use('layim', function() {
                     timestamp: new Date().getTime()
                 });
             },
-            messageTemp: function() {
+            messageTemp: function () {
                 //接受临时会话消息
                 layim.getMessage({
                     username: "小酱",
@@ -249,17 +297,17 @@ layui.use('layim', function() {
                     content: "临时：" + new Date().getTime()
                 });
             },
-            add: function() {
+            add: function () {
                 //实际使用时数据由动态获得
                 layim.add({
                     type: 'friend',
                     username: '麻花疼',
                     avatar: '//tva1.sinaimg.cn/crop.0.0.720.720.180/005JKVuPjw8ers4osyzhaj30k00k075e.jpg',
-                    submit: function(group, remark, index) {
+                    submit: function (group, remark, index) {
                         layer.msg('好友申请已发送，请等待对方确认', {
                             icon: 1,
                             shade: 0.5
-                        }, function() {
+                        }, function () {
                             layer.close(index);
                         });
 
@@ -284,16 +332,16 @@ layui.use('layim', function() {
                     }
                 });
             },
-            addqun: function() {
+            addqun: function () {
                 layim.add({
                     type: 'group',
                     username: 'LayIM会员群',
                     avatar: '//tva2.sinaimg.cn/crop.0.0.180.180.50/6ddfa27bjw1e8qgp5bmzyj2050050aa8.jpg',
-                    submit: function(group, remark, index) {
+                    submit: function (group, remark, index) {
                         layer.msg('申请已发送，请等待管理员确认', {
                             icon: 1,
                             shade: 0.5
-                        }, function() {
+                        }, function () {
                             layer.close(index);
                         });
 
@@ -310,7 +358,7 @@ layui.use('layim', function() {
                     }
                 });
             },
-            addFriend: function() {
+            addFriend: function () {
                 var user = {
                     type: 'friend',
                     id: 1234560,
@@ -326,7 +374,7 @@ layui.use('layim', function() {
                     avatar: user.avatar,
                     group: layim.cache().friend //获取好友列表数据
                     ,
-                    submit: function(group, index) {
+                    submit: function (group, index) {
                         //一般在此执行Ajax和WS，以通知对方已经同意申请
                         //……
 
@@ -346,7 +394,7 @@ layui.use('layim', function() {
                     }
                 });
             },
-            addGroup: function() {
+            addGroup: function () {
                 layer.msg('已成功把[Angular开发]添加到群组里', {
                     icon: 1
                 });
@@ -359,7 +407,7 @@ layui.use('layim', function() {
                     members: 0
                 });
             },
-            removeFriend: function() {
+            removeFriend: function () {
                 layer.msg('已成功删除[凤姐]', {
                     icon: 1
                 });
@@ -369,7 +417,7 @@ layui.use('layim', function() {
                     type: 'friend'
                 });
             },
-            removeGroup: function() {
+            removeGroup: function () {
                 layer.msg('已成功删除[前端群]', {
                     icon: 1
                 });
@@ -381,7 +429,7 @@ layui.use('layim', function() {
             }
             //置灰离线好友
             ,
-            setGray: function() {
+            setGray: function () {
                 layim.setFriendStatus(168168, 'offline');
 
                 layer.msg('已成功将好友[马小云]置灰', {
@@ -390,7 +438,7 @@ layui.use('layim', function() {
             }
             //取消好友置灰
             ,
-            unGray: function() {
+            unGray: function () {
                 layim.setFriendStatus(168168, 'online');
 
                 layer.msg('成功取消好友[马小云]置灰状态', {
@@ -399,7 +447,7 @@ layui.use('layim', function() {
             }
             //移动端版本
             ,
-            mobile: function() {
+            mobile: function () {
                 var device = layui.device();
                 var mobileHome = '/layim/demo/mobile.html';
                 if (device.android || device.ios) {
@@ -412,7 +460,7 @@ layui.use('layim', function() {
                     area: ['375px', '667px'],
                     shadeClose: true,
                     shade: 0.8,
-                    end: function() {
+                    end: function () {
                         layer.close(index + 2);
                     }
                 });
@@ -424,13 +472,13 @@ layui.use('layim', function() {
                     },
                     anim: 0,
                     shade: false,
-                    success: function(layero) {
+                    success: function (layero) {
                         layero.css('margin-left', '350px');
                     }
                 });
             }
         };
-    $('.site-demo-layim').on('click', function() {
+    $('.site-demo-layim').on('click', function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });

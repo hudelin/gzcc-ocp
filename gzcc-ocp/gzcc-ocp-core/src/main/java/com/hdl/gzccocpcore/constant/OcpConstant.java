@@ -11,6 +11,7 @@ public class OcpConstant {
     private static Logger logger = LoggerFactory.getLogger(BaseConstant.class);
 
     public static final String RESOURCE_TYPE_NOTE = "1";
+    public static final String RESOURCE_TYPE_USER_AVATAR = "2";
 //    public static final String RESOURCE_TYPE_NOTE = "1";
 
     public static Map<String, String> resourceTypeMap = new HashMap<>();

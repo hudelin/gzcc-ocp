@@ -11,8 +11,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Value("${gzcc.ocp.web.root-path}")
     private String rootPath;
+    @Value("${gzcc.ocp.web.path}")
+    private String path;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**").addResourceLocations("file:"+rootPath);
+        registry.addResourceHandler(path+"**").addResourceLocations("file:"+rootPath);
     }
 }

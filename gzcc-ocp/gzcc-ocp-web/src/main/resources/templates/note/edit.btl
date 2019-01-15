@@ -173,7 +173,9 @@
         , base: '../../res/mods/'
     }).extend({
         fly: 'index'
-    }).use('fly');
+    }).use('fly',function (fly) {
+
+    });
 </script>
 <script>
     function changeImage() {
@@ -251,6 +253,10 @@
         var uploadListIns=upload.render({
             elem: '#chooseFileButton'
             ,url: '/resource/upload/'
+            ,data: {
+                userId: layui.data('userData').user.id,
+                type:"1",
+            }
             ,multiple: true
             ,accept: 'file'
             ,auto: false
@@ -269,7 +275,6 @@
                         ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
                         ,'</td>'
                         ,'</tr>'].join(''));
-
                     //单个重传
                     tr.find('.demo-reload').on('click', function(){
                         obj.upload(index, file);

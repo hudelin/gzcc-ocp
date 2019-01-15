@@ -141,7 +141,11 @@
                     }).then(function (res) {
                         layui.data('userData', {
                             key: 'user'
-                            ,value: res
+                            ,value: res.data
+                        });
+                        layui.sessionData('userData', {
+                            key: 'user'
+                            ,value: res.data
                         });
                         window.location.href = url;
                     })

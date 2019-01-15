@@ -80,7 +80,7 @@ public class Note  implements Serializable {
 
     @Getter@Setter
     //是否置顶 用BaseConstant的true和false
-    private String isTop="1";
+    private String top="1";
 
 
     @Getter@Setter

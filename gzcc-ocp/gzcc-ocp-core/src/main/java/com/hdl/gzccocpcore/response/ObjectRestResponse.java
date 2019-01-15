@@ -7,17 +7,15 @@ package com.hdl.gzccocpcore.response;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@NoArgsConstructor
 public class ObjectRestResponse extends BaseResponse {
 
     private static final long serialVersionUID = 1L;
 
     @Getter@Setter
     private Object data;
-
-    public ObjectRestResponse() {
-    }
 
     public ObjectRestResponse(Object data) {
         this.data = data;
