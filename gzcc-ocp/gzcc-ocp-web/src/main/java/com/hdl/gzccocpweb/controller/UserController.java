@@ -36,6 +36,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ResourceService resourceService;
+
     private RequestCache requestCache=new HttpSessionRequestCache();
 
     private String header="/user";
@@ -153,13 +156,24 @@ public class UserController {
         return objectRestResponse;
     }
 
-    @Autowired
-    private ResourceService resourceService;
+
 
     @RequestMapping("/upload")
     @ResponseBody
     private ObjectRestResponse upload(MultipartFile multipartFile, Long userId,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         Resource resource=resourceService.uploadResource(multipartFile,userId, OcpConstant.RESOURCE_TYPE_USER_AVATAR);
         return new ObjectRestResponse(resource);
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public ObjectRestResponse test(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+//        User user=userService.get((long) 1);
+//        User u=userService.transToDTO(user,User.class);
+        User user=new User();
+        user.setBan(false);
+        List<User> userList=userService.findByCondition(user);
+        List<User> u=userService.transToDTOList(userList,User.class);
+        return new ObjectRestResponse(u);
     }
 }

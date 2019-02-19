@@ -2,6 +2,9 @@ package com.hdl.gzccocpcore.service.serviceImpl;
 
 import com.hdl.gzccocpcore.repository.BaseRepository;
 import com.hdl.gzccocpcore.service.BaseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +21,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,11 +29,38 @@ import java.util.List;
 public abstract class BaseServiceImpl<T , ID extends Serializable> implements BaseService<T, ID> {
 
 
+    /**
+     * 日志
+     */
+    private Logger logger = LoggerFactory.getLogger(getClass());
     BaseRepository<T , ID> baseRepository;
 
     @Autowired
     public void setRepository(BaseRepository<T, ID> baseRepository) {
         this.baseRepository = baseRepository;
+    }
+
+
+    @Override
+    public <D> D transToDTO(T t, Class<D> clazz) throws Exception {
+        if (t == null) {
+            return null;
+        }
+        D d = clazz.newInstance();
+        BeanUtils.copyProperties(t, d);
+        return d;
+    }
+
+    @Override
+    public <D> List<D> transToDTOList(List<T> tList, Class<D> clazz) throws Exception {
+        List<D> dList = new ArrayList<>();
+        if (tList != null && tList.size() > 0) {
+            for (T t : tList) {
+                D d = transToDTO(t, clazz);
+                dList.add(d);
+            }
+        }
+        return dList;
     }
 
     @Override
@@ -97,6 +128,41 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
     }
 
     @Override
+    public List<T> findByCondition(T t) throws Exception {
+        List<T> list= baseRepository.findAll(new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate p = null;
+                if (t != null) {
+                    Field[] fields = t.getClass().getDeclaredFields();
+                    for (Field field : fields) {
+                        field.setAccessible(true);
+                        try {
+                            Object value = field.get(t);
+                            if (t != null && value != null && !"serialVersionUID".equals(field.getName()) && !"java.util.List".equals(field.getType().getName()) ) {
+                                p = cb.equal(root.get(field.getName()),field.get(t));
+//                                p = cb.like(root.get(field.getName()), "%" + field.get(t) + "%");
+                            }
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                if (null != p){
+                    query.where(p);
+                }
+                return null;
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public List<T> findByCondition(T t, Sort sort) throws Exception {
+        return null;
+    }
+
+    @Override
     public List<T> findAll() throws Exception {
         return baseRepository.findAll();
     }
@@ -140,15 +206,17 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
 //                                if("java.lang.Boolean".equals(field.getType().getName())) {
 //                                    like=cb.isFalse(root.<Boolean>get(field.getName()));
 //                                }
-                                like = cb.like(root.<String>get(field.getName()), "%" + field.get(t) + "%");
-
+//                                like = cb.like(root.<String>get(field.getName()), "%" + field.get(t) + "%");
+                                like = cb.equal(root.<String>get(field.getName()),field.get(t));
                             }
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         }
                     }
                 }
-                if (null != like) query.where(like);
+                if (null != like){
+                    query.where(like);
+                }
                 return null;
             }
         }, pageable);

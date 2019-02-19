@@ -3,6 +3,7 @@ package com.hdl.gzccocpweb.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,5 +25,7 @@ public class AdminController {
         mv.setViewName("/admin/user.btl");
         return mv;
     }
+
+
 
 }
