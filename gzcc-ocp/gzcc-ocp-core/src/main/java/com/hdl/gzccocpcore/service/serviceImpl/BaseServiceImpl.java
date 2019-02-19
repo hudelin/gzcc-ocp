@@ -64,6 +64,11 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
     }
 
     @Override
+    public <D> D getDTO(ID id, Class<D> clazz) throws Exception {
+        return transToDTO(get(id),clazz);
+    }
+
+    @Override
     public T save(T t) throws Exception {
         return baseRepository.save(t);
     }
@@ -127,8 +132,7 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
         return baseRepository.count();
     }
 
-    @Override
-    public List<T> findByCondition(T t) throws Exception {
+    private  List<T> findByT(T t,Sort sort) throws Exception{
         List<T> list= baseRepository.findAll(new Specification<T>() {
             @Override
             public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -153,13 +157,18 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
                 }
                 return null;
             }
-        });
+        },sort);
         return list;
     }
 
     @Override
+    public List<T> findByCondition(T t) throws Exception {
+       return findByT(t,new Sort(Sort.Direction.ASC,"id"));
+    }
+
+    @Override
     public List<T> findByCondition(T t, Sort sort) throws Exception {
-        return null;
+        return findByT(t,sort);
     }
 
     @Override

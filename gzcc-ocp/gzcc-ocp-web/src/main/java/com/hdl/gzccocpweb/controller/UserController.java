@@ -171,8 +171,8 @@ public class UserController {
 //        User user=userService.get((long) 1);
 //        User u=userService.transToDTO(user,User.class);
         User user=new User();
-        user.setBan(false);
-        List<User> userList=userService.findByCondition(user);
+//        user.setBan(false);
+        List<User> userList=userService.findByCondition(user,new Sort(Sort.Direction.ASC,"lastModifiedTime"));
         List<User> u=userService.transToDTOList(userList,User.class);
         return new ObjectRestResponse(u);
     }
