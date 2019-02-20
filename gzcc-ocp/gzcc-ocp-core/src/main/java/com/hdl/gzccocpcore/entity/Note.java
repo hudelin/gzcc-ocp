@@ -75,17 +75,14 @@ public class Note  implements Serializable {
     private List<Reply> replyList= new ArrayList<>();
 
     @Getter@Setter
-    //是否可以回复 用BaseConstant的true和false
-    private String canReply="1";
+    private Boolean canReply=true;
 
     @Getter@Setter
-    //是否置顶 用BaseConstant的true和false
-    private String top="1";
+    private Boolean top=false;
 
 
     @Getter@Setter
-    //是否逻辑删除  用BaseConstant的true和false
-    private String isDelete="0";
+    private Boolean deleted=false;
 
 
     @Getter@Setter

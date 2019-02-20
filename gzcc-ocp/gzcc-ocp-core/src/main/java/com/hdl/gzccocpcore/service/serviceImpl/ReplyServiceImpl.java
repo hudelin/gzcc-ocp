@@ -35,20 +35,20 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Override
     public Page<Reply> findPageByNoteId(Integer page, Integer size, Long noteId) throws Exception {
         Pageable pageable = PageRequest.of(page-1, size);
-        Page<Reply> replyPage=replyRepository.findByNoteIdAndIsDeleteOrderByIsAcceptDescCreateTimeDesc(pageable,noteId,BaseConstant.FALSE);
+        Page<Reply> replyPage=replyRepository.findByNoteIdAndDeletedOrderByAcceptedDescCreateTimeDesc(pageable,noteId,false);
         return replyPage;
     }
 
     @Override
     public Reply acceptReply(Long replyId, Long noteId) throws Exception {
 
-        if(replyRepository.findByNoteIdAndIsAccept(noteId, BaseConstant.TRUE)!=null){
-            Reply acceptReplyOld=replyRepository.findByNoteIdAndIsAccept(noteId,BaseConstant.TRUE);
-            acceptReplyOld.setIsAccept(BaseConstant.FALSE);
+        if(replyRepository.findByNoteIdAndAccepted(noteId, true)!=null){
+            Reply acceptReplyOld=replyRepository.findByNoteIdAndAccepted(noteId,true);
+            acceptReplyOld.setAccepted(false);
             replyRepository.save(acceptReplyOld);
         }
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsAccept(BaseConstant.TRUE);
+        acceptReplyNew.setAccepted(true);
         replyRepository.save(acceptReplyNew);
         return acceptReplyNew;
     }
@@ -56,7 +56,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
     @Override
     public void delete(Long replyId) throws Exception {
         Reply acceptReplyNew=replyRepository.getOne(replyId);
-        acceptReplyNew.setIsDelete(BaseConstant.TRUE);
+        acceptReplyNew.setDeleted(true);
         replyRepository.save(acceptReplyNew);
     }
 

@@ -235,13 +235,13 @@
               </span>
             <div class="jieda-admin">
                 {{# if(item.user.id==d.userId){ }}
-                <span type="edit"  onclick="editReply({{item.id}})">编辑</span>
+                <span type="edit"  class="reply-event" data-type="edit"  data-id="{{item.id}}" >编辑</span>
                 {{# } }}
                 {{# if(item.user.id==d.userId||d.userId==d.noteUserId){ }}
-                <span type="del" class="delete-note" data-type="del" data-method="notice"  onclick="deleteReply({{item.id}})">删除</span>
+                <span type="delete" class="reply-event" data-type="delete" data-id="{{item.id}}"   >删除</span>
                 {{# } }}
                 {{# if(d.userId==d.noteUserId&&item.isAccept=="0"){ }}
-                <span class="jieda-accept" type="accept" onclick="acceptReply({{item.id}})">采纳</span>
+                <span type="accept"  class="jieda-accept reply-event"  data-type="accept"  data-id="{{item.id}}"  >采纳</span>
                 {{# } }}
             </div>
         </div>
@@ -361,11 +361,12 @@
                     }
                 }
             });
-            $('.delete-note').on('click', function(){
-                var othis = $(this), type = othis.data('type');
+            $('.reply-event').on('click', function(){
+                var othis = $(this), type = othis.data('type'),id=othis.data('id');
 
                 console.log(othis)
                 console.log(type)
+                console.log(id)
                 active[type] ? active[type].call(this, othis) : '';
             });
 
@@ -469,28 +470,40 @@
 
         //触发事件
         var active = {
-            tabAdd: function(){
-                //新增一个Tab项
-                element.tabAdd('demo', {
-                    title: '新选项'+ (Math.random()*1000|0) //用于演示
-                    ,content: '内容'+ (Math.random()*1000|0)
-                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                })
+            edit: function(othis){
+                var id=othis.data('id');
+                $("#replyId").val(id)
+                editor.txt.html(replyPage.content.find(e=>e.id==id).content)
             }
-            ,tabDelete: function(othis){
-                //删除指定Tab项
-                element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-                othis.addClass('layui-btn-disabled');
+            ,delete: function(othis){
+                var id=othis.data('id');
+                layer.confirm('确认删除该回答么？', function(index){
+                    request.ajax({
+                        type: 'POST',
+                        url: '/note/deleteReplay',
+                        data: {replyId: id, noteId: noteId},
+                    }).then(function (res) {
+                        requestFindPage(noteId).then(function (replyPage) {
+                            loadPageBar(replyPage)
+                        })
+                    })
+                    layer.close(index);
+                });
             }
-            ,tabChange: function(){
-                //切换到指定Tab项
-                element.tabChange('demo', '22'); //切换到：用户管理
-            },del:function (othis) {
-                console.log("删除")
-                console.log(othis)
-
+            ,accept: function(othis){
+                var id=othis.data('id');
+                layer.confirm('是否采纳该回答为最佳答案？', function(index){
+                    request.ajax({
+                        type: 'POST',
+                        url: '/note/acceptReplay',
+                        data: {replyId: id, noteId: noteId},
+                    }).then(function (res) {
+                        requestFindPage(noteId).then(function (replyPage) {
+                            loadPageBar(replyPage)
+                        })
+                    })
+                    layer.close(index);
+                });
             }
         };
 

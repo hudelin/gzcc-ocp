@@ -55,7 +55,7 @@ public class Reply  implements Serializable {
     private Integer praise=0;
 
     @Getter@Setter
-    private String isDelete="0";
+    private Boolean deleted=false;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,7 +64,7 @@ public class Reply  implements Serializable {
     private Note note;
 
     @Getter@Setter
-    private String isAccept="0";
+    private Boolean accepted=false;
 
     @ManyToOne
     @Getter@Setter

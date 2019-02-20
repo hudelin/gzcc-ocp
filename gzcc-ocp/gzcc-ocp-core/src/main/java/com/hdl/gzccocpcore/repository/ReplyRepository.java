@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ReplyRepository extends BaseRepository<Reply, Long> {
 
-    Page<Reply> findByNoteIdAndIsDeleteOrderByIsAcceptDescCreateTimeDesc(Pageable pageable,Long noteId,String isDelete);
-    Reply findByNoteIdAndIsAccept( Long noteId,String isAccept);
+    Page<Reply> findByNoteIdAndDeletedOrderByAcceptedDescCreateTimeDesc(Pageable pageable,Long noteId,Boolean deleted);
+    Reply findByNoteIdAndAccepted( Long noteId,Boolean accepted);
 
 }

@@ -52,7 +52,7 @@ public class Resource implements Serializable {
     private String suffix;
 
     @Getter@Setter
-    private String isDelete="0";
+    private Boolean deleted=false;
 
     @Getter@Setter
     private Long userId;
