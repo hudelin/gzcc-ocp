@@ -216,7 +216,7 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
 //                                    like=cb.isFalse(root.<Boolean>get(field.getName()));
 //                                }
 //                                like = cb.like(root.<String>get(field.getName()), "%" + field.get(t) + "%");
-                                like = cb.equal(root.<String>get(field.getName()),field.get(t));
+//                                like = cb.equal(root.<String>get(field.getName()),field.get(t));
                             }
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();

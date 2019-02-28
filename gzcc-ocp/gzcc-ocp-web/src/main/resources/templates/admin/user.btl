@@ -6,18 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../res/layui/css/layui.css">
+    <style>
+        .user-form .layui-input-block {
+            margin-top: 20px;
+            margin-right: 40px;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
     <table id="demo" lay-filter="test"></table>
 </div>
-<div class="layui-btn-container" id="a">
+<div class="user-form" id="a">
     <!--<button class="layui-btn layui-btn-sm addUser" data-type="add" lay-event="addUser">添加</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>-->
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">输入框</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码框</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择框</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">北京</option>
+                    <option value="1">上海</option>
+                    <option value="2">广州</option>
+                    <option value="3">深圳</option>
+                    <option value="4">杭州</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="like[write]" title="写作">
+                <input type="checkbox" name="like[read]" title="阅读" checked>
+                <input type="checkbox" name="like[dai]" title="发呆">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开关</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="switch" lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单选框</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="男" title="男">
+                <input type="radio" name="sex" value="女" title="女" checked>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文本域</label>
+            <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script src="../../res/layui/layui.js"></script>
@@ -47,10 +114,11 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table'], function () {
+    }).use(['jquery', 'request', 'table','form'], function () {
         var $ = layui.$
         var table = layui.table;
-        var request = layui.request
+        var request = layui.request;
+        var form = layui.form
 
         //第一个实例
         var userTable = table.render({
@@ -117,6 +185,7 @@
                 case 'addUser':
                     layer.open({
                         type: 1,
+                        area: '540px',
                         content: $('#a') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                     });
                     // $('.addUser').on('click', function(){
@@ -174,31 +243,36 @@
             }
         });
 
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+
         var socket;
-        if(typeof(WebSocket) == "undefined") {
+        if (typeof(WebSocket) == "undefined") {
             console.log("您的浏览器不支持WebSocket");
-        }else{
+        } else {
             console.log("您的浏览器支持WebSocket");
             //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
             //等同于
             socket = new WebSocket("ws://localhost:8060/webSocket/20");
 
             //打开事件
-            socket.onopen = function() {
+            socket.onopen = function () {
                 console.log("Socket 已打开");
                 socket.send("这是来自客户端的消息" + location.href + new Date());
             };
             //获得消息事件
-            socket.onmessage = function(msg) {
+            socket.onmessage = function (msg) {
                 console.log(msg.data);
                 //发现消息进入    开始处理前端触发逻辑
             };
             //关闭事件
-            socket.onclose = function() {
+            socket.onclose = function () {
                 console.log("Socket已关闭");
             };
             //发生了错误事件
-            socket.onerror = function() {
+            socket.onerror = function () {
                 alert("Socket发生了错误");
                 //此时可以尝试刷新页面
             }
@@ -208,8 +282,6 @@
             //     socket.close();
             //});
         }
-
-
     });
 </script>
 
