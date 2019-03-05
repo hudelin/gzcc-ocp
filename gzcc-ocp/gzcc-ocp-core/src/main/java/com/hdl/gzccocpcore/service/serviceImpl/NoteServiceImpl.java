@@ -29,6 +29,7 @@ public class NoteServiceImpl extends BaseServiceImpl<Note,Long> implements NoteS
         if(!StringUtils.isEmpty(note.getNoteType())){
             noteOld.setNoteType(note.getNoteType());
         }
+        noteOld.setResource(note.getResource());
 
         return noteRepository.save(noteOld);
     }

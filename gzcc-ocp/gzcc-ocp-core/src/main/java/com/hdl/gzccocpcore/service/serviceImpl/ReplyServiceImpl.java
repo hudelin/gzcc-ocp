@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,6 +20,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -51,6 +54,34 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
         acceptReplyNew.setAccepted(true);
         replyRepository.save(acceptReplyNew);
         return acceptReplyNew;
+    }
+
+    @Override
+    public Reply praiseReply(Long replyId, Long userId) throws Exception {
+        Reply reply = get(replyId);
+        //判断是否有已有点赞
+        if (!StringUtils.isEmpty(reply.getPraiseUserIdString())) {
+            String[] userIdList = reply.getPraiseUserIdString().split(",");
+            List<String> list = new ArrayList<>();
+            Boolean exist=false;
+            for (String s : userIdList) {
+                if(!userId.toString().equals(s)){
+                    list.add(s);
+                }else{
+                    exist=true;
+                }
+            }
+            if(!exist){
+                list.add(userId.toString());
+            }
+            userIdList = list.toArray(new String[list.size()]);
+            reply.setPraiseUserIdString(StringUtils.arrayToDelimitedString(userIdList, ","));
+            reply.setPraise((long) list.size());
+        } else {
+            reply.setPraiseUserIdString(userId.toString());
+            reply.setPraise((long) 1);
+        }
+        return null;
     }
 
     @Override

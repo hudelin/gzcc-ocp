@@ -9,4 +9,7 @@ public interface ReplyService extends BaseService<Reply,Long>  {
 
     public Reply acceptReply(Long replyId,Long noteId)throws Exception ;
 
+    public Reply praiseReply(Long replyId,Long userId)throws Exception ;
+
+
 }

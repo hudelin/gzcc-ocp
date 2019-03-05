@@ -18,7 +18,7 @@
 
     <table id="demo" lay-filter="test"></table>
 </div>
-<div class="user-form" id="a">
+<div class="user-form" id="addUserModal">
     <!--<button class="layui-btn layui-btn-sm addUser" data-type="add" lay-event="addUser">添加</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
@@ -26,54 +26,54 @@
     <!--<button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>-->
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">输入框</label>
+            <label class="layui-form-label">账号名</label>
             <div class="layui-input-block">
-                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入账号名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">密码框</label>
+            <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
                 <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+            <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">选择框</label>
-            <div class="layui-input-block">
-                <select name="city" lay-verify="required">
-                    <option value=""></option>
-                    <option value="0">北京</option>
-                    <option value="1">上海</option>
-                    <option value="2">广州</option>
-                    <option value="3">深圳</option>
-                    <option value="4">杭州</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">复选框</label>
-            <div class="layui-input-block">
-                <input type="checkbox" name="like[write]" title="写作">
-                <input type="checkbox" name="like[read]" title="阅读" checked>
-                <input type="checkbox" name="like[dai]" title="发呆">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">开关</label>
-            <div class="layui-input-block">
-                <input type="checkbox" name="switch" lay-skin="switch">
-            </div>
-        </div>
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">选择框</label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<select name="city" lay-verify="required">-->
+                    <!--<option value=""></option>-->
+                    <!--<option value="0">北京</option>-->
+                    <!--<option value="1">上海</option>-->
+                    <!--<option value="2">广州</option>-->
+                    <!--<option value="3">深圳</option>-->
+                    <!--<option value="4">杭州</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">复选框</label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="checkbox" name="like[write]" title="写作">-->
+                <!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
+                <!--<input type="checkbox" name="like[dai]" title="发呆">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">开关</label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="checkbox" name="switch" lay-skin="switch">-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="layui-form-item">
             <label class="layui-form-label">单选框</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="男" title="男">
-                <input type="radio" name="sex" value="女" title="女" checked>
+                <input type="radio" name="sex" value="男" title="男" checked>
+                <input type="radio" name="sex" value="女" title="女" >
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">文本域</label>
+            <label class="layui-form-label">签名</label>
             <div class="layui-input-block">
                 <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
@@ -93,7 +93,7 @@
 <script type="text/html" id="genderTemplate">
     <!-- 这里的 checked 的状态只是演示 -->
     <!--<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>-->
-    {{d.gender=='0'?"男":"女"}}
+    {{d.gender=='1'?"女":"男"}}
 </script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
@@ -125,7 +125,6 @@
             elem: '#demo'
             // ,height: 312
             , height: 'full-20'
-
             , url: '/user/findUserPage' //数据接口
             , cellMinWidth: 80
             // ,toolbar: true
@@ -147,23 +146,22 @@
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'id', title: 'ID', sort: true}
-                , {field: 'username', title: '用户名'}
+                , {field: 'account', title: '用户名',sort: true}
+                , {field: 'username', title: '昵称',sort: true}
                 , {field: 'gender', title: '性别', sort: true, templet: '#genderTemplate'}
-                , {field: 'email', title: '城市', edit: 'text'}
-                , {field: 'sign', title: '签名'}
-                , {field: 'experience', title: '积分', sort: true}
-                , {field: 'score', title: '评分', sort: true}
-                , {field: 'classify', title: '职业'}
+                // , {field: 'email', title: '城市', edit: 'text'}
+                , {field: 'sign', title: '签名',sort: true}
+                // , {field: 'experience', title: '积分', sort: true}
+                // , {field: 'score', title: '评分', sort: true}
+                // , {field: 'classify', title: '职业'}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                 console.log(res);
-
                 //得到当前页码
                 console.log(curr);
-
                 //得到数据总量
                 console.log(count);
                 console.log(userTable)
@@ -186,15 +184,8 @@
                     layer.open({
                         type: 1,
                         area: '540px',
-                        content: $('#a') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                        content: $('#addUserModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                     });
-                    // $('.addUser').on('click', function(){
-                    //     var othis = $(this), type = othis.data('type');
-                    //
-                    //     console.log(othis)
-                    //     console.log(type)
-                    //     active[type] ? active[type].call(this, othis) : '';
-                    // });
                     break;
                 case 'getCheckData':
                     var data = checkStatus.data;

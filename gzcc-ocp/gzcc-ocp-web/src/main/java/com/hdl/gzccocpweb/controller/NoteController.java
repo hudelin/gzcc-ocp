@@ -1,19 +1,25 @@
 package com.hdl.gzccocpweb.controller;
 
+import com.hdl.gzccocpcore.dto.NoteDTO;
 import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
+import com.hdl.gzccocpcore.entity.Resource;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ReplyService;
+import com.hdl.gzccocpcore.service.ResourceService;
 import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +30,8 @@ public class NoteController {
     private NoteService noteService;
     @Autowired
     private ReplyService replyService;
+    @Autowired
+    private ResourceService resourceService;
     @Autowired
     private UserService userService;
 
@@ -66,9 +74,17 @@ public class NoteController {
 
     @RequestMapping(value = "/get")
     @ResponseBody
-    public Note get(Long noteId) throws Exception {
-        Note note = noteService.get(noteId);
-        return note;
+    public ObjectRestResponse get(Long noteId) throws Exception {
+        NoteDTO noteDTO = noteService.getDTO(noteId,NoteDTO.class);
+        if(!StringUtils.isEmpty(noteDTO.getResource())){
+            String[] resourceSrcList=noteDTO.getResource().split(",");
+            List<Resource> resourceList=new ArrayList<>();
+            for(String s:resourceSrcList){
+                resourceList.add(resourceService.findByFormatName(s)) ;
+            }
+            noteDTO.setResourceList(resourceList);
+        }
+        return new ObjectRestResponse(noteDTO);
     }
 
     @RequestMapping(value = "/findAll")
@@ -77,32 +93,6 @@ public class NoteController {
         List<Note> noteList = noteService.findAll();
         return noteList;
     }
-
-    @RequestMapping(value = "/saveReplay")
-    @ResponseBody
-    public Reply replay(Reply reply, Long noteId, Long userId) throws Exception {
-        reply.setNote(noteService.get(noteId));
-        reply.setUser(userService.get(userId));
-        reply = replyService.save(reply);
-        return reply;
-    }
-
-    @RequestMapping(value = "/acceptReplay")
-    @ResponseBody
-    public Reply acceptReplay(Long replyId, Long noteId) throws Exception {
-//        Reply reply=replyService.get(replyId);
-//        reply.setAccept(true);
-//        replyService.save(reply);
-        return replyService.acceptReply(replyId, noteId);
-//        return reply;
-    }
-
-    @RequestMapping(value = "/deleteReplay")
-    @ResponseBody
-    public void deleteReplay(Long replyId) throws Exception {
-        replyService.delete(replyId);
-    }
-
 
     @RequestMapping(value = "/findReplyPage")
     @ResponseBody

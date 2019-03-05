@@ -34,7 +34,6 @@
                 <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
                     <legend>回帖</legend>
                 </fieldset>
-
                 <ul class="jieda" id="jieda">
 
                 </ul>
@@ -108,7 +107,6 @@
                     <a href="">基于 layui 的极简社区页面模版</a>
                     <span><i class="iconfont icon-pinglun1"></i> 16</span>
                 </dd>
-
                 <!-- 无数据时 -->
                 <!--
                 <div class="fly-none">没有相关数据</div>
@@ -129,7 +127,6 @@
                 <img src="../../res/images/weixin.jpg" style="max-width: 100%;" alt="layui">
                 <p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>
             </div>
-
         </div>
     </div>
 </div>
@@ -170,7 +167,7 @@
         </a>
         <div class="fly-detail-user">
             <a href="/user/home.html" class="fly-link">
-                <cite>{{d.note.user.nickname}}</cite>
+                <cite>{{d.note.user.username}}</cite>
                 <!--<i class="iconfont icon-renzheng" title="认证信息："></i>-->
                 <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
             </a>
@@ -180,6 +177,14 @@
             <!--<span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>-->
             {{# if(d.note.user.id==d.userId){ }}
             <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="/note/edit/${noteId}">编辑此贴</a></span>
+            {{# } }}
+            {{# if(d.userId!=0){ }}
+            {{# if(d.collect){ }}
+            <span class="layui-btn layui-btn-xs jie-admin layui-btn-danger" type="collect"
+                  data-type="remove">取消收藏</span>
+            {{# }else{ }}
+            <span class="layui-btn layui-btn-xs jie-admin" type="collect" data-type="add">收藏</span>
+            {{# } }}
             {{# } }}
         </div>
     </div>
@@ -200,7 +205,7 @@
             </a>
             <div class="fly-detail-user">
                 <a href="" class="fly-link">
-                    <cite>{{item.user.nickname}}</cite>
+                    <cite>{{item.user.username}}</cite>
                     <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
                     <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
                 </a>
@@ -216,7 +221,7 @@
             <div class="detail-hits">
                 <span>{{item.timeAgo}}</span>
             </div>
-            {{# if(item.isAccept=="1"){ }}
+            {{# if(item.accepted){ }}
             <i class="iconfont icon-caina" title="最佳答案"></i>
             {{# } }}
         </div>
@@ -225,23 +230,34 @@
             {{ item.content }}
         </div>
         <div class="jieda-reply">
-              <span class="jieda-zan zanok" type="zan">
+
+              <span class="jieda-zan  reply-event
+               {{# if(item.praise!=0){ }}
+              {{#  layui.each(item.praiseUserIdList, function(idx, i){ }}
+                  {{# if(i==d.userId){ }}
+                    zanok
+                    {{# } }}
+               {{#  }); }}
+               {{# } }}
+                " type="zan"   data-type="praise" data-id="{{item.id}}">
+
                 <i class="iconfont icon-zan"></i>
-                <em>66</em>
+                <em>{{item.praise}}</em>
               </span>
+            <!--<span class="jieda-zan " type="zan"> <i class="iconfont icon-zan"></i> <em>0</em> </span>-->
             <span type="reply">
                 <i class="iconfont icon-svgmoban53"></i>
                 回复
               </span>
             <div class="jieda-admin">
                 {{# if(item.user.id==d.userId){ }}
-                <span type="edit"  class="reply-event" data-type="edit"  data-id="{{item.id}}" >编辑</span>
+                <span type="edit" class="reply-event" data-type="edit" data-id="{{item.id}}">编辑</span>
                 {{# } }}
                 {{# if(item.user.id==d.userId||d.userId==d.noteUserId){ }}
-                <span type="delete" class="reply-event" data-type="delete" data-id="{{item.id}}"   >删除</span>
+                <span type="delete" class="reply-event" data-type="delete" data-id="{{item.id}}">删除</span>
                 {{# } }}
-                {{# if(d.userId==d.noteUserId&&item.isAccept=="0"){ }}
-                <span type="accept"  class="jieda-accept reply-event"  data-type="accept"  data-id="{{item.id}}"  >采纳</span>
+                {{# if(d.userId==d.noteUserId&&!item.accepted){ }}
+                <span type="accept" class="jieda-accept reply-event" data-type="accept" data-id="{{item.id}}">采纳</span>
                 {{# } }}
             </div>
         </div>
@@ -269,7 +285,7 @@
     }).extend({
         fly: 'index',
         request: 'request'
-    }).use(['request','jquery', 'laytpl', 'form', 'laypage', 'util','layer','fly'], function () {
+    }).use(['request', 'jquery', 'laytpl', 'form', 'laypage', 'util', 'layer', 'fly'], function () {
         var $ = layui.$
         var fly = layui.fly;
         var laytpl = layui.laytpl
@@ -288,22 +304,40 @@
             url: '/note/get',
             data: {noteId: noteId},
         }).then(function (res) {
-            console.log("note",res)
-            note = res;
-            note.timeAgo = util.timeAgo(note.lastModifiedTime)
-            var data = {
-                note: note,
-                userId: layui.data('userData').user.id
+            console.log("note", res)
+            if (res.code == 0) {
+                note = res.data;
+                note.timeAgo = util.timeAgo(note.lastModifiedTime)
+                var collect = false
+                var data = {
+                    note: note,
+                    userId: 0,
+                    collect: collect
+                }
+                if (layui.sessionData('userData').user != null) {
+                    data.userId = layui.sessionData('userData').user.id;
+                    var collectNoteList = layui.sessionData('userData').user.collectNote.split(",");
+                    if (collectNoteList.find(e => e == note.id)){
+                        data.collect = true
+                    }
+                }
+                var getTpl = noteTemplate.innerHTML
+                    , view = document.getElementById('noteBox');
+                laytpl(getTpl).render(data, function (html) {
+                    view.innerHTML = html;
+                });
+                // $('#note-content').html(note.content)
+                $('body').on('click', '.jie-admin', function(){
+                    var othis = $(this), type = othis.attr('type');
+                    console.log(type)
+                    gather.jieAdmin[type] && gather.jieAdmin[type].call(this, othis.parent());
+                });
+
+                requestFindPage(noteId).then(function (replyPage) {
+                    loadPageBar(replyPage)
+                })
             }
-            var getTpl = noteTemplate.innerHTML
-                , view = document.getElementById('noteBox');
-            laytpl(getTpl).render(data, function (html) {
-                view.innerHTML = html;
-            });
-            // $('#note-content').html(note.content)
-            requestFindPage(noteId).then(function (replyPage) {
-                loadPageBar(replyPage)
-            })
+
         })
 
         //请求回复分页
@@ -324,6 +358,9 @@
             var content = replyPage.content;
             content.forEach(function (item) {
                 item.timeAgo = util.timeAgo(item.lastModifiedTime)
+                if(item.praiseUserIdString){
+                    item.praiseUserIdList=item.praiseUserIdString.split(",")
+                }
             })
             return new Promise(function (res, reject) {
                 if (content.length <= 0) {
@@ -332,8 +369,9 @@
                 var data = {
                     content: content,
                     noteUserId: note.user.id,
-                    userId: layui.data('userData').user.id
+                    userId: layui.sessionData('userData').user != null ? layui.sessionData('userData').user.id : 0
                 }
+                console.log(data)
                 var getTpl = replyTemplate.innerHTML
                     , view = document.getElementById('jieda');
                 laytpl(getTpl).render(data, function (html) {
@@ -361,8 +399,8 @@
                     }
                 }
             });
-            $('.reply-event').on('click', function(){
-                var othis = $(this), type = othis.data('type'),id=othis.data('id');
+            $('.reply-event').on('click', function () {
+                var othis = $(this), type = othis.data('type'), id = othis.data('id');
 
                 console.log(othis)
                 console.log(type)
@@ -410,14 +448,20 @@
             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            data.field.userId = layui.data('userData').user.id
-            if($("#replyId").val()!=""){
-                data.field.createTime= new Date(replyPage.content.find(e=>e.id==data.field.id).createTime)
+            if (layui.sessionData('userData').user == null) {
+                layer.msg('请先登录');
+                return false
+            } else {
+                data.field.userId = layui.sessionData('userData').user.id
             }
 
+            if ($("#replyId").val() != "") {
+                data.field.createTime = new Date(replyPage.content.find(e => e.id == data.field.id).createTime
+            )
+            }
             request.ajax({
                 type: 'POST',
-                url: '/note/saveReplay',
+                url: '/reply/save',
                 data: data.field,
             }).then(function (res) {
                 // note.replyList.push(res)
@@ -430,57 +474,21 @@
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
 
-        window.acceptReply=function(replyId) {
-            layer.confirm('是否采纳该回答为最佳答案？', function(index){
-                request.ajax({
-                    type: 'POST',
-                    url: '/note/acceptReplay',
-                    data: {replyId: replyId, noteId: noteId},
-                }).then(function (res) {
-                    requestFindPage(noteId).then(function (replyPage) {
-                        loadPageBar(replyPage)
-                    })
-                })
-                layer.close(index);
-            });
-        }
-
-        window.deleteReply=function(replyId){
-            layer.confirm('确认删除该回答么？', function(index){
-                request.ajax({
-                    type: 'POST',
-                    url: '/note/deleteReplay',
-                    data: {replyId: replyId, noteId: noteId},
-                }).then(function (res) {
-                    requestFindPage(noteId).then(function (replyPage) {
-                        loadPageBar(replyPage)
-                    })
-                })
-                layer.close(index);
-            });
-        }
-        window.editReply=function(replyId){
-            // console.log(replyId)
-            // console.log( replyPage.content.find(e=>e.id==replyId).content)
-            $("#replyId").val(replyId)
-            editor.txt.html(replyPage.content.find(e=>e.id==replyId).content)
-        }
-
-
 
         //触发事件
         var active = {
-            edit: function(othis){
-                var id=othis.data('id');
+            edit: function (othis) {
+                var id = othis.data('id');
                 $("#replyId").val(id)
-                editor.txt.html(replyPage.content.find(e=>e.id==id).content)
+                editor.txt.html(replyPage.content.find(e => e.id == id).content
+            )
             }
-            ,delete: function(othis){
-                var id=othis.data('id');
-                layer.confirm('确认删除该回答么？', function(index){
+            , delete: function (othis) {
+                var id = othis.data('id');
+                layer.confirm('确认删除该回答么？', function (index) {
                     request.ajax({
                         type: 'POST',
-                        url: '/note/deleteReplay',
+                        url: '/reply/delete',
                         data: {replyId: id, noteId: noteId},
                     }).then(function (res) {
                         requestFindPage(noteId).then(function (replyPage) {
@@ -490,12 +498,12 @@
                     layer.close(index);
                 });
             }
-            ,accept: function(othis){
-                var id=othis.data('id');
-                layer.confirm('是否采纳该回答为最佳答案？', function(index){
+            , accept: function (othis) {
+                var id = othis.data('id');
+                layer.confirm('是否采纳该回答为最佳答案？', function (index) {
                     request.ajax({
                         type: 'POST',
-                        url: '/note/acceptReplay',
+                        url: '/reply/accept',
                         data: {replyId: id, noteId: noteId},
                     }).then(function (res) {
                         requestFindPage(noteId).then(function (replyPage) {
@@ -504,9 +512,83 @@
                     })
                     layer.close(index);
                 });
+            }
+            , praise:function (othis) {
+                var id = othis.data('id');
+                request.ajax({
+                    type: 'POST',
+                    url: '/reply/praise',
+                    data: {replyId: id, userId: layui.sessionData('userData').user.id},
+                }).then(function (res) {
+                    requestFindPage(noteId).then(function (replyPage) {
+                        loadPageBar(replyPage)
+                    })
+                })
             }
         };
 
+        var gather = {}
+
+
+        gather.jieAdmin = {
+            //删求解
+            // del: function(div){
+            //     layer.confirm('确认删除该求解么？', function(index){
+            //         layer.close(index);
+            //         fly.json('/api/jie-delete/', {
+            //             id: div.data('id')
+            //         }, function(res){
+            //             if(res.status === 0){
+            //                 location.href = '/jie/';
+            //             } else {
+            //                 layer.msg(res.msg);
+            //             }
+            //         });
+            //     });
+            // }
+            //设置置顶、状态
+            // ,set: function(div){
+            //     var othis = $(this);
+            //     fly.json('/api/jie-set/', {
+            //         id: div.data('id')
+            //         ,rank: othis.attr('rank')
+            //         ,field: othis.attr('field')
+            //     }, function(res){
+            //         if(res.status === 0){
+            //             location.reload();
+            //         }
+            //     });
+            // }
+            //收藏
+            // ,
+            collect: function(div){
+                var othis = $(this), type = othis.data('type');
+
+                if(type == 'add'){
+                    request.ajax({
+                        type: 'POST',
+                        url: '/user/collectNote',
+                        data: {
+                            userId: layui.sessionData('userData').user.id,
+                            noteId: note.id
+                        },
+                    }).then(function (res) {
+                        othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
+                    })
+                } else if(type == 'remove'){
+                    request.ajax({
+                        type: 'POST',
+                        url: '/user/removeNote',
+                        data: {
+                            userId: layui.sessionData('userData').user.id,
+                            noteId: note.id
+                        },
+                    }).then(function (res) {
+                        othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
+                    })
+                }
+            }
+        };
 
 
     })

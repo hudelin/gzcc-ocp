@@ -112,18 +112,7 @@
                             <!--<div class="layui-form-mid layui-word-aux">发表后无法更改飞吻</div>-->
                             <!--</div>-->
                             <!--</div>-->
-                            <div class="layui-form-item">
-                                <label for="L_vercode" class="layui-form-label">验证码</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" id="L_vercode" name="imageCode" required lay-verify="required" placeholder="请输入后面的验证码"
-                                           autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-form-mid">
-                                    <!--<span style="color: #c00;">1+1=?</span>-->
-                                    <img src="/code/image" class="fly-imagecode" id="imgCode" onclick="changeImage()"
-                                         style="position: relative;margin-top: -4px;cursor: pointer;">
-                                </div>
-                            </div>
+
                             <div class="layui-form-item">
                                 <div class="layui-upload">
                                     <button type="button" class="layui-btn " id="chooseFileButton">选择多文件</button>
@@ -136,13 +125,25 @@
                                                 <th>状态</th>
                                                 <th>操作</th>
                                             </tr></thead>
+                                            <tbody id="fileListOld"></tbody>
                                             <tbody id="fileList"></tbody>
                                         </table>
                                     </div>
 
                                 </div>
                             </div>
-
+                            <div class="layui-form-item">
+                                <label for="L_vercode" class="layui-form-label">验证码</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_vercode" name="imageCode" required lay-verify="required" placeholder="请输入后面的验证码"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">
+                                    <!--<span style="color: #c00;">1+1=?</span>-->
+                                    <img src="/code/image" class="fly-imagecode" id="imgCode" onclick="changeImage()"
+                                         style="position: relative;margin-top: -4px;cursor: pointer;">
+                                </div>
+                            </div>
                             <div class="layui-form-item">
                                 <input type="hidden" id="noteId" name="id" autocomplete="off" class="layui-input">
                                 <button class="layui-btn" lay-filter="saveNote" lay-submit>完成</button>
@@ -202,59 +203,53 @@
 
         var noteId="${noteId}"
         var note;
+        var resourceListOld=[]
         if(noteId!=0){
             request.ajax({
                 type: 'POST',
                 url: '/note/get',
                 data: {noteId: noteId},
             }).then(function (res) {
-                note=res;
-                console.log("note",res)
-                editor.txt.html(res.content)
-                $("#noteId").val(res.id)
-                $("#L_title").val(res.title)
+                if(res.code==0){
+                    note=res.data;
+                    console.log("note",note)
+                    editor.txt.html(note.content)
+                    $("#noteId").val(note.id)
+                    $("#L_title").val(note.title)
+                    resourceListOld=note.resourceList
+                    resourceListOld.forEach(function (e,index) {
+                        var tr = $(['<tr id="upload-'+ index +'">'
+                            ,'<td>'+ e.formatName +'</td>'
+                            ,'<td>'+ (e.size/1014).toFixed(1)  +'kb</td>'
+                            ,'<td>原文件</td>'
+                            ,'<td>'
+                            // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                            ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                            ,'</td>'
+                            ,'</tr>'].join(''));
+                        $('#fileList').append(tr);
+                        tr.find('.demo-delete').on('click', function(){
+                            tr.remove();
+                            resourceListOld.splice(index,1)
+                            console.log(resourceListOld)
+                        });
+                    })
+                }
+
+
             })
         }
 
-        // 各种基于事件的操作，下面会有进一步介绍
-        form.on('submit(saveNote)', function (data) {
-            console.log(uploadListIns.config.files)
-            var ok = true
-            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            data.field.userId = layui.data('userData').user.id
-            if(data.field.id!=""){
-                data.field.createTime= new Date(note.createTime)
-            }
-            // note.id=data.field
-            request.ajax({
-                type: 'POST',
-                url: '/note/save',
-                data: data.field,
-            }).then(function (res) {
-                changeImage();
-                if (res.content == "验证码不匹配") {
-                    layer.msg('验证码不匹配');
-                    ok = false
-                }
-                if (ok) {
-                    window.location.href = "/note/detail/"+res.id;
-                }
-                // else{
-                //     layer.msg('请求');
-                // }
-            })
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-        });
+
 
 
         var demoListView = $('#fileList')
+        var resourceList=[]
         var uploadListIns=upload.render({
             elem: '#chooseFileButton'
             ,url: '/resource/upload/'
             ,data: {
-                userId: layui.data('userData').user.id,
+                userId: layui.sessionData('userData').user.id,
                 type:"1",
             }
             ,multiple: true
@@ -282,6 +277,13 @@
 
                     //删除
                     tr.find('.demo-delete').on('click', function(){
+                        resourceList.forEach(function (e,idx) {
+                            if(e.originalName==file.name){
+                                resourceList.splice(idx,1);
+                                return false;
+                            }
+                        })
+                        console.log(resourceList)
                         delete files[index]; //删除对应的文件
                         tr.remove();
                         uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
@@ -291,6 +293,7 @@
             }
             ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
                 layer.load(); //上传loading
+                resourceList=[]
             }
             ,allDone: function(obj){ //当文件全部被提交后，才触发
                 console.log(obj.total); //得到总文件数
@@ -307,6 +310,13 @@
                     tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                     // tds.eq(3).html('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'); //清空操作
                     // return delete this.files[index]; //删除文件队列已经上传成功的文件
+                    resourceList.push(res.data);
+                    // if(resourceSting=""){
+                    //     resourceSting+=res.data.formateName;
+                    // }else{
+                    //     resourceSting+=","+res.data.formateName;
+                    // }
+                    console.log(resourceList)
                     return;
                 }
                 this.error(index, upload);
@@ -317,6 +327,53 @@
                 tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
                 tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
+        });
+
+        // 各种基于事件的操作，下面会有进一步介绍
+        form.on('submit(saveNote)', function (data) {
+            console.log(uploadListIns.config.files)
+            var ok = true
+            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            data.field.userId = layui.sessionData('userData').user.id
+            var s=""
+            console.log(resourceListOld,"123")
+            console.log(resourceList,"456")
+            resourceListOld.forEach(function (e) {
+                if(s==""){
+                    s+=e.formatName;
+                }else{
+                    s+=","+e.formatName;
+                }
+            })
+            resourceList.forEach(function (e) {
+                if(s==""){
+                    s+=e.formatName;
+                }else{
+                    s+=","+e.formatName;
+                }
+            })
+            data.field.resource=s;
+            if(data.field.id!=""){
+                data.field.createTime= new Date(note.createTime)
+            }
+            // note.id=data.field
+            request.ajax({
+                type: 'POST',
+                url: '/note/save',
+                data: data.field,
+            }).then(function (res) {
+                changeImage();
+                if (res.content == "验证码不匹配") {
+                    layer.msg('验证码不匹配');
+                    ok = false
+                }
+                if (ok) {
+                    window.location.href = "/note/detail/"+res.id;
+                }
+            })
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
 
 
