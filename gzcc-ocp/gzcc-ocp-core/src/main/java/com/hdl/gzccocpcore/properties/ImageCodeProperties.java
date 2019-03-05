@@ -7,7 +7,7 @@ public class ImageCodeProperties {
     private int length = 4;
     private int expireIn = 60;
 
-    private String url="/login,/note/save";
+    private String url="/login,/note/save,/user/registerUser";
 
     public int getWidth() {
         return width;

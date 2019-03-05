@@ -18,10 +18,15 @@ layui.define(['layer', 'jquery'],function (exports) { //提示：模块也可以
             for (var key in obj) {
                 new_obj[key] = obj[key]
             }
-            return $.ajax(new_obj).then(function(e){
-                console.log(e)
-                return e
+            return $.ajax(new_obj).then(function(res){
+                console.log(res)
+                return res
             })
+            //     .fail(function (e) {
+            //     console.log(e)
+            //     console.log("asd")
+            //     return e
+            // })
         }
     };
     //输出test接口

@@ -45,6 +45,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
         }
 //        ArrayUtils.toString(arr, ",");
         //获取文件的后缀，对文件进行重命名
+
         String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
         String fileName = gen() + OcpConstant.RESOURCE_TYPE_NOTE + "." + suffix;
         File f = new File(rootPath + fileName);
@@ -56,8 +57,14 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
         resource.setFormatName(fileName);
         resource.setOriginalName(multipartFile.getOriginalFilename());
         resource.setSuffix(suffix);
+        resource.setSize(multipartFile.getSize());
         resourceRepository.save(resource);
         return resource;
+    }
+
+    @Override
+    public Resource findByFormatName(String formatName) throws Exception {
+        return resourceRepository.findByFormatName(formatName);
     }
 
     private synchronized String gen() {

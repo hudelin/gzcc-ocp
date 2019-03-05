@@ -71,8 +71,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(myUserDetailsService)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/save","/authentication/require", "/login", "/code/image","/",securityProperties.getWebProperties().getLoginPage()).permitAll()
+                .antMatchers("/user/save","/authentication/require", "/user/login","/user/register","/user/registerUser", "/code/image","/",securityProperties.getWebProperties().getLoginPage()).permitAll()
+                .antMatchers("/note/**").permitAll()
                 .antMatchers("/note/edit").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMINISTRATOR")
                 .anyRequest()
 //                关闭登录验证
 //                .permitAll()

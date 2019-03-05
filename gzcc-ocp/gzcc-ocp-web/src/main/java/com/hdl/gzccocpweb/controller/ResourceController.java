@@ -23,9 +23,7 @@ public class ResourceController {
     @RequestMapping("/upload")
     @ResponseBody
     private ObjectRestResponse upload(MultipartFile file,Long userId,String type) throws Exception {
-
         Resource resource=resourceService.uploadResource(file,userId,type);
-        resource.setSrc("https://res.layui.com/static/images/layui/logo.png");
         return new ObjectRestResponse(resource);
     }
 }

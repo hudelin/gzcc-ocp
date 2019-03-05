@@ -56,7 +56,8 @@
                     <dd><a href="/user/home"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a>
                     </dd>
                     <hr style="margin: 5px 0;">
-                    <dd><a href="/logout" style="text-align: center;">退出</a></dd>
+                    <dd><a  href="javascript:;" onclick="logout()" style="text-align: center;">退出</a></dd>
+
                 </dl>
             </li>
             <%}%>
@@ -64,21 +65,18 @@
         </ul>
     </div>
 </div>
-<!--<script src="../../res/layui/layui.js"></script>-->
-<!--<script>-->
-    <!--layui.config({-->
-        <!--version: "3.0.0"-->
-        <!--, base: '../../res/mods/'-->
-    <!--}).extend({-->
-        <!--request: 'request'-->
-    <!--}).use(['request', 'laytpl',], function () {-->
-        <!--var request = layui.request;-->
-        <!--var laytpl = layui.laytpl;-->
-        <!--request.ajax({-->
-            <!--type: 'POST',-->
-            <!--url: '/user/getDetail',-->
-        <!--}).then(function (res) {-->
-            <!--console.log(res,"header")-->
-        <!--})-->
-    <!--});-->
-<!--</script>-->
+<script src="../../res/layui/layui.js"></script>
+<script>
+    function logout(){
+        layui.data('userData', {
+            key: 'user'
+            ,value: null
+        });
+        layui.sessionData('userData', {
+            key: 'user'
+            ,value: null
+        });
+        window.location.href = "/logout";
+    }
+
+</script>

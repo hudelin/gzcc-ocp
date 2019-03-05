@@ -18,14 +18,14 @@
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title">
                 <li class="layui-this">登入</li>
-                <li><a href="reg.html">注册</a></li>
+                <li><a href="/user/register">注册</a></li>
             </ul>
             <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form layui-form-pane">
                         <form action="/login" method="post">
                             <div class="layui-form-item">
-                                <label for="L_email" class="layui-form-label">用户名</label>
+                                <label for="L_email" class="layui-form-label">账号</label>
                                 <div class="layui-input-inline">
                                     <input type="text" id="L_email" name="username" required lay-verify="required"
                                            autocomplete="off" class="layui-input">
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="layui-form-mid">
                                     <!--<span style="color: #c00;">{{d.vercode}}</span>-->
-                                    <img src="/code/image" class="fly-imagecode" id="imgCode" onclick="changeImage()"
+                                    <img src="${request.scheme+'://'+request.serverName+':'+request.serverPort}/code/image" class="fly-imagecode" id="imgCode" onclick="changeImage()"
                                          style="position: relative;margin-top: -4px;cursor: pointer;">
                                 </div>
                             </div>
@@ -104,11 +104,14 @@
         element.src = "/code/image?t=" + new Date().getTime();
     }
     var url = "${url}"
+    if(url=="${request.scheme+'://'+request.serverName+':'+request.serverPort}/error"){
+        url=document.referrer
+    }
     console.log(url)
     layui.use(['form', 'request', 'laytpl'], function () {
         var $ = layui.$
         var form = layui.form;
-        var request = layui.request
+        var request = layui.request;
         var laytpl = layui.laytpl;
         // 各种基于事件的操作，下面会有进一步介绍
         form.on('submit(login)', function (data) {

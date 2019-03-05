@@ -2,8 +2,10 @@ package com.hdl.gzccocpweb.controller;
 
 
 import com.hdl.gzccocpcore.constant.OcpConstant;
+import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Resource;
 import com.hdl.gzccocpcore.entity.User;
+import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ResourceService;
 import com.hdl.gzccocpcore.service.UserService;
 import com.hdl.gzccocpcore.response.ObjectRestResponse;
@@ -37,6 +39,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
+    private NoteService noteService;
+    @Autowired
     private ResourceService resourceService;
 
     private RequestCache requestCache=new HttpSessionRequestCache();
@@ -49,12 +53,13 @@ public class UserController {
     private String set=header+"/set.btl";
     private String message=header+"/message.btl";
     private String forget=header+"/forget.btl";
+    private String register=header+"/register.btl";
 
 
 //    @Autowired
 //    private RedisTemplate redisCacheTemplate;
     @RequestMapping(value = "/login")
-    public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public ModelAndView login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
         String targetUrl="/";
         try {
@@ -83,7 +88,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/set")
-    public ModelAndView set(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public ModelAndView set(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         ModelAndView mv = new ModelAndView();
         SecurityContext securityContext = SecurityContextHolder.getContext();
         String username=securityContext.getAuthentication().getName();
@@ -105,13 +110,20 @@ public class UserController {
         mv.setViewName(forget);
         return mv;
     }
+    @RequestMapping(value = "/register")
+    public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(register);
+        return mv;
+    }
+
 
     @RequestMapping("/getDetail")
     @ResponseBody
     public ObjectRestResponse getDetail() throws Exception {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         String username=securityContext.getAuthentication().getName();
-        User user=userService.findByUsername(username);
+        User user=userService.findByAccount(username);
         return new ObjectRestResponse(user);
     }
 
@@ -140,9 +152,24 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/save")
-    public User save( User user) throws Exception {
+    public ObjectRestResponse save( User user) throws Exception {
         user=userService.save(user);
-        return user;
+        return new ObjectRestResponse(user);
+    }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    public ObjectRestResponse update( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        user=userService.update(user);
+        httpServletRequest.getSession().setAttribute("user",userService.get(user.getId()));
+        return new ObjectRestResponse(user);
+    }
+
+    @ResponseBody
+    @RequestMapping("/registerUser")
+    public ObjectRestResponse registerUser( User user) throws Exception {
+        user=userService.save(user);
+        return new ObjectRestResponse(user);
     }
 
     @ResponseBody
@@ -154,6 +181,19 @@ public class UserController {
         BeanUtils.copyProperties(userList,test);
         objectRestResponse.data(userList);
         return objectRestResponse;
+    }
+
+    @ResponseBody
+    @RequestMapping("/collectNote")
+    public ObjectRestResponse collectNote(Long userId,Long noteId) throws Exception {
+        userService.collectNote(userId,noteId);
+        return new ObjectRestResponse();
+    }
+    @ResponseBody
+    @RequestMapping("/removeNote")
+    public ObjectRestResponse removeNote(Long userId,Long noteId) throws Exception {
+        userService.removeNote(userId,noteId);
+        return new ObjectRestResponse();
     }
 
 

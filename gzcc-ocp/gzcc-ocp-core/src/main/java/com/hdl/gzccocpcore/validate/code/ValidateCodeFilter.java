@@ -34,7 +34,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        String[] configUrls = StringUtils.split(securityProperties.getValidateCodeProperties().getImageCodeProperties().getUrl(), ",");
+        String[] configUrls = securityProperties.getValidateCodeProperties().getImageCodeProperties().getUrl().split(",");
+        System.out.print(configUrls);
         for (String configUrl : configUrls) {
             urls.add(configUrl);
         }
