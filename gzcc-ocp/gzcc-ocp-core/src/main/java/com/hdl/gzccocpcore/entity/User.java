@@ -52,10 +52,12 @@ public class User  implements Serializable{
 //    protected Long lastModifiedBy;
 
     @Getter@Setter
-    private String username;
+    private String account;
 
     @Getter@Setter
-    private String nickname;
+    private String username;
+
+
 
     @JsonIgnore
     @Getter@Setter
@@ -69,6 +71,9 @@ public class User  implements Serializable{
 
     @Getter@Setter
     private String avatar;
+
+    @Getter@Setter
+    private String sign;
 
     @Getter@Setter
     private Boolean ban;
@@ -87,6 +92,10 @@ public class User  implements Serializable{
     @JsonIgnore
     @Getter@Setter
     private List<Note> noteList=new ArrayList<>();
+
+
+    @Getter@Setter
+    private String collectNote;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore

@@ -11,6 +11,14 @@ public class OcpErrorConstant {
      */
     public static final String USER_ERROR = "10000";
     /**
+     * 账号已存在
+     */
+    public static final String ACCOUNT_EXIST = "10001";
+    /**
+     * 帖子已收藏
+     */
+    public static final String ACCOUNT_NOTE_COLLECT = "10002";
+    /**
      * 帖子错误
      */
     public static final String NOTE_ERROR = "20000";

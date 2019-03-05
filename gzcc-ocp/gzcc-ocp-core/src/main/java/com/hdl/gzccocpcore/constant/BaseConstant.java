@@ -10,18 +10,13 @@ public class BaseConstant {
      */
     private static Logger logger = LoggerFactory.getLogger(BaseConstant.class);
 
-    /**
-     * 逻辑真
-     */
-    public static final String TRUE = "1";
-    /**
-     * 逻辑假
-     */
-    public static final String FALSE = "0";
+
     /**
      * 系统错误
      */
     public static final String SYSTEM_ERROR = "0000";
+
+
 
     static {
         logger.debug("debug加载本地数据....");

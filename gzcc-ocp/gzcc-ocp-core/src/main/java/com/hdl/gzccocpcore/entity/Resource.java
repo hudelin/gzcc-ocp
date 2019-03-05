@@ -60,6 +60,9 @@ public class Resource implements Serializable {
     @Getter@Setter
     private String resourceType;
 
+    @Getter@Setter
+    private Long size;
+
 
 
 

@@ -52,7 +52,10 @@ public class Reply  implements Serializable {
     private String content;
 
     @Getter@Setter
-    private Integer praise=0;
+    private Long praise= Long.valueOf(0);
+
+    @Getter@Setter
+    private String praiseUserIdString="";
 
     @Getter@Setter
     private Boolean deleted=false;
@@ -69,6 +72,9 @@ public class Reply  implements Serializable {
     @ManyToOne
     @Getter@Setter
     private User user;
+
+
+
 
 
 }

@@ -2,10 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="079431bd-83ba-4caa-b6b8-92fee4397a7a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/dto/NoteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ReplyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/register.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpErrorConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpErrorConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/ImageCodeProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/ImageCodeProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ResourceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ResourceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ReplyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ResourceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ResourceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/NoteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/NoteServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ResourceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ResourceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/validate/code/ValidateCodeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/validate/code/ValidateCodeFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/authentication/MyAuthenticationSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/authentication/MyAuthenticationSuccessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/NoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ResourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ResourceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/MyUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/MyUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/jie.js" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/jie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/user.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/user.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/index.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/index.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl" beforeDir="false" afterPath="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -103,50 +137,100 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1801444500">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.open.time.69" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="btl" value="18" />
+          <entry key="java" value="84" />
+          <entry key="js" value="3" />
+          <entry key="properties" value="2" />
+          <entry key="xml" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="18" />
+          <entry key="JAVA" value="84" />
+          <entry key="JavaScript" value="3" />
+          <entry key="Properties" value="2" />
+          <entry key="XML" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="btl" value="1465" />
+          <entry key="java" value="1340" />
+          <entry key="js" value="38" />
+          <entry key="properties" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="1465" />
+          <entry key="JAVA" value="1340" />
+          <entry key="JavaScript" value="38" />
+          <entry key="Properties" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/user.btl">
+        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="238" column="36" lean-forward="true" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
+            <state relative-caret-position="232">
+              <caret line="520" column="46" selection-start-line="520" selection-start-column="46" selection-end-line="520" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/css/cropper.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/index.btl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1392">
-              <caret line="144" column="24" lean-forward="true" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="219" column="29" lean-forward="true" selection-start-line="219" selection-start-column="29" selection-end-line="219" selection-end-column="29" />
+              <caret line="57" column="37" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl">
+        <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ReplyService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1278">
-              <caret line="75" selection-start-line="22" selection-end-line="75" />
+            <state relative-caret-position="171">
+              <caret line="11" column="28" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ReplyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,43 +244,43 @@
         <option value="Interface" />
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>kit-side-fold</find>
-      <find>msgbox</find>
-      <find>layui-fixbar</find>
-      <find>bar1</find>
-      <find>TRUE</find>
-      <find>title</find>
-      <find>layui-nav-item</find>
-      <find>demo</find>
-      <find>sendInfo</find>
-      <find>send</find>
-      <find>avatarAdd</find>
-      <find>avatar-add</find>
-      <find>.upload-img</find>
-      <find>repass</find>
-      <find>choose-avatar</find>
-      <find>upload</find>
-      <find>confirm-avatar</find>
-      <find>chooseFileButton</find>
-      <find>layui-btn</find>
-      <find>upload-img</find>
-      <find>top</find>
-      <find>jie</find>
-      <find>column</find>
-      <find>LAY_quiz</find>
-      <find>layui.cache</find>
-      <find>copy</find>
-      <find>移除</find>
-      <find>delete-note</find>
-      <find>loadPageBar</find>
-      <find>BeanUtils</find>
+      <find>register</find>
+      <find>changeImage</find>
+      <find>edit</find>
+      <find>login</find>
+      <find>BaseException</find>
+      <find>securityProperties</find>
+      <find>avatar</find>
+      <find>fileList</find>
+      <find>demoListView</find>
+      <find>nickname</find>
+      <find>username</find>
+      <find>nick</find>
+      <find>collect</find>
+      <find>id</find>
+      <find>replyPage</find>
+      <find>layui.data('userData')</find>
+      <find>66</find>
+      <find>= &gt;</find>
+      <find>jiedaActive</find>
+      <find>jieda-reply</find>
+      <find>collection</find>
+      <find>jie-admin</find>
+      <find>jieAdmin</find>
+      <find>请求异常，请重试</find>
+      <find>layui.data</find>
+      <find>collectNote</find>
+      <find>noteId</find>
+      <find>note</find>
+      <find>userService</find>
+      <find>userId</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,38 +289,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseConstant.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/BaseResponse.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/exception/BaseException.java" />
-        <option value="$USER_HOME$/Desktop/SeaConstants.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpErrorConstant.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ResourceService.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ResourceController.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/user-nav.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/index.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpConstant.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/message.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/forget.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ResourceServiceImpl.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/WebMvcConfig.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/user.js" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/css/cropper.css" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/croppers.js" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/vue.js" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/index.js" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/ObjectRestResponse.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/dto/ChatDTO.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Friend.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/FriendService.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/FriendRepository.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/FriendServiceImpl.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ChatController.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/contextMenu.js" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/socket.js" />
@@ -244,18 +299,47 @@
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/chat.js" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/index.btl" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/AdminController.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/BaseService.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ReplyRepository.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java" />
-        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQImpl.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/UserRepository.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/authentication/MyAuthenticationSuccessHandler.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseConstant.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/MyUserDetailsService.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/request.js" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/ImageCodeProperties.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/validate/code/ValidateCodeFilter.java" />
         <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/user.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ResourceRepository.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ResourceService.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ResourceServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ResourceController.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/NoteServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/index.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/WebSecurityConfig.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/dto/NoteDTO.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/jie.js" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpErrorConstant.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/register.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/BaseResponse.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/NoteController.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ReplyService.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ReplyController.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl" />
       </list>
     </option>
   </component>
@@ -294,11 +378,11 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="30" />
-    <option name="y" value="7" />
-    <option name="width" value="1862" />
-    <option name="height" value="983" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="28" />
+    <option name="y" value="6" />
+    <option name="width" value="1865" />
+    <option name="height" value="1003" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -306,7 +390,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -347,27 +430,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -377,20 +439,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
               <item name="entity" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -401,32 +449,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="response" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -437,50 +459,9 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
               <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="social" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="social" type="462c0819:PsiDirectoryNode" />
-              <item name="qq" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="hdl" type="462c0819:PsiDirectoryNode" />
-              <item name="gzccocpcore" type="462c0819:PsiDirectoryNode" />
-              <item name="social" type="462c0819:PsiDirectoryNode" />
-              <item name="qq" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
@@ -523,16 +504,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="hdl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -542,7 +513,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpweb" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -553,7 +523,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpweb" type="462c0819:PsiDirectoryNode" />
               <item name="authentication" type="462c0819:PsiDirectoryNode" />
@@ -565,7 +534,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpweb" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
@@ -577,7 +545,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="hdl" type="462c0819:PsiDirectoryNode" />
               <item name="gzccocpweb" type="462c0819:PsiDirectoryNode" />
               <item name="security" type="462c0819:PsiDirectoryNode" />
@@ -618,28 +585,6 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gzcc-ocp" type="462c0819:PsiDirectoryNode" />
-              <item name="gzcc-ocp-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="mods" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gzcc-ocp" type="b2602c69:ProjectViewProjectNode" />
@@ -696,27 +641,31 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550633032194" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551757508295" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.29770115" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -730,18 +679,18 @@
       <recent name="com.hdl" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hdl.gzccocpcore.dto" />
       <recent name="com.hdl.gzccocpcore.service.serviceImpl" />
       <recent name="com.hdl.gzccocpcore.service" />
       <recent name="com.hdl.gzccocpcore.repository" />
       <recent name="com.hdl.gzccocpcore.entity" />
-      <recent name="com.hdl.gzccocpcore.redis" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\gd\gzcc-ocp\gzcc-ocp-web\src\main\resources\templates\user" />
       <recent name="G:\hdl-graduation-design\gzcc-ocp\gzcc-ocp-web\src\main\resources\static\res\css" />
       <recent name="G:\hdl-graduation-design\gzcc-ocp\gzcc-ocp-web\src\main\resources\static\res\mods" />
       <recent name="G:\hdl-graduation-design\gzcc-ocp\gzcc-ocp-web\src\main\resources\templates\user" />
       <recent name="G:\hdl-graduation-design\gzcc-ocp\gzcc-ocp-web\src\main\java\com\hdl\gzccocpweb\support" />
-      <recent name="G:\hdl-graduation-design\gzcc-ocp\gzcc-ocp-web\src\main\resources\static\res\layui\css\modules\layim\voice" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -881,11 +830,16 @@
       <workItem from="1551233671254" duration="41000" />
       <workItem from="1551239556018" duration="1088000" />
       <workItem from="1551320931803" duration="5510000" />
+      <workItem from="1551517673136" duration="611000" />
+      <workItem from="1551518371262" duration="2540000" />
+      <workItem from="1551583514360" duration="19019000" />
+      <workItem from="1551676297906" duration="23708000" />
+      <workItem from="1551751611800" duration="5728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="371947000" />
+    <option name="totallyTimeSpent" value="423553000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -897,10 +851,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="30" y="7" width="1862" height="983" extended-state="0" />
+    <frame x="23" y="5" width="1492" height="802" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.33518314" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.26778242" />
       <window_info id="Structure" order="1" sideWeight="0.5009074" side_tool="true" weight="0.29300776" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -911,22 +865,22 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270142" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3297062" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4994872" weight="0.2912736" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4994872" visible="true" weight="0.092675634" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32992035" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50051284" side_tool="true" weight="0.3293556" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3254717" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.20777279" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32992035" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32874617" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.24965133" />
       <window_info anchor="right" id="Maven Projects" order="5" weight="0.43229744" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -946,7 +900,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/validate/code/ValidateCodeFilter.java</url>
-          <line>65</line>
+          <line>66</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
@@ -957,6 +911,10 @@
         <watch expression="((RedisTemplate)((DefaultValueOperations)redisCacheTemplate.valueOps).template).keySerializer" language="JAVA" custom="org.springframework.data.redis.core.RedisTemplate,org.springframework.data.redis.core.DefaultValueOperations" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -969,338 +927,356 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/user.js">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ValidateCodeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="179" column="35" lean-forward="true" selection-start-line="179" selection-start-column="17" selection-end-line="179" selection-end-column="35" />
+        <state relative-caret-position="-133">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/jie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="53" column="15" lean-forward="true" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/request.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="69" column="42" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/index.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="735" column="24" selection-start-line="735" selection-start-column="24" selection-end-line="735" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="192" column="47" lean-forward="true" selection-start-line="192" selection-start-column="47" selection-end-line="192" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/index.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="406" selection-start-line="406" selection-end-line="413" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="67" column="15" lean-forward="true" selection-start-line="67" selection-start-column="15" selection-end-line="67" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/ObjectRestResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/dto/ChatDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/FriendRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/FriendService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/socket.js" />
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/contextMenu.js" />
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/css/contextMenu.css" />
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/chat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4541">
-          <caret line="239" column="10" selection-start-line="239" selection-start-column="10" selection-end-line="239" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/FriendServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/index.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1325">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ChatController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="151" column="46" lean-forward="true" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2793">
-          <caret line="173" column="29" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/BaseService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/authentication/MyAuthenticationFailureHandler.java">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpConstant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
+          <caret line="14" column="58" lean-forward="true" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://F:/repository/org/springframework/spring-beans/5.1.3.RELEASE/spring-beans-5.1.3.RELEASE.jar!/org/springframework/beans/BeanUtils.class">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/WebSecurityController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5738">
-          <caret line="335" column="23" selection-start-line="335" selection-start-column="23" selection-end-line="335" selection-end-column="23" />
+        <state relative-caret-position="361">
+          <caret line="47" column="123" lean-forward="true" selection-start-line="47" selection-start-column="123" selection-end-line="47" selection-end-column="123" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/MyUserDetailsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+        <state relative-caret-position="183">
+          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="37" column="101" selection-start-line="37" selection-start-column="101" selection-end-line="37" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ReplyRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/NoteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="99" column="44" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/NoteRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="88" column="30" lean-forward="true" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/BaseEntity.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Friend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="59" column="15" lean-forward="true" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-293">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1520">
-          <caret line="175" column="6" selection-start-line="170" selection-start-column="4" selection-end-line="175" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://G:/security/p1o6vt/imooc-security-core/src/main/java/com/imooc/security/core/social/qq/api/QQImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="761">
-          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQ.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/WebSecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="475" column="76" selection-start-line="475" selection-start-column="76" selection-end-line="475" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/social/qq/api/QQUserInfo.java">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseErrorConstant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ChatController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="219" column="29" lean-forward="true" selection-start-line="219" selection-start-column="29" selection-end-line="219" selection-end-column="29" />
+        <state relative-caret-position="376">
+          <caret line="202" column="1" lean-forward="true" selection-start-line="201" selection-end-line="202" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/BaseConstant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="75" selection-start-line="22" selection-end-line="75" />
+        <state relative-caret-position="76">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/index.btl">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/exception/BaseException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="144" column="24" lean-forward="true" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="24" />
+        <state relative-caret-position="236">
+          <caret line="55" column="60" lean-forward="true" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/link.btl">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$0/requestUtil.js" />
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/request.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
+        <state relative-caret-position="361">
+          <caret line="31" column="14" lean-forward="true" selection-start-line="30" selection-start-column="6" selection-end-line="31" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/css/cropper.css">
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/LoginResponseType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state relative-caret-position="133">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/ValidateCodeProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/validate/code/ValidateCodeFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="20" column="54" lean-forward="true" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/ImageCodeProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="9" column="60" lean-forward="true" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/SecurityProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/properties/WebProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/admin/user.btl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="238" column="36" lean-forward="true" selection-start-line="238" selection-start-column="36" selection-end-line="238" selection-end-column="36" />
+        <state relative-caret-position="-1118">
+          <caret line="126" column="31" selection-start-line="126" selection-start-column="31" selection-end-line="126" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/authentication/MyAuthenticationSuccessHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="49" column="7" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/set.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1691">
+          <caret line="61" column="41" lean-forward="true" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ResourceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/repository/ResourceRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Resource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="45" column="31" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/NoteServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ResourceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Note.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="93" column="21" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="97" column="30" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/index.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="429" column="23" selection-start-line="429" selection-start-column="12" selection-end-line="429" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/security/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="74" column="35" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/dto/NoteDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/BaseServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/static/res/mods/jie.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="238" lean-forward="true" selection-start-line="238" selection-end-line="238" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/edit.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5283">
+          <caret line="373" column="17" lean-forward="true" selection-start-line="373" selection-start-column="17" selection-end-line="373" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/common/header.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="74" column="25" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/constant/OcpErrorConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/BaseResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/response/ObjectRestResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="94" column="67" selection-start-line="94" selection-start-column="67" selection-end-line="94" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/register.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3400">
+          <caret line="180" column="30" selection-start-line="180" selection-start-column="30" selection-end-line="180" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/user/login.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="48" column="111" selection-start-line="48" selection-start-column="111" selection-end-line="48" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="194" column="31" selection-start-line="194" selection-start-column="31" selection-end-line="194" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/entity/Reply.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/NoteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/ReplyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/java/com/hdl/gzccocpweb/controller/ReplyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-core/src/main/java/com/hdl/gzccocpcore/service/serviceImpl/ReplyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzcc-ocp-web/src/main/resources/templates/note/detail.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="520" column="46" selection-start-line="520" selection-start-column="46" selection-end-line="520" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1325,7 +1301,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.29770115" />
               </list>
             </option>
           </splitter-proportions>
@@ -1348,7 +1324,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.29770115" />
               </list>
             </option>
           </splitter-proportions>
@@ -1356,11 +1332,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>gzcc-ocp-core</last-edited>
+          <last-edited>gzcc-ocp</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.29770115" />
                 <option value="0.6" />
               </list>
             </option>
@@ -1373,7 +1349,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.29770115" />
               </list>
             </option>
           </splitter-proportions>
