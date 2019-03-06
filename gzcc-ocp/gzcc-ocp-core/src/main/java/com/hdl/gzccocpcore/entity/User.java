@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -101,5 +99,10 @@ public class User  implements Serializable{
     @JsonIgnore
     @Getter@Setter
     private List<Friend> friendList=new ArrayList<>();
+
+    @ManyToMany(mappedBy = "userList",fetch = FetchType.LAZY)
+    @JsonIgnore
+    @Getter@Setter
+    private List<GroupChat> groupChatList =new ArrayList<>();
 
 }

@@ -9,20 +9,13 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @NoArgsConstructor
-public class ChatDTO {
+public class SendDTO {
 
     @Getter @Setter
-    private UserDTO mine=new UserDTO();
+    private String type;
     @Getter @Setter
-    private UserDTO to=new UserDTO();
+    private ChatDTO data=new ChatDTO();
 
-    @Getter@Setter
-    private List<Friend> friend=new ArrayList<>();
-
-    @Getter@Setter
-    private List<GroupChat> group=new ArrayList<>();
-
-    @Getter@Setter
-    private List<User> list=new ArrayList<>();
 }

@@ -16,6 +16,12 @@ public class OcpConstant {
 
     public static Map<String, String> resourceTypeMap = new HashMap<>();
 
+    public static final String CHAT_TYPE_CHAT_MESSAGE = "chatMessage";
+    public static final String CHAT_TYPE_ADD_LIST= "addList";
+
+    public static final String CHAT_MESSAGE_TYPE_FRIEDN_MESSAGE = "friend";
+    public static final String CHAT_MESSAGE_TYPE_GROUP_MESSAGE = "group";
+
     static {
         logger.debug("debug加载本地数据....");
         logger.info("info加载本地数据....");

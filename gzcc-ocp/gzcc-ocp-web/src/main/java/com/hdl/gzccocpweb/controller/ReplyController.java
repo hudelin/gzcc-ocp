@@ -26,7 +26,12 @@ public class ReplyController {
     public Reply replay(Reply reply, Long noteId, Long userId) throws Exception {
         reply.setNote(noteService.get(noteId));
         reply.setUser(userService.get(userId));
-        reply = replyService.save(reply);
+        if(reply.getId()==null){
+            reply = replyService.save(reply);
+        }else{
+            reply = replyService.update(reply);
+        }
+
         return reply;
     }
     @RequestMapping(value = "/accept")

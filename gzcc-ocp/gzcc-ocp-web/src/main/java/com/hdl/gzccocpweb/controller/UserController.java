@@ -186,14 +186,14 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/collectNote")
     public ObjectRestResponse collectNote(Long userId,Long noteId) throws Exception {
-        userService.collectNote(userId,noteId);
+        User user= userService.collectNote(userId,noteId);
         return new ObjectRestResponse();
     }
     @ResponseBody
     @RequestMapping("/removeNote")
     public ObjectRestResponse removeNote(Long userId,Long noteId) throws Exception {
-        userService.removeNote(userId,noteId);
-        return new ObjectRestResponse();
+        User user= userService.removeNote(userId,noteId);
+        return new ObjectRestResponse(user);
     }
 
 

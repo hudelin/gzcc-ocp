@@ -19,6 +19,8 @@ public interface UserRepository extends BaseRepository<User, Long> {
 
     User findByAccount(String account);
 
+    List<User> findByGroupChatListId(Long groupChatId);
+
 
 
 

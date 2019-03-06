@@ -2,6 +2,8 @@ package com.hdl.gzccocpcore.service;
 
 import com.hdl.gzccocpcore.entity.User;
 
+import java.util.List;
+
 
 public interface UserService extends BaseService<User, Long> {
 
@@ -20,9 +22,11 @@ public interface UserService extends BaseService<User, Long> {
 
     User findByAccount(String account) throws Exception;
 
-    void collectNote(Long userId,Long noteId) throws Exception;
+    User collectNote(Long userId, Long noteId) throws Exception;
 
-    void removeNote(Long userId,Long noteId) throws Exception;
+    User removeNote(Long userId, Long noteId) throws Exception;
+
+    List<User> findByGroupChatId(Long groupChatId)throws Exception;
 
 
 }

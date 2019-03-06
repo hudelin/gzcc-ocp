@@ -316,10 +316,13 @@
                 }
                 if (layui.sessionData('userData').user != null) {
                     data.userId = layui.sessionData('userData').user.id;
-                    var collectNoteList = layui.sessionData('userData').user.collectNote.split(",");
-                    if (collectNoteList.find(e => e == note.id)){
-                        data.collect = true
+                    if(layui.sessionData('userData').user.collectNote){
+                        var collectNoteList = layui.sessionData('userData').user.collectNote.split(",");
+                        if (collectNoteList.find(e => e == note.id)){
+                            data.collect = true
+                        }
                     }
+
                 }
                 var getTpl = noteTemplate.innerHTML
                     , view = document.getElementById('noteBox');
@@ -378,6 +381,8 @@
                     view.innerHTML = html;
                 });
                 res(replyPage)
+            }).catch(function (e) {
+
             })
         }
 
@@ -563,7 +568,6 @@
             // ,
             collect: function(div){
                 var othis = $(this), type = othis.data('type');
-
                 if(type == 'add'){
                     request.ajax({
                         type: 'POST',
@@ -573,6 +577,10 @@
                             noteId: note.id
                         },
                     }).then(function (res) {
+                        layui.sessionData('userData', {
+                            key: 'user'
+                            ,value: res.data
+                        });
                         othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
                     })
                 } else if(type == 'remove'){
@@ -584,6 +592,10 @@
                             noteId: note.id
                         },
                     }).then(function (res) {
+                        layui.sessionData('userData', {
+                            key: 'user'
+                            ,value: res.data
+                        });
                         othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
                     })
                 }

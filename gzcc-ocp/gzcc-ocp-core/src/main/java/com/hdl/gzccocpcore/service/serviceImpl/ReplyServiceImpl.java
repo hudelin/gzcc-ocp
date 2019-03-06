@@ -32,7 +32,14 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
 
     @Override
     public Reply update(Reply reply) throws Exception {
-        return null;
+        Reply replyOld = get(reply.getId());
+        if (!StringUtils.isEmpty(replyOld.getContent())) {
+            replyOld.setContent(reply.getContent());
+        }
+        if (!StringUtils.isEmpty(reply.getPraiseUserIdString())) {
+            replyOld.setPraiseUserIdString(reply.getPraiseUserIdString());
+        }
+        return replyRepository.save(replyOld);
     }
 
     @Override

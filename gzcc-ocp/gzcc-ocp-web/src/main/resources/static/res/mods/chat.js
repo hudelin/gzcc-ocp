@@ -4,10 +4,11 @@
 // }).extend({
 //     socket: 'socket'
 // })
-layui.use(['layim', 'jquery', 'layer'], function () {
+layui.use(['layim', 'jquery', 'layer','request'], function () {
     var layim = layui.layim;
     var $ = layui.$;
     var layer = layui.layer;
+    var request = layui.request;
     var socket;
     if (typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
@@ -15,17 +16,72 @@ layui.use(['layim', 'jquery', 'layer'], function () {
         console.log("您的浏览器支持WebSocket");
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
         //等同于
-        socket = new WebSocket("ws://localhost:8060/webSocket/" + layui.data('userData').user.id);
+        socket = new WebSocket("ws://localhost:8060/webSocket/" + layui.sessionData('userData').user.id);
 
         //打开事件
         socket.onopen = function () {
             console.log("Socket 已打开");
-            socket.send("这是来自客户端的消息" + location.href + new Date());
+            // socket.send("这是来自客户端的消息" + location.href + new Date());
+
         };
+
+        var a={
+            "type":"chatMessage",
+            "data":{
+                "mine":{
+                    "username":"hdl",
+                    "avatar":"/uploads/0019030515430300001.png",
+                    "id":1,
+                    "mine":true,
+                    "content":"778"
+                },
+                "to":{
+                    "id":1,
+                    "createTime":"2019-03-05 23:46:34",
+                    "lastModifiedTime":"2019-03-05 23:46:37",
+                    "groupname":"一群","avatar":"/uploads/0019030515430300001.png",
+                    "userList":[
+                        {
+                            "id":1,
+                            "createTime":"2019-03-05 15:10:45",
+                            "lastModifiedTime":"2019-03-05 15:43:04",
+                            "account":"hdl",
+                            "username":"hdl",
+                            "email":null,
+                            "gender":null,
+                            "avatar":"/uploads/0019030515430300001.png",
+                            "sign":null,
+                            "ban":null,
+                            "roleList":[{"id":1,"createTime":null,"lastModifiedTime":null,"name":"ROLE_ADMIN","description":null},{"id":2,"createTime":null,"lastModifiedTime":null,"name":"ROLE_USER","description":null}],
+                            "collectNote":null},
+                        {
+                            "id":2,
+                            "createTime":"2019-03-05 15:43:52",
+                            "lastModifiedTime":"2019-03-05 15:43:52",
+                            "account":"czx",
+                            "username":"woerzhi",
+                            "email":null,
+                            "gender":null,
+                            "avatar":"/uploads/0019030515430300001.png",
+                            "sign":null,"ban":null,"roleList":[],
+                            "collectNote":null
+                        }],
+                    "name":"一群",
+                    "type":"group"
+                }
+             }
+        }
         //获得消息事件
-        socket.onmessage = function (msg) {
-            console.log(msg.data);
+        socket.onmessage = function (res) {
+            // console.log("发现消息进入");
+            console.log(res);
+            // console.log(res.data);
+            // res = JSON.parse(res);
             //发现消息进入    开始处理前端触发逻辑
+            var data = JSON.parse(res.data);
+            // if(res.type === 'chatMessage'){
+                layim.getMessage(data); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+            // }
         };
         //关闭事件
         socket.onclose = function () {
@@ -149,38 +205,51 @@ layui.use(['layim', 'jquery', 'layer'], function () {
     layim.on('sendMessage', function (data) {
         var To = data.to;
         console.log(data);
-
-        if (To.type === 'friend') {
-            layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
-        }
+        socket.send(JSON.stringify({
+            type: 'chatMessage' //随便定义，用于在服务端区分消息类型
+            ,data: data
+        }));
+        // if (To.type === 'friend') {
+        //     layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
+        //     request.ajax({
+        //         type: 'POST',
+        //         url: '/chat/send',
+        //         data: {userId: 1},
+        //     }).then(function (res) {
+        //
+        //     })
+        //
+        // }else{
+        //
+        // }
 
         //演示自动回复
-        setTimeout(function () {
-            var obj = {};
-            if (To.type === 'group') {
-                obj = {
-                    username: '模拟群员' + (Math.random() * 100 | 0),
-                    avatar: layui.cache.dir + 'images/face/' + (Math.random() * 72 | 0) + '.gif',
-                    id: To.id,
-                    type: To.type,
-                    content: autoReplay[Math.random() * 9 | 0]
-                }
-            } else {
-                obj = {
-                    username: To.name,
-                    avatar: To.avatar,
-                    id: To.id,
-                    type: To.type,
-                    content: autoReplay[Math.random() * 9 | 0]
-                }
-                layim.setChatStatus('<span style="color:#FF5722;">在线</span>');
-            }
-            layim.getMessage(obj);
-        }, 1000);
+        // setTimeout(function () {
+        //     var obj = {};
+        //     if (To.type === 'group') {
+        //         obj = {
+        //             username: '模拟群员' + (Math.random() * 100 | 0),
+        //             avatar: layui.cache.dir + 'images/face/' + (Math.random() * 72 | 0) + '.gif',
+        //             id: To.id,
+        //             type: To.type,
+        //             content: autoReplay[Math.random() * 9 | 0]
+        //         }
+        //     } else {
+        //         obj = {
+        //             username: To.name,
+        //             avatar: To.avatar,
+        //             id: To.id,
+        //             type: To.type,
+        //             content: autoReplay[Math.random() * 9 | 0]
+        //         }
+        //         layim.setChatStatus('<span style="color:#FF5722;">在线</span>');
+        //     }
+        //     layim.getMessage(obj);
+        // }, 1000);
     });
     //监听查看群员
     layim.on('members', function (data) {
-        //console.log(data);
+        console.log(data);
     });
 
     //监听聊天窗口的切换
@@ -189,7 +258,7 @@ layui.use(['layim', 'jquery', 'layer'], function () {
         console.log(res.data.id)
         if (type === 'friend') {
             //模拟标注好友状态
-            //layim.setChatStatus('<span style="color:#FF5722;">在线</span>');
+            // layim.setChatStatus('<span style="color:#FF5722;">在线</span>');
         } else if (type === 'group') {
             //模拟系统消息
             layim.getMessage({

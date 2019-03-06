@@ -1,7 +1,6 @@
 package com.hdl.gzccocpcore.service.serviceImpl;
 
 
-import com.hdl.gzccocpcore.constant.BaseConstant;
 import com.hdl.gzccocpcore.constant.OcpErrorConstant;
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.exception.BaseException;
@@ -68,7 +67,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
     }
 
     @Override
-    public void collectNote(Long userId, Long noteId) throws Exception {
+    public User collectNote(Long userId, Long noteId) throws Exception {
         User user = get(userId);
         if (!StringUtils.isEmpty(user.getCollectNote())) {
             String[] noteIdList = user.getCollectNote().split(",");
@@ -86,10 +85,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
             user.setCollectNote(noteId.toString());
         }
         userRepository.save(user);
+        return user;
     }
 
     @Override
-    public void removeNote(Long userId, Long noteId) throws Exception {
+    public User removeNote(Long userId, Long noteId) throws Exception {
         User user = get(userId);
         if (!StringUtils.isEmpty(user.getCollectNote())) {
             String[] noteIdList = user.getCollectNote().split(",");
@@ -103,7 +103,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
             user.setCollectNote(StringUtils.arrayToDelimitedString(noteIdList, ","));
             userRepository.save(user);
         }
+        return user;
+    }
 
+    @Override
+    public List<User> findByGroupChatId(Long groupChatId) throws Exception {
+        return userRepository.findByGroupChatListId(groupChatId);
     }
 
 
