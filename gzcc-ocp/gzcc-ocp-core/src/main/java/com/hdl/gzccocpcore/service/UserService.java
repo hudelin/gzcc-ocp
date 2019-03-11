@@ -28,5 +28,7 @@ public interface UserService extends BaseService<User, Long> {
 
     List<User> findByGroupChatId(Long groupChatId)throws Exception;
 
+    void deleteLogic(Long id)throws Exception;
+
 
 }

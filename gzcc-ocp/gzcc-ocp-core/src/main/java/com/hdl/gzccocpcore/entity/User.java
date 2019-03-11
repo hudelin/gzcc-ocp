@@ -76,6 +76,10 @@ public class User  implements Serializable{
     @Getter@Setter
     private Boolean ban;
 
+
+    @Getter@Setter
+    private Boolean deleted=false;
+
     @ManyToMany(mappedBy = "userList" ,fetch=FetchType.EAGER )
     @Cascade(value ={ org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
     @Getter@Setter

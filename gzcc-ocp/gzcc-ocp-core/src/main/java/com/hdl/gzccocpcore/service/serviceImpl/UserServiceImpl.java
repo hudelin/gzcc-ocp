@@ -34,7 +34,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         if (!StringUtils.isEmpty(user.getAvatar())) {
             userOld.setAvatar(user.getAvatar());
         }
-        userOld.setCollectNote(user.getCollectNote());
+        if (!StringUtils.isEmpty(user.getCollectNote())) {
+            userOld.setCollectNote(user.getCollectNote());
+        }
         userOld.setGender(user.getGender());
         return userRepository.save(userOld);
     }
@@ -44,7 +46,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         if (this.findByAccount(user.getAccount()) != null) {
             throw new BaseException(OcpErrorConstant.ACCOUNT_EXIST, "账号已存在！");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(!StringUtils.isEmpty(user.getPassword())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }else{
+            user.setPassword(passwordEncoder.encode("123456"));
+        }
         return userRepository.save(user);
     }
 
@@ -109,6 +115,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
     @Override
     public List<User> findByGroupChatId(Long groupChatId) throws Exception {
         return userRepository.findByGroupChatListId(groupChatId);
+    }
+
+    @Override
+    public void deleteLogic(Long id) throws Exception {
+        User user=get(id);
+        user.setDeleted(true);
+        userRepository.save(user);
     }
 
 

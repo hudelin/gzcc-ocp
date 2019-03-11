@@ -7,8 +7,10 @@
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../res/layui/css/layui.css">
     <style>
-        .user-form .layui-input-block {
+        .user-form .layui-form-item:first-of-type {
             margin-top: 20px;
+        }
+        .user-form .layui-input-block {
             margin-right: 40px;
         }
     </style>
@@ -24,20 +26,52 @@
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>-->
-    <form class="layui-form" action="">
+    <form class="layui-form" action=""  lay-filter="userForm">
+        <input type="hidden" id="id" name="id" autocomplete="off" class="layui-input">
         <div class="layui-form-item">
             <label class="layui-form-label">账号名</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" required lay-verify="required" placeholder="请输入账号名" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
-                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                <input type="text" name="account" required lay-verify="required" placeholder="请输入账号名" autocomplete="off" class="layui-input">
             </div>
             <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="username" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">头像</label>
+            <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                <button type="button" class="layui-btn layui-btn-primary" id="avatarUpload">
+                    <i class="layui-icon layui-icon-upload"></i>上传图片
+                </button><input class="layui-upload-file" type="file" accept="undefined" name="file">
+                <input type="hidden" id="avatar" name="avatar" autocomplete="off" class="layui-input">
+                <!--<button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button>-->
+            </div>
+            <div class="layui-input-inline">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo1" style="width: 92px;height: 92px;margin: 0 10px 10px 0;">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">账号名</label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="text" name="title" required lay-verify="required" placeholder="请输入账号名" autocomplete="off" class="layui-input">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">密码</label>-->
+            <!--<div class="layui-input-inline">-->
+                <!--<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="layui-form-mid layui-word-aux">辅助文字</div>&ndash;&gt;-->
+        <!--</div>-->
         <!--<div class="layui-form-item">-->
             <!--<label class="layui-form-label">选择框</label>-->
             <!--<div class="layui-input-block">-->
@@ -68,20 +102,20 @@
         <div class="layui-form-item">
             <label class="layui-form-label">单选框</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="男" title="男" checked>
-                <input type="radio" name="sex" value="女" title="女" >
+                <input type="radio" name="gender" value="0" title="男" checked>
+                <input type="radio" name="gender" value="1" title="女" >
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">签名</label>
             <div class="layui-input-block">
-                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="sign" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
             </div>
         </div>
     </form>
@@ -89,7 +123,9 @@
 
 <script src="../../res/layui/layui.js"></script>
 
-
+<script type="text/html" id="avatarTemplate">
+    <img style="display: inline-block; width: 50%; height: 100%;" src="{{d.avatar}}">
+</script>
 <script type="text/html" id="genderTemplate">
     <!-- 这里的 checked 的状态只是演示 -->
     <!--<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>-->
@@ -114,11 +150,12 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table','form'], function () {
+    }).use(['jquery', 'request', 'table','form','upload'], function () {
         var $ = layui.$
         var table = layui.table;
         var request = layui.request;
-        var form = layui.form
+        var upload = layui.upload;
+        var form = layui.form;
 
         //第一个实例
         var userTable = table.render({
@@ -148,12 +185,11 @@
                 , {field: 'id', title: 'ID', sort: true}
                 , {field: 'account', title: '用户名',sort: true}
                 , {field: 'username', title: '昵称',sort: true}
+                , {field: 'avatar', title: '头像',templet:'#avatarTemplate'}
                 , {field: 'gender', title: '性别', sort: true, templet: '#genderTemplate'}
                 // , {field: 'email', title: '城市', edit: 'text'}
                 , {field: 'sign', title: '签名',sort: true}
-                // , {field: 'experience', title: '积分', sort: true}
-                // , {field: 'score', title: '评分', sort: true}
-                // , {field: 'classify', title: '职业'}
+                , {field: 'createTime', title: '创建时间', sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
             , done: function (res, curr, count) {
@@ -169,7 +205,6 @@
             }
         });
 
-
         //监听单元格编辑
         table.on('edit(test)', function (obj) {
             var value = obj.value //得到修改后的值
@@ -181,9 +216,17 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addUser':
-                    layer.open({
+                    form.val("userForm", {
+                        "id":null
+                        ,"account":null
+                        ,"username": null // "name": "value"
+                        ,"gender": null
+                        ,"sign": null
+                    })
+                    $('#demo1').attr('src', null);
+                    userFormLayerIndex=layer.open({
                         type: 1,
-                        area: '540px',
+                        area: '550px',
                         content: $('#addUserModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                     });
                     break;
@@ -199,15 +242,7 @@
                     layer.msg(checkStatus.isAll ? '全选' : '未全选');
                     break;
                 case 'refresh':
-                    table.reload('demo', {
-                        url: '/user/findUserPage'
-                        , request: {
-                            pageName: 'page' //页码的参数名称，默认：page
-                            , limitName: 'size' //每页数据量的参数名，默认：limit
-                        }
-                        , where: {} //设定异步数据接口的额外参数
-                        //,height: 300
-                    });
+                    findUserPage();
                     break;
             }
             ;
@@ -218,61 +253,103 @@
             console.log(obj)
             if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
+                    // obj.del();
+                    request.ajax({
+                        type: 'POST',
+                        url: '/user/delete',
+                        data:{id:data.id},
+                    }).then(function (result) {
+                        if(result.code == 0){
+                            findUserPage();
+                            layer.close(index);
+                        }
+                    })
                 });
             } else if (obj.event === 'edit') {
-                layer.prompt({
-                    formType: 2
-                    , value: data.email
-                }, function (value, index) {
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
+                // layer.prompt({
+                //     formType: 2
+                //     , value: data.email
+                // }, function (value, index) {
+                //     obj.update({
+                //         email: value
+                //     });
+                //     layer.close(index);
+                // });
+                form.val("userForm", {
+                    "id":data.id
+                    ,"account":data.account
+                    ,"username": data.username // "name": "value"
+                    ,"gender": data.gender
+                    ,"sign": data.sign
+                })
+                $('#demo1').attr('src', data.avatar);
+                userFormLayerIndex=layer.open({
+                    type: 1,
+                    area: '550px',
+                    content: $('#addUserModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                 });
             }
         });
+        function findUserPage(){
+            table.reload('demo', {
+                url: '/user/findUserPage'
+                , request: {
+                    pageName: 'page' //页码的参数名称，默认：page
+                    , limitName: 'size' //每页数据量的参数名，默认：limit
+                }
+                , where: {} //设定异步数据接口的额外参数
+                //,height: 300
+            });
+        }
+
 
         form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
+            // layer.msg(JSON.stringify(data.field));
+            request.ajax({
+                type: 'POST',
+                url: '/user/save',
+                data:data.field,
+            }).then(function (result) {
+                if(result.code == 0){
+                    findUserPage();
+                    layer.close(userFormLayerIndex);
+                }
+            })
             return false;
         });
 
-        var socket;
-        if (typeof(WebSocket) == "undefined") {
-            console.log("您的浏览器不支持WebSocket");
-        } else {
-            console.log("您的浏览器支持WebSocket");
-            //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-            //等同于
-            socket = new WebSocket("ws://localhost:8060/webSocket/20");
+        var userFormLayerIndex;
 
-            //打开事件
-            socket.onopen = function () {
-                console.log("Socket 已打开");
-                socket.send("这是来自客户端的消息" + location.href + new Date());
-            };
-            //获得消息事件
-            socket.onmessage = function (msg) {
-                console.log(msg.data);
-                //发现消息进入    开始处理前端触发逻辑
-            };
-            //关闭事件
-            socket.onclose = function () {
-                console.log("Socket已关闭");
-            };
-            //发生了错误事件
-            socket.onerror = function () {
-                alert("Socket发生了错误");
-                //此时可以尝试刷新页面
+        var uploadInst = upload.render({
+            elem: '#avatarUpload'
+            ,url: '/user/upload/'
+            ,data: {
+                userId: layui.sessionData('userData').user.id
             }
-            //离开页面时，关闭socket
-            //jquery1.8中已经被废弃，3.0中已经移除
-            // $(window).unload(function(){
-            //     socket.close();
-            //});
-        }
+            , field: "multipartFile"
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                $('#avatar').val(res.data.src);
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
     });
 </script>
 

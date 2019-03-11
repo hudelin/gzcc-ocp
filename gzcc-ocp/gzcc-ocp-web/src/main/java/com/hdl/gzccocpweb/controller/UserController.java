@@ -152,17 +152,27 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/save")
-    public ObjectRestResponse save( User user) throws Exception {
-        user=userService.save(user);
+    public ObjectRestResponse save( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if(user.getId()!=null){
+            user=userService.update(user);
+            httpServletRequest.getSession().setAttribute("user",userService.get(user.getId()));
+        }else{
+            user=userService.save(user);
+        }
         return new ObjectRestResponse(user);
     }
 
+//    @ResponseBody
+//    @RequestMapping("/update")
+//    public ObjectRestResponse update( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+//        return new ObjectRestResponse(user);
+//    }
+
     @ResponseBody
-    @RequestMapping("/update")
-    public ObjectRestResponse update( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        user=userService.update(user);
-        httpServletRequest.getSession().setAttribute("user",userService.get(user.getId()));
-        return new ObjectRestResponse(user);
+    @RequestMapping("/delete")
+    public ObjectRestResponse delete( Long id,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        userService.deleteLogic(id);
+        return new ObjectRestResponse();
     }
 
     @ResponseBody
@@ -208,10 +218,7 @@ public class UserController {
     @RequestMapping("/test")
     @ResponseBody
     public ObjectRestResponse test(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-//        User user=userService.get((long) 1);
-//        User u=userService.transToDTO(user,User.class);
         User user=new User();
-//        user.setBan(false);
         List<User> userList=userService.findByCondition(user,new Sort(Sort.Direction.ASC,"lastModifiedTime"));
         List<User> u=userService.transToDTOList(userList,User.class);
         return new ObjectRestResponse(u);

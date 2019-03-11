@@ -239,7 +239,7 @@
                     var user=layui.data('userData').user;
                     request.ajax({
                         type: 'POST',
-                        url: '/user/update',
+                        url: '/user/save',
                         data:{
                             id:user.id,
                             avatar:res.data.src,
