@@ -22,6 +22,11 @@ public class OcpConstant {
     public static final String CHAT_MESSAGE_TYPE_FRIEDN_MESSAGE = "friend";
     public static final String CHAT_MESSAGE_TYPE_GROUP_MESSAGE = "group";
 
+    public static final String ROLE_ADMINISTRATOR = "ROLE_ADMINISTRATOR";
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_TEACHER = "ROLE_TEACHER";
+
+
     static {
         logger.debug("debug加载本地数据....");
         logger.info("info加载本地数据....");

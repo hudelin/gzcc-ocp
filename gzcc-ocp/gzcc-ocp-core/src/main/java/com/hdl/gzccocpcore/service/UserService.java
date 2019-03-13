@@ -1,6 +1,7 @@
 package com.hdl.gzccocpcore.service;
 
 import com.hdl.gzccocpcore.entity.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -18,7 +19,9 @@ public interface UserService extends BaseService<User, Long> {
      */
     User findByUsername(String username) throws Exception;
 
-    User encryption(User user) throws Exception;
+    User saveUser(User user)throws Exception;
+
+    User saveTeacher(User user)throws Exception;
 
     User findByAccount(String account) throws Exception;
 
@@ -29,6 +32,10 @@ public interface UserService extends BaseService<User, Long> {
     List<User> findByGroupChatId(Long groupChatId)throws Exception;
 
     void deleteLogic(Long id)throws Exception;
+
+    Page<User> findAllUser(User user, Integer page, Integer size)throws Exception;
+
+    Page<User> findAllTeacher(User user, Integer page, Integer size)throws Exception;
 
 
 }

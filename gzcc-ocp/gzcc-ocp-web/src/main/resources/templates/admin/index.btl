@@ -47,7 +47,7 @@
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree" lay-filter="sideBar">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页</span></a>
+                    <a lay-href="" class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页</span></a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;"><i class="layui-icon layui-icon-home"></i> <span>主页一</span></a></dd>
                         <!--<dd><a href="javascript:;"><i class="fa fa-clipboard fa-lg"></i> <span>学校信息</span></a></dd>-->
@@ -55,23 +55,17 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>论坛</span></a>
+                    <a lay-href="" href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>论坛</span></a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
                         <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>教学</span></a>
+                    <a lay-href="" href="javascript:;"><i class="layui-icon layui-icon-username"></i> <span>教学</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
-                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>资源</span></a>
-                    <dl class="layui-nav-child">
-                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>账号管理</span></a></dd>
+
+                        <dd><a lay-href="/admin/major"  href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>课程管理</span></a></dd>
                         <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>授权管理</span></a></dd>
                     </dl>
                 </li>

@@ -26,6 +26,20 @@ public class AdminController {
         return mv;
     }
 
+    @RequestMapping("/teacher")
+    public ModelAndView teacher(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/admin/teacher.btl");
+        return mv;
+    }
+
+    @RequestMapping("/major")
+    public ModelAndView major(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/admin/major.btl");
+        return mv;
+    }
+
 
 
 }

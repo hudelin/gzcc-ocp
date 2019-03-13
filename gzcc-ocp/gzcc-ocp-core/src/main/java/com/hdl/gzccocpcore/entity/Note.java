@@ -93,6 +93,11 @@ public class Note  implements Serializable {
     @Getter@Setter
     private User user;
 
+    @ManyToOne
+    @Getter@Setter
+
+    private Major major;
+
     @Getter@Setter
     private String resource;
 

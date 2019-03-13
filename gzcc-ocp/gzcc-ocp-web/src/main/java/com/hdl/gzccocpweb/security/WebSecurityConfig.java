@@ -77,9 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMINISTRATOR")
                 .anyRequest()
 //                关闭登录验证
-//                .permitAll()
+                .permitAll()
 //                开启登录验证
-                .authenticated()
+//                .authenticated()
                 .and()
                 .logout()
                 .and()

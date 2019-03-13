@@ -17,11 +17,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class User  implements Serializable{
+public class User implements Serializable {
 
     private static final long serialVersionUID = 6911727722566303411L;
     @Id
@@ -33,80 +33,88 @@ public class User  implements Serializable{
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
-
-//    @CreatedBy
-//    @Getter@Setter
-//    protected Long createBy;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String account;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String username;
 
 
-
     @JsonIgnore
-    @Getter@Setter
+    @Getter
+    @Setter
     private String password;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String email;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String gender;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String avatar;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String sign;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Boolean ban;
 
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Getter
+    @Setter
+    //@JoinTable(name="user_role",joinColumns={@JoinColumn(name="user_id")},inverseJoinColumns={@JoinColumn(name="role_id")})
+    //    @Cascade(value ={ org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
+    private List<Role> roleList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "userList" ,fetch=FetchType.EAGER )
-    @Cascade(value ={ org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
-    @Getter@Setter
-    private List<Role> roleList=new ArrayList<>();
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
-    @Getter@Setter
-    private List<Reply> replyList=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Reply> replyList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
-    @Getter@Setter
-    private List<Note> noteList=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Note> noteList = new ArrayList<>();
 
-
-    @Getter@Setter
+    @Getter
+    @Setter
     private String collectNote;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
-    @Getter@Setter
-    private List<Friend> friendList=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Friend> friendList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "userList",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
     @JsonIgnore
-    @Getter@Setter
-    private List<GroupChat> groupChatList =new ArrayList<>();
+    @Getter
+    @Setter
+    private List<GroupChat> groupChatList = new ArrayList<>();
 
 }

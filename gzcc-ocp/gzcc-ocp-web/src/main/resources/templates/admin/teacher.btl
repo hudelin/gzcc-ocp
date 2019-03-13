@@ -162,7 +162,7 @@
             elem: '#demo'
             // ,height: 312
             , height: 'full-20'
-            , url: '/user/findUserPage' //数据接口
+            , url: '/user/findTeacherPage' //数据接口
             , cellMinWidth: 80
             // ,toolbar: true
             , toolbar: '#toolbarDemo'
@@ -292,7 +292,7 @@
         });
         function findUserPage(){
             table.reload('demo', {
-                url: '/user/findUserPage'
+                url: '/user/findTeacherPage'
                 , request: {
                     pageName: 'page' //页码的参数名称，默认：page
                     , limitName: 'size' //每页数据量的参数名，默认：limit
@@ -307,7 +307,7 @@
             // layer.msg(JSON.stringify(data.field));
             request.ajax({
                 type: 'POST',
-                url: '/user/saveUser',
+                url: '/user/saveTeacher',
                 data:data.field,
             }).then(function (result) {
                 if(result.code == 0){

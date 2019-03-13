@@ -406,7 +406,6 @@
             });
             $('.reply-event').on('click', function () {
                 var othis = $(this), type = othis.data('type'), id = othis.data('id');
-
                 console.log(othis)
                 console.log(type)
                 console.log(id)
@@ -471,6 +470,7 @@
             }).then(function (res) {
                 // note.replyList.push(res)
                 editor.txt.clear()
+                $("#replyId").val("")
                 // replyPage = res
                 requestFindPage(noteId).then(function (replyPage) {
                     loadPageBar(replyPage)

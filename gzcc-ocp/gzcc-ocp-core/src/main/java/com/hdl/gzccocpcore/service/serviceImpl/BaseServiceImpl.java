@@ -173,9 +173,39 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
 
     @Override
     public List<T> findAll() throws Exception {
+
         return baseRepository.findAll();
     }
+    @Override
+    public List<T> findAll(T t) throws Exception {
+       List<T> list = baseRepository.findAll(new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate like = null;
 
+                if (t != null) {
+                    Field[] fields = t.getClass().getDeclaredFields();
+                    for (Field field : fields) {
+                        field.setAccessible(true);
+                        try {
+                            Object value = field.get(t);
+                            if("deleted".equals(field.getName())){
+                                like = cb.equal(root.get(field.getName()),false);
+                            }
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                if (null != like){
+                    query.where(like);
+                }
+                return null;
+            }
+        });
+        return list;
+
+    }
     @Override
     public List<T> findAll(Sort sort) throws Exception {
         return baseRepository.findAll(sort);
@@ -237,6 +267,10 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
         }, pageable);
         return page;
     }
+
+
+
+
 
     private <T> String getEntityName(Class<T> entityClass) {
         String entityName = entityClass.getSimpleName();

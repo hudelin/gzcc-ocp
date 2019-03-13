@@ -34,7 +34,23 @@
                     <div class="layui-tab-item layui-show">
                         <form action="" method="post">
                             <div class="layui-row layui-col-space15 layui-form-item">
-                                <div class="layui-col-md3">
+                                <div class="layui-col-md4">
+                                    <label for="L_title" class="layui-form-label">标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off"
+                                               class="layui-input">
+                                        <!-- <input type="hidden" name="id" value="{{d.edit.id}}"> -->
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
+                                    <label class="layui-form-label">所在板块</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="major" name="class" lay-filter="column">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
                                     <label class="layui-form-label">所在专栏</label>
                                     <div class="layui-input-block">
                                         <select lay-verify="required" name="class" lay-filter="column">
@@ -48,14 +64,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="layui-col-md9">
-                                    <label for="L_title" class="layui-form-label">标题</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off"
-                                               class="layui-input">
-                                        <!-- <input type="hidden" name="id" value="{{d.edit.id}}"> -->
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="layui-row layui-col-space15 layui-form-item layui-hide" id="LAY_quiz">
                                 <div class="layui-col-md3">
@@ -201,6 +210,23 @@
         var upload = layui.upload
         var layer = layui.layer;
 
+        request.ajax({
+            type: 'POST',
+            url: '/major/findAll',
+            data: {noteId: noteId},
+        }).then(function (res) {
+            if(res.code==0) {
+                res.data.forEach(function (e) {
+                    var option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
+                    $("#major").append(option);
+                })
+                form.render("select");
+            }
+
+        })
+
+
+
         var noteId="${noteId}"
         var note;
         var resourceListOld=[]
@@ -210,6 +236,7 @@
                 url: '/note/get',
                 data: {noteId: noteId},
             }).then(function (res) {
+
                 if(res.code==0){
                     note=res.data;
                     console.log("note",note)

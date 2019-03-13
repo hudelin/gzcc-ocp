@@ -4,10 +4,11 @@ package com.hdl.gzccocpcore.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -18,14 +19,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role implements Serializable {
+public class TeachingTeam implements Serializable {
+    private static final long serialVersionUID = -8048491347295979125L;
 
-
-    private static final long serialVersionUID = 9033363582548011826L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
     @Column(name = "id")
@@ -35,29 +35,30 @@ public class Role implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
-//    @CreatedBy
-//    @Getter@Setter
-//    protected Long createBy;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
-
-    @Getter@Setter
+    @Getter
+    @Setter
     private String name;
 
     @Getter@Setter
-    private String description;
+    private Boolean deleted=false;
 
-    @ManyToMany(mappedBy = "roleList" )
-    @JsonIgnore
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Getter@Setter
     private List<User> userList=new ArrayList<>();
+
+
+
+
 }

@@ -2,11 +2,16 @@ package com.hdl.gzccocpcore.service.serviceImpl;
 
 
 import com.hdl.gzccocpcore.constant.OcpErrorConstant;
+import com.hdl.gzccocpcore.entity.Role;
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.exception.BaseException;
 import com.hdl.gzccocpcore.repository.UserRepository;
+import com.hdl.gzccocpcore.service.RoleService;
 import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -24,20 +29,26 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public User update(User user) throws Exception {
         User userOld = get(user.getId());
-//        if(!StringUtils.isEmpty(user.getNickname())){
-        userOld.setUsername(user.getUsername());
-//        }
+        if(!StringUtils.isEmpty(user.getAccount())){
+            userOld.setAccount(user.getAccount());
+        }
         if (!StringUtils.isEmpty(user.getAvatar())) {
             userOld.setAvatar(user.getAvatar());
         }
         if (!StringUtils.isEmpty(user.getCollectNote())) {
             userOld.setCollectNote(user.getCollectNote());
         }
+        if (!StringUtils.isEmpty(user.getUsername())) {
+            userOld.setUsername(user.getUsername());
+        }
         userOld.setGender(user.getGender());
+        userOld.setSign(user.getSign());
         return userRepository.save(userOld);
     }
 
@@ -51,7 +62,24 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         }else{
             user.setPassword(passwordEncoder.encode("123456"));
         }
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User saveUser(User user) throws Exception {
+        List<Role> roleList=new ArrayList<>();
+        roleList.add(roleService.getUserRole());
+        user.setRoleList(roleList);
+        return save(user);
+    }
+
+    @Override
+    public User saveTeacher(User user) throws Exception {
+        List<Role> roleList=new ArrayList<>();
+        roleList.add(roleService.getTeacherRole());
+        user.setRoleList(roleList);
+        return save(user);
     }
 
     @Override
@@ -61,11 +89,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         return user;
     }
 
-    @Override
-    public User encryption(User user) throws Exception {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return user;
-    }
+
+
 
     @Override
     public User findByAccount(String account) {
@@ -124,8 +149,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         userRepository.save(user);
     }
 
+    @Override
+    public Page<User> findAllUser(User user, Integer page, Integer size) throws Exception {
+        Pageable pageable = PageRequest.of(page-1, size);
+        return userRepository.findByRoleListId(pageable,roleService.getUserRole().getId());
+    }
 
-//    @Override
+    @Override
+    public Page<User> findAllTeacher(User user, Integer page, Integer size) throws Exception {
+        Pageable pageable = PageRequest.of(page-1, size);
+        return userRepository.findByRoleListId(pageable,roleService.getTeacherRole().getId());
+    }
+    //    @Override
 //    @Transactional(readOnly = true)
 //    public Page<User> findAll(Integer page, Integer size) {
 //        Sort sort = new Sort(Sort.Direction.ASC,"id");

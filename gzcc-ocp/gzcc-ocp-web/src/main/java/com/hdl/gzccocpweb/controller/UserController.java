@@ -144,9 +144,18 @@ public class UserController {
 
     @RequestMapping(value = "/findUserPage")
     @ResponseBody
-    public Page<User> findNotePage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
+    public Page<User> findUserPage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
         User user=new User();
-        Page<User> notePage = userService.findPageByConditionAndSort(user,page, size,new Sort(Sort.Direction.ASC, "id"));
+//        Page<User> notePage = userService.findPageByConditionAndSort(user,page, size,new Sort(Sort.Direction.ASC, "id"));
+        Page<User> notePage = userService.findAllUser(user,page, size);
+        return notePage;
+    }
+
+    @RequestMapping(value = "/findTeacherPage")
+    @ResponseBody
+    public Page<User> findTeacherPage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
+        User user=new User();
+        Page<User> notePage = userService.findAllTeacher(user,page, size);
         return notePage;
     }
 
@@ -162,11 +171,26 @@ public class UserController {
         return new ObjectRestResponse(user);
     }
 
-//    @ResponseBody
-//    @RequestMapping("/update")
-//    public ObjectRestResponse update( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-//        return new ObjectRestResponse(user);
-//    }
+    @ResponseBody
+    @RequestMapping("/saveUser")
+    public ObjectRestResponse saveUser( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if(user.getId()!=null){
+            user=userService.update(user);
+        }else{
+            user=userService.saveUser(user);
+        }
+        return new ObjectRestResponse(user);
+    }
+    @ResponseBody
+    @RequestMapping("/saveTeacher")
+    public ObjectRestResponse saveTeacher( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if(user.getId()!=null){
+            user=userService.update(user);
+        }else{
+            user=userService.saveTeacher(user);
+        }
+        return new ObjectRestResponse(user);
+    }
 
     @ResponseBody
     @RequestMapping("/delete")
@@ -218,9 +242,10 @@ public class UserController {
     @RequestMapping("/test")
     @ResponseBody
     public ObjectRestResponse test(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        User user=new User();
-        List<User> userList=userService.findByCondition(user,new Sort(Sort.Direction.ASC,"lastModifiedTime"));
-        List<User> u=userService.transToDTOList(userList,User.class);
-        return new ObjectRestResponse(u);
+//        User user=new User();
+//        List<User> userList=userService.findByCondition(user,new Sort(Sort.Direction.ASC,"lastModifiedTime"));
+//        List<User> u=userService.transToDTOList(userList,User.class);
+//        userService.delete((long) 8);
+        return new ObjectRestResponse(userService.findAllUser(new User(),1,20));
     }
 }

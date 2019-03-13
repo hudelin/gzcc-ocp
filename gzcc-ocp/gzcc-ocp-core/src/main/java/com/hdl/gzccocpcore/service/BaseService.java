@@ -35,6 +35,8 @@ public interface BaseService<T ,ID extends Serializable>{
 
     List<T> findAll()throws Exception;
 
+    List<T> findAll(T t)throws Exception;
+
     List<T> findAll(Sort sort)throws Exception;
 
     Page<T> findPage(Integer page, Integer size)throws Exception;
