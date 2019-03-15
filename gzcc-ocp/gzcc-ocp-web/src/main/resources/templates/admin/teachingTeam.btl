@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="../../res/layui/css/layui.css">
+    <style>
+        .modal-form .layui-form-item:first-of-type {
+            margin-top: 20px;
+        }
+
+        .modal-form .layui-input-block {
+            margin-right: 40px;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <form  class="layui-form" action="" method="post" lay-filter="searchForm">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md3">
+                <label class="layui-form-label">课程名</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" name="name" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <button class="layui-btn layui-btn-sm" lay-submit lay-filter="search"><i
+                        class="layui-icon layui-icon-search layuiadmin-button-btn"></i></button>
+            </div>
+        </div>
+    </form>
+    <table id="table" lay-filter="tableFilter"></table>
+</div>
+<div class="modal-form" id="editModal">
+    <form class="layui-form" action="" lay-filter="modalForm">
+        <input type="hidden" id="id" name="id" autocomplete="off" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">课程名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入学科名" autocomplete="off"
+                       class="layui-input">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+        </div>
+        <!--<div class="layui-form-item layui-form-text">-->
+        <!--<label class="layui-form-label">签名</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<textarea name="sign" placeholder="请输入内容" class="layui-textarea"></textarea>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="save">保存</button>
+                <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../../res/layui/layui.js"></script>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addUser">添加</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
+        <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+        <button class="layui-btn layui-btn-sm" lay-event="refresh">刷新</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+</script>
+<script>
+    layui.config({
+        version: "3.0.0"
+        , base: '../../res/mods/'
+    }).extend({
+        request: 'request'
+    }).use(['jquery', 'request', 'table', 'form', 'upload'], function () {
+        var $ = layui.$
+        var table = layui.table;
+        var request = layui.request;
+        var upload = layui.upload;
+        var form = layui.form;
+
+
+        var name = "";
+        //第一个实例
+        var majorTable = table.render({
+            elem: '#table'
+            // ,height: 312
+            , height: 'full-20'
+            , url: '/major/findPage' //数据接口
+            , cellMinWidth: 80
+            // ,toolbar: true
+            , toolbar: '#toolbarDemo'
+            , page: true //开启分页
+            , request: {
+                pageName: 'page' //页码的参数名称，默认：page
+                , limitName: 'size' //每页数据量的参数名，默认：limit
+            }
+            , parseData: function (res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": "0", //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.data.totalElements, //解析数据长度
+                    "data": res.data.content //解析数据列表
+                };
+            }
+            , cols: [[ //表头
+                {type: 'checkbox'}
+                , {field: 'id', title: 'ID', sort: true}
+                , {field: 'name', title: '学科名', sort: true}
+                , {field: 'createTime', title: '创建时间', sort: true}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+            ]]
+            , done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+                //得到当前页码
+                console.log(curr);
+                //得到数据总量
+                console.log(count);
+                console.log(majorTable)
+                var data = majorTable.config.data;
+            }
+            , where: {
+                name: name,
+            }
+        });
+
+        //监听单元格编辑
+        table.on('edit(tableFilter)', function (obj) {
+            var value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+            layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+        });
+        table.on('toolbar(tableFilter)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'addUser':
+                    form.val("modalForm", {
+                        "id": null
+                        , "name": null
+                    })
+                    $('#demo1').attr('src', null);
+                    majorFormLayerIndex = layer.open({
+                        type: 1,
+                        area: '550px',
+                        content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    });
+                    break;
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                case 'refresh':
+                    findPage();
+                    break;
+            }
+            ;
+        });
+        //监听行工具事件
+        table.on('tool(tableFilter)', function (obj) {
+            var data = obj.data;
+            console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    // obj.del();
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/delete',
+                        data: {id: data.id},
+                    }).then(function (result) {
+                        if (result.code == 0) {
+                            findPage();
+                            layer.close(index);
+                        }
+                    })
+                });
+            } else if (obj.event === 'edit') {
+                form.val("modalForm", {
+                    "id": data.id
+                    , "name": data.name
+                })
+                majorFormLayerIndex = layer.open({
+                    type: 1,
+                    area: '550px',
+                    content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                });
+            }
+        });
+
+        //请求分页
+        function findPage() {
+            console.log(name,"请求分页name")
+            table.reload('table', {
+                url: '/major/findPage'
+                , request: {
+                    pageName: 'page' //页码的参数名称，默认：page
+                    , limitName: 'size' //每页数据量的参数名，默认：limit
+                }
+                , where: {
+                    name: name,
+                } //设定异步数据接口的额外参数
+            });
+        }
+
+        //提交保存
+        form.on('submit(save)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            request.ajax({
+                type: 'POST',
+                url: '/major/save',
+                data: data.field,
+            }).then(function (result) {
+                if (result.code == 0) {
+                    findPage();
+                    layer.close(majorFormLayerIndex);
+                }
+            })
+            return false;
+        });
+        //提交搜索
+        form.on('submit(search)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            console.log(data,"data.field.name")
+            name = data.field.name;
+            findPage();
+            return false;
+        });
+
+        var majorFormLayerIndex;
+
+
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -52,6 +52,9 @@ public class GroupChat implements Serializable{
     @Getter@Setter
     private List<User> userList=new ArrayList<>();
 
+    @Getter@Setter
+    private Boolean deleted=false;
+
 
 
 

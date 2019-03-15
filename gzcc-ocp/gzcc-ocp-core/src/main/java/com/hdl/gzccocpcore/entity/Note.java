@@ -86,6 +86,12 @@ public class Note  implements Serializable {
 
 
     @Getter@Setter
+    private Boolean end=false;
+
+    @Getter@Setter
+    private Boolean essence=false;
+
+    @Getter@Setter
     //帖子的类型 用BaseConstant的帖子类型
     private String noteType;
 
@@ -100,6 +106,7 @@ public class Note  implements Serializable {
 
     @Getter@Setter
     private String resource;
+
 
 
 

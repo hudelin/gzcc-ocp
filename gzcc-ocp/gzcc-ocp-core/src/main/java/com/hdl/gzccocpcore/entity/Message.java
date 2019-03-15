@@ -64,6 +64,9 @@ public class Message implements Serializable{
     @Getter@Setter
     private Boolean readStatus=false;
 
+    @Getter@Setter
+    private Boolean deleted=false;
+
 
 
 }

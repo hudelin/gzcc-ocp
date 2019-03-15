@@ -163,7 +163,7 @@
 
             request.ajax({
                 type: 'POST',
-                url: '/user/registerUser',
+                url: '/user/saveUser',
                 data: data.field,
             }).then(function (res) {
                 console.log(res)

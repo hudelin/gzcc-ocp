@@ -26,6 +26,14 @@ public class OcpConstant {
     public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_TEACHER = "ROLE_TEACHER";
 
+    public static final String NOTE_TYPE_QUESTION = "1";
+    public static final String NOTE_TYPE_SHARE = "2";
+    public static final String NOTE_TYPE_DISCUSS = "3";
+    public static final String NOTE_TYPE_SUGGEST = "4";
+    public static final String NOTE_TYPE_NOTICE= "5";
+//    public static final String NOTE_TYPE_DYNAMIC = "6";
+
+
 
     static {
         logger.debug("debug加载本地数据....");

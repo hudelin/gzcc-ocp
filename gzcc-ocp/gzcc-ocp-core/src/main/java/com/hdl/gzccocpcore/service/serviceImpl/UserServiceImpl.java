@@ -9,13 +9,17 @@ import com.hdl.gzccocpcore.repository.UserRepository;
 import com.hdl.gzccocpcore.service.RoleService;
 import com.hdl.gzccocpcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RoleService roleService;
+
+    @Value("${avatar.path}")
+    private String avatarPath;
 
     @Override
     public User update(User user) throws Exception {
@@ -61,6 +68,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }else{
             user.setPassword(passwordEncoder.encode("123456"));
+        }
+        if(StringUtils.isEmpty(user.getAvatar())){
+           user.setAvatar(avatarPath);
         }
         userRepository.save(user);
         return user;
@@ -149,67 +159,53 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
         userRepository.save(user);
     }
 
-    @Override
-    public Page<User> findAllUser(User user, Integer page, Integer size) throws Exception {
-        Pageable pageable = PageRequest.of(page-1, size);
-        return userRepository.findByRoleListId(pageable,roleService.getUserRole().getId());
-    }
+//    @Override
+//    public Page<User> findAllUser(User user, Integer page, Integer size) throws Exception {
+//        Pageable pageable = PageRequest.of(page-1, size);
+//
+//        return userRepository.findByRoleListId(pageable,roleService.getUserRole().getId());
+//    }
 
     @Override
     public Page<User> findAllTeacher(User user, Integer page, Integer size) throws Exception {
         Pageable pageable = PageRequest.of(page-1, size);
-        return userRepository.findByRoleListId(pageable,roleService.getTeacherRole().getId());
+        Page<User> userPage= findAll(user,pageable,roleService.getTeacherRole().getName());
+        return userPage;
     }
-    //    @Override
-//    @Transactional(readOnly = true)
-//    public Page<User> findAll(Integer page, Integer size) {
-//        Sort sort = new Sort(Sort.Direction.ASC,"id");
-//        Pageable pageable = PageRequest.of(page, size, sort);
-//        Page<User> userEntityPage= userRepository.findAll(pageable);
-//        List<User> ordinaryUserList = userRepository.findAll();
-//        return userEntityPage;
-//
-//    }
-//
-//    @Override
-//    public Page<User> findPageAllDynamic(User ordinaryUser, Integer page, Integer size) {
-//        Sort sort = new Sort(Sort.Direction.ASC,"id");
-//        Pageable pageable = PageRequest.of(page, size, sort);
-//
-//        return userRepository.findAll(new Specification<User>() {
-//            @Override
-//            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//
-//                Predicate stuNameLike = null;
-//                if(null != ordinaryUser && !StringUtils.isEmpty(ordinaryUser.getUsername())) {
-//                // 这里也可以root.get("name").as(String.class)这种方式来强转泛型类型
-//                    stuNameLike = cb.like(root.<String> get("name"), "%" + ordinaryUser.getUsername() + "%");
-//                }
-//
-//
-//                if(null != stuNameLike) query.where(stuNameLike);
-//                return null;
-//            }
-//        },pageable);
-//    }
-//
-//    @Override
-//    public List<User> findAllDynamic(User ordinaryUser) {
-//        return userRepository.findAll(new Specification<User>() {
-//            @Override
-//            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//
-//                Predicate stuNameLike = null;
-//                if(null != ordinaryUser && !StringUtils.isEmpty(ordinaryUser.getUsername())) {
-//                    // 这里也可以root.get("name").as(String.class)这种方式来强转泛型类型
-//                    stuNameLike = cb.like(root.<String> get("name"), "%" + ordinaryUser.getUsername() + "%");
-//                }
-//
-//                if(null != stuNameLike) query.where(stuNameLike);
-//                return null;
-//            }
-//        });
-//    }
+
+    @Override
+    public Page<User> findAllUser(User user, Integer page, Integer size) throws Exception {
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<User> userPage= findAll(user,pageable,roleService.getUserRole().getName());
+        return userPage;
+    }
+
+    //动态查询某个角色的用户
+    private Page<User> findAll(User user,Pageable pageable,String roleName)throws Exception {
+        Page<User> userPage= userRepository.findAll(new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate predicate  = cb.equal(root.get("deleted"),false);
+                if(!StringUtils.isEmpty(roleName)){
+                    try {
+                        ListJoin<User,Role> join= root.join(root.getModel().getList("roleList",Role.class), JoinType.LEFT);
+                        predicate = cb.and(cb.equal(join.get("name"), roleName),predicate);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(null != user ) {
+                    if(!StringUtils.isEmpty(user.getUsername())){
+                        predicate = cb.and(cb.like(root.get("username"), "%" + user.getUsername() + "%"),predicate);
+                    }
+
+                }
+                if(null != predicate) query.where(predicate);
+                return null;
+            }
+        },pageable);
+        return userPage;
+    }
 
 
 }

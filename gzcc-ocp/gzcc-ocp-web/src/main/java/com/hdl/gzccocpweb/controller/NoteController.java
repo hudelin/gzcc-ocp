@@ -5,10 +5,7 @@ import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
 import com.hdl.gzccocpcore.entity.Resource;
 import com.hdl.gzccocpcore.response.ObjectRestResponse;
-import com.hdl.gzccocpcore.service.NoteService;
-import com.hdl.gzccocpcore.service.ReplyService;
-import com.hdl.gzccocpcore.service.ResourceService;
-import com.hdl.gzccocpcore.service.UserService;
+import com.hdl.gzccocpcore.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -34,6 +31,8 @@ public class NoteController {
     private ResourceService resourceService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MajorService majorService;
 
     @RequestMapping(value = "/edit/{noteId}")
     public ModelAndView edit(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable Long noteId) {
@@ -60,7 +59,8 @@ public class NoteController {
 
     @RequestMapping(value = "/save")
     @ResponseBody
-    public Note save(Note note,Long userId) throws Exception {
+    public Note save(Note note,Long userId,Long majorId) throws Exception {
+        note.setMajor( majorService.get(majorId));
         if(note.getId()==null){
             note.setUser(userService.get(userId));
             note = noteService.save(note);

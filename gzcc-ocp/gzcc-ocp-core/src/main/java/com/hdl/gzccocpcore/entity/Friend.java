@@ -56,4 +56,7 @@ public class Friend implements Serializable{
     @Getter@Setter
     private User user;
 
+    @Getter@Setter
+    private Boolean deleted=false;
+
 }

@@ -29,9 +29,9 @@
                     <span class="fly-mid"></span>
                     <a href="">精华</a>
                     <span class="fly-filter-right layui-hide-xs">
-            <a href="" class="layui-this">按最新</a>
-            <span class="fly-mid"></span>
-            <a href="">按热议</a>
+            <!--<a href="" class="layui-this">按最新</a>-->
+            <!--<span class="fly-mid"></span>-->
+            <!--<a href="">按热议</a>-->
           </span>
                 </div>
 

@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface UserRepository extends BaseRepository<User, Long> {
 
+    public Page<User> findByRoleListId(Specification<User> specification,Pageable pageable, Long roleListId);
+
     public Page<User> findByRoleListId(Pageable pageable, Long roleListId);
 
-    public List<User> findAll(Specification<User> spec);
+    public Page<User> findAll(Specification<User> spec,Pageable pageable);
 
 //    public List<User> findByUsernameIsNotNull();
 

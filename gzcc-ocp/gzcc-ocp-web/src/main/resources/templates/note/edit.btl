@@ -35,9 +35,9 @@
                         <form action="" method="post">
                             <div class="layui-row layui-col-space15 layui-form-item">
                                 <div class="layui-col-md4">
-                                    <label for="L_title" class="layui-form-label">标题</label>
+                                    <label for="title" class="layui-form-label">标题</label>
                                     <div class="layui-input-block">
-                                        <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off"
+                                        <input type="text" id="title" name="title" required lay-verify="required" autocomplete="off"
                                                class="layui-input">
                                         <!-- <input type="hidden" name="id" value="{{d.edit.id}}"> -->
                                     </div>
@@ -45,7 +45,7 @@
                                 <div class="layui-col-md4">
                                     <label class="layui-form-label">所在板块</label>
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" id="major" name="class" lay-filter="column">
+                                        <select lay-verify="required" id="majorId" name="majorId" lay-filter="column">
                                             <option></option>
                                         </select>
                                     </div>
@@ -53,14 +53,14 @@
                                 <div class="layui-col-md4">
                                     <label class="layui-form-label">所在专栏</label>
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" name="class" lay-filter="column">
+                                        <select lay-verify="required" name="noteType" lay-filter="column">
                                             <option></option>
-                                            <option value="0">提问</option>
-                                            <option value="99">分享</option>
-                                            <option value="100">讨论</option>
-                                            <option value="101">建议</option>
-                                            <option value="168">公告</option>
-                                            <option value="169">动态</option>
+                                            <option value="1">提问</option>
+                                            <option value="2">分享</option>
+                                            <option value="3">讨论</option>
+                                            <option value="4">建议</option>
+                                            <!--<option value="5">公告</option>-->
+                                            <!--<option value="6">动态</option>-->
                                         </select>
                                     </div>
                                 </div>
@@ -242,7 +242,8 @@
                     console.log("note",note)
                     editor.txt.html(note.content)
                     $("#noteId").val(note.id)
-                    $("#L_title").val(note.title)
+                    $("#title").val(note.title)
+                    $("#majorId").val(note.major.id)
                     resourceListOld=note.resourceList
                     resourceListOld.forEach(function (e,index) {
                         var tr = $(['<tr id="upload-'+ index +'">'

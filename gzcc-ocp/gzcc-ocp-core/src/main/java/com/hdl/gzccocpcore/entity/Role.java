@@ -60,4 +60,7 @@ public class Role implements Serializable {
     @ManyToMany(mappedBy = "roleList" )
     @JsonIgnore
     private List<User> userList=new ArrayList<>();
+
+    @Getter@Setter
+    private Boolean deleted=false;
 }
