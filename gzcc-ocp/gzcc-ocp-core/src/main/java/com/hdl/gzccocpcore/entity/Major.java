@@ -50,8 +50,9 @@ public class Major implements Serializable {
     @Setter
     private String name;
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
 
     @OneToMany(mappedBy = "major", fetch = FetchType.LAZY)
@@ -59,5 +60,11 @@ public class Major implements Serializable {
     @Getter
     @Setter
     private List<Note> noteList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @Getter
+    @Setter
+    private List<TeachingTeam> teachingTeamList = new ArrayList<>();
 
 }

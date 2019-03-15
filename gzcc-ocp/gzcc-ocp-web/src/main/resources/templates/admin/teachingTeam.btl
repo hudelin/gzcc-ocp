@@ -21,7 +21,7 @@
     <form  class="layui-form" action="" method="post" lay-filter="searchForm">
         <div class="layui-row layui-col-space10">
             <div class="layui-col-md3">
-                <label class="layui-form-label">课程名</label>
+                <label class="layui-form-label">团队名</label>
                 <div class="layui-input-block">
                     <input type="text" id="name" name="name" autocomplete="off"
                            class="layui-input">
@@ -39,12 +39,20 @@
     <form class="layui-form" action="" lay-filter="modalForm">
         <input type="hidden" id="id" name="id" autocomplete="off" class="layui-input">
         <div class="layui-form-item">
-            <label class="layui-form-label">课程名</label>
+            <label class="layui-form-label">团队名</label>
             <div class="layui-input-inline">
-                <input type="text" name="name" required lay-verify="required" placeholder="请输入学科名" autocomplete="off"
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入团队名" autocomplete="off"
                        class="layui-input">
             </div>
             <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所在板块</label>
+            <div class="layui-input-block">
+                <select lay-verify="required" id="majorId" name="majorId" lay-filter="column">
+                    <option></option>
+                </select>
+            </div>
         </div>
         <!--<div class="layui-form-item layui-form-text">-->
         <!--<label class="layui-form-label">签名</label>-->
@@ -90,14 +98,15 @@
         var upload = layui.upload;
         var form = layui.form;
 
-
         var name = "";
+
+        var formLayerIndex;
         //第一个实例
         var majorTable = table.render({
             elem: '#table'
             // ,height: 312
             , height: 'full-20'
-            , url: '/major/findPage' //数据接口
+            , url: '/teachingTeam/findPage' //数据接口
             , cellMinWidth: 80
             // ,toolbar: true
             , toolbar: '#toolbarDemo'
@@ -118,7 +127,7 @@
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'id', title: 'ID', sort: true}
-                , {field: 'name', title: '学科名', sort: true}
+                , {field: 'name', title: '团队名', sort: true}
                 , {field: 'createTime', title: '创建时间', sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
@@ -153,8 +162,20 @@
                         "id": null
                         , "name": null
                     })
-                    $('#demo1').attr('src', null);
-                    majorFormLayerIndex = layer.open({
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/findAll',
+                        data: {},
+                    }).then(function (res) {
+                        if(res.code==0) {
+                            res.data.forEach(function (e) {
+                                var option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
+                                $("#majorId").append(option);
+                            })
+                            form.render("select");
+                        }
+                    })
+                    formLayerIndex = layer.open({
                         type: 1,
                         area: '550px',
                         content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
@@ -186,7 +207,7 @@
                     // obj.del();
                     request.ajax({
                         type: 'POST',
-                        url: '/major/delete',
+                        url: '/teachingTeam/delete',
                         data: {id: data.id},
                     }).then(function (result) {
                         if (result.code == 0) {
@@ -200,7 +221,7 @@
                     "id": data.id
                     , "name": data.name
                 })
-                majorFormLayerIndex = layer.open({
+                formLayerIndex = layer.open({
                     type: 1,
                     area: '550px',
                     content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
@@ -212,7 +233,7 @@
         function findPage() {
             console.log(name,"请求分页name")
             table.reload('table', {
-                url: '/major/findPage'
+                url: '/teachingTeam/findPage'
                 , request: {
                     pageName: 'page' //页码的参数名称，默认：page
                     , limitName: 'size' //每页数据量的参数名，默认：limit
@@ -228,12 +249,12 @@
             // layer.msg(JSON.stringify(data.field));
             request.ajax({
                 type: 'POST',
-                url: '/major/save',
+                url: '/teachingTeam/save',
                 data: data.field,
             }).then(function (result) {
                 if (result.code == 0) {
                     findPage();
-                    layer.close(majorFormLayerIndex);
+                    layer.close(formLayerIndex);
                 }
             })
             return false;
@@ -247,7 +268,7 @@
             return false;
         });
 
-        var majorFormLayerIndex;
+
 
 
     });

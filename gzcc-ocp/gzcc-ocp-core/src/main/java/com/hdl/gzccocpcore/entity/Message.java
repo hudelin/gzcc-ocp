@@ -18,11 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message implements Serializable{
+public class Message implements Serializable {
 
 
     private static final long serialVersionUID = 20393427563199288L;
@@ -35,38 +35,47 @@ public class Message implements Serializable{
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long formUserId;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long toUserId;
 
-    @Column(columnDefinition="text")
-    @Getter@Setter
+    @Column(columnDefinition = "text")
+    @Getter
+    @Setter
     private String content;//内容
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String type;//内容
 
-    @Getter@Setter
-    private Boolean mine=false;
+    @Getter
+    @Setter
+    private Boolean mine = false;
 
-    @Getter@Setter
-    private Boolean system=false;
+    @Getter
+    @Setter
+    private Boolean system = false;
 
-    @Getter@Setter
-    private Boolean readStatus=false;
+    @Getter
+    @Setter
+    private Boolean readStatus = false;
 
-    @Getter@Setter
-    private Boolean deleted=false;
-
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
 
 }

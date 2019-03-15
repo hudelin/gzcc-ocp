@@ -16,29 +16,32 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reply  implements Serializable {
+public class Reply implements Serializable {
 
     private static final long serialVersionUID = -3843608801898748229L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
     @Column(name = "id")
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
 //    @LastModifiedBy
@@ -46,35 +49,39 @@ public class Reply  implements Serializable {
 //    protected Long lastModifiedBy;
 
 
-    @Column(columnDefinition="text")
-    @Getter@Setter
+    @Column(columnDefinition = "text")
+    @Getter
+    @Setter
 
     private String content;
 
-    @Getter@Setter
-    private Long praise= Long.valueOf(0);
+    @Getter
+    @Setter
+    private Long praise = Long.valueOf(0);
 
-    @Getter@Setter
-    private String praiseUserIdString="";
+    @Getter
+    @Setter
+    private String praiseUserIdString = "";
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @Getter@Setter
+    @Getter
+    @Setter
     private Note note;
 
-    @Getter@Setter
-    private Boolean accepted=false;
+    @Getter
+    @Setter
+    private Boolean accepted = false;
 
     @ManyToOne
-    @Getter@Setter
+    @Getter
+    @Setter
     private User user;
-
-
-
 
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role implements Serializable {
@@ -35,32 +35,33 @@ public class Role implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
-//    @CreatedBy
-//    @Getter@Setter
-//    protected Long createBy;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String name;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String description;
 
-    @ManyToMany(mappedBy = "roleList" )
+    @ManyToMany(mappedBy = "roleList")
     @JsonIgnore
-    private List<User> userList=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<User> userList = new ArrayList<>();
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 }

@@ -173,8 +173,17 @@ public abstract class BaseServiceImpl<T , ID extends Serializable> implements Ba
 
     @Override
     public List<T> findAll() throws Exception {
-
-        return baseRepository.findAll();
+        List<T> list = baseRepository.findAll(new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate predicate = cb.equal(root.get("deleted"),false);
+                if (null != predicate){
+                    query.where(predicate);
+                }
+                return null;
+            }
+        });
+        return list;
     }
     @Override
     public List<T> findAll(T t) throws Exception {

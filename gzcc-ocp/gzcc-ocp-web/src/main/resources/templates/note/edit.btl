@@ -218,11 +218,10 @@
             if(res.code==0) {
                 res.data.forEach(function (e) {
                     var option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
-                    $("#major").append(option);
+                    $("#majorId").append(option);
                 })
                 form.render("select");
             }
-
         })
 
 

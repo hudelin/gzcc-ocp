@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,40 +31,47 @@ public class Resource implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String src;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String originalName;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String formatName;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String suffix;
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long userId;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String resourceType;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long size;
-
-
-
 
 
 }

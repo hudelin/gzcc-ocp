@@ -101,7 +101,6 @@ public class Note  implements Serializable {
 
     @ManyToOne
     @Getter@Setter
-
     private Major major;
 
     @Getter@Setter

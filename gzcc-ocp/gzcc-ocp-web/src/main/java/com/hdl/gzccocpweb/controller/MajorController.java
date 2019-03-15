@@ -25,9 +25,9 @@ public class MajorController {
     @ResponseBody
     public ObjectRestResponse save(Major major) throws Exception {
         if(major.getId()==null){
-            major = majorService.save(major);
+            majorService.save(major);
         }else{
-            major = majorService.update(major);
+           majorService.update(major);
         }
         return new ObjectRestResponse(major);
     }

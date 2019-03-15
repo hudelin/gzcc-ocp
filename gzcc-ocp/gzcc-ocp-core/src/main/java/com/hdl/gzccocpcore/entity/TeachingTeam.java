@@ -50,15 +50,20 @@ public class TeachingTeam implements Serializable {
     @Setter
     private String name;
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
 
     @OneToMany(fetch = FetchType.LAZY)
-    @Getter@Setter
-    private List<User> userList=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<User> userList = new ArrayList<>();
 
-
+    @ManyToOne
+    @Getter
+    @Setter
+    private Major major;
 
 
 }

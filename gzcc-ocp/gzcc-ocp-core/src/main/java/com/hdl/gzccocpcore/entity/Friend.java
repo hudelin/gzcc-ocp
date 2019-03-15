@@ -20,11 +20,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Friend implements Serializable{
+public class Friend implements Serializable {
 
 
     private static final long serialVersionUID = 20393427563199288L;
@@ -37,26 +37,32 @@ public class Friend implements Serializable{
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String groupname;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @Getter@Setter
-    private List<User> list=new ArrayList<>();
+    @Getter
+    @Setter
+    private List<User> list = new ArrayList<>();
 
     @ManyToOne
-    @Getter@Setter
+    @Getter
+    @Setter
     private User user;
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
 }
