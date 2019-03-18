@@ -14,27 +14,27 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="javascript:;"><i class="kit-side-fold layui-icon layui-icon-shrink-right"></i></a></li>
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>
+            <!--<li class="layui-nav-item"><a href="">控制台</a></li>-->
+            <!--<li class="layui-nav-item"><a href="">商品管理</a></li>-->
+            <!--<li class="layui-nav-item"><a href="">用户</a></li>-->
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">其它系统</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="">邮件管理</a></dd>-->
+                    <!--<dd><a href="">消息管理</a></dd>-->
+                    <!--<dd><a href="">授权管理</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                    <img src="${user.avatar}" class="layui-nav-img">
+                    ${user.username}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <!--<dd><a href="">基本资料</a></dd>-->
+                    <!--<dd><a href="">安全设置</a></dd>-->
                     <dd><a href="/logout">退出</a></dd>
                 </dl>
             </li>
@@ -57,15 +57,15 @@
                 <li class="layui-nav-item">
                     <a lay-href="" href="javascript:;"><i class="layui-icon layui-icon-set"></i> <span>论坛</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>帖子管理</span></a></dd>
-                        <dd><a lay-href="/"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>回复管理</span></a></dd>
+                        <dd><a lay-href="/admin/note"   href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>帖子管理</span></a></dd>
+                        <dd><a lay-href="/admin/reply"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>回贴管理</span></a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a lay-href="" href="javascript:;"><i class="layui-icon layui-icon-username"></i> <span>教学</span></a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="/admin/major"  href="javascript:;"><i class="fa fa-address-book fa-lg"></i> <span>课程管理</span></a></dd>
-                        <dd><a lay-href="/admin/teachingTeam"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>教学团队</span></a></dd>
+                        <!--<dd><a lay-href="/admin/teachingTeam"   href="javascript:;"><i class="fa fa-check-square fa-lg"></i> <span>教学团队</span></a></dd>-->
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -105,7 +105,8 @@
                 <!--<li lay-id="44">商品管理</li>-->
                 <!--<li lay-id="55">订单管理</li>-->
             </ul>
-            <div class="layui-tab-content" style="height: calc(100vh - 190px);">
+            <!--style="height: calc(100vh - 190px);"-->
+            <div class="layui-tab-content" >
                 <!--<div class="layui-tab-item layui-show" style="height: calc(100vh - 190px);">-->
                     <!--<iframe src="/admin/user" style="width: 100%;-->
     <!--height: calc(100vh - 190px);-->
@@ -194,7 +195,8 @@
                     element.tabAdd('pages', {
                         title: title
                         ,content: '<iframe src="'+url+'" style="width: 100%;\n' +
-                            '    height: calc(100vh - 190px);\n' +
+                            '    min-height: 700px;height: calc(100vh - 220px);\n' +
+                            // '    height: calc(100vh - 220px);\n' +
                             '    border: 0;"></iframe>' //支持传入html
                         ,id: title
                     });

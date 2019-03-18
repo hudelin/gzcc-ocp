@@ -21,6 +21,8 @@ public class MajorController {
     @Autowired
     private MajorService majorService;
 
+
+
     @RequestMapping(value = "/save")
     @ResponseBody
     public ObjectRestResponse save(Major major) throws Exception {
@@ -38,7 +40,6 @@ public class MajorController {
         majorService.deleteLogic(id);
         return new ObjectRestResponse();
     }
-
 
     @RequestMapping(value = "/findPage")
     @ResponseBody

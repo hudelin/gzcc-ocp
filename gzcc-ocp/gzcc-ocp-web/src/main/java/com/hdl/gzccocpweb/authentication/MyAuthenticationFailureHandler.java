@@ -3,7 +3,7 @@ package com.hdl.gzccocpweb.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdl.gzccocpcore.properties.LoginResponseType;
 import com.hdl.gzccocpcore.properties.SecurityProperties;
-import com.hdl.gzccocpweb.response.SimpleResponse;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,10 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
         if (LoginResponseType.JSON.equals(securityProperties.getWebProperties().getLoginResponseType())){
 //            //将 authention 信息打包成json格式返回
             httpServletResponse.setContentType("application/json;charset=UTF-8");
-            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
+            ObjectRestResponse response = new ObjectRestResponse();
+            response.setCode("1");
+            response.setMsg(e.getMessage());
+            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(response));
         }else {
 //            //返回view
             super.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);

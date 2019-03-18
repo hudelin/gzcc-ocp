@@ -195,10 +195,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
                     }
                 }
                 if(null != user ) {
+                    if(user.getId()!=null){
+                        predicate = cb.and(cb.equal(root.get("id"), user.getId()),predicate);
+                    }
+                    if(!StringUtils.isEmpty(user.getAccount())){
+                        predicate = cb.and(cb.like(root.get("account"), "%" + user.getAccount() + "%"),predicate);
+                    }
                     if(!StringUtils.isEmpty(user.getUsername())){
                         predicate = cb.and(cb.like(root.get("username"), "%" + user.getUsername() + "%"),predicate);
                     }
 
+                    if(!StringUtils.isEmpty(user.getGender())){
+                        predicate = cb.and(cb.equal(root.get("gender"), user.getGender() ),predicate);
+                    }
                 }
                 if(null != predicate) query.where(predicate);
                 return null;

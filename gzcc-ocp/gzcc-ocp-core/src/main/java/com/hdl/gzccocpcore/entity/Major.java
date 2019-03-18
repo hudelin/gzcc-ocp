@@ -52,6 +52,13 @@ public class Major implements Serializable {
 
     @Getter
     @Setter
+    private String picture;
+    @Getter
+    @Setter
+    private String summary;
+
+    @Getter
+    @Setter
     private Boolean deleted = false;
 
 
@@ -61,10 +68,22 @@ public class Major implements Serializable {
     @Setter
     private List<Note> noteList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    @Getter
+//    @Setter
+//    private List<TeachingTeam> teachingTeamList = new ArrayList<>();
+
+
     @Getter
     @Setter
-    private List<TeachingTeam> teachingTeamList = new ArrayList<>();
+    @Column(columnDefinition="text")
+    private String introduction;
+
+
+    @Getter
+    @Setter
+    @Column(columnDefinition="text")
+    private String means;
 
 }

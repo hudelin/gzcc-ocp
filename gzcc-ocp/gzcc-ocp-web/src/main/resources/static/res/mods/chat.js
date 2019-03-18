@@ -16,7 +16,7 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
         console.log("您的浏览器支持WebSocket");
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
         //等同于
-        socket = new WebSocket("ws://localhost:8060/webSocket/" + layui.sessionData('userData').user.id);
+        socket = new WebSocket("ws://localhost:8060/webSocket/" + layui.data('userData').user.id);
 
         //打开事件
         socket.onopen = function () {

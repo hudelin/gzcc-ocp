@@ -34,6 +34,16 @@ public class NoteController {
     @Autowired
     private MajorService majorService;
 
+    @RequestMapping(value = "/major/{majorId}")
+    public ModelAndView major(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable Long majorId,String noteType) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("majorId", majorId);
+        mv.addObject("noteType", noteType);
+        mv.addObject("major", majorService.get(majorId));
+        mv.setViewName("/note/majorIndex.btl");
+        return mv;
+    }
+
     @RequestMapping(value = "/edit/{noteId}")
     public ModelAndView edit(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable Long noteId) {
         ModelAndView mv = new ModelAndView();
@@ -60,16 +70,34 @@ public class NoteController {
     @RequestMapping(value = "/save")
     @ResponseBody
     public Note save(Note note,Long userId,Long majorId) throws Exception {
-        note.setMajor( majorService.get(majorId));
         if(note.getId()==null){
+            note.setMajor( majorService.get(majorId));
             note.setUser(userService.get(userId));
             note = noteService.save(note);
         }else{
+            noteService.update(note);
+        }
+        return note;
+    }
+
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public ObjectRestResponse delete(Long id) throws Exception {
+        noteService.deleteLogic(id);
+        return new ObjectRestResponse();
+    }
+
+    @RequestMapping(value = "/admin/save")
+    @ResponseBody
+    public ObjectRestResponse administratorSave(Note note,Long userId,Long majorId) throws Exception {
+        if(note.getId()==null){
+            note.setMajor( majorService.get(majorId));
             note.setUser(userService.get(userId));
+            note = noteService.save(note);
+        }else{
             note = noteService.update(note);
         }
-
-        return note;
+        return new ObjectRestResponse(note);
     }
 
     @RequestMapping(value = "/get")
@@ -109,6 +137,12 @@ public class NoteController {
         return notePage;
     }
 
+    @RequestMapping(value = "/findPage")
+    @ResponseBody
+    public ObjectRestResponse findPage(NoteDTO noteDTO ,@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) throws Exception {
+        Page<Note> notePage = noteService.findNotePage(noteDTO, page, size);
+        return new ObjectRestResponse(notePage);
+    }
 
 
 

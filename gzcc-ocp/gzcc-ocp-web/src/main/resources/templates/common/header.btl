@@ -5,7 +5,7 @@
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
-                <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
+                <a href="/"><i class="iconfont icon-jiaoliu"></i>论坛</a>
             </li>
             <li class="layui-nav-item">
                 <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
@@ -32,14 +32,14 @@
             <li class="layui-nav-item">
                 <a href="/user/register">注册</a>
             </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入"
-                   class="iconfont icon-qq"></a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入"
-                   class="iconfont icon-weibo"></a>
-            </li>
+            <!--<li class="layui-nav-item layui-hide-xs">-->
+                <!--<a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入"-->
+                   <!--class="iconfont icon-qq"></a>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item layui-hide-xs">-->
+                <!--<a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入"-->
+                   <!--class="iconfont icon-weibo"></a>-->
+            <!--</li>-->
             <%}else{%>
             <!-- 登入后的状态 -->
             <!--&lt;!&ndash;-->

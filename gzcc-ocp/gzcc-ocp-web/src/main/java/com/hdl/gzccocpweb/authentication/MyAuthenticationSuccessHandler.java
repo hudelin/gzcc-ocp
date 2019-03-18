@@ -2,6 +2,7 @@ package com.hdl.gzccocpweb.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdl.gzccocpcore.properties.SecurityProperties;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import com.hdl.gzccocpcore.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
         } catch (Exception e) {
             e.printStackTrace();
         }
-        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(authentication));
+        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(new ObjectRestResponse(authentication)));
 //        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(targetUrl));
 //        }else {
 //            //返回view

@@ -13,7 +13,13 @@ public class CommonController {
     @RequestMapping()
     public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/index.btl");
+        mv.setViewName("/note/major.btl");
         return mv;
     }
+//    @RequestMapping()
+//    public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("/index.btl");
+//        return mv;
+//    }
 }

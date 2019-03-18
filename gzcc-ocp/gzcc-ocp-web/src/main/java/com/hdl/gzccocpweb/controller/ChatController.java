@@ -1,9 +1,11 @@
 package com.hdl.gzccocpweb.controller;
 
+import com.hdl.gzccocpcore.constant.OcpErrorConstant;
 import com.hdl.gzccocpcore.dto.ChatDTO;
 import com.hdl.gzccocpcore.dto.UserDTO;
 import com.hdl.gzccocpcore.entity.Friend;
 import com.hdl.gzccocpcore.entity.User;
+import com.hdl.gzccocpcore.exception.BaseException;
 import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import com.hdl.gzccocpcore.service.FriendService;
 import com.hdl.gzccocpcore.service.GroupChatService;
@@ -96,8 +98,8 @@ public class ChatController {
     @ResponseBody
     @RequestMapping("/send")
     public ObjectRestResponse send(String message,Long userId) throws Exception {
-        WebSocketServer.sendInfo("123",userId);
-        return new ObjectRestResponse();
+        throw new BaseException(OcpErrorConstant.ACCOUNT_NOTE_COLLECT,"帖子已收藏");
+//        return new ObjectRestResponse();
 
     }
 

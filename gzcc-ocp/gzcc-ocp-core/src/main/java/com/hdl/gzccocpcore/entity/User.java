@@ -79,7 +79,7 @@ public class User implements Serializable {
 
     @Getter
     @Setter
-    private Boolean ban;
+    private Boolean enabled=true;
 
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -1,13 +1,16 @@
-package com.hdl.gzccocpcore.entity;
+package com.hdl.gzccocpcore.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
+import com.hdl.gzccocpcore.entity.Note;
+import com.hdl.gzccocpcore.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -15,18 +18,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
-@EntityListeners(AuditingEntityListener.class)
+
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reply implements Serializable {
-
-    private static final long serialVersionUID = -3843608801898748229L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  //设置自动增长
-    @Column(name = "id")
+public class ReplyDTO {
     @Getter
     @Setter
     private Long id;
@@ -44,14 +39,9 @@ public class Reply implements Serializable {
     @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
-
-
-    @Column(columnDefinition = "text")
     @Getter
     @Setter
+
     private String content;
 
     @Getter
@@ -66,8 +56,6 @@ public class Reply implements Serializable {
     @Setter
     private Boolean deleted = false;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @Getter
     @Setter
     private Note note;
@@ -76,10 +64,21 @@ public class Reply implements Serializable {
     @Setter
     private Boolean accepted = false;
 
-    @ManyToOne
     @Getter
     @Setter
     private User user;
+
+    @Getter
+    @Setter
+    private Long userId;
+
+
+    @Getter
+    @Setter
+    private Long noteId;
+    @Getter
+    @Setter
+    private String username;
 
 
 }

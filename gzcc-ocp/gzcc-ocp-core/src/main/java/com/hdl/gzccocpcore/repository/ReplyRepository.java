@@ -11,6 +11,6 @@ import java.util.List;
 public interface ReplyRepository extends BaseRepository<Reply, Long> {
 
     Page<Reply> findByNoteIdAndDeletedOrderByAcceptedDescCreateTimeDesc(Pageable pageable,Long noteId,Boolean deleted);
-    Reply findByNoteIdAndAccepted( Long noteId,Boolean accepted);
+    List<Reply> findByNoteIdAndAccepted( Long noteId,Boolean accepted);
 
 }

@@ -148,10 +148,10 @@
                 layer.msg('两次密码不一致');
                 return false;
             }
-            //
+
             // $.ajax({
             //     type: "GET",
-            //     url: "/chat/send",
+            //     url: "/user/test",
             //
             //     success: function(data){
             //         console.log(data,"data")
@@ -160,7 +160,8 @@
             //         console.log(e,"e")
             //     }
             // });
-
+            //
+            // return
             request.ajax({
                 type: 'POST',
                 url: '/user/saveUser',

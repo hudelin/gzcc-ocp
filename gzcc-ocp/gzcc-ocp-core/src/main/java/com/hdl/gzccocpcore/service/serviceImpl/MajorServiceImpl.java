@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -32,7 +33,17 @@ public class MajorServiceImpl extends BaseServiceImpl<Major, Long> implements Ma
 
     @Override
     public Major update(Major major) throws Exception {
-        return majorRepository.save(major);
+        Major old =majorRepository.getOne(major.getId());
+        if(!StringUtils.isEmpty(major.getName()) ){
+            old.setName(major.getName());
+        }
+        if(!StringUtils.isEmpty(major.getIntroduction())){
+            old.setIntroduction(major.getIntroduction());
+        }
+        if(!StringUtils.isEmpty(major.getMeans())){
+            old.setMeans(major.getMeans());
+        }
+        return majorRepository.save(old);
     }
 
     @Override

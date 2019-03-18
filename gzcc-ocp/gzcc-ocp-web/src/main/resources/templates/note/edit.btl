@@ -210,19 +210,7 @@
         var upload = layui.upload
         var layer = layui.layer;
 
-        request.ajax({
-            type: 'POST',
-            url: '/major/findAll',
-            data: {noteId: noteId},
-        }).then(function (res) {
-            if(res.code==0) {
-                res.data.forEach(function (e) {
-                    var option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
-                    $("#majorId").append(option);
-                })
-                form.render("select");
-            }
-        })
+
 
 
 
@@ -244,26 +232,65 @@
                     $("#title").val(note.title)
                     $("#majorId").val(note.major.id)
                     resourceListOld=note.resourceList
-                    resourceListOld.forEach(function (e,index) {
-                        var tr = $(['<tr id="upload-'+ index +'">'
-                            ,'<td>'+ e.formatName +'</td>'
-                            ,'<td>'+ (e.size/1014).toFixed(1)  +'kb</td>'
-                            ,'<td>原文件</td>'
-                            ,'<td>'
-                            // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-                            ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                            ,'</td>'
-                            ,'</tr>'].join(''));
-                        $('#fileList').append(tr);
-                        tr.find('.demo-delete').on('click', function(){
-                            tr.remove();
-                            resourceListOld.splice(index,1)
-                            console.log(resourceListOld)
-                        });
+                    if(resourceListOld.length>0){
+                        resourceListOld.forEach(function (e,index) {
+                            var tr = $(['<tr id="upload-'+ index +'">'
+                                ,'<td>'+ e.formatName +'</td>'
+                                ,'<td>'+ (e.size/1014).toFixed(1)  +'kb</td>'
+                                ,'<td>原文件</td>'
+                                ,'<td>'
+                                // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                                ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                ,'</td>'
+                                ,'</tr>'].join(''));
+                            $('#fileList').append(tr);
+                            tr.find('.demo-delete').on('click', function(){
+                                tr.remove();
+                                resourceListOld.splice(index,1)
+                                console.log(resourceListOld)
+                            });
+                        })
+                    }
+                    form.val("userForm", {
+                        "noteType":note.noteType
+                    })
+
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/findAll',
+                        data: {noteId: noteId},
+                    }).then(function (res) {
+                        if(res.code==0) {
+                            res.data.forEach(function (e) {
+                                var option;
+                                if(e.id==note.major.id){
+                                    option=$(['<option selected value='+e.id+'>'+e.name+'</option>'].join(''));
+                                }else{
+                                    option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
+                                }
+
+                                $("#majorId").append(option);
+                            })
+                            form.render("select");
+                        }
                     })
                 }
 
 
+            })
+        }else{
+            request.ajax({
+                type: 'POST',
+                url: '/major/findAll',
+                data: {noteId: noteId},
+            }).then(function (res) {
+                if(res.code==0) {
+                    res.data.forEach(function (e) {
+                        var option=$(['<option value='+e.id+'>'+e.name+'</option>'].join(''));
+                        $("#majorId").append(option);
+                    })
+                    form.render("select");
+                }
             })
         }
 

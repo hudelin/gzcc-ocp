@@ -30,12 +30,36 @@
     <form class="layui-form" action="" method="post" lay-filter="searchForm">
         <div class="layui-row layui-col-space10">
             <div class="layui-col-md3">
-                <label class="layui-form-label">课程名</label>
+                <label class="layui-form-label">ID</label>
                 <div class="layui-input-block">
-                    <input type="text" id="name" name="name" autocomplete="off"
+                    <input type="text" id="id" name="id" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <input type="text" id="title" name="title" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label">发帖人ID</label>
+                <div class="layui-input-block">
+                    <input type="text" id="userId" name="userId" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <label class="layui-form-label">发帖人</label>
+                <div class="layui-input-block">
+                    <input type="text" id="username" name="username" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-row layui-col-space10">
             <div class="layui-col-md3">
                 <button class="layui-btn " lay-submit lay-filter="search"><i
                         class="layui-icon layui-icon-search layuiadmin-button-btn"></i></button>
@@ -46,32 +70,32 @@
 </div>
 
 <div style="height: 0px;width: 0px;overflow: hidden">
-    <div class="modal-form" id="editModal">
-        <form class="layui-form" action="" lay-filter="modalForm">
-            <input type="hidden" id="id" name="id" autocomplete="off" class="layui-input">
-            <div class="layui-form-item">
-                <label class="layui-form-label">课程名</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入课程名"
-                           autocomplete="off"
-                           class="layui-input">
-                </div>
-                <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
-            </div>
-            <!--<div class="layui-form-item layui-form-text">-->
-            <!--<label class="layui-form-label">签名</label>-->
-            <!--<div class="layui-input-block">-->
-            <!--<textarea name="sign" placeholder="请输入内容" class="layui-textarea"></textarea>-->
+    <!--<div class="modal-form" id="editModal">-->
+        <!--<form class="layui-form" action="" lay-filter="modalForm">-->
+            <!--<input type="hidden" id="id" name="id" autocomplete="off" class="layui-input">-->
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">课程名</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" name="name" required lay-verify="required" placeholder="请输入课程名"-->
+                           <!--autocomplete="off"-->
+                           <!--class="layui-input">-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<div class="layui-form-mid layui-word-aux">辅助文字</div>&ndash;&gt;-->
             <!--</div>-->
+            <!--&lt;!&ndash;<div class="layui-form-item layui-form-text">&ndash;&gt;-->
+            <!--&lt;!&ndash;<label class="layui-form-label">签名</label>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="layui-input-block">&ndash;&gt;-->
+            <!--&lt;!&ndash;<textarea name="sign" placeholder="请输入内容" class="layui-textarea"></textarea>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--<div class="layui-form-item">-->
+                <!--<div class="layui-input-block">-->
+                    <!--<button class="layui-btn" lay-submit lay-filter="save">保存</button>-->
+                    <!--&lt;!&ndash;<button type="reset" class="layui-btn layui-btn-primary">重置</button>&ndash;&gt;-->
+                <!--</div>-->
             <!--</div>-->
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="save">保存</button>
-                    <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
-                </div>
-            </div>
-        </form>
-    </div>
+        <!--</form>-->
+    <!--</div>-->
 
     <div class="modal-form" id="editTextModal">
         <div style="padding: 5px 10px 0;">
@@ -100,10 +124,29 @@
 <script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
 
 
+<script type="text/html" id="userIdTemplate">
+    {{d.user.id}}
+</script>
+<script type="text/html" id="usernameTemplate">
+    {{d.user.username}}
+</script>
+
+<script type="text/html" id="topTemplate">
+    {{#  if(d.top){ }}
+    <button class="layui-btn layui-btn-xs">已置顶</button>
+    {{# }else{ }}
+    <button class="layui-btn layui-btn-primary layui-btn-xs">正常显示</button>
+    {{#  }  }}
+</script>
 <!--target="_blank"-->
-<script type="text/html" id="introductionTemplate">
+<script type="text/html" id="contentTemplate">
     <a href="javascript:;" class="layui-table-link">查看</a>
 </script>
+
+<script type="text/html" id="avatarTemplate">
+    <img style="display: inline-block; width: 50%; height: 100%;" src="{{d.user.avatar}}">
+</script>
+
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addUser">添加</button>
@@ -114,8 +157,8 @@
     </div>
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a> -->
+     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     layui.config({
@@ -129,7 +172,6 @@
         var request = layui.request;
         var upload = layui.upload;
         var form = layui.form;
-
 
         var E = window.wangEditor
         var editor = new E('#toolbar', '#content')  // 两个参数也可以传入 elem 对象，class 选择器
@@ -148,7 +190,7 @@
             elem: '#table'
             // ,height: 312
             , height: 'full-200'
-            , url: '/major/findPage' //数据接口
+            , url: '/note/findPage' //数据接口
             , cellMinWidth: 80
             // ,toolbar: true
             , toolbar: '#toolbarDemo'
@@ -169,10 +211,12 @@
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'id', title: 'ID', sort: true}
-                , {field: 'name', title: '课程名', sort: true}
-                , {field: 'null', title: '课程简介', templet: '#introductionTemplate', event: 'introduction'}
-                , {field: 'null', title: '教学方法', templet: '#introductionTemplate', event: 'means'}
-                , {field: 'name', title: '师资队伍'}
+                , {field: 'null', title: '发帖人ID', sort: true,templet: '#userIdTemplate'}
+                , {field: 'username', title: '发帖人',sort: true, templet: '#usernameTemplate'}
+                , {field: 'avatar', title: '头像', templet: '#avatarTemplate',width:100}
+                , {field: 'title', title: '标题', sort: true}
+                , {field: 'null', title: '内容', templet: '#contentTemplate', event: 'content'}
+                , {field: 'null', title: '置顶', templet: '#topTemplate', event: 'top'}
                 , {field: 'createTime', title: '创建时间', sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
@@ -188,7 +232,7 @@
                 var data = majorTable.config.data;
             }
             , where: {
-                name: name,
+
             }
         });
 
@@ -208,7 +252,7 @@
                         , "name": null
                     })
                     $('#demo1').attr('src', null);
-                    majorFormLayerIndex = layer.open({
+                    formLayerIndex = layer.open({
                         type: 1,
                         area: '550px',
                         content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
@@ -236,11 +280,11 @@
             var data = obj.data;
             console.log(obj)
             if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('是否删除', function (index) {
                     // obj.del();
                     request.ajax({
                         type: 'POST',
-                        url: '/major/delete',
+                        url: '/note/delete',
                         data: {id: data.id},
                     }).then(function (result) {
                         if (result.code == 0) {
@@ -254,23 +298,44 @@
                     "id": data.id
                     , "name": data.name
                 })
-                majorFormLayerIndex = layer.open({
+                formLayerIndex = layer.open({
                     type: 1,
                     area: '550px',
                     content: $('#editModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                 });
-            } else if (obj.event === 'introduction' || obj.event === 'means') {
+            } else if (obj.event === 'content' ) {
                 form.val("editText", {
                     "id": data.id
                     , "L_event": obj.event
                 })
                 editor.txt.clear()
                 editor.txt.html(data[obj.event])
-                layer.open({
+                formLayerIndex=layer.open({
                     type: 1,
                     area: '750px',
                     maxmin: true,
                     content: $('#editTextModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                });
+            }else if(obj.event="top"){
+                var id =data.id;
+                var top=data.top;
+                var msg=""
+                if(top){
+                    msg="是否取消置顶？"
+                }else{
+                    msg="是否置顶？"
+                }
+                layer.confirm(msg, function (index) {
+                    request.ajax({
+                        type: 'POST',
+                        url: '/note/admin/save',
+                        data: {id: id, top: !top},
+                    }).then(function (res) {
+                        if(res.code=="0"){
+                            findPage();
+                            layer.close(index);
+                        }
+                    })
                 });
             }
         });
@@ -279,59 +344,57 @@
         function findPage() {
             console.log(name, "请求分页name")
             table.reload('table', {
-                url: '/major/findPage'
+                url: '/note/findPage'
                 , request: {
                     pageName: 'page' //页码的参数名称，默认：page
                     , limitName: 'size' //每页数据量的参数名，默认：limit
                 }
-                , where: {
-                    name: name,
-                } //设定异步数据接口的额外参数
+                , where: search //设定异步数据接口的额外参数
             });
         }
 
         //提交保存
-        form.on('submit(save)', function (data) {
-            // layer.msg(JSON.stringify(data.field));
-            request.ajax({
-                type: 'POST',
-                url: '/major/save',
-                data: data.field,
-            }).then(function (result) {
-                if (result.code == 0) {
-                    findPage();
-                    // layer.close(majorFormLayerIndex);
-                    layer.close(layer.index);
-                }
-            })
-            return false;
-        });
+        // form.on('submit(save)', function (data) {
+        //     // layer.msg(JSON.stringify(data.field));
+        //     request.ajax({
+        //         type: 'POST',
+        //         url: '/mote/save',
+        //         data: data.field,
+        //     }).then(function (result) {
+        //         if (result.code == 0) {
+        //             findPage();
+        //             // layer.close(majorFormLayerIndex);
+        //             layer.close(layer.index);
+        //         }
+        //     })
+        //     return false;
+        // });
 
         form.on('submit(saveText)', function (data) {
             // layer.msg(JSON.stringify(data.field));
             data.field[data.field.L_event] = data.field.L_content
             request.ajax({
                 type: 'POST',
-                url: '/major/save',
+                url: '/note/admin/save',
                 data: data.field,
             }).then(function (result) {
                 if (result.code == 0) {
                     findPage();
-                    // layer.close(majorFormLayerIndex);
-                    layer.close(layer.index);
+                    layer.close(formLayerIndex);
+                    // layer.close(layer.index);
                 }
             })
             return false;
         });
         //提交搜索
+        var search={};
         form.on('submit(search)', function (data) {
             // layer.msg(JSON.stringify(data.field));
-            console.log(data, "data.field.name")
-            name = data.field.name;
+            search = data.field;
             findPage();
             return false;
         });
-        var majorFormLayerIndex;
+        var formLayerIndex;
 
 
     });

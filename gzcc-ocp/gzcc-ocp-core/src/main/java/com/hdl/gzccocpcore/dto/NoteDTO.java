@@ -4,6 +4,7 @@ package com.hdl.gzccocpcore.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hdl.gzccocpcore.entity.Major;
 import com.hdl.gzccocpcore.entity.Reply;
 import com.hdl.gzccocpcore.entity.Resource;
 import com.hdl.gzccocpcore.entity.User;
@@ -60,6 +61,14 @@ public class NoteDTO implements Serializable {
     private String resource;
     @Getter@Setter
     private List<Resource> resourceList;
+    @Getter@Setter
+    private Major major;
+    @Getter@Setter
+    private Long userId;
+    @Getter@Setter
+    private String username;
+
+
 
 
 

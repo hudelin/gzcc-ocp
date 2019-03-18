@@ -2,7 +2,7 @@ package com.hdl.gzccocpweb.controller;
 
 
 import com.hdl.gzccocpcore.properties.SecurityProperties;
-import com.hdl.gzccocpweb.response.SimpleResponse;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class WebSecurityController {
 
     @RequestMapping(value = "/authentication/require")
     @ResponseStatus(code= HttpStatus.UNAUTHORIZED)
-    public SimpleResponse requireAuthentication( HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws IOException {
+    public ObjectRestResponse requireAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
 
 //        SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
 //        if (savedRequest != null) {

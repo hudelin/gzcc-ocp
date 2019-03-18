@@ -12,6 +12,7 @@ import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContext;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,32 +45,32 @@ public class UserController {
     @Autowired
     private ResourceService resourceService;
 
-    private RequestCache requestCache=new HttpSessionRequestCache();
+    private RequestCache requestCache = new HttpSessionRequestCache();
 
-    private String header="/user";
+    private String header = "/user";
 
-    private String login=header+"/login.btl";
-    private String home=header+"/home.btl";
-    private String index=header+"/index.btl";
-    private String set=header+"/set.btl";
-    private String message=header+"/message.btl";
-    private String forget=header+"/forget.btl";
-    private String register=header+"/register.btl";
+    private String login = header + "/login.btl";
+    private String home = header + "/home.btl";
+    private String index = header + "/index.btl";
+    private String set = header + "/set.btl";
+    private String message = header + "/message.btl";
+    private String forget = header + "/forget.btl";
+    private String register = header + "/register.btl";
 
 
-//    @Autowired
+    //    @Autowired
 //    private RedisTemplate redisCacheTemplate;
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
-        String targetUrl="/";
+        String targetUrl = "/";
         try {
             targetUrl = savedRequest.getRedirectUrl();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         ModelAndView mv = new ModelAndView();
-        mv.addObject("url",targetUrl);
+        mv.addObject("url", targetUrl);
         mv.setViewName(login);
         return mv;
     }
@@ -91,8 +93,8 @@ public class UserController {
     public ModelAndView set(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         ModelAndView mv = new ModelAndView();
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        String username=securityContext.getAuthentication().getName();
-        mv.addObject("user",userService.findByUsername(username));
+        String username = securityContext.getAuthentication().getName();
+        mv.addObject("user", userService.findByUsername(username));
         mv.setViewName(set);
         return mv;
     }
@@ -110,6 +112,7 @@ public class UserController {
         mv.setViewName(forget);
         return mv;
     }
+
     @RequestMapping(value = "/register")
     public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         ModelAndView mv = new ModelAndView();
@@ -122,8 +125,8 @@ public class UserController {
     @ResponseBody
     public ObjectRestResponse getDetail() throws Exception {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        String username=securityContext.getAuthentication().getName();
-        User user=userService.findByAccount(username);
+        String username = securityContext.getAuthentication().getName();
+        User user = userService.findByAccount(username);
         return new ObjectRestResponse(user);
     }
 
@@ -131,78 +134,78 @@ public class UserController {
     @ResponseBody
     public List<User> findAll() throws Exception {
 //        String imageCode = (String) redisCacheTemplate.opsForValue().get("imageCode");
-        List<User> userList=userService.findAll();
+        List<User> userList = userService.findAll();
         return userList;
     }
 
     @ResponseBody
     @RequestMapping("/findByUsername")
     public User findByUsername(String username) throws Exception {
-        User user=userService.findByUsername(username);
+        User user = userService.findByUsername(username);
         return user;
     }
 
     @RequestMapping(value = "/findUserPage")
     @ResponseBody
-    public Page<User> findUserPage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
-        User user=new User();
+    public Page<User> findUserPage( User user ,@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
 //        Page<User> notePage = userService.findPageByConditionAndSort(user,page, size,new Sort(Sort.Direction.ASC, "id"));
-        Page<User> notePage = userService.findAllUser(user,page, size);
+        Page<User> notePage = userService.findAllUser(user, page, size);
         return notePage;
     }
 
     @RequestMapping(value = "/findTeacherPage")
     @ResponseBody
     public Page<User> findTeacherPage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, String orderType) throws Exception {
-        User user=new User();
-        Page<User> notePage = userService.findAllTeacher(user,page, size);
-        return notePage;
+        User user = new User();
+        Page<User> userPage = userService.findAllTeacher(user, page, size);
+        return userPage;
     }
 
     @ResponseBody
     @RequestMapping("/save")
-    public ObjectRestResponse save( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        if(user.getId()!=null){
-            user=userService.update(user);
-            httpServletRequest.getSession().setAttribute("user",userService.get(user.getId()));
-        }else{
-            user=userService.save(user);
+    public ObjectRestResponse save(User user, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if (user.getId() != null) {
+            user = userService.update(user);
+            httpServletRequest.getSession().setAttribute("user", userService.get(user.getId()));
+        } else {
+            user = userService.save(user);
         }
         return new ObjectRestResponse(user);
     }
 
     @ResponseBody
     @RequestMapping("/saveUser")
-    public ObjectRestResponse saveUser( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        if(user.getId()!=null){
-            user=userService.update(user);
-        }else{
-            user=userService.saveUser(user);
+    public ObjectRestResponse saveUser(User user, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if (user.getId() != null) {
+            user = userService.update(user);
+        } else {
+            user = userService.saveUser(user);
         }
         return new ObjectRestResponse(user);
     }
+
     @ResponseBody
     @RequestMapping("/saveTeacher")
-    public ObjectRestResponse saveTeacher( User user,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        if(user.getId()!=null){
-            user=userService.update(user);
-        }else{
-            user=userService.saveTeacher(user);
+    public ObjectRestResponse saveTeacher(User user, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        if (user.getId() != null) {
+            user = userService.update(user);
+        } else {
+            user = userService.saveTeacher(user);
         }
         return new ObjectRestResponse(user);
     }
 
     @ResponseBody
     @RequestMapping("/delete")
-    public ObjectRestResponse delete( Long id,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    public ObjectRestResponse delete(Long id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         userService.deleteLogic(id);
         return new ObjectRestResponse();
     }
 
     @ResponseBody
     @RequestMapping("/registerUser")
-    public ObjectRestResponse registerUser( User user) throws Exception {
-        user=userService.save(user);
+    public ObjectRestResponse registerUser(User user) throws Exception {
+        user = userService.save(user);
         return new ObjectRestResponse(user);
     }
 
@@ -210,35 +213,37 @@ public class UserController {
     @RequestMapping("/send")
     public ObjectRestResponse send(String message) throws Exception {
         List<User> userList = userService.findAll();
-        List<User> test=new ArrayList<>();
+        List<User> test = new ArrayList<>();
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
-        BeanUtils.copyProperties(userList,test);
+        BeanUtils.copyProperties(userList, test);
         objectRestResponse.data(userList);
         return objectRestResponse;
     }
 
     @ResponseBody
     @RequestMapping("/collectNote")
-    public ObjectRestResponse collectNote(Long userId,Long noteId) throws Exception {
-        User user= userService.collectNote(userId,noteId);
+    public ObjectRestResponse collectNote(Long userId, Long noteId) throws Exception {
+        User user = userService.collectNote(userId, noteId);
         return new ObjectRestResponse();
     }
+
     @ResponseBody
     @RequestMapping("/removeNote")
-    public ObjectRestResponse removeNote(Long userId,Long noteId) throws Exception {
-        User user= userService.removeNote(userId,noteId);
+    public ObjectRestResponse removeNote(Long userId, Long noteId) throws Exception {
+        User user = userService.removeNote(userId, noteId);
         return new ObjectRestResponse(user);
     }
 
 
-
     @RequestMapping("/upload")
     @ResponseBody
-    private ObjectRestResponse upload(MultipartFile multipartFile, Long userId,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        Resource resource=resourceService.uploadResource(multipartFile,userId, OcpConstant.RESOURCE_TYPE_USER_AVATAR);
+    private ObjectRestResponse upload(MultipartFile multipartFile, Long userId, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        Resource resource = resourceService.uploadResource(multipartFile, userId, OcpConstant.RESOURCE_TYPE_USER_AVATAR);
         return new ObjectRestResponse(resource);
     }
 
+    @Value("${gzcc.ocp.web.root-path}")
+    private String rootPath;
     @RequestMapping("/test")
     @ResponseBody
     public ObjectRestResponse test(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
@@ -246,6 +251,49 @@ public class UserController {
 //        List<User> userList=userService.findByCondition(user,new Sort(Sort.Direction.ASC,"lastModifiedTime"));
 //        List<User> u=userService.transToDTOList(userList,User.class);
 //        userService.delete((long) 8);
-        return new ObjectRestResponse(userService.findAllUser(new User(),1,20));
+//        String fileName = "default.jpg";//被下载文件的名称
+//        String downloadFilePath = rootPath+fileName;//被下载的文件在服务器中的路径,
+//
+//
+//        File file = new File(downloadFilePath);
+//        if (file.exists()) {
+//            httpServletResponse.setContentType("application/force-download");// 设置强制下载不打开            
+//            httpServletResponse.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
+//            byte[] buffer = new byte[1024];
+//            FileInputStream fis = null;
+//            BufferedInputStream bis = null;
+//            try {
+//                fis = new FileInputStream(file);
+//                bis = new BufferedInputStream(fis);
+//                OutputStream outputStream = httpServletResponse.getOutputStream();
+//                int i = bis.read(buffer);
+//                while (i != -1) {
+//                    outputStream.write(buffer, 0, i);
+//                    i = bis.read(buffer);
+//                }
+//                return null;
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (bis != null) {
+//                    try {
+//                        bis.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    if (fis != null) {
+//                        try {
+//                            fis.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//            return null;
+//        }
+
+        return new ObjectRestResponse(userService.findAllUser(new User(), 1, 20));
     }
 }
