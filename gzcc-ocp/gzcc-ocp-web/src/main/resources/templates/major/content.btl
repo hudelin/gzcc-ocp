@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <title>Fly Template v3.0，基于 layui 的极简社区页面模版</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <% include("/common/link.btl"){} %>
+    <style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+
+        .text {
+            border: 1px solid #ccc;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<% include("/common/header.btl"){} %>
+<div class="fly-case-header" style="height: 110px;">
+    <p class="fly-case-year">广州商学院</p>
+    <!--<p class="fly-case-banner" style="line-height: 50px;-->
+    <!--font-size: 50px;-->
+    <!--text-align: center;-->
+    <!--color: #fff;">师生在线交流平台</p>-->
+    <!--<a href="javascript:;">-->
+    <!--<a href="/case/{{ year }}/">-->
+    <!--<img class="fly-case-banner" src="../../res/images/case.png" alt="师生在线交流平台">-->
+    <!--</a>-->
+    <!--<div class="fly-case-btn">-->
+    <!--<a href="javascript:;" class="layui-btn layui-btn-big fly-case-active" data-type="push">提交案例</a>-->
+    <!--<a href="" class="layui-btn layui-btn-primary layui-btn-big">我的案例</a>-->
+    <!--<a href="http://fly.layui.com/jie/11996/" target="_blank" style="padding: 0 15px; text-decoration: underline">案例要求</a>-->
+    <!--</div>-->
+</div>
+
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12 content detail">
+            <div class="fly-panel detail-box" id="noteBox">
+                <!--<fieldset class="layui-elem-field layui-field-title" style="text-align: center;">-->
+                <!--<legend>课程简介</legend>-->
+                <!--</fieldset>-->
+                <h1>课程简介</h1>
+                <div class="detail-body photos">
+                    <div style="padding-bottom: 15px; font-family: 宋体; background: rgb(238, 238, 238); font-size: 12px;"><div style="margin-right: auto; margin-left: auto; padding: 40px 20px; width: 1002px; border-right: 1px solid rgb(218, 218, 218); border-bottom: 1px solid rgb(218, 218, 218); border-left: 1px solid rgb(218, 218, 218); border-image: initial; border-top: none; background: rgb(248, 248, 248);"><div style="padding-top: 20px; padding-bottom: 20px; line-height: 30px;"><h3 style="margin-top: 0px; margin-bottom: 0px; width: 1002px; font-size: 18px; text-align: center;">教学方法与手段</h3><p style="margin-bottom: 15px;"></p><hr><p style="margin-top: 0px; margin-bottom: 0px;"></p><p style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em;"><strong><font color="#FF0000">(一）教学设计</font></strong></p><p align="left" style="margin-top: 0px; margin-bottom: 0px;">　　《基础会计》课程教学模式的设计，将能力训练和素质培养贯穿于教学全过程，构建起理论与实践一体化，教学与会计从业资格考证相结合，实践与职业岗位相结合的教学模式。<br>1．课程目标设计：基于会计职业岗位要求，设计课程教学的能力目标、知识目标及素质目标。<br>2．课程项目设计：根据会计工作岗位工作流程，设计与工作内容相一致的课程项目。<br>　　包括会计凭证填制和审核、账簿的开设和登记、账务处理程序的应用、财产的清查、财务会计报告的编制等模块和相应的实训项目。课程教学项目设计采用分总式的方式，分五个单元项目和一个综合项目，由小项目来带动整个章节的学习，最后通过一个综合项目对全部会计账务处理进行强化训练。<br>3．教学与训练方法设计：以能力在实践中培养的特点设计教学与训练方法。<br>　　课程教学以课内与课外相结合的形式完成。打破传统的知识传授方式的框架，以工作项目为主线，结合职业技能证书考证，培养学生的职业能力。通过课堂教学、单项实训、综合实训、工学结合等途径来完成课程的教学任务。<br>4．考核方案设计：以完成工作任务为结果设计考核方案。<br>　　课程结束后，要求学生交出三本记账凭证、二本日记账、一本总账、若干张不同格式的明细账以及一张资产负债表和一张利润表。<br>　　考核要求，包括过程性考核和终结性考核。其中过程性考核为70%，终结性考核为30%。过程性考核主要包括常规（学习态度、出勤、课堂提问、职业道德等）20%、课堂作业50%。终结性考核主要是期末考试。<br>评价标准：<br>①常规，以平时记分册中记录为准。平时对学生进行不同方式的考勤并记录，占10%；课堂提问包括主动回答和被动回答记录，占10%；学习态度和职业道德，作为附加分处理。<br>②课堂作业50%，主要指平时布置的书面作业和课堂训练完成的凭证、账簿、报表等会计资料。书面作业占5%；完成上交并展示的原始凭证要求符合填制的规定占5%；完成上交并展示的各种记账凭证要求符合填制的规定占10%；完成上交并展示的各种账簿要求符合登记的规定占10%；完成上交并展示的两张报表要求符合编制的规定占5%。</p><p align="left" style="margin-top: 0px; margin-bottom: 0px;"><img alt="\" src="http://oa.gzcc.cn/uploadfile/2016/1213/20161213095204281.jpg" style="margin-top: 25px; margin-bottom: 25px; width: 480px; height: 360px;"></p><p align="left" style="margin-top: 0px; margin-bottom: 0px;"><br><br><strong><font color="#FF0000">（二）教学方法</font></strong><br>　　要使课堂讲授与开展讨论相结合，采用启发式教学，发挥学生能动学习的主体作用，引导学生积极思考；要注意收集教学案例资料，同时要结合自己的教学实践编写有针对性的案例素材，指导学生围绕教学案例，综合运用所学专业知识分析案例；积极鼓励教师使用多媒体手段组织教学，使教学内容系统化、直观化，便于理解和掌握，弥补传统授课方式的局限性，使教学过程与形式、丰富多彩、生动活泼，激发学生学习兴趣，提高教与学的实际效果；必须给学生辅以必要的大量的练习，才能巩固课堂所学的知识与技能，提高学生分析问题和实践操作技能；充分利用会计实验室的现有条件，进一步搞好会计模拟实验教学，使学生在模拟环境下贴近会计实务，使学生掌握必须的实践技能，提高会计职业能力。<br>1．启发式的互动教学：由于本课程是学生的专业入门课程，学生的专业知识完全空白，所以首先必须由教师进行引导，激发学生的学习兴趣和学习热情，有效调动学生学习主动性，启发式的互动教学体现在教学的各个环节中。<br>2．现场教学和案例教学：通过看录像、参观企业等形式，增加学生的感性认识；通过案例教学，提高学生的分析问题和解决问题的能力。<br>3．讨论式教学：把学生分成若干小组并推举一名组长。让学生围绕对会计的初步认识，列举生活中涉及到与会计有关的事项，或对学习中遇到的不理解之处，展开热烈的讨论，各抒己见，畅所欲言。<br>4．开展仿真模拟教学<br>我校会计系的“会计实验室”包括手工做账模拟与电算化账务处理两个部分。《基础会计》课程在教学过程中结合本课程相关内容的特点，任课教师充分利用会计系“会计实验室”已有的设备和条件，对学生编制会计分录与财务报表等技能进行仿真训练，提高学生的动手能力。<br>5．利用网络教学资源教学<br>（1）学院网络建设已具备一定规模，院系都有独立网站<br>　　课程的网络教学环境已经建立，并逐渐趋于完善，充分满足了本课程的教学需要；本课程的网络教学资源相当丰富。选编了大量会计教学资源，课程标准、教学方案、课件、习题与试题、实训和其他教学资料等将陆续上网，并注意保持网站内容的经常更新，网络教学资源能满足本课程的教学、自我训练、单元测试、实训等需要，为学生自我学习提供了一个功能强大的远程会计教育平台。<br>（2） 网络软件资源<br>　　充分利用网络资源。将丰富的《基础会计》精品课程建设的全部内容挂在容量大、速度快的校园网络上，计算机机房和会计模拟网络实验室的全天开放，为网络资源的充分利用提供了条件，扩大了学生的学习空间和延展了学生的时间，方便了学生的自主学习并培养了学生的自学能力。</p><p align="left" style="margin-top: 0px; margin-bottom: 0px;"><img alt="\" src="http://oa.gzcc.cn/uploadfile/2016/1213/20161213095241625.jpg" style="margin-top: 25px; margin-bottom: 25px; width: 480px; height: 320px;"></p><p align="left" style="margin-top: 0px; margin-bottom: 0px;">&nbsp;</p><p align="left" style="margin-top: 0px; margin-bottom: 0px;">&nbsp;</p><p align="left" style="margin-top: 0px; margin-bottom: 0px;"><font color="#FF0000"><strong>（三）教学手段</strong></font><br><font size="2">1．信息技术手段在教学中的应用及</font><font size="2">效果<br>　　近年来我们一直使用多媒体课堂辅助教学软件，面授时多采用直观性很强的图示法，深入浅出地说明难点，讲清疑点，节约了时间，提高了课堂教学效果。这样生动、形象的教学模式、教学方法和手段，促进了学生自主性、研究性学习和个性化发展，取得了极为突出的教学效果。由于课后有机会获得老师的详细讲稿和演示文稿，课堂上减少了笔记，便于学生集中精力听课和思考。同时，该课程还制作了全套网络课程，便于学生课前、课后预习、复习和讨论，增加了师生间互动与交流。<br>2．注重理论教学与实际操作相结合。<br>　　在《基</font><font size="2">础会计》课程教学中，注重会计理论与会计实践的结合，在立足于会计学理论教学的基础上，适当采集、编制现实经济生活中会计理论与会计实践紧密相连的、生动直观的、引发学生深入思考的教学案例，加大了会计学教学中案例教学力度的教学实践。<br>3．充分发挥企业综合实训教学平台的作用。<br>　　企业综合实训平台是按大供应链的思路构建一套仿真化、实战化的实验系统，满足学生实践技能训练的需要，为学生提供一个实战化的实践平台。企业内部协同管理按典型的规模型的企业扁平化管理架构设计一个角色定位的仿真化的实训平台，外部关联协同管理是将上下游企业、合作伙伴、社会化第三方机构各个层面协同的仿真化的应用系统。商贸综合实训平台建立了虚拟社会、虚拟企业、虚拟车间、虚拟项目等仿真教学环境，学生在这个仿真系统内可以进行多种管理身份的互动式的实战性操作、实验，完成实习任务，可以起到优化教学过程，提高教学质量和效率，取得实效。<br><br><img alt="\" src="http://oa.gzcc.cn/uploadfile/2016/1213/20161213095318389.jpg" style="margin-top: 25px; margin-bottom: 25px; width: 480px; height: 320px;"></font></p><p style="margin-top: 0px; margin-bottom: 0px;"></p></div></div></div><div style="padding-top: 15px; font-family: 宋体; background: url(&quot;../images/footerBg.jpg&quot;) repeat-x; font-size: 12px;"><div style="padding-top: 30px; padding-bottom: 30px; text-align: center; background: rgb(219, 219, 219);"><p style="margin-top: 0px; margin-bottom: 0px; line-height: 30px;">版权所有：广州商学院网络中心&nbsp;</p><p style="margin-top: 0px; margin-bottom: 0px; line-height: 30px;">地址：广州市黄埔区九龙大道206号&nbsp;&nbsp;粤公网安备 44011602000060号&nbsp;&nbsp; 粤ICP备15103669号</p></div></div>
+                </div>
+            </div>
+
+            <div class="fly-panel detail-box" id="flyReply">
+                <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+                    <legend>回帖</legend>
+                </fieldset>
+
+            </div>
+
+        </div>
+        <!--<div class="layui-col-md4">-->
+            <!--<dl class="fly-panel fly-list-one">-->
+                <!--<dt class="fly-panel-title">课程课件</dt>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--&lt;!&ndash; 无数据时 &ndash;&gt;-->
+                <!--&lt;!&ndash;-->
+                <!--<div class="fly-none">没有相关数据</div>-->
+                <!--&ndash;&gt;-->
+            <!--</dl>-->
+
+            <!--<div class="fly-panel">-->
+                <!--<div class="fly-panel-title">-->
+                    <!--这里可作为广告区域-->
+                <!--</div>-->
+                <!--<div class="fly-panel-main">-->
+                    <!--<a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu"-->
+                       <!--time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="fly-panel" style="padding: 20px 0; text-align: center;">-->
+                <!--<img src="../../res/images/weixin.jpg" style="max-width: 100%;" alt="layui">-->
+                <!--<p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<% include("/common/footer.btl"){} %>
+
+
+<script src="/res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
+<script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
+<script>
+    layui.cache.page = 'jie';
+    layui.cache.user = {
+        username: '游客'
+        , uid: -1
+        , avatar: '../../res/images/avatar/00.jpg'
+        , experience: 83
+        , sex: '男'
+    };
+    layui.config({
+        version: "3.0.0"
+        , base: '../../res/mods/'
+    }).extend({
+        fly: 'index',
+        request: 'request'
+    }).use(['request', 'jquery', 'laytpl', 'form', 'laypage', 'util', 'layer', 'fly'], function () {
+        var $ = layui.$
+        var fly = layui.fly;
+        var laytpl = layui.laytpl
+        var request = layui.request
+        var form = layui.form;
+        var laypage = layui.laypage;
+        var util = layui.util;
+        var layer = layui.layer;
+
+        var major;
+
+        //请求帖子内容
+
+    })
+
+</script>
+
+</body>
+</html>

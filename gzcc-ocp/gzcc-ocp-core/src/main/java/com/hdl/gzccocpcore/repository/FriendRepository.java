@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface FriendRepository extends BaseRepository<Friend, Long> {
 
-    List<Friend> findByUserId(Long userId);
+    List<Friend> findByUserIdAndDeleted(Long userId,Boolean deleted);
+
+    Friend findByUserIdAndListIdAndDeleted(Long userId,Long listId,Boolean deleted);
 }

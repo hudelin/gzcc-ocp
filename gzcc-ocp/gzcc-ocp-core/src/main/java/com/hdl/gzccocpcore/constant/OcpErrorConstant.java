@@ -19,9 +19,15 @@ public class OcpErrorConstant {
      */
     public static final String ACCOUNT_NOTE_COLLECT = "10002";
     /**
+     * 密码错误
+     */
+    public static final String PASSWORD_ERROR = "10003";
+    /**
      * 帖子错误
      */
     public static final String NOTE_ERROR = "20000";
+
+
     /**
      * 回复错误
      */
@@ -32,7 +38,16 @@ public class OcpErrorConstant {
     public static final String RESOURCE_ERROR = "40000";
     public static final String RESOURCE_IS_NULL = "40001";
 
+    /**
+     * 专业模块错误
+     */
+    public static final String MAJOR_SYNOPSIS_NULL = "50000";
+    public static final String MAJOR_PICTURE_NULL = "50001";
+    public static final String MAJOR_MEANS_NULL = "50002";
+    public static final String MAJOR_INTRODUCTION_NULL = "50003";
+    public static final String MAJOR_TEACHER_NULL = "50004";
 
+    public static final String MAJOR_TEACHER_EXIST="50005";
 
 
 }

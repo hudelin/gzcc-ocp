@@ -55,6 +55,11 @@ public class GroupChat implements Serializable{
     @Getter@Setter
     private Boolean deleted=false;
 
+    @ManyToOne
+    @Getter
+    @Setter
+    private User user;
+
 
 
 

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <title>Fly Template v3.0，基于 layui 的极简社区页面模版</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <% include("/common/link.btl"){} %>
+    <style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+
+        .text {
+            border: 1px solid #ccc;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<% include("/common/header.btl"){} %>
+<div class="fly-case-header" style="height: 110px;">
+    <p class="fly-case-year">计算机网络技术</p>
+    <!--<p class="fly-case-banner" style="line-height: 50px;-->
+    <!--font-size: 50px;-->
+    <!--text-align: center;-->
+    <!--color: #fff;">师生在线交流平台</p>-->
+    <!--<a href="javascript:;">-->
+    <!--<a href="/case/{{ year }}/">-->
+    <!--<img class="fly-case-banner" src="../../res/images/case.png" alt="师生在线交流平台">-->
+    <!--</a>-->
+    <!--<div class="fly-case-btn">-->
+    <!--<a href="javascript:;" class="layui-btn layui-btn-big fly-case-active" data-type="push">提交案例</a>-->
+    <!--<a href="" class="layui-btn layui-btn-primary layui-btn-big">我的案例</a>-->
+    <!--<a href="http://fly.layui.com/jie/11996/" target="_blank" style="padding: 0 15px; text-decoration: underline">案例要求</a>-->
+    <!--</div>-->
+</div>
+
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md8 content detail">
+            <div class="fly-panel detail-box" id="resource">
+
+            </div>
+            <div class="fly-panel detail-box" id="flyReply">
+                <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+                    <legend>评论</legend>
+                </fieldset>
+                <ul class="jieda" id="jieda">
+
+                </ul>
+                <div class="layui-form layui-form-pane">
+                    <form action="/note/saveReply" method="post">
+                        <div class="layui-form-item layui-form-text">
+                            <a name="comment"></a>
+                            <div id="toolbar" class="toolbar">
+                            </div>
+                            <input type="hidden" id="L_content" name="content" autocomplete="off" class="layui-input">
+                            <div id="content" class="text ">
+                                <!--可使用 min-height 实现编辑区域自动增加高度-->
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <input type="hidden" id="replyId" name="id" value="">
+                            <button class="layui-btn" lay-filter="comment" lay-submit>确认</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <dl class="fly-panel fly-list-one">
+                <dt class="fly-panel-title">相关视频</dt>
+                <dd>
+                    <a href="">交换机基本配置</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">常用网络命令使用</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">vlan配置（一）</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">vlan配置（二）</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">静态路由配置</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">路由器基本配置</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">路由器实现vlan间通信</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">基于 layui 的极简社区页面模版</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">基于 layui 的极简社区页面模版</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <dd>
+                    <a href="">基于 layui 的极简社区页面模版</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <!-- 无数据时 -->
+                <!--
+                <div class="fly-none">没有相关数据</div>
+                -->
+            </dl>
+
+            <div class="fly-panel">
+                <div class="fly-panel-title">
+                    快速通道
+                </div>
+                <div class="fly-panel-main">
+                    <a href="/note/major/${majorId}" target="_blank" class="fly-zanzhu"
+                       time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">同板块论坛</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<% include("/common/footer.btl"){} %>
+
+<script id="videoTemplate" type="text/html">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{{d.data.originalName}}</legend>
+    </fieldset>
+    <video width="100%" height="420" controls="controls">
+        <!--<source src="/uploads/movie.ogg" type="video/ogg">-->
+        <source id="video" src="{{d.data.src}}" type="video/mp4">
+        浏览器不支持播放
+    </video>
+</script>
+
+<script id="commentTemplate" type="text/html">
+    {{#  layui.each(d.list, function(index, item){ }}
+    <li data-id="111" class="jieda-daan">
+        <a name="item-1111111111"></a>
+        <div class="detail-about detail-about-reply">
+            <a class="fly-avatar" href="/user/home/{{item.user.id}}">
+                <img src="{{item.user.avatar}}" alt=" ">
+            </a>
+            <div class="fly-detail-user">
+                <a href="/user/home/{{item.user.id}}" class="fly-link">
+                    <cite>{{item.user.username}}</cite>
+                    {{#  layui.each(item.user.roleList, function(index, e){ }}
+                    {{#  if(e.name === "TEACHER"){ }}
+                    <i class="iconfont icon-renzheng" title="认证信息：广商教师"></i>
+                    {{#  } }}
+                    {{#  }); }}
+                    <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
+                </a>
+                <!--<span>(楼主)</span>-->
+                <!--
+                <span style="color:#5FB878">(管理员)</span>
+                <span style="color:#FF9E3F">（社区之光）</span>
+                <span style="color:#999">（该号已被封）</span>
+                -->
+            </div>
+            <div class="detail-hits">
+                <span>{{item.timeAgo}}</span>
+            </div>
+            <!--<i class="iconfont icon-caina" title="最佳答案"></i>-->
+        </div>
+        <div class="detail-body jieda-body photos">
+            <!--<p>香菇那个蓝瘦，这是一条被采纳的回帖</p>-->
+            {{ item.content }}
+        </div>
+        <div class="jieda-reply">
+            <span class="jieda-zan zanok" type="zan"><i class="iconfont icon-zan"></i><em>66</em></span>
+            <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
+            <div class="jieda-admin">
+                <span type="edit">编辑</span>
+                <span type="del">删除</span>
+                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
+            </div>
+        </div>
+    </li>
+    {{#  }); }}
+    <!--<li data-id="111">-->
+        <!--<a name="item-1111111111"></a>-->
+        <!--<div class="detail-about detail-about-reply">-->
+            <!--<a class="fly-avatar" href="">-->
+                <!--<img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt=" ">-->
+            <!--</a>-->
+            <!--<div class="fly-detail-user">-->
+                <!--<a href="" class="fly-link">-->
+                    <!--<cite>贤心</cite>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="detail-hits">-->
+                <!--<span>2017-11-30</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="detail-body jieda-body photos">-->
+            <!--<p>蓝瘦那个香菇，这是一条没被采纳的回帖</p>-->
+        <!--</div>-->
+        <!--<div class="jieda-reply">-->
+            <!--<span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>-->
+            <!--<span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>-->
+            <!--<div class="jieda-admin">-->
+                <!--<span type="edit">编辑</span>-->
+                <!--<span type="del">删除</span>-->
+                <!--<span class="jieda-accept" type="accept">采纳</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+    <!-- 无数据时 -->
+    {{#  if(d.list.length === 0){ }}
+     <li class="fly-none">消灭零回复</li>
+    {{#  } }}
+</script>
+
+
+<script src="/res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
+<script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
+<script>
+    layui.cache.page = 'jie';
+    layui.cache.user = {
+        username: '游客'
+        , uid: -1
+        , avatar: '../../res/images/avatar/00.jpg'
+        , experience: 83
+        , sex: '男'
+    };
+    layui.config({
+        version: "3.0.0"
+        , base: '../../res/mods/'
+    }).extend({
+        fly: 'index',
+        request: 'request'
+    }).use(['request', 'jquery', 'laytpl', 'form', 'laypage', 'util', 'layer', 'fly'], function () {
+        var $ = layui.$
+        var fly = layui.fly;
+        var laytpl = layui.laytpl
+        var request = layui.request
+        var form = layui.form;
+        var laypage = layui.laypage;
+        var util = layui.util;
+        var layer = layui.layer;
+
+        var resourceId = "${resourceId}";
+        var majorId = "${majorId}";
+        request.ajax({
+            type: 'POST',
+            url: '/resource/findById',
+            data: {id: resourceId}
+        }).then(function (res) {
+            // $("#video").attr('src', res.data.src);
+            var data = {
+                data: res.data
+            }
+            var getTpl = videoTemplate.innerHTML
+                , view = document.getElementById('resource');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+        })
+
+        var E = window.wangEditor
+        var editor = new E('#toolbar', '#content')  // 两个参数也可以传入 elem 对象，class 选择器
+        editor.customConfig.zIndex = 1
+        editor.customConfig.onchange = function (html) {
+            document.getElementById('L_content').value = html
+        }
+        editor.create()
+
+        request.ajax({
+            type: 'POST',
+            url: '/major/comment',
+            data: {resourceId: resourceId}
+        }).then(function (res) {
+            res.data.forEach(function (item) {
+                item.timeAgo = util.timeAgo(item.createTime)
+            })
+            var data = {
+                list: res.data
+            }
+            var getTpl = commentTemplate.innerHTML
+                , view = document.getElementById('jieda');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+        })
+
+
+    })
+
+</script>
+
+</body>
+</html>

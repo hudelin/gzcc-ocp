@@ -21,7 +21,7 @@ public class ChatDTO {
     private List<Friend> friend=new ArrayList<>();
 
     @Getter@Setter
-    private List<GroupChat> group=new ArrayList<>();
+    private List<GroupChatDTO> group=new ArrayList<>();
 
     @Getter@Setter
     private List<User> list=new ArrayList<>();

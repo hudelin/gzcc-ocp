@@ -55,24 +55,21 @@ public class Major implements Serializable {
     private String picture;
     @Getter
     @Setter
-    private String summary;
+    private String synopsis;
 
     @Getter
     @Setter
     private Boolean deleted = false;
 
+    @Getter
+    @Setter
+    private Boolean enabled;
 
     @OneToMany(mappedBy = "major", fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter
     @Setter
     private List<Note> noteList = new ArrayList<>();
-
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    @Getter
-//    @Setter
-//    private List<TeachingTeam> teachingTeamList = new ArrayList<>();
 
 
     @Getter
@@ -85,5 +82,20 @@ public class Major implements Serializable {
     @Setter
     @Column(columnDefinition="text")
     private String means;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Getter
+    @Setter
+    private List<User> teacherList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Getter
+    @Setter
+    private List<Resource> videoList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Getter
+    @Setter
+    private List<Resource> resourceList = new ArrayList<>();
 
 }

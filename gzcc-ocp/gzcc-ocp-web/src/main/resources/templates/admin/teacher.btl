@@ -36,9 +36,9 @@
             <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">昵称</label>
+            <label class="layui-form-label">姓名</label>
             <div class="layui-input-inline">
-                <input type="text" name="username" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+                <input type="text" name="realName" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
             </div>
             <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
         </div>
@@ -59,46 +59,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="layui-form-item">-->
-            <!--<label class="layui-form-label">账号名</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<input type="text" name="title" required lay-verify="required" placeholder="请输入账号名" autocomplete="off" class="layui-input">-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="layui-form-item">-->
-            <!--<label class="layui-form-label">密码</label>-->
-            <!--<div class="layui-input-inline">-->
-                <!--<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div class="layui-form-mid layui-word-aux">辅助文字</div>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="layui-form-item">-->
-            <!--<label class="layui-form-label">选择框</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<select name="city" lay-verify="required">-->
-                    <!--<option value=""></option>-->
-                    <!--<option value="0">北京</option>-->
-                    <!--<option value="1">上海</option>-->
-                    <!--<option value="2">广州</option>-->
-                    <!--<option value="3">深圳</option>-->
-                    <!--<option value="4">杭州</option>-->
-                <!--</select>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="layui-form-item">-->
-            <!--<label class="layui-form-label">复选框</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<input type="checkbox" name="like[write]" title="写作">-->
-                <!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
-                <!--<input type="checkbox" name="like[dai]" title="发呆">-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="layui-form-item">-->
-            <!--<label class="layui-form-label">开关</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<input type="checkbox" name="switch" lay-skin="switch">-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="layui-form-item">
             <label class="layui-form-label">单选框</label>
             <div class="layui-input-block">
@@ -150,12 +110,13 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table','form','upload'], function () {
+    }).use(['jquery', 'request', 'table','form','upload','layer'], function () {
         var $ = layui.$
         var table = layui.table;
         var request = layui.request;
         var upload = layui.upload;
         var form = layui.form;
+        var layer = layui.layer;
 
         //第一个实例
         var userTable = table.render({
@@ -184,6 +145,7 @@
                 {type: 'checkbox'}
                 , {field: 'id', title: 'ID', sort: true}
                 , {field: 'account', title: '用户名',sort: true}
+                , {field: 'realName', title: '姓名',sort: true}
                 , {field: 'username', title: '昵称',sort: true}
                 , {field: 'avatar', title: '头像',templet:'#avatarTemplate'}
                 , {field: 'gender', title: '性别', sort: true, templet: '#genderTemplate'}
@@ -278,8 +240,9 @@
                 form.val("userForm", {
                     "id":data.id
                     ,"account":data.account
-                    ,"username": data.username // "name": "value"
+                    ,"username": data.username
                     ,"gender": data.gender
+                    ,"realName": data.realName
                     ,"sign": data.sign
                 })
                 $('#demo1').attr('src', data.avatar);
@@ -305,6 +268,7 @@
 
         form.on('submit(formDemo)', function (data) {
             // layer.msg(JSON.stringify(data.field));
+            data.field.username=data.field.realName
             request.ajax({
                 type: 'POST',
                 url: '/user/saveTeacher',

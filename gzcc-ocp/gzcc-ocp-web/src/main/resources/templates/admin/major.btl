@@ -23,6 +23,71 @@
             border: 1px solid #ccc;
             height: 350px;
         }
+
+        .layim-msgbox {
+            margin: 15px;
+        }
+
+        .layim-msgbox li {
+            position: relative;
+            margin-bottom: 10px;
+            padding: 0 130px 10px 60px;
+            padding-bottom: 10px;
+            line-height: 22px;
+            border-bottom: 1px dotted #e2e2e2;
+        }
+
+        .layim-msgbox .layim-msgbox-tips {
+            margin: 0;
+            padding: 10px 0;
+            border: none;
+            text-align: center;
+            color: #999;
+        }
+
+        .layim-msgbox .layim-msgbox-system {
+            padding: 0 10px 10px 10px;
+        }
+
+        .layim-msgbox li p span {
+            padding-left: 5px;
+            color: #999;
+        }
+
+        .layim-msgbox li p em {
+            font-style: normal;
+            color: #FF5722;
+        }
+
+        .layim-msgbox-avatar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        .layim-msgbox-user {
+            padding-top: 5px;
+        }
+
+        .layim-msgbox-content {
+            margin-top: 3px;
+        }
+
+        .layim-msgbox .layui-btn-small {
+            padding: 0 15px;
+            margin-left: 5px;
+        }
+
+        .layim-msgbox-btn {
+            position: absolute;
+            right: 0;
+            top: 12px;
+            color: #999;
+        }
+
+
     </style>
 </head>
 <body class="layui-layout-body">
@@ -58,12 +123,24 @@
                 </div>
                 <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
             </div>
-            <!--<div class="layui-form-item layui-form-text">-->
-            <!--<label class="layui-form-label">签名</label>-->
-            <!--<div class="layui-input-block">-->
-            <!--<textarea name="sign" placeholder="请输入内容" class="layui-textarea"></textarea>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                    <button type="button" class="layui-btn layui-btn-primary" id="avatarUpload">
+                        <i class="layui-icon layui-icon-upload"></i>上传图片
+                    </button>
+                    <input class="layui-upload-file" type="file" accept="undefined" name="file">
+                    <input type="hidden" id="picture" name="picture" autocomplete="off" class="layui-input">
+                    <!--<button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button>-->
+                </div>
+                <div class="layui-input-inline">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1"
+                             style="width: 92px;height: 92px;margin: 0 10px 10px 0;">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="save">保存</button>
@@ -94,12 +171,130 @@
             </form>
         </div>
     </div>
+
+    <div class="modal-form" id="teacherModal">
+        <ul class="layim-msgbox" id="teacherList"></ul>
+        <form class="layui-form" style="margin-top:20px;" action="" method="post" lay-filter="searchForm">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-sm6">
+                    <!--<div class="layui-input-block" style="margin-left: 0px">-->
+                    <!--<label class="layui-form-label">查找</label>-->
+                    <input type="text" id="text" name="text" autocomplete="off" placeholder="教师账号/真实姓名"
+                           class="layui-input">
+                    <!--</div>-->
+                </div>
+                <div class="layui-col-sm2">
+                    <button class="layui-btn " lay-submit lay-filter="find"><i
+                            class="layui-icon layui-icon-search layuiadmin-button-btn"></i></button>
+                </div>
+            </div>
+        </form>
+        <ul class="layim-msgbox" id="findList"></ul>
+    </div>
+
+    <div class="modal-form" id="videoModal">
+        <div class="layui-form-item">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn " id="chooseFileButton">选择多文件</button>
+                <button type="button" class="layui-btn" id="uploadFileButton">开始上传</button>
+                <div class="layui-upload-list">
+                    <table class="layui-table">
+                        <thead>
+                        <tr><th>文件名</th>
+                            <th>大小</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody id="fileListOld"></tbody>
+                        <tbody id="fileList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-form" id="resourceModal">
+        <div class="layui-form-item">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn " id="chooseResourceButton">选择多文件</button>
+                <button type="button" class="layui-btn" id="uploadResourceButton">开始上传</button>
+                <div class="layui-upload-list">
+                    <table class="layui-table">
+                        <thead>
+                        <tr><th>文件名</th>
+                            <th>大小</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody id="resourceListOld"></tbody>
+                        <tbody id="resourceList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <script src="../../res/layui/layui.js"></script>
 <script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
 
+<script type="text/html" id="teacherTemplate">
+    {{# layui.each(d.data.teacherList, function(index, item){   }}
+    <li data-id="{{ item.id}}" style="float: left">
+        <a href="/user/home/{{ item.formUserId }}/" target="_blank">
+            <img src="{{ item.avatar }}" class="layui-circle layim-msgbox-avatar">
+        </a>
+        <p class="layim-msgbox-user">
+            <a href="/user/home/{{ item.id }}/" target="_blank">{{ item.realName||'' }}</a>
+        </p>
+        <p class="layim-msgbox-content">
+            ({{ item.account }})
+        </p>
+        <p class="layim-msgbox-btn">
+            <!--<button class="layui-btn layui-btn-small" data-type="add">添加</button>-->
+            <button class="layui-btn layui-btn-small layui-btn-primary teacher" data-type="delete"  data-user="{{item.id}}">移除</button>
+        </p>
+    </li>
+    {{# }); }}
+    {{#  if(d.data.teacherList.length==0){ }}
+    <div class="layui-flow-more">
+        <li class="layim-msgbox-tips">该课程暂无教师</li>
+    </div>
+    {{# }  }}
+</script>
+<script type="text/html" id="findTemplate">
+    {{# layui.each(d.data, function(index, item){   }}
+    <li data-id="{{ item.id}}" style="float: left">
+        <a href="/user/home/{{ item.formUserId }}/" target="_blank">
+            <img src="{{ item.avatar }}" class="layui-circle layim-msgbox-avatar">
+        </a>
+        <p class="layim-msgbox-user">
+            <a href="/user/home/{{ item.id }}/" target="_blank">{{ item.realName||'' }}</a>
+        </p>
+        <p class="layim-msgbox-content">
+            ({{ item.account }})
+        </p>
+        <p class="layim-msgbox-btn">
+            <button class="layui-btn layui-btn-small teacher" data-type="add" data-user="{{item.id}}">添加</button>
+        </p>
+    </li>
+    {{# }); }}
+    {{#  if(d.data.length==0){ }}
+    <div class="layui-flow-more">
+        <li class="layim-msgbox-tips">查无教师</li>
+    </div>
+    {{# }  }}
+</script>
 
+<script type="text/html" id="enabledTemplate">
+    {{#  if(d.enabled){ }}
+    <button class="layui-btn layui-btn-xs">已启用</button>
+    {{# }else{ }}
+    <button class="layui-btn layui-btn-primary layui-btn-xs">待启用</button>
+    {{#  }  }}
+</script>
 <!--target="_blank"-->
 <script type="text/html" id="introductionTemplate">
     <a href="javascript:;" class="layui-table-link">查看</a>
@@ -123,12 +318,14 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table', 'form', 'upload'], function () {
+    }).use(['jquery', 'request', 'table', 'form', 'upload', 'laytpl','layer'], function () {
         var $ = layui.$
         var table = layui.table;
         var request = layui.request;
         var upload = layui.upload;
         var form = layui.form;
+        var laytpl = layui.laytpl;
+        var layer = layui.layer;
 
 
         var E = window.wangEditor
@@ -170,22 +367,18 @@
                 {type: 'checkbox'}
                 , {field: 'id', title: 'ID', sort: true}
                 , {field: 'name', title: '课程名', sort: true}
-                , {field: 'null', title: '课程简介', templet: '#introductionTemplate', event: 'introduction'}
+                , {field: 'synopsis', title: '课程简介', event: 'synopsis'}
+                , {field: 'null', title: '课程介绍', templet: '#introductionTemplate', event: 'introduction'}
                 , {field: 'null', title: '教学方法', templet: '#introductionTemplate', event: 'means'}
-                , {field: 'name', title: '师资队伍'}
+                , {field: 'name', title: '师资队伍', templet: '#introductionTemplate', event: 'teacher'}
+                , {field: 'name', title: '课程视频', templet: '#introductionTemplate', event: 'video'}
+                , {field: 'name', title: '课件', templet: '#introductionTemplate', event: 'resource'}
+                , {field: 'null', title: '状态', templet: '#enabledTemplate', event: 'enabled'}
                 , {field: 'createTime', title: '创建时间', sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
             ]]
             , done: function (res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-                console.log(majorTable)
-                var data = majorTable.config.data;
+
             }
             , where: {
                 name: name,
@@ -254,6 +447,7 @@
                     "id": data.id
                     , "name": data.name
                 })
+                $('#demo1').attr('src', data.picture);
                 majorFormLayerIndex = layer.open({
                     type: 1,
                     area: '550px',
@@ -266,13 +460,177 @@
                 })
                 editor.txt.clear()
                 editor.txt.html(data[obj.event])
-                layer.open({
+                majorFormLayerIndex = layer.open({
                     type: 1,
                     area: '750px',
                     maxmin: true,
                     content: $('#editTextModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                 });
+            } else if (obj.event === 'synopsis') {
+                layer.prompt({
+                    formType: 2
+                    , value: data.synopsis
+                }, function (value, index) {
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/save',
+                        data: {
+                            synopsis: value,
+                            id: data.id
+                        },
+                    }).then(function (result) {
+                            findPage();
+                            layer.close(index);
+                    })
+                });
+            } else if (obj.event == "enabled") {
+                var msg = ""
+                if (data.enabled) {
+                    msg = "是否取消启用？"
+                } else {
+                    msg = "是否启用？"
+                }
+                layer.confirm(msg, function (index) {
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/enabled',
+                        data: {id: data.id},
+                    }).then(function (res) {
+                        if (res.code == "0") {
+                            findPage();
+                            layer.close(index);
+                        }
+                    }).fail(function (e) {
+                        layer.close(index);
+                        layer.msg(e.responseJSON.msg);
+                    })
+                });
+            } else if (obj.event == "teacher") {
+
+                var getTpl = teacherTemplate.innerHTML
+                    , view = document.getElementById('teacherList');
+                laytpl(getTpl).render({data:data}, function (html) {
+                    view.innerHTML = html;
+                });
+                majorFormLayerIndex = layer.open({
+                    type: 1,
+                    area: ['740px', '450px'],
+                    content: $('#teacherModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                });
+                 majorId = obj.data.id;
+
+            }else if (obj.event == "video") {
+                majorId = obj.data.id;
+                majorFormLayerIndex = layer.open({
+                    type: 1,
+                    area: ['740px', '450px'],
+                    content: $('#videoModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                });
+                $("#fileListOld").empty();
+                $("#fileList").empty();
+                if(obj.data.videoList.length>0) {
+                    obj.data.videoList.forEach(function (e, index) {
+                        var tr = $(['<tr id="upload-' + index + '">'
+                            , '<td>' + e.originalName + '</td>'
+                            , '<td>' + (e.size / 1014).toFixed(1) + 'kb</td>'
+                            , '<td>原文件</td>'
+                            , '<td>'
+                            // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                            , '<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                            , '</td>'
+                            , '</tr>'].join(''));
+                        $('#fileListOld').append(tr);
+                        tr.find('.demo-delete').on('click', function () {
+                            layer.confirm('确定删除吗？', function (index) {
+                                request.ajax({
+                                    type: 'POST',
+                                    url: '/major/deleteVideo',
+                                    data: {majorId:majorId,videoName:e.formatName}
+                                }).then(function (res) {
+                                    tr.remove();
+                                    findPage();
+                                    layer.close(index);
+                                })
+                            });
+                        });
+                    })
+                }
+            }else if (obj.event == "resource") {
+                majorId = obj.data.id;
+                majorFormLayerIndex = layer.open({
+                    type: 1,
+                    area: ['740px', '450px'],
+                    content: $('#resourceModal') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                });
+                $("#resourceListOld").empty();
+                $("#resourceList").empty();
+                if(obj.data.resourceList.length>0) {
+                    obj.data.resourceList.forEach(function (e, index) {
+                        var tr = $(['<tr id="upload-' + index + '">'
+                            , '<td>' + e.originalName + '</td>'
+                            , '<td>' + (e.size / 1014).toFixed(1) + 'kb</td>'
+                            , '<td>原文件</td>'
+                            , '<td>'
+                            // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                            , '<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                            , '</td>'
+                            , '</tr>'].join(''));
+                        $('#resourceListOld').append(tr);
+                        tr.find('.demo-delete').on('click', function () {
+                            layer.confirm('确定删除吗？', function (index) {
+                                request.ajax({
+                                    type: 'POST',
+                                    url: '/major/deleteResource',
+                                    data: {majorId:majorId,resourceName:e.formatName}
+                                }).then(function (res) {
+                                    tr.remove();
+                                    findPage();
+                                    layer.close(index);
+                                })
+                            });
+                        });
+                    })
+                }
             }
+        });
+        var majorId
+        $('body').on('click', '.teacher', function () {
+            var othis = $(this);
+            var type = othis.data('type');
+
+            var userId = othis.data('user');
+            request.ajax({
+                type: 'POST',
+                url: '/major/changeUser',
+                data: {type:type,majorId:majorId,userId:userId,}
+            }).then(function (res) {
+                var getTpl = teacherTemplate.innerHTML
+                    , view = document.getElementById('teacherList');
+                laytpl(getTpl).render({data:res.data}, function (html) {
+                    view.innerHTML = html;
+                });
+                findPage();
+            }).fail(function (e) {
+                layer.msg(e.responseJSON.msg);
+            })
+        });
+
+        form.on('submit(find)', function(data){
+            request.ajax({
+                type: 'POST',
+                url: '/user/findTeacher',
+                data: {text:data.field.text}
+            }).then(function (res) {
+                var find= {
+                    data:res.data,
+                }
+                var getTpl = findTemplate.innerHTML
+                    , view = document.getElementById('findList');
+                laytpl(getTpl).render(find, function (html) {
+                    view.innerHTML = html;
+                });
+            })
+            return false;
         });
 
         //请求分页
@@ -300,8 +658,7 @@
             }).then(function (result) {
                 if (result.code == 0) {
                     findPage();
-                    // layer.close(majorFormLayerIndex);
-                    layer.close(layer.index);
+                    layer.close(majorFormLayerIndex);
                 }
             })
             return false;
@@ -317,8 +674,7 @@
             }).then(function (result) {
                 if (result.code == 0) {
                     findPage();
-                    // layer.close(majorFormLayerIndex);
-                    layer.close(layer.index);
+                    layer.close(majorFormLayerIndex);
                 }
             })
             return false;
@@ -333,6 +689,199 @@
         });
         var majorFormLayerIndex;
 
+
+        var uploadInst = upload.render({
+            elem: '#avatarUpload'
+            , url: '/user/upload/'
+            , data: {
+                userId: layui.data('userData').user.id
+            }
+            , field: "multipartFile"
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                $('#picture').val(res.data.src);
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+
+        var demoListView = $('#fileList')
+        var resourceList=[]
+        var uploadListIns=upload.render({
+            elem: '#chooseFileButton'
+            ,url: '/resource/upload/'
+            ,data: {
+                userId: layui.data('userData').user.id,
+                type:"1",
+            }
+            ,multiple: true
+            ,accept: 'video'
+            ,auto: false
+            ,bindAction: '#uploadFileButton'
+            ,field:'file'
+            ,choose: function(obj){
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function(index, file, result){
+                    var tr = $(['<tr id="upload-'+ index +'">'
+                        ,'<td>'+ file.name +'</td>'
+                        ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                        ,'<td>等待上传</td>'
+                        ,'<td>'
+                        // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        ,'</td>'
+                        ,'</tr>'].join(''));
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function(){
+                        obj.upload(index, file);
+                    });
+                    //删除
+                    tr.find('.demo-delete').on('click', function(){
+
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+                    demoListView.append(tr);
+                });
+            }
+            ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                layer.load(); //上传loading
+                resourceList=[]
+            }
+            ,allDone: function(obj){ //当文件全部被提交后，才触发
+                layer.closeAll('loading'); //关闭loading
+                findPage();
+            }
+            ,done: function(res, index, upload){
+                if(res.code == 0){ //上传成功
+                    var tr = demoListView.find('tr#upload-'+ index)
+                        ,tds = tr.children();
+                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                    // tds.eq(3).html('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'); //清空操作
+                    // return delete this.files[index]; //删除文件队列已经上传成功的文件
+                    resourceList.push(res.data);
+                    console.log(resourceList)
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/uploadVideo',
+                        data: {majorId:majorId,videoName:res.data.formatName},
+                    }).then(function (result) {
+
+                    })
+
+
+                    return;
+                }
+                this.error(index, upload);
+            }
+            ,error: function(index, upload){
+                var tr = demoListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        })
+
+        var resourceListView = $('#resourceList')
+        var uploadResourceListIns=upload.render({
+            elem: '#chooseResourceButton'
+            ,url: '/resource/upload/'
+            ,data: {
+                userId: layui.data('userData').user.id,
+                type:"1",
+            }
+            ,multiple: true
+            ,accept: 'file'
+            ,auto: false
+            ,bindAction: '#uploadResourceButton'
+            ,field:'file'
+            ,choose: function(obj){
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function(index, file, result){
+                    var tr = $(['<tr id="upload-'+ index +'">'
+                        ,'<td>'+ file.name +'</td>'
+                        ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                        ,'<td>等待上传</td>'
+                        ,'<td>'
+                        // ,'<button type="button" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        ,'</td>'
+                        ,'</tr>'].join(''));
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function(){
+                        obj.upload(index, file);
+                    });
+                    //删除
+                    tr.find('.demo-delete').on('click', function(){
+                        resourceList.forEach(function (e,idx) {
+                            if(e.originalName==file.name){
+                                resourceList.splice(idx,1);
+                                return false;
+                            }
+                        })
+                        console.log(resourceList)
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+                    resourceListView.append(tr);
+                });
+            }
+            ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                layer.load(); //上传loading
+                resourceList=[]
+            }
+            ,allDone: function(obj){ //当文件全部被提交后，才触发
+                layer.closeAll('loading'); //关闭loading
+                findPage();
+            }
+            ,done: function(res, index, upload){
+                if(res.code == 0){ //上传成功
+                    var tr = resourceListView.find('tr#upload-'+ index)
+                        ,tds = tr.children();
+                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                    // tds.eq(3).html('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'); //清空操作
+                    // return delete this.files[index]; //删除文件队列已经上传成功的文件
+                    resourceList.push(res.data);
+                    console.log(resourceList)
+                    request.ajax({
+                        type: 'POST',
+                        url: '/major/uploadResource',
+                        data: {majorId:majorId,resourceName:res.data.formatName},
+                    }).then(function (result) {
+
+                    })
+                    return;
+                }
+                this.error(index, upload);
+            }
+            ,error: function(index, upload){
+                var tr = resourceListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        });
 
     });
 </script>

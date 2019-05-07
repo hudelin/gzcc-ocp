@@ -18,6 +18,8 @@ public class UserDTO {
     @Getter @Setter
     private Long id;
     @Getter @Setter
+    private Long userId;
+    @Getter @Setter
     private String username;
     @Getter @Setter
     private String avatar;
@@ -25,6 +27,8 @@ public class UserDTO {
     private String content;
     @Getter @Setter
     private Boolean mine=true;
+    @Getter @Setter
+    private Boolean deleted=true;
     @Getter @Setter
     private String type;
     @Getter @Setter
@@ -43,5 +47,8 @@ public class UserDTO {
     private List<UserDTO> userList=new ArrayList<>();
     @Getter@Setter
     private String collectNote;
-
+    @Getter@Setter
+    private String introduction;
+    @Getter@Setter
+    private User user;
 }

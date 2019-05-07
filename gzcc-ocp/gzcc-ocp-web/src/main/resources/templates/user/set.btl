@@ -4,6 +4,7 @@
     <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
     <meta charset="utf-8">
     <title>帐号设置</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
@@ -18,15 +19,15 @@
     <!--<% include("/common/user-nav.btl"){} %>-->
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
         <li class="layui-nav-item">
-            <a href="/user/home">
+            <a href="javascript:;" id="homeA">
                 <i class="layui-icon">&#xe609;</i>
                 我的主页
             </a>
         </li>
         <li class="layui-nav-item">
-            <a href="/user/index">
+            <a href="/user/note">
                 <i class="layui-icon">&#xe612;</i>
-                用户中心
+                我的帖子
             </a>
         </li>
         <li class="layui-nav-item layui-this">
@@ -64,17 +65,16 @@
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
-                    <form method="post">
-                        <div class="layui-form-item">
-                            <label for="L_email" class="layui-form-label">邮箱</label>
-                            <div class="layui-input-inline">
-                                <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" value=""
-                                       class="layui-input">
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html"
-                                                                                               style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。
-                            </div>
-                        </div>
+                    <form class="layui-form" method="post" lay-filter="info">
+                        <!--<div class="layui-form-item">-->
+                            <!--<label for="L_email" class="layui-form-label">邮箱</label>-->
+                            <!--<div class="layui-input-inline">-->
+                                <!--<input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" value=""-->
+                                       <!--class="layui-input">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="layui-form-item">
                             <label for="L_username" class="layui-form-label">昵称</label>
                             <div class="layui-input-inline">
@@ -83,17 +83,17 @@
                             </div>
                             <div class="layui-inline">
                                 <div class="layui-input-inline">
-                                    <input type="radio" name="sex"  value="0" checked title="男">
-                                    <input type="radio" name="sex"   value="1"  title="女">
+                                    <input type="radio" name="gender"  value="0" title="男" checked>
+                                    <input type="radio" name="gender"   value="1"  title="女">
                                 </div>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <label for="L_city" class="layui-form-label">城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" id="L_city" name="city" autocomplete="off" value="" class="layui-input">
-                            </div>
-                        </div>
+                        <!--<div class="layui-form-item">-->
+                            <!--<label for="L_city" class="layui-form-label">城市</label>-->
+                            <!--<div class="layui-input-inline">-->
+                                <!--<input type="text" id="L_city" name="city" autocomplete="off" value="" class="layui-input">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="layui-form-item layui-form-text">
                             <label for="L_sign" class="layui-form-label">签名</label>
                             <div class="layui-input-block">
@@ -102,8 +102,9 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="set-mine" lay-filter="saveInfo" lay-submit>确认修改</button>
                         </div>
+                    </form>
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item" >
@@ -113,7 +114,7 @@
                             <!--<button type="button" class="layui-btn layui-btn-normal" >-->
                                 <!--<i class="layui-icon">&#xe67c;</i>上传头像-->
                             <!--</button>-->
-                            <img class="avatar-image" src="">
+                            <img class="avatar-image" src="" id="avatar">
                             <span class="loading"></span>
                         </div>
                     </div>
@@ -125,30 +126,30 @@
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form action="/user/repass" method="post">
+                    <form action="/user/repass" method="post" lay-filter="rePassword">
                         <div class="layui-form-item">
                             <label for="L_nowpass" class="layui-form-label">当前密码</label>
                             <div class="layui-input-inline">
-                                <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required" autocomplete="off"
+                                <input type="password" id="L_nowpass" name="password" required lay-verify="required" autocomplete="off"
                                        class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label for="L_pass" class="layui-form-label">新密码</label>
                             <div class="layui-input-inline">
-                                <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="password" id="L_pass" name="newPassword" required lay-verify="required|newPassword" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">6到16个字符</div>
                         </div>
                         <div class="layui-form-item">
                             <label for="L_repass" class="layui-form-label">确认密码</label>
                             <div class="layui-input-inline">
-                                <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off"
+                                <input type="password" id="L_repass" name="rePassword" required lay-verify="required|rePassword" autocomplete="off"
                                        class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="set-mine" lay-filter="savePassword" lay-submit>确认修改</button>
                         </div>
                     </form>
                 </div>
@@ -190,10 +191,8 @@
 </div>
 
 <script src="/res/layui/layui.js"></script>
-<!--<script src="/res/mods/vue.js"></script>-->
-<script>
+<script src="../res/mods/chat.js"></script>
 
-</script>
 <script>
     layui.cache.page = 'user';
     layui.cache.user = {
@@ -208,12 +207,68 @@
         , base: '../../res/mods/'
     }).extend({
         fly: 'index'
-    }).use(['fly', 'upload', 'jquery', 'croppers','request'], function () {
+    }).use(['fly', 'upload', 'jquery', 'request','form','layer'], function () {
         var $ = layui.$;
         var upload = layui.upload;
         var request = layui.request;
+        var form = layui.form;
+        var layer = layui.layer;
         var avatarAdd = $('.avatar-add');
+        var user
+        request.ajax({
+            type: 'POST',
+            url: '/user/getDetail',
+            // data: {userId: layui.data('userData').user.id,}
+        }).then(function (res) {
+            user =res.data
+            $("#avatar").attr('src',user.avatar);
+            form.val("info", {
+                "username": user.username
+                , "sign": user.sign
+                , "gender": user.gender
+            })
+        })
 
+       $('#homeA').on('click',(function () {
+           window.location.href="/user/home/"+layui.data('userData').user.id
+       }))
+
+        form.on('submit(saveInfo)', function (data) {
+            data.field.id=user.id
+            request.ajax({
+                type: 'POST',
+                url: '/user/saveUser',
+                data: data.field,
+            }).then(function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                } else {
+
+                }
+            }).fail(function (e) {
+
+            })
+            return false;
+        });
+        form.on('submit(savePassword)', function (data) {
+            if(data.field.newPassword!=data.field.rePassword){
+                layer.msg("两次密码不一致");
+                return false;
+            }
+            data.field.id=user.id
+            request.ajax({
+                type: 'POST',
+                url: '/user/changePassword',
+                data: data.field,
+            }).then(function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                }
+            }).fail(function (e) {
+                layer.msg(e.responseJSON.msg);
+            })
+            return false;
+        });
 
         // 选完文件后不自动上传
         upload.render({
@@ -246,6 +301,7 @@
                         },
                     }).then(function (result) {
                       if(result.code == 0){
+                         layer.msg("修改成功")
                           location.reload();
                       }
                     })
@@ -253,22 +309,16 @@
                 // avatarAdd.find('.loading').show();
             }
         });
-
-        // var croppers = layui.croppers;
-        //
-        // //创建一个头像上传组件
-        // croppers.render({
-        //     elem: '#test8'
-        //     ,saveW:150     //保存宽度
-        //     ,saveH:150
-        //     ,mark:1/1    //选取比例
-        //     ,area:'900px'  //弹窗宽度
-        //     ,url: "/user/upload/"  //图片上传接口返回和（layui 的upload 模块）返回的JOSN一样
-        //     ,done: function(url){ //上传完毕回调
-        //         $("#inputimgurl").val(url);
-        //         $("#srcimgurl").attr('src',url);
-        //     }
-        // });
+        form.verify({
+            newPassword: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,rePassword: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+        });
 
     });
 </script>

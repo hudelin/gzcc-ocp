@@ -6,6 +6,7 @@ import com.hdl.gzccocpcore.dto.MessageDTO;
 import com.hdl.gzccocpcore.dto.SendDTO;
 import com.hdl.gzccocpcore.dto.UserDTO;
 import com.hdl.gzccocpcore.entity.Role;
+import com.hdl.gzccocpcore.response.ObjectRestResponse;
 import com.hdl.gzccocpcore.service.MessageService;
 import net.sf.json.JSONObject;
 import org.apache.tomcat.util.json.JSONParser;
@@ -85,7 +86,6 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) {
         log.info("收到来自窗口" + sid + "的信息:" + message);
         //群发消息
-
         JSONObject jsonObject = JSONObject.fromObject(message);
         //如果属性中含有复杂的类型，当其中属性有类似List ,如List<UserDTO> userList, 可以先定义Map<String, Class> classMap = new HashMap<>();在classMap中put你要转换的类中的集合名,像:classMap.put("userList", UserDTO.class)
         Map<String, Class> classMap = new HashMap<>();
@@ -101,13 +101,16 @@ public class WebSocketServer {
             e.printStackTrace();
         }
         for(MessageDTO messageDTO:messageDTOList){
-            JSONObject json = JSONObject.fromObject(messageDTO);//将java对象转换为json对象
+
+            ObjectRestResponse objectRestResponse = new ObjectRestResponse(messageDTO);
+            objectRestResponse.setMsg("chatMessage");
+            JSONObject json = JSONObject.fromObject(objectRestResponse);//将java对象转换为json对象
             String str = json.toString();
             for (WebSocketServer item : webSocketSet) {
                 try {
                     if (!messageDTO.getMine()&&item.sid.equals(messageDTO.getToid())) {
                         item.sendMessage(str);
-                        messageService.readMessage(messageDTO.getCid());
+//                        messageService.readMessage(messageDTO.getCid());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

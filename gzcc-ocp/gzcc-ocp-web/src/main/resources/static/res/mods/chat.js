@@ -1,10 +1,4 @@
-// layui.config({
-//     version: "3.0.0"
-//     , base: '../../res/mods/'
-// }).extend({
-//     socket: 'socket'
-// })
-layui.use(['layim', 'jquery', 'layer','request'], function () {
+layui.use(['layim', 'jquery', 'layer', 'request'], function () {
     var layim = layui.layim;
     var $ = layui.$;
     var layer = layui.layer;
@@ -24,64 +18,21 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
             // socket.send("这是来自客户端的消息" + location.href + new Date());
 
         };
-
-        var a={
-            "type":"chatMessage",
-            "data":{
-                "mine":{
-                    "username":"hdl",
-                    "avatar":"/uploads/0019030515430300001.png",
-                    "id":1,
-                    "mine":true,
-                    "content":"778"
-                },
-                "to":{
-                    "id":1,
-                    "createTime":"2019-03-05 23:46:34",
-                    "lastModifiedTime":"2019-03-05 23:46:37",
-                    "groupname":"一群","avatar":"/uploads/0019030515430300001.png",
-                    "userList":[
-                        {
-                            "id":1,
-                            "createTime":"2019-03-05 15:10:45",
-                            "lastModifiedTime":"2019-03-05 15:43:04",
-                            "account":"hdl",
-                            "username":"hdl",
-                            "email":null,
-                            "gender":null,
-                            "avatar":"/uploads/0019030515430300001.png",
-                            "sign":null,
-                            "ban":null,
-                            "roleList":[{"id":1,"createTime":null,"lastModifiedTime":null,"name":"ROLE_ADMIN","description":null},{"id":2,"createTime":null,"lastModifiedTime":null,"name":"ROLE_USER","description":null}],
-                            "collectNote":null},
-                        {
-                            "id":2,
-                            "createTime":"2019-03-05 15:43:52",
-                            "lastModifiedTime":"2019-03-05 15:43:52",
-                            "account":"czx",
-                            "username":"woerzhi",
-                            "email":null,
-                            "gender":null,
-                            "avatar":"/uploads/0019030515430300001.png",
-                            "sign":null,"ban":null,"roleList":[],
-                            "collectNote":null
-                        }],
-                    "name":"一群",
-                    "type":"group"
-                }
-             }
-        }
         //获得消息事件
-        socket.onmessage = function (res) {
+        socket.onmessage = function (message) {
             // console.log("发现消息进入");
-            console.log(res);
+            console.log(message);
             // console.log(res.data);
             // res = JSON.parse(res);
             //发现消息进入    开始处理前端触发逻辑
-            var data = JSON.parse(res.data);
-            // if(res.type === 'chatMessage'){
-                layim.getMessage(data); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
-            // }
+            var res = JSON.parse(message.data);
+            if(res.msg === 'chatMessage'){
+                layim.getMessage(res.data); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+            }else if(res.msg === 'addList'){
+                res.data.groupid=res.data.groupId;
+                layim.addList(res.data);
+                // friendMenu();
+            }
         };
         //关闭事件
         socket.onclose = function () {
@@ -166,11 +117,10 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
         , min: true //是否始终最小化主面板，默认false
         //,notice: true //是否开启桌面消息提醒，默认false
         //,voice: false //声音提醒，默认开启，声音文件为：default.mp3
-
         ,
-        msgbox: '/layim/demo/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+        msgbox: '/chat/message' //消息盒子页面地址，若不开启，剔除该项即可
         ,
-        find: '/layim/demo/find.html' //发现页面地址，若不开启，剔除该项即可
+        find: '/chat/find' //发现页面地址，若不开启，剔除该项即可
         ,
         chatLog: '/layim/demo/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
 
@@ -207,7 +157,7 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
         console.log(data);
         socket.send(JSON.stringify({
             type: 'chatMessage' //随便定义，用于在服务端区分消息类型
-            ,data: data
+            , data: data
         }));
         // if (To.type === 'friend') {
         //     layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
@@ -250,6 +200,48 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
     //监听查看群员
     layim.on('members', function (data) {
         console.log(data);
+        var index;
+        $('body').find('.layui-layer-content .layim-members-list li').contextmenu(function (e) {
+            e.preventDefault();
+            if (index != null) {
+                layer.close(index);
+            }
+            var othis = $(this);
+            var id = othis[0].uid;
+            console.log(e)
+            console.log(e.currentTarget.classList[0])
+            var html = '<ul id="contextmenu_' + othis[0].id + '" data-id="' + othis[0].id + '" data-index="' + othis.data('index') + '">';
+            html += '<li class="group-li" layim-event="menu_delete" style="padding:5px 0px;width:110px; text-align:center;"   data-type="add" data-id="1" >' + '添加好友</li>';
+            html += '<li class="group-li" layim-event="menu_moveto" style="padding:5px 0px;width:110px;text-align:center;">' + '移动分组</li></ul>';
+            // layer.tips('默认就是向右的', '.layim-friend4');
+
+            index = layer.open({
+                shade: 0,
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                content: html, //这里content是一个普通的String
+                offset: [(document.body.offsetHeight - e.clientY) > 58 ? e.clientY : e.clientY - 58, (document.body.offsetWidth - e.clientX) > 110 ? e.clientX : e.clientX - 110]
+            });
+
+            // $('body').find('.group-li ').click(function (e) {
+            //     console.log(e)
+            //     var othis = $(this), type = othis.data('type'), id = othis.data('id');
+            // })
+
+            $('.group-li').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        $('body').click(function (e) {
+            console.log(e)
+            if (index != null) {
+                layer.close(index);
+            }
+        })
+
+
     });
 
     //监听聊天窗口的切换
@@ -269,13 +261,11 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
             });
         }
     });
+    var index;
 
-    layim.on('ready', function (options) {
+    function menu() {
 
-        // console.log(options);
-        // console.log($('body').find('.layim-list-friend'),"zhao")
-        var index;
-        $('body').find('.layim-list-friend .layui-layim-list li').contextmenu(function (e) {
+        $('body').find('.layim-list-friend  h5').contextmenu(function (e) {
             if (index != null) {
                 layer.close(index);
             }
@@ -284,29 +274,104 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
             console.log(e)
             console.log(e.currentTarget.classList[0])
             var html = '<ul id="contextmenu_' + othis[0].id + '" data-id="' + othis[0].id + '" data-index="' + othis.data('index') + '">';
-            // html += '<li layim-event="menu_chat">' + '发送即时消息</li>';
-            // html += '<li layim-event="menu_profile">' + '查看资料</li>';
-            // html += '<li layim-event="menu_history">' + '消息记录</li>';
-            // html += '<li layim-event="menu_nomsg">' + '屏蔽消息</li>';
-            html += '<li layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '删除好友</li>';
-            html += '<li layim-event="menu_moveto" style="padding:5px 0px;width:110px;text-align:center;">' + '移动分组</li></ul>';
-            // layer.tips('默认就是向右的', '.layim-friend4');
-
+            html += '<li class="group-li" data-type="deleteGroup" layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '删除分组</li>';
+            html += '<li class="group-li" data-type="rename" layim-event="menu_moveto" style="padding:5px 0px;width:110px;text-align:center;">' + '重命名</li></ul>';
             index = layer.open({
                 shade: 0,
                 type: 1,
                 title: false,
                 closeBtn: 0,
                 content: html, //这里content是一个普通的String
-                offset: [(document.body.offsetHeight-e.clientY)>58? e.clientY:e.clientY-58 , (document.body.offsetWidth-e.clientX)>110? e.clientX:e.clientX-110]
+                offset: [(document.body.offsetHeight - e.clientY) > 58 ? e.clientY : e.clientY - 58, (document.body.offsetWidth - e.clientX) > 110 ? e.clientX : e.clientX - 110]
+            });
+            $('.group-li').on('click', function () {
+                var type = $(this).data('type');
+                console.log(type)
+                active[type] ? active[type].call(this, othis) : '';
             });
         });
-        $('body').click(function (e) {
-            console.log(e)
+        $('body').on('click', function () {
             if (index != null) {
                 layer.close(index);
             }
         })
+    }
+
+    function friendMenu() {
+        $('body').find('.layim-list-friend .layui-layim-list').on('contextmenu','li',(function (e) {
+            if (index != null) {
+                layer.close(index);
+            }
+            var othis = $(this);
+            var id = othis[0].id;
+            if (othis.attr('class') != "layim-null") {
+                console.log(e)
+                console.log(e.currentTarget.classList[0])
+                var html = '<ul id="contextmenu_' + othis[0].id + '" data-id="' + othis[0].id + '" data-index="' + othis.data('index') + '">';
+                // html += '<li layim-event="menu_chat">' + '发送即时消息</li>';
+                // html += '<li layim-event="menu_profile">' + '查看资料</li>';
+                // html += '<li layim-event="menu_history">' + '消息记录</li>';
+                // html += '<li layim-event="menu_nomsg">' + '屏蔽消息</li>';
+                html += '<li class="group-li" data-type="removeFriend" layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '删除好友</li>';
+                html += '<li class="group-li" data-type="moveFriend" layim-event="menu_moveto" style="padding:5px 0px;width:110px;text-align:center;">' + '移动分组</li></ul>';
+                index = layer.open({
+                    shade: 0,
+                    type: 1,
+                    title: false,
+                    closeBtn: 0,
+                    content: html, //这里content是一个普通的String
+                    offset: [(document.body.offsetHeight - e.clientY) > 58 ? e.clientY : e.clientY - 58, (document.body.offsetWidth - e.clientX) > 110 ? e.clientX : e.clientX - 110]
+                });
+                $('.group-li').on('click', function () {
+                    var type = $(this).data('type');
+                    console.log(type)
+                    active[type] ? active[type].call(this, othis) : '';
+                });
+            }
+        }));
+
+        $('body').on('click', function () {
+            if (index != null) {
+                layer.close(index);
+            }
+        })
+    }
+
+    layim.on('ready', function (options) {
+        // console.log(options);
+        // console.log($('body').find('.layim-list-friend'),"zhao")
+        menu()
+        friendMenu();
+        var othis = $(this);
+        $('body').on('click', function () {
+            if (index != null) {
+                layer.close(index);
+            }
+        })
+        $('body').find('.layui-layim-tab  li').contextmenu(function (e) {
+            if (index != null) {
+                layer.close(index);
+            }
+            // if($(this).attr('title')=="联系人"){
+                var html = '<ul id="contextmenu_' + othis[0].id + '" data-id="' + othis[0].id + '" data-index="' + othis.data('index') + '">';
+                html += '<li class="group-li" data-type="createGroup" layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '创建分组</li>';
+                  html += '<li class="group-li" data-type="createGroup" layim-event="menu_delete" style="padding:5px 0px;width:110px;text-align:center;" >' + '创建群</li>';
+            index = layer.open({
+                    shade: 0,
+                    type: 1,
+                    title: false,
+                    closeBtn: 0,
+                    content: html, //这里content是一个普通的String
+                    offset: [(document.body.offsetHeight - e.clientY) > 58 ? e.clientY : e.clientY - 58, (document.body.offsetWidth - e.clientX) > 110 ? e.clientX : e.clientX - 110]
+                });
+                $('.group-li').on('click', function () {
+                    var type = $(this).data('type');
+                    console.log(type)
+                    active[type] ? active[type].call(this, othis) : '';
+                });
+            // }
+        });
+
     });
 
 
@@ -379,7 +444,6 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
                         }, function () {
                             layer.close(index);
                         });
-
                         //通知对方
                         /*
                         $.post('/im-applyFriend/', {
@@ -476,15 +540,61 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
                     members: 0
                 });
             },
-            removeFriend: function () {
-                layer.msg('已成功删除[凤姐]', {
-                    icon: 1
+            removeFriend: function (othis) {
+                var userId = othis.attr('class').substring(12);
+                layer.confirm('确定删除好友吗？', function (index) {
+                    request.ajax({
+                        type: 'POST',
+                        url: '/friend/deleteFriend',
+                        data: {myId: layui.data('userData').user.id, userId: userId}
+                    }).then(function (res) {
+                        layer.msg("删除成功");
+                        //删除一个好友
+                        layim.removeList({
+                            id: userId,
+                            type: 'friend'
+                        });
+                    })
                 });
-                //删除一个好友
-                layim.removeList({
-                    id: 121286,
-                    type: 'friend'
-                });
+            },
+            moveFriend: function (othis) {
+                var userId = othis.attr('class').substring(12);
+                var user;
+                request.ajax({
+                    type: 'POST',
+                    url: '/user/findByUserId',
+                    data: {userId: userId}
+                }).then(function (res) {
+                    user = res.data
+                    layim.setFriendGroup({
+                        type: 'friend'
+                        , username: user.username
+                        , avatar: user.avatar
+                        , group: layim.cache().friend //获取好友列表数据
+                        , submit: function (group, index) {
+                            layim.removeList({
+                                id: userId,
+                                type: 'friend'
+                            });
+                            layim.addList({
+                                type: 'friend'
+                                , username: user.username
+                                , avatar: user.avatar
+                                , groupid: group //所在的分组id
+                                , id: user.id //好友ID
+                                , sign: user.sign //好友签名
+                            });
+                            layer.close(index);
+                            // friendMenu();
+                            request.ajax({
+                                type: 'POST',
+                                url: '/friend/moveFriend',
+                                data: {userId: userId, myId: layui.data('userData').user.id, id: group}
+                            }).then(function (res) {
+                            })
+                        }
+                    });
+                })
             },
             removeGroup: function () {
                 layer.msg('已成功删除[前端群]', {
@@ -500,7 +610,6 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
             ,
             setGray: function () {
                 layim.setFriendStatus(168168, 'offline');
-
                 layer.msg('已成功将好友[马小云]置灰', {
                     icon: 1
                 });
@@ -513,6 +622,85 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
                 layer.msg('成功取消好友[马小云]置灰状态', {
                     icon: 1
                 });
+            },
+            deleteGroup: function (othis) {
+                var groupname = othis.children("span").text()
+                if (groupname == "我的好友") {
+                    layer.msg("该分组不能删除");
+                } else {
+                    var id = layim.cache().friend.find(e => e.groupname == groupname).id
+                    layer.confirm('确定删除该分组吗（该分组好友也将全部删除）？', function (index) {
+                        request.ajax({
+                            type: 'POST',
+                            url: '/friend/deleteGroup',
+                            data: {id: id}
+                        }).then(function (res) {
+                            layer.msg("删除成功");
+
+                            layim.cache().friend.forEach(function (e,index) {
+                                if(e.groupname == groupname){
+                                    layim.cache().friend.splice(index,1);
+
+                                    $('.layim-list-friend')[0].childNodes[index].remove()
+                                }
+                            })
+
+                            menu()
+                        })
+                    });
+                }
+            },
+            createGroup: function(othis){
+                layer.prompt({
+                    value: "",
+                    title: '请输入分组名',
+                }, function (value, index, elem) {
+                    request.ajax({
+                        type: 'POST',
+                        url: '/friend/createGroup',
+                        data: {userId: layui.data('userData').user.id,groupname:value}
+                    }).then(function (res) {
+                        var li='<li>'+
+                            '<h5 layim-event="spread" lay-type="false">'+
+                            '<i class="layui-icon">&#xe61a;</i>'+
+                            '<span>'+value+'</span>'+
+                            '<em>(<cite class="layim-count"> 0</cite>)</em>'+
+                            '</h5>'+
+                            '<ul class="layui-layim-list ">'+
+                            '<li class="layim-null">该分组下暂无好友</li>'+
+                            '</ul>'+
+                            '</li>';
+                        //找到主面板里好友列表，新增一列
+                        $('.layim-list-friend').append($(li));
+                       layim.cache().friend.push(res.data);
+                        layer.close(index);
+                        menu()
+                    })
+                });
+
+            }
+            ,
+            rename: function (othis) {
+                var groupname = othis.children("span").text()
+                if (groupname == "我的好友") {
+                    layer.msg("该分组不能改名");
+                } else {
+                    var id = layim.cache().friend.find(e => e.groupname == groupname).id
+                    layer.prompt({
+                        value: groupname,
+                        title: '请输入值',
+                    }, function (value, index, elem) {
+                        request.ajax({
+                            type: 'POST',
+                            url: '/friend/changeGroupName',
+                            data: {id: id,changeGroupName:value}
+                        }).then(function (res) {
+                            layer.msg("修改成功");
+                            layer.close(index);
+                            menu()
+                        })
+                    });
+                }
             }
             //移动端版本
             ,
@@ -551,4 +739,6 @@ layui.use(['layim', 'jquery', 'layer','request'], function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
+
+
 });

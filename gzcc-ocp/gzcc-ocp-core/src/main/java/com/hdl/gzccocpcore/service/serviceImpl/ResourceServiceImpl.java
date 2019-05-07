@@ -55,7 +55,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> impleme
         resource.setResourceType(type);
         resource.setUserId(userId);
         resource.setFormatName(fileName);
-        resource.setOriginalName(multipartFile.getOriginalFilename());
+        resource.setOriginalName(multipartFile.getOriginalFilename().substring(0,multipartFile.getOriginalFilename().lastIndexOf(".")));
         resource.setSuffix(suffix);
         resource.setSize(multipartFile.getSize());
         resourceRepository.save(resource);

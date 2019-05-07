@@ -21,6 +21,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,7 +52,7 @@ public class UserController {
 
     private String login = header + "/login.btl";
     private String home = header + "/home.btl";
-    private String index = header + "/index.btl";
+    private String note = header + "/note.btl";
     private String set = header + "/set.btl";
     private String message = header + "/message.btl";
     private String forget = header + "/forget.btl";
@@ -75,17 +76,18 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping(value = "/home")
-    public ModelAndView home(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    @RequestMapping(value = "/home/{userId}")
+    public ModelAndView home(@PathVariable Long userId, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("userId", userId);
         mv.setViewName(home);
         return mv;
     }
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/note")
     public ModelAndView index(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName(index);
+        mv.setViewName(note);
         return mv;
     }
 
@@ -120,7 +122,6 @@ public class UserController {
         return mv;
     }
 
-
     @RequestMapping("/getDetail")
     @ResponseBody
     public ObjectRestResponse getDetail() throws Exception {
@@ -130,10 +131,16 @@ public class UserController {
         return new ObjectRestResponse(user);
     }
 
+    @RequestMapping("/findByUserId")
+    @ResponseBody
+    public ObjectRestResponse findByUserId(Long userId) throws Exception {
+        User user = userService.get(userId);
+        return new ObjectRestResponse(user);
+    }
+
     @RequestMapping("/findAll")
     @ResponseBody
     public List<User> findAll() throws Exception {
-//        String imageCode = (String) redisCacheTemplate.opsForValue().get("imageCode");
         List<User> userList = userService.findAll();
         return userList;
     }
@@ -224,7 +231,7 @@ public class UserController {
     @RequestMapping("/collectNote")
     public ObjectRestResponse collectNote(Long userId, Long noteId) throws Exception {
         User user = userService.collectNote(userId, noteId);
-        return new ObjectRestResponse();
+        return new ObjectRestResponse(user);
     }
 
     @ResponseBody
@@ -233,6 +240,28 @@ public class UserController {
         User user = userService.removeNote(userId, noteId);
         return new ObjectRestResponse(user);
     }
+
+    @ResponseBody
+    @RequestMapping("/find")
+    public ObjectRestResponse find(String text) throws Exception {
+        List<User> userList=userService.find(text);
+        return new ObjectRestResponse(userList);
+    }
+
+    @ResponseBody
+    @RequestMapping("/findTeacher")
+    public ObjectRestResponse findTeacher(String text) throws Exception {
+        List<User> userList=userService.findTeacher(text);
+        return new ObjectRestResponse(userList);
+    }
+
+    @RequestMapping("/changePassword")
+    @ResponseBody
+    private ObjectRestResponse changePassword(Long id,String password,String newPassword, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        userService.changePassword(id,password,newPassword);
+        return new ObjectRestResponse();
+    }
+
 
 
     @RequestMapping("/upload")

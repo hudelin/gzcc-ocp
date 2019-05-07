@@ -34,11 +34,22 @@ public class NoteController {
     @Autowired
     private MajorService majorService;
 
+    @RequestMapping(value = "")
+    public ModelAndView register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/note/major.btl");
+        return mv;
+    }
+
     @RequestMapping(value = "/major/{majorId}")
     public ModelAndView major(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable Long majorId,String noteType) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.addObject("majorId", majorId);
+        if(StringUtils.isEmpty(noteType)){
+            noteType="0";
+        }
         mv.addObject("noteType", noteType);
+        mv.addObject("index",1);
         mv.addObject("major", majorService.get(majorId));
         mv.setViewName("/note/majorIndex.btl");
         return mv;
@@ -52,17 +63,26 @@ public class NoteController {
         return mv;
     }
 
-    @RequestMapping(value = "/detail/{noteId}")
-    public ModelAndView detail(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable Long noteId) throws Exception {
+    @RequestMapping(value = "/{majorId}/detail/{noteId}")
+    public ModelAndView detail( @PathVariable Long majorId,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable Long noteId) throws Exception {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("majorId", majorId);
+        mv.addObject("major", majorService.get(majorId));
         mv.addObject("noteId", noteId);
+        mv.addObject("noteType", "0");
         mv.setViewName("/note/detail.btl");
         return mv;
     }
 
-    @RequestMapping(value = "/index")
-    public ModelAndView index(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    @RequestMapping(value = "/{majorId}/index")
+    public ModelAndView index( @PathVariable Long majorId,String noteType,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("majorId", majorId);
+        mv.addObject("major", majorService.get(majorId));
+        if(StringUtils.isEmpty(noteType)){
+            noteType="";
+        }
+        mv.addObject("noteType", noteType);
         mv.setViewName("/note/index.btl");
         return mv;
     }
@@ -144,6 +164,33 @@ public class NoteController {
         return new ObjectRestResponse(notePage);
     }
 
+    @RequestMapping(value = "/findNoteTop")
+    @ResponseBody
+    public ObjectRestResponse findNoteTop(Long  majorId ) throws Exception {
+        List<Note> noteList = noteService.findNoteTop(majorId);
+        return new ObjectRestResponse(noteList);
+    }
+
+    @RequestMapping(value = "/findReplyTop")
+    @ResponseBody
+    public ObjectRestResponse findReplyTop(Long  majorId) throws Exception {
+        List<Note> noteList = noteService.findReplyTop(majorId);
+        return new ObjectRestResponse(noteList);
+    }
+
+    @RequestMapping(value = "/findMyNote")
+    @ResponseBody
+    public ObjectRestResponse findMyNote(Long  userId) throws Exception {
+        List<Note> noteList = noteService.findMyNote(userId);
+        return new ObjectRestResponse(noteList);
+    }
+
+    @RequestMapping(value = "/findMyCollect")
+    @ResponseBody
+    public ObjectRestResponse findMyCollect(Long  userId) throws Exception {
+        List<Note> noteList = noteService.findMyCollect(userId);
+        return new ObjectRestResponse(noteList);
+    }
 
 
 }

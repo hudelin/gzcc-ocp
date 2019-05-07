@@ -44,11 +44,6 @@ public class Reply implements Serializable {
     @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
-
-
     @Column(columnDefinition = "text")
     @Getter
     @Setter
@@ -80,6 +75,5 @@ public class Reply implements Serializable {
     @Getter
     @Setter
     private User user;
-
 
 }

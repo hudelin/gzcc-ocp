@@ -64,13 +64,6 @@ public class AdminController {
         return mv;
     }
 
-//    @RequestMapping("/teachingTeam")
-//    public ModelAndView teachingTeam(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("/admin/teachingTeam.btl");
-//        return mv;
-//    }
-
 
 
 }

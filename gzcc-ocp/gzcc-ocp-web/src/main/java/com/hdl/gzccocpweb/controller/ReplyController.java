@@ -35,6 +35,7 @@ public class ReplyController {
         }else{
             reply = replyService.update(reply);
         }
+        noteService.updateReplyCount(noteId);
         return new ObjectRestResponse (reply);
     }
     @RequestMapping(value = "/changeAccept")

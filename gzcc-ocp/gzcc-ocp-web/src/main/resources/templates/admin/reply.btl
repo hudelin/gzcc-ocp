@@ -161,12 +161,13 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table', 'form', 'upload'], function () {
+    }).use(['jquery', 'request', 'table', 'form', 'upload','layer'], function () {
         var $ = layui.$
         var table = layui.table;
         var request = layui.request;
         var upload = layui.upload;
         var form = layui.form;
+        var layer = layui.layer;
 
         var E = window.wangEditor
         var editor = new E('#toolbar', '#content')  // 两个参数也可以传入 elem 对象，class 选择器

@@ -52,14 +52,24 @@ public class Message implements Serializable {
     @Setter
     private Long toUserId;
 
+    @Getter
+    @Setter
+    private Long groupId;
+
+
     @Column(columnDefinition = "text")
     @Getter
     @Setter
-    private String content;//内容
+    private String content;
+
+    @Column(columnDefinition = "text")
+    @Getter
+    @Setter
+    private String remark;
 
     @Getter
     @Setter
-    private String type;//内容
+    private String type;
 
     @Getter
     @Setter
@@ -76,6 +86,15 @@ public class Message implements Serializable {
     @Getter
     @Setter
     private Boolean deleted = false;
+
+    @Getter
+    @Setter
+    private String status;
+
+    @Transient
+    @Getter
+    @Setter
+    private User user;
 
 
 }

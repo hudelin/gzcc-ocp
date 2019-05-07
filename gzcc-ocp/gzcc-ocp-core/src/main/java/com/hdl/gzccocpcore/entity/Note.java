@@ -19,20 +19,19 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
 /**
-* @Description:    帖子类
-* @Author:         HuDeLin
-* @CreateDate:     2018/12/24 11:49
-* @UpdateUser:     HuDeLin
-* @UpdateDate:     2018/12/24 11:49
-* @UpdateRemark:   修改内容
-*/
-public class Note  implements Serializable {
-
+ * @Description: 帖子类
+ * @Author: HuDeLin
+ * @CreateDate: 2018/12/24 11:49
+ * @UpdateUser: HuDeLin
+ * @UpdateDate: 2018/12/24 11:49
+ * @UpdateRemark: 修改内容
+ */
+public class Note implements Serializable {
 
     private static final long serialVersionUID = -7106333655949626799L;
 
@@ -45,68 +44,73 @@ public class Note  implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
-
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @LastModifiedDate
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
 
-//    @LastModifiedBy
-//    @Getter@Setter
-//    protected Long lastModifiedBy;
-
-    @Getter@Setter
-    //标题
+    @Getter
+    @Setter
     private String title;
 
-    @Column(columnDefinition="text")
-    @Getter@Setter
-    //内容
+    @Getter
+    @Setter
+    private Long replyCount= Long.valueOf(0);
+
+    @Column(columnDefinition = "text")
+    @Getter
+    @Setter
     private String content;
 
-    @OneToMany(mappedBy = "note",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "note", fetch = FetchType.LAZY)
 //    @Cascade(value = org.hibernate.annotations.CascadeType.PERSIST)
     @JsonIgnore
-    @Getter@Setter
-    //回复列表
-    private List<Reply> replyList= new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Reply> replyList = new ArrayList<>();
 
-    @Getter@Setter
-    private Boolean canReply=true;
+    @Getter
+    @Setter
+    private Boolean canReply = true;
 
-    @Getter@Setter
-    private Boolean top=false;
+    @Getter
+    @Setter
+    private Boolean top = false;
 
+    @Getter
+    @Setter
+    private Boolean deleted = false;
 
-    @Getter@Setter
-    private Boolean deleted=false;
+    @Getter
+    @Setter
+    private Boolean finished = false;
 
+    @Getter
+    @Setter
+    private Boolean essence = false;
 
-    @Getter@Setter
-    private Boolean end=false;
-
-    @Getter@Setter
-    private Boolean essence=false;
-
-    @Getter@Setter
-    //帖子的类型 用BaseConstant的帖子类型
+    @Getter
+    @Setter
     private String noteType;
 
     @ManyToOne
-    @Getter@Setter
+    @Getter
+    @Setter
     private User user;
 
     @ManyToOne
-    @Getter@Setter
+    @Getter
+    @Setter
     private Major major;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private String resource;
-
-
 
 
 }

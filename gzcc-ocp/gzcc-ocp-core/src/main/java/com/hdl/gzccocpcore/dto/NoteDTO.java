@@ -24,52 +24,71 @@ import java.util.List;
 
 
 /**
-* @Description:    帖子类
-* @Author:         HuDeLin
-* @CreateDate:     2018/12/24 11:49
-* @UpdateUser:     HuDeLin
-* @UpdateDate:     2018/12/24 11:49
-* @UpdateRemark:   修改内容
-*/
+ * @Description: 帖子类
+ * @Author: HuDeLin
+ * @CreateDate: 2018/12/24 11:49
+ * @UpdateUser: HuDeLin
+ * @UpdateDate: 2018/12/24 11:49
+ * @UpdateRemark: 修改内容
+ */
 public class NoteDTO implements Serializable {
 
 
     private static final long serialVersionUID = -7048325638851182914L;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date createTime;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Date lastModifiedTime;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String title;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String content;
-    @Getter@Setter
-    private List<Reply> replyList= new ArrayList<>();
-    @Getter@Setter
+    @Getter
+    @Setter
+    private List<Reply> replyList = new ArrayList<>();
+    @Getter
+    @Setter
     private Boolean canReply;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Boolean top;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Boolean deleted;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String noteType;
-    @Getter@Setter
+    @Getter
+    @Setter
     private User user;
-    @Getter@Setter
-    private String resource;
-    @Getter@Setter
-    private List<Resource> resourceList;
-    @Getter@Setter
-    private Major major;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long userId;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String username;
-
-
-
+    @Getter
+    @Setter
+    private String resource;
+    @Getter
+    @Setter
+    private List<Resource> resourceList;
+    @Getter
+    @Setter
+    private Major major;
+    @Getter
+    @Setter
+    private Long majorId;
+    @Getter
+    @Setter
+    private Long replyCount;
 
 
 }

@@ -34,4 +34,16 @@ public class MessageDTO {
     private Long toid= Long.valueOf(0);
     @Getter @Setter
     private Long timestamp;
+    @Getter @Setter
+    private Long groupId;
+    @Getter
+    @Setter
+    private String remark;
+    @Getter
+    @Setter
+    private String sign;
+    @Getter
+    @Setter
+    private User user;
+
 }

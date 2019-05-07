@@ -4,6 +4,7 @@
     <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
     <meta charset="utf-8">
     <title>我的消息</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
@@ -16,15 +17,15 @@
 <div class="layui-container fly-marginTop fly-user-main">
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
         <li class="layui-nav-item">
-            <a href="/user/home">
+            <a href="javascript:;" id="homeA">
                 <i class="layui-icon">&#xe609;</i>
                 我的主页
             </a>
         </li>
         <li class="layui-nav-item">
-            <a href="/user/index">
+            <a href="/user/note">
                 <i class="layui-icon">&#xe612;</i>
-                用户中心
+                我的帖子
             </a>
         </li>
         <li class="layui-nav-item">
@@ -89,6 +90,7 @@
 </div>
 
 <script src="../../res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
 <script>
     layui.cache.page = 'user';
     layui.cache.user = {
@@ -103,7 +105,12 @@
         , base: '../../res/mods/'
     }).extend({
         fly: 'index'
-    }).use('fly');
+    }).use(['fly', 'upload', 'jquery', 'request','form','layer'],function () {
+        var $ = layui.$;
+        $('#homeA').on('click',(function () {
+            window.location.href="/user/home/"+layui.data('userData').user.id
+        }))
+    });
 </script>
 
 </body>

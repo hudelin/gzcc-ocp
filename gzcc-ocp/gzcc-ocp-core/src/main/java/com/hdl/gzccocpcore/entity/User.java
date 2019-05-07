@@ -55,6 +55,9 @@ public class User implements Serializable {
     @Setter
     private String username;
 
+    @Getter
+    @Setter
+    private String realName;
 
     @JsonIgnore
     @Getter
@@ -75,7 +78,7 @@ public class User implements Serializable {
 
     @Getter
     @Setter
-    private String sign;
+    private String sign="";
 
     @Getter
     @Setter
@@ -95,6 +98,13 @@ public class User implements Serializable {
     @Setter
     private List<Reply> replyList = new ArrayList<>();
 
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @Getter
+    @Setter
+    private List<Comment> commentList = new ArrayList<>();
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter
@@ -105,16 +115,27 @@ public class User implements Serializable {
     @Setter
     private String collectNote;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "list", fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter
     @Setter
     private List<Friend> friendList = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "teacherList", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @Getter
+    @Setter
+    private List<Major> majorList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
     @JsonIgnore
     @Getter
     @Setter
     private List<GroupChat> groupChatList = new ArrayList<>();
+
+    @Getter
+    @Setter
+    @Column(columnDefinition="text")
+    private String introduction;
 
 }

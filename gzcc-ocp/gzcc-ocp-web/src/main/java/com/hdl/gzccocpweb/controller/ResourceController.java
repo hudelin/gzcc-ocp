@@ -9,6 +9,7 @@ import com.hdl.gzccocpcore.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,14 +37,22 @@ public class ResourceController {
         return new ObjectRestResponse(resource);
     }
 
+    @RequestMapping("/findById")
+    @ResponseBody
+    private ObjectRestResponse findById(Long id) throws Exception {
+        Resource resource=resourceService.get(id);
+        return new ObjectRestResponse(resource);
+    }
+
+
+
     @Value("${gzcc.ocp.web.root-path}")
     private String rootPath;
-    @RequestMapping("/test")
+    @RequestMapping("/download/{fileName}")
     @ResponseBody
-    public ObjectRestResponse test(String fileName,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    public ObjectRestResponse test(@PathVariable String fileName, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
 //        String fileName = "default.jpg";//被下载文件的名称
         String downloadFilePath = rootPath+fileName;//被下载的文件在服务器中的路径,
-
         File file = new File(downloadFilePath);
         if (file.exists()) {
             httpServletResponse.setContentType("application/force-download");// 设置强制下载不打开            
@@ -61,7 +70,6 @@ public class ResourceController {
                     i = bis.read(buffer);
                 }
                 return null;
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -85,11 +93,10 @@ public class ResourceController {
         return new ObjectRestResponse();
     }
 
-    @RequestMapping(value = "/download")
+    @RequestMapping(value = "/downloadZip")
     public void imgDownload(String fileName, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,String name) throws Exception {
         //存放--服务器上zip文件的目录
         String[] names=name.split(",");
-
 //        String downloadFilePath = rootPath+fileName;
 //        File directoryFile=new File(downloadFilePath);
 //        if(!directoryFile.isDirectory() && !directoryFile.exists()){

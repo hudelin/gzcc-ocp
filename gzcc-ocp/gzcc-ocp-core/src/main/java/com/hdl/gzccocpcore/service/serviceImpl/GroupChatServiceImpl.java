@@ -26,7 +26,7 @@ public class GroupChatServiceImpl extends BaseServiceImpl<GroupChat,Long> implem
 
     @Override
     public List<GroupChat> findByUserId(Long userId) throws Exception {
-        return groupChatRepository.findByUserListId(userId);
-//        return null;
+        List<GroupChat> groupChatList=groupChatRepository.findByUserListId(userId);
+        return groupChatList;
     }
 }

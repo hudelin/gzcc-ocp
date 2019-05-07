@@ -108,7 +108,7 @@
             <!--&lt;!&ndash;//,right: '100px' //主面板相对浏览器右侧距离&ndash;&gt;-->
             <!--&lt;!&ndash;//,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离&ndash;&gt;-->
             <!--&lt;!&ndash;,&ndash;&gt;-->
-            <!--&lt;!&ndash;initSkin: '3.jpg' //1-5 设置初始背景&ndash;&gt;-->
+            <!--&lt;!&ndash;initSkin: '1.jpg' //1-5 设置初始背景&ndash;&gt;-->
             <!--&lt;!&ndash;//,skin: ['aaa.jpg'] //新增皮肤&ndash;&gt;-->
             <!--&lt;!&ndash;//,isfriend: false //是否开启好友&ndash;&gt;-->
             <!--&lt;!&ndash;//,isgroup: false //是否开启群组&ndash;&gt;-->

@@ -51,7 +51,7 @@ public class Friend implements Serializable {
     @Setter
     private String groupname;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @Getter
     @Setter
     private List<User> list = new ArrayList<>();

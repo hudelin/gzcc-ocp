@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <title>Fly Template v3.0，基于 layui 的极简社区页面模版</title>
+
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <% include("/common/link.btl"){} %>
+    <style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+
+        .text {
+            border: 1px solid #ccc;
+            height: 150px;
+        }
+        .fly-rank dd {
+            width: 120px;
+            height: 110px;
+        }
+
+        .fly-rank dd a img {
+            width: 120px;
+            height: 90px;
+        }
+    </style>
+</head>
+<body>
+
+<% include("/common/header.btl"){} %>
+<div class="fly-case-header" style="height: 110px;">
+    <p class="fly-case-year">计算机网络技术</p>
+    <!--<p class="fly-case-banner" style="line-height: 50px;-->
+    <!--font-size: 50px;-->
+    <!--text-align: center;-->
+    <!--color: #fff;">师生在线交流平台</p>-->
+    <!--<a href="javascript:;">-->
+    <!--<a href="/case/{{ year }}/">-->
+    <!--<img class="fly-case-banner" src="../../res/images/case.png" alt="师生在线交流平台">-->
+    <!--</a>-->
+    <!--<div class="fly-case-btn">-->
+    <!--<a href="javascript:;" class="layui-btn layui-btn-big fly-case-active" data-type="push">提交案例</a>-->
+    <!--<a href="" class="layui-btn layui-btn-primary layui-btn-big">我的案例</a>-->
+    <!--<a href="http://fly.layui.com/jie/11996/" target="_blank" style="padding: 0 15px; text-decoration: underline">案例要求</a>-->
+    <!--</div>-->
+</div>
+
+
+<div class="layui-container">
+   <div id="majorDiv"></div>
+</div>
+
+<% include("/common/footer.btl"){} %>
+
+<script type="text/html" id="majorTemplate">
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md8 content detail">
+            <div class="fly-panel detail-box" id="noteBox">
+                <!--<fieldset class="layui-elem-field layui-field-title" style="text-align: center;">-->
+                <!--<legend>课程简介</legend>-->
+                <!--</fieldset>-->
+                <h1>课程简介</h1>
+                <div class="detail-body photos">
+                    <p> <img src ="{{d.data.picture}}" style=" width: 200px;height: 250px;" align ="right">
+                       {{d.data.synopsis}}
+                    </p>
+                </div>
+            </div>
+            <div class="fly-panel detail-box" >
+                <!--<fieldset class="layui-elem-field layui-field-title" style="text-align: center;">-->
+                <!--<legend>课程简介</legend>-->
+                <!--</fieldset>-->
+                <h1>教学方法</h1>
+                <div class="detail-body photos">
+                    <!--<p> <img src ="../../res/images/fly.jpg" align ="right">-->
+                    计算机网络技术是通信技术与计算机技术相结合的产物。计算机网络是按照网络协议，将地球上分散的、独立的计算机相互连接的集合。连接介质可以是电缆、双绞线、光纤、微波、载波或通信卫星。计算机网络具有共享硬件、软件和数据资源的功能，具有对共享数据资源集中处理及管理和维护的能力。
+                    计算机网络包括计算机和网络两部分 其中计算机又称电子计算机，俗称电脑，是一种能够按照程序运行，自动、高速处理海量数据的现代化智能电子设备。
+                    </p>
+                </div>
+            </div>
+
+            <div class="fly-panel detail-box" id="flyReply">
+                <!--style="text-align: center;"-->
+                <fieldset class="layui-elem-field layui-field-title" >
+                    <legend>课程资源</legend>
+                </fieldset>
+                <div class="layui-row layui-col-space10">
+                    <div class="layui-col-md6">
+                        <dl class="fly-panel fly-list-one">
+                            <dt class="fly-panel-title">课程课件</dt>
+                            {{#  layui.each(d.data.resourceList, function(index, item){ }}
+                            {{#  if(index < 5){ }}
+                            <dd>
+                                <a href="">{{item.originalName}}</a>
+                                <span><i class="iconfont icon-pinglun1"></i></span>
+                            </dd>
+                            {{#  } }}
+                            {{#  }); }}
+                            {{#  if(d.data.resourceList.length === 0){ }}
+                            <div class="fly-none">没有相关课件</div>
+                            {{#  } }}
+                        </dl>
+                    </div>
+                    <div class="layui-col-md6">
+                        <dl class="fly-panel fly-list-one">
+                            <dt class="fly-panel-title">实验指导视频</dt>
+                            {{#  layui.each(d.data.videoList, function(index, item){ }}
+                            {{#  if(index < 5){ }}
+                            <dd>
+                                <a href="/major/video/{{d.data.id}}/{{item.id}}">{{item.originalName}}</a>
+                                <span><i class="iconfont icon-pinglun1"></i></span>
+                            </dd>
+                            {{#  } }}
+                            {{#  }); }}
+                            {{#  if(d.data.videoList.length === 0){ }}
+                            <div class="fly-none">没有相关视频</div>
+                            {{#  } }}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
+                <h3 class="fly-panel-title">教学团队</h3>
+                <dl>
+                    <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
+                    {{#  layui.each(d.data.teacherList, function(index, item){ }}
+                    <dd>
+                        <a href="/user/home/{{item.id}}">
+                            <img src="{{item.avatar}}">
+                            <!--<cite>贤心</cite>-->
+                            <i>{{item.realName}}</i>
+                        </a>
+                    </dd>
+                    {{#  }); }}
+                </dl>
+            </div>
+
+            <div class="fly-panel">
+                <div class="fly-panel-title">
+                    快速通道
+                </div>
+                <div class="fly-panel-main">
+                    <a href="/note/major/{{d.data.id}}" target="_blank" class="fly-zanzhu"
+                       time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">同板块论坛</a>
+                </div>
+            </div>
+            <!--<div class="fly-panel" style="padding: 20px 0; text-align: center;">-->
+            <!--<img src="../../res/images/weixin.jpg" style="max-width: 100%;" alt="layui">-->
+            <!--<p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</script>
+
+
+<script src="/res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
+<script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
+<script>
+    layui.cache.page = 'jie';
+    layui.cache.user = {
+        username: '游客'
+        , uid: -1
+        , avatar: '../../res/images/avatar/00.jpg'
+        , experience: 83
+        , sex: '男'
+    };
+    layui.config({
+        version: "3.0.0"
+        , base: '../../res/mods/'
+    }).extend({
+        fly: 'index',
+        request: 'request'
+    }).use(['request', 'jquery', 'laytpl', 'form', 'laypage', 'util', 'layer', 'fly'], function () {
+        var $ = layui.$
+        var fly = layui.fly;
+        var laytpl = layui.laytpl
+        var request = layui.request
+        var form = layui.form;
+        var laypage = layui.laypage;
+        var util = layui.util;
+        var layer = layui.layer;
+
+
+        var majorId = "${majorId}";
+
+        request.ajax({
+            type: 'POST',
+            url: '/major/findById',
+            data: {majorId: majorId}
+        }).then(function (res) {
+            var getTpl = majorTemplate.innerHTML
+                , view = document.getElementById('majorDiv');
+            laytpl(getTpl).render({data:res.data}, function (html) {
+                view.innerHTML = html;
+            });
+        })
+
+
+
+    })
+
+</script>
+
+</body>
+</html>

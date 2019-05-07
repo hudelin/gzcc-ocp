@@ -30,7 +30,6 @@ public class ValidateCodeController {
     @RequestMapping("/code/image")
     public void createCode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
 
-
         ImageCode imageCode=imageCodeGenerator.generate(new ServletWebRequest(httpServletRequest));
 //        String imageCode1= (String) redisCacheTemplate.opsForValue().get("imageCode");
 //        redisCacheTemplate.opsForValue().set("imageCode",imageCode.getCode());

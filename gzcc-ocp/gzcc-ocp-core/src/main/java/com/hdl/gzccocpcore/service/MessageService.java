@@ -14,5 +14,15 @@ public interface MessageService extends BaseService<Message,Long>  {
 
     public void readMessage(Long id) throws  Exception;
 
+    public void add(MessageDTO messageDTO) throws  Exception;
+
+    public List<Message> getReaderMessage(Long userId) throws  Exception;
+
+    public Message agreeFriend(Long id) throws  Exception;
+
+    public void refuseFriend(Long id) throws  Exception;
+
+    public void reply(Long userId,Long noteId)throws  Exception;
+
 
 }

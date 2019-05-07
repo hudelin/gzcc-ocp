@@ -4,6 +4,7 @@
     <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
     <meta charset="utf-8">
     <title>Fly Template v3.0，基于 layui 的极简社区页面模版</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
@@ -65,67 +66,18 @@
 
         </div>
         <div class="layui-col-md4">
-            <dl class="fly-panel fly-list-one">
-                <dt class="fly-panel-title">本周热议</dt>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <!-- 无数据时 -->
-                <!--
-                <div class="fly-none">没有相关数据</div>
-                -->
+            <dl class="fly-panel fly-list-one"  id="replyTop">
+
             </dl>
 
             <div class="fly-panel">
                 <div class="fly-panel-title">
-                    这里可作为广告区域
+                    快速通道
                 </div>
                 <div class="fly-panel-main">
-                    <a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu"
-                       time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
+                    <a href="/major/${majorId}" target="_blank" class="fly-zanzhu"
+                       time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">同板块课程</a>
                 </div>
-            </div>
-
-            <div class="fly-panel" style="padding: 20px 0; text-align: center;">
-                <img src="../../res/images/weixin.jpg" style="max-width: 100%;" alt="layui">
-                <p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>
             </div>
         </div>
     </div>
@@ -172,17 +124,17 @@
             <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="code" rank="0" style="background-color:#ccc;">取消加精</span> -->
         </div>
         <span class="fly-list-nums">
-            <a href="${servlet.request.requestURL}#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
-            <i class="iconfont" title="人气">&#xe60b;</i> 99999
+            <a href="${servlet.request.requestURL}#comment"><i class="iconfont" title="回答">&#xe60c;</i> {{d.note.replyCount}}</a>
+            <!--<i class="iconfont" title="人气">&#xe60b;</i> 99999-->
           </span>
     </div>
     <div class="detail-about">
-        <a class="fly-avatar" href="../user/home.html">
-            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+        <a class="fly-avatar" href="/user/home/{{d.note.user.id}}">
+            <img src="{{d.note.user.avatar}}"
                  alt="贤心">
         </a>
         <div class="fly-detail-user">
-            <a href="/user/home.html" class="fly-link">
+            <a href="/user/home/{{d.note.user.id}}" class="fly-link">
                 <cite>{{d.note.user.username}}</cite>
                 <!--<i class="iconfont icon-renzheng" title="认证信息："></i>-->
                 <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
@@ -194,20 +146,45 @@
             {{# if(d.note.user.id==d.userId){ }}
             <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="/note/edit/${noteId}">编辑此贴</a></span>
             {{# } }}
-            {{# if(d.userId!=0){ }}
+
             {{# if(d.collect){ }}
             <span class="layui-btn layui-btn-xs jie-admin layui-btn-danger" type="collect"
                   data-type="remove">取消收藏</span>
             {{# }else{ }}
             <span class="layui-btn layui-btn-xs jie-admin" type="collect" data-type="add">收藏</span>
             {{# } }}
-            {{# } }}
+
         </div>
     </div>
     <div class="detail-body photos" id="note-content">
         {{ d.note.content }}
+        {{# if(d.note.resourceList!=null){ }}
+        <div class="layui-upload-list">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>文件名</th>
+                    <th>大小</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="fileList">
+                {{# layui.each(d.note.resourceList, function(index, item){ }}
+                <tr id="upload-0">
+                    <td>{{item.originalName}}</td>
+                    <td>{{ (item.size/1014).toFixed(1)}}kb</td>
+                    <td>
+                        <!--<a href="/uploads/{{item.formatName}}" style="color:#fff;" data-name="{{item.formatName}}" class="layui-btn layui-btn-xs layui-btn-success demo-delete">下载</a>-->
+                        <a href="/resource/download/{{item.formatName}}" style="color:#fff;"
+                           data-name="{{item.formatName}}" class="layui-btn layui-btn-xs layui-btn-success demo-delete">下载</a>
+                    </td>
+                </tr>
+                {{# }); }}
+                </tbody>
+            </table>
+        </div>
+        {{# } }}
     </div>
-
 </script>
 
 
@@ -220,10 +197,15 @@
                 <img src="{{item.user.avatar}}" alt=" ">
             </a>
             <div class="fly-detail-user">
-                <a href="" class="fly-link">
+                <a href="/user/home/{{item.user.id}}" class="fly-link" target="_blank">
                     <cite>{{item.user.username}}</cite>
                     <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
                     <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
+                    {{#  layui.each(item.user.roleList, function(index, e){ }}
+                    {{#  if(e.name === "TEACHER"){ }}
+                    <i class="iconfont icon-renzheng" title="认证信息：广商教师"></i>
+                    {{#  } }}
+                    {{#  }); }}
                 </a>
                 {{# if(item.userId==d.noteUserId){ }}
                 <span>(楼主)</span>
@@ -255,7 +237,7 @@
                     {{# } }}
                {{#  }); }}
                {{# } }}
-                " type="zan"   data-type="praise" data-id="{{item.id}}">
+                " type="zan" data-type="praise" data-id="{{item.id}}">
 
                 <i class="iconfont icon-zan"></i>
                 <em>{{item.praise}}</em>
@@ -270,7 +252,8 @@
                 {{# if(!item.accepted){ }}
                 <span type="accept" class="jieda-accept reply-event" data-type="accept" data-id="{{item.id}}">采纳</span>
                 {{# }else{ }}
-                <span type="accept" class="jieda-accept reply-event" data-type="cancelAccept" data-id="{{item.id}}">取消采纳</span>
+                <span type="accept" class="jieda-accept reply-event" data-type="cancelAccept"
+                      data-id="{{item.id}}">取消采纳</span>
                 {{# } }}
                 {{# } }}
                 {{# if(item.user.id==d.userId){ }}
@@ -289,7 +272,21 @@
     {{#  } }}
 </script>
 
+<script id="replyTopTemplate" type="text/html">
+    <dt class="fly-panel-title">热议榜</dt>
+    {{#  layui.each(d.list, function(index, item){ }}
+    <dd>
+        <a href="/note/{{item.major.id}}/detail/{{item.id}}">{{item.title}}</a>
+        <span><i class="iconfont icon-pinglun1"></i> {{item.replyCount}}</span>
+    </dd>
+    {{#  }); }}
+    {{#  if(d.list.length === 0){ }}
+    <div class="fly-none">没有相关数据</div>
+    {{#  } }}
+</script>
+
 <script src="/res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
 <script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
 <script>
     layui.cache.page = 'jie';
@@ -319,6 +316,23 @@
         var noteId = '${noteId}'
         var note = {};
         var replyPage = {};
+
+
+        request.ajax({
+            type: 'POST',
+            url: '/note/findReplyTop',
+            data: {majorId: majorId},
+        }).then(function (res) {
+            var data = {
+                list: res.data
+            }
+            var getTpl = replyTopTemplate.innerHTML
+                , view = document.getElementById('replyTop');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+        })
+
         //请求帖子内容
         request.ajax({
             type: 'POST',
@@ -337,9 +351,10 @@
                 }
                 if (layui.data('userData').user != null) {
                     data.userId = layui.data('userData').user.id;
-                    if(layui.data('userData').user.collectNote){
+                    if (layui.data('userData').user.collectNote) {
                         var collectNoteList = layui.data('userData').user.collectNote.split(",");
-                        if (collectNoteList.find(e => e == note.id)){
+                        if (collectNoteList.find(e => e == note.id))
+                        {
                             data.collect = true
                         }
                     }
@@ -351,12 +366,15 @@
                     view.innerHTML = html;
                 });
                 // $('#note-content').html(note.content)
-                $('body').on('click', '.jie-admin', function(){
+                $('body').on('click', '.jie-admin', function () {
+                    if (layui.data('userData').user == null) {
+                        layer.msg('请先登录');
+                        return false
+                    }
                     var othis = $(this), type = othis.attr('type');
                     console.log(type)
                     gather.jieAdmin[type] && gather.jieAdmin[type].call(this, othis.parent());
                 });
-
                 requestFindPage(noteId).then(function (replyPage) {
                     loadPageBar(replyPage)
                 })
@@ -371,12 +389,9 @@
                 url: '/reply/findPage',
                 data: {noteId: noteId, page: page || 1, size: size || 10,},
             }).then(function (res) {
-                if(res.code=="0"){
-                    replyPage = res.data
-                    loadReply(replyPage)
-                    return replyPage
-                }
-
+                replyPage = res.data
+                loadReply(replyPage)
+                return replyPage
             })
         }
 
@@ -384,9 +399,9 @@
         function loadReply(replyPage) {
             var content = replyPage.content;
             content.forEach(function (item) {
-                item.timeAgo = util.timeAgo(item.lastModifiedTime)
-                if(item.praiseUserIdString){
-                    item.praiseUserIdList=item.praiseUserIdString.split(",")
+                item.timeAgo = util.timeAgo(item.createTime)
+                if (item.praiseUserIdString) {
+                    item.praiseUserIdList = item.praiseUserIdString.split(",")
                 }
             })
             return new Promise(function (res, reject) {
@@ -429,6 +444,10 @@
                 }
             });
             $('.reply-event').on('click', function () {
+                if (layui.data('userData').user == null) {
+                    layer.msg('请先登录');
+                    return false
+                }
                 var othis = $(this), type = othis.data('type'), id = othis.data('id');
                 console.log(othis)
                 console.log(type)
@@ -447,29 +466,6 @@
             document.getElementById('L_content').value = html
             console.log(html)
         }
-        // editor.customConfig.emotions = [
-        //     {
-        //         // tab 的标题
-        //         title: '默认',
-        //         // type -> 'emoji' / 'image'
-        //         type: 'image',
-        //         // content -> 数组
-        //         content: [
-        //             {
-        //                 alt: '[坏笑]',
-        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png'
-        //             },
-        //             {
-        //                 alt: '[爱你]',
-        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/f6/2018new_aini_org.png'
-        //             },
-        //             {
-        //                 alt: '[舔屏]',
-        //                 src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png'
-        //             }
-        //         ]
-        //     }
-        // ]
         editor.create()
         form.on('submit(replyNote)', function (data) {
             var ok = true
@@ -482,7 +478,6 @@
             } else {
                 data.field.userId = layui.data('userData').user.id
             }
-
             if ($("#replyId").val() != "") {
                 data.field.createTime = new Date(replyPage.content.find(e => e.id == data.field.id).createTime
             )
@@ -502,7 +497,6 @@
             })
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
-
 
         //触发事件
         var active = {
@@ -535,7 +529,7 @@
                         url: '/reply/changeAccept',
                         data: {id: id},
                     }).then(function (res) {
-                        if(res.code=="0"){
+                        if (res.code == "0") {
                             requestFindPage(noteId).then(function (replyPage) {
                                 loadPageBar(replyPage)
                             })
@@ -554,7 +548,7 @@
                         url: '/reply/changeAccept',
                         data: {id: id},
                     }).then(function (res) {
-                        if(res.code=="0"){
+                        if (res.code == "0") {
                             requestFindPage(noteId).then(function (replyPage) {
                                 loadPageBar(replyPage)
                             })
@@ -564,7 +558,7 @@
 
                 });
             }
-            , praise:function (othis) {
+            , praise: function (othis) {
                 var id = othis.data('id');
                 request.ajax({
                     type: 'POST',
@@ -612,9 +606,9 @@
             // }
             //收藏
             // ,
-            collect: function(div){
+            collect: function (div) {
                 var othis = $(this), type = othis.data('type');
-                if(type == 'add'){
+                if (type == 'add') {
                     request.ajax({
                         type: 'POST',
                         url: '/user/collectNote',
@@ -625,11 +619,11 @@
                     }).then(function (res) {
                         layui.data('userData', {
                             key: 'user'
-                            ,value: res.data
+                            , value: res.data
                         });
                         othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
                     })
-                } else if(type == 'remove'){
+                } else if (type == 'remove') {
                     request.ajax({
                         type: 'POST',
                         url: '/user/removeNote',
@@ -640,7 +634,7 @@
                     }).then(function (res) {
                         layui.data('userData', {
                             key: 'user'
-                            ,value: res.data
+                            , value: res.data
                         });
                         othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
                     })

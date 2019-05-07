@@ -4,6 +4,7 @@
     <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
     <meta charset="utf-8">
     <title>发表问题 编辑问题 公用</title>
+    <link href="../res/images/logo.png" rel="icon" type="image/x-ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
@@ -168,6 +169,7 @@
 <% include("/common/footer.btl"){} %>
 
 <script src="../../res/layui/layui.js"></script>
+<script src="../res/mods/chat.js"></script>
 <script type="text/javascript" src="/res/mods/wangEditor.min.js"></script>
 <script>
     layui.cache.page = 'jie';
@@ -210,10 +212,6 @@
         var upload = layui.upload
         var layer = layui.layer;
 
-
-
-
-
         var noteId="${noteId}"
         var note;
         var resourceListOld=[]
@@ -223,7 +221,6 @@
                 url: '/note/get',
                 data: {noteId: noteId},
             }).then(function (res) {
-
                 if(res.code==0){
                     note=res.data;
                     console.log("note",note)
@@ -235,7 +232,7 @@
                     if(resourceListOld.length>0){
                         resourceListOld.forEach(function (e,index) {
                             var tr = $(['<tr id="upload-'+ index +'">'
-                                ,'<td>'+ e.formatName +'</td>'
+                                ,'<td>'+ e.originalName +'</td>'
                                 ,'<td>'+ (e.size/1014).toFixed(1)  +'kb</td>'
                                 ,'<td>原文件</td>'
                                 ,'<td>'
@@ -243,7 +240,7 @@
                                 ,'<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
                                 ,'</td>'
                                 ,'</tr>'].join(''));
-                            $('#fileList').append(tr);
+                            $('#fileListOld').append(tr);
                             tr.find('.demo-delete').on('click', function(){
                                 tr.remove();
                                 resourceListOld.splice(index,1)
@@ -254,7 +251,6 @@
                     form.val("userForm", {
                         "noteType":note.noteType
                     })
-
                     request.ajax({
                         type: 'POST',
                         url: '/major/findAll',
@@ -275,8 +271,6 @@
                         }
                     })
                 }
-
-
             })
         }else{
             request.ajax({
@@ -295,15 +289,13 @@
         }
 
 
-
-
         var demoListView = $('#fileList')
         var resourceList=[]
         var uploadListIns=upload.render({
             elem: '#chooseFileButton'
             ,url: '/resource/upload/'
             ,data: {
-                userId: layui.sessionData('userData').user.id,
+                userId: layui.data('userData').user.id,
                 type:"1",
             }
             ,multiple: true
@@ -328,7 +320,6 @@
                     tr.find('.demo-reload').on('click', function(){
                         obj.upload(index, file);
                     });
-
                     //删除
                     tr.find('.demo-delete').on('click', function(){
                         resourceList.forEach(function (e,idx) {
@@ -350,14 +341,9 @@
                 resourceList=[]
             }
             ,allDone: function(obj){ //当文件全部被提交后，才触发
-                console.log(obj.total); //得到总文件数
-                console.log(obj.successful); //请求成功的文件数
-                console.log(obj.aborted); //请求失败的文件数
-
                 layer.closeAll('loading'); //关闭loading
             }
             ,done: function(res, index, upload){
-                // console.log(res)
                 if(res.code == 0){ //上传成功
                     var tr = demoListView.find('tr#upload-'+ index)
                         ,tds = tr.children();
@@ -365,11 +351,6 @@
                     // tds.eq(3).html('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'); //清空操作
                     // return delete this.files[index]; //删除文件队列已经上传成功的文件
                     resourceList.push(res.data);
-                    // if(resourceSting=""){
-                    //     resourceSting+=res.data.formateName;
-                    // }else{
-                    //     resourceSting+=","+res.data.formateName;
-                    // }
                     console.log(resourceList)
                     return;
                 }
@@ -382,7 +363,6 @@
                 tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
         });
-
         // 各种基于事件的操作，下面会有进一步介绍
         form.on('submit(saveNote)', function (data) {
             console.log(uploadListIns.config.files)
@@ -390,7 +370,7 @@
             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            data.field.userId = layui.sessionData('userData').user.id
+            data.field.userId = layui.data('userData').user.id
             var s=""
             console.log(resourceListOld,"123")
             console.log(resourceList,"456")
@@ -424,13 +404,11 @@
                     ok = false
                 }
                 if (ok) {
-                    window.location.href = "/note/detail/"+res.id;
+                    window.location.href = "/note/"+data.field.majorId+"/detail/"+res.id;
                 }
             })
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
         });
-
-
     });
 
 </script>

@@ -90,7 +90,7 @@
         , base: '../../res/mods/'
     }).extend({
         request: 'request'
-    }).use(['jquery', 'request', 'table', 'form', 'upload'], function () {
+    }).use(['jquery', 'request', 'table', 'form', 'upload','layer'], function () {
         var $ = layui.$
         var table = layui.table;
         var request = layui.request;

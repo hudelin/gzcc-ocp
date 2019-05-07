@@ -59,13 +59,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 //        redisCacheTemplate.opsForValue().set("imageCode", imageCode.getCode());
         return imageCode;
     }
-    /**
-     * 生成随机背景条纹
-     *
-     * @param fc
-     * @param bc
-     * @return
-     */
+
     private Color getRandColor(int fc, int bc) {
         Random random = new Random();
         if (fc > 255) {

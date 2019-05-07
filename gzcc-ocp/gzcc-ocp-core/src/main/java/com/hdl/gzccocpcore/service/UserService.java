@@ -37,5 +37,11 @@ public interface UserService extends BaseService<User, Long> {
 
     Page<User> findAllTeacher(User user, Integer page, Integer size)throws Exception;
 
+    List<User> find(String text)throws Exception;
+
+    List<User> findTeacher(String text)throws Exception;
+
+    void changePassword(Long id,String password,String newPassword)throws Exception;
+
 
 }

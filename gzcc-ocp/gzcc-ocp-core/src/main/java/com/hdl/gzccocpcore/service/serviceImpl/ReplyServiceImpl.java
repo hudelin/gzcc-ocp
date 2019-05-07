@@ -6,6 +6,7 @@ import com.hdl.gzccocpcore.entity.Note;
 import com.hdl.gzccocpcore.entity.Reply;
 import com.hdl.gzccocpcore.entity.User;
 import com.hdl.gzccocpcore.repository.ReplyRepository;
+import com.hdl.gzccocpcore.service.NoteService;
 import com.hdl.gzccocpcore.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
 
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private NoteService noteService;
 
     @Override
     public Reply update(Reply reply) throws Exception {
@@ -53,7 +56,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
 
     @Override
     public Page<Reply> findReplyPage(ReplyDTO replyDTO, Integer page, Integer size) throws Exception {
-        Pageable pageable = PageRequest.of(page-1, size);
+        Pageable pageable = PageRequest.of(page-1, size,new Sort(Sort.Direction.DESC,"createTime"));
         Page<Reply> replyPage=findAll(replyDTO,pageable);
         return replyPage;
     }
@@ -158,6 +161,8 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply,Long> implements Rep
         Reply reply=replyRepository.getOne(id);
         reply.setDeleted(true);
         replyRepository.save(reply);
+        noteService.updateReplyCount(reply.getNote().getId());
+
     }
 
 }

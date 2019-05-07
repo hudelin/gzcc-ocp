@@ -21,10 +21,12 @@ public class OcpConstant {
 
     public static final String CHAT_MESSAGE_TYPE_FRIEDN_MESSAGE = "friend";
     public static final String CHAT_MESSAGE_TYPE_GROUP_MESSAGE = "group";
+    public static final String CHAT_MESSAGE_TYPE_ADD = "add";
+    public static final String CHAT_MESSAGE_TYPE_REPLY = "reply";
 
-    public static final String ROLE_ADMINISTRATOR = "ROLE_ADMINISTRATOR";
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_TEACHER = "ROLE_TEACHER";
+    public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
+    public static final String ROLE_USER = "USER";
+    public static final String ROLE_TEACHER = "TEACHER";
 
     public static final String NOTE_TYPE_QUESTION = "1";
     public static final String NOTE_TYPE_SHARE = "2";
@@ -32,6 +34,17 @@ public class OcpConstant {
     public static final String NOTE_TYPE_SUGGEST = "4";
     public static final String NOTE_TYPE_NOTICE= "5";
 //    public static final String NOTE_TYPE_DYNAMIC = "6";
+
+    public static final String ADD_FRIEND= "0";
+    public static final String AGREE= "1";
+    public static final String REFUSE= "2";
+
+    public static final String ADD_CONTENT= "申请添加你为好友";
+    public static final String REFUSE_CONTENT= "拒绝了你的好友申请";
+    public static final String AGREE_CONTENT= "已经同意你的好友申请";
+
+    public static final String REPLY_CONTENT= "回复了您的帖子";
+
 
 
 

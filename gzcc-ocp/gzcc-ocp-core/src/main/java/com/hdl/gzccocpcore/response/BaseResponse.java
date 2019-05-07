@@ -13,10 +13,12 @@ import java.io.Serializable;
 public class BaseResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Getter@Setter
-    private String code="0";
-    @Getter@Setter
-    private String msg ="";
+    @Getter
+    @Setter
+    private String code = "0";
+    @Getter
+    @Setter
+    private String msg = "";
 
     public BaseResponse(String code, String msg) {
         this.code = code;
@@ -29,6 +31,4 @@ public class BaseResponse implements Serializable {
 
     public BaseResponse() {
     }
-
-
 }
